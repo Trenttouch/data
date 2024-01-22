@@ -1182,8 +1182,15 @@ package:
 		font cap extra: 第二规则叙述字体大小(历险，试作等)
 		extra shrink power text: 第二攻防字体缩小值(试作等)
 		use holofoil stamps: 使用稀有标记？
+		is foil: 闪卡？(标记为 · 还是 ★ )
+		use acron stamp: 使用橡果标(鸡飞牌)？
+		remove from autocount: 自定义卡牌编号？
+		ancestral mana symbols: 预定义法术力图标(建议开启)
+		tap symbol: 横置符号
 		
 		frames:		特殊边框
+		universe beyond: 无疆新宇宙
+		circuit(universe beyond DIY): 线路板(无疆新宇宙DIY)
 		adventure:	历险
 		lesson:		课程
 		map:		宝藏图
