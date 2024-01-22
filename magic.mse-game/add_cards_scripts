@@ -1,0 +1,95 @@
+
+add cards script:
+	name: &基本地
+	description: 加五张基本地进入系列 (平原，海岛，沼泽，山脉，树林)
+	script:
+		# TODO:
+		#show_yes_no_dialog("This set already contains basic lands, do you want to add more?")
+		[ new_card([name: "平原",   super_type: "基本地", sub_type: "平原",   rarity: "basic land", watermark: "mana symbol white"])
+		, new_card([name: "海岛",   super_type: "基本地", sub_type: "海岛",   rarity: "basic land", watermark: "mana symbol blue"])
+		, new_card([name: "沼泽",	super_type: "基本地", sub_type: "沼泽",   rarity: "basic land", watermark: "mana symbol black"])
+		, new_card([name: "山脉",	super_type: "基本地", sub_type: "山脉",	  rarity: "basic land", watermark: "mana symbol red"])
+		, new_card([name: "树林",   super_type: "基本地", sub_type: "树林",   rarity: "basic land", watermark: "mana symbol green"])
+		]
+
+add cards script:
+	name: &雪境基本地
+	description: 加五张雪境基本地进入系列 (平原，海岛，沼泽，山脉，树林)
+	script:
+		# TODO:
+		#show_yes_no_dialog("This set already contains basic snow-covered lands, do you want to add more?")
+		[ new_card([name: "覆雪平原",	super_type: "雪境基本地", sub_type: "平原",   rarity: "basic land", watermark: "mana symbol white"])
+		, new_card([name: "覆雪海岛",	super_type: "雪境基本地", sub_type: "海岛",   rarity: "basic land", watermark: "mana symbol blue"])
+		, new_card([name: "覆雪沼泽",	super_type: "雪境基本地", sub_type: "沼泽",	  rarity: "basic land", watermark: "mana symbol black"])
+		, new_card([name: "覆雪山脉",	super_type: "雪境基本地", sub_type: "山脉",	  rarity: "basic land", watermark: "mana symbol red"])
+		, new_card([name: "覆雪树林",	super_type: "雪境基本地", sub_type: "树林",   rarity: "basic land", watermark: "mana symbol green"])
+		]
+
+#add cards script:
+#	name: &Many Empty Cards
+#	script:
+#		# TODO:
+#		#count := show_number_dialog("How many cards should be added?")
+#		count := 1
+#		for _ from 1 to count do [new_card()]
+
+add cards script:
+	name: 普通牌循环
+	description: 给每个单色添加一张稀有度为普通的空白卡
+	script:
+		# TODO:
+		#rarity := show_text_dialog("What rarity should the cards be?")
+		[ new_card([casting_cost: "W"])
+		, new_card([casting_cost: "U"])
+		, new_card([casting_cost: "B"])
+		, new_card([casting_cost: "R"])
+		, new_card([casting_cost: "G"])
+		]
+add cards script:
+	name: &非普通牌循环
+	description: 给每个单色添加一张稀有度为非普通的空白卡
+	script:
+		[ new_card([casting_cost: "W",   rarity: "uncommon"])
+		, new_card([casting_cost: "U",   rarity: "uncommon"])
+		, new_card([casting_cost: "B",   rarity: "uncommon"])
+		, new_card([casting_cost: "R",   rarity: "uncommon"])
+		, new_card([casting_cost: "G",   rarity: "uncommon"])
+		]
+add cards script:
+	name: &稀有牌循环
+	description: 给每个单色添加一张稀有度为稀有的空白卡
+	script:
+		[ new_card([casting_cost: "W",   rarity: "rare"])
+		, new_card([casting_cost: "U",   rarity: "rare"])
+		, new_card([casting_cost: "B",   rarity: "rare"])
+		, new_card([casting_cost: "R",   rarity: "rare"])
+		, new_card([casting_cost: "G",   rarity: "rare"])
+		]
+add cards script:
+	name: &完整设计骨架
+	description: 填充一个每个颜色包含19张普通，11张非普通，7张稀有，2张密稀；包含一个非普通，一个稀有的双色颜色循环；包含6张普通，15张非普通，8张稀有，5张密稀无色牌的系列骨架。在控制台输入"skeleton_info()"查看详情。
+	script:	skeleton_script()
+add cards script:
+	name: &普通牌设计骨架
+	description: 填充一个每个颜色包含19张普通牌的骨架。在控制台输入"skeleton_info()"来改变填充的数值。
+	script:	skeleton_runner(count:skeleton_commons)
+add cards script:
+	name: &非普通牌设计骨架
+	description: 填充一个每个颜色包含11张非普通牌的骨架。在控制台输入"skeleton_info()"来改变填充的数值。
+	script:	skeleton_runner(count:skeleton_uncommons, prefix:"U", rarity:"uncommon")
+add cards script:
+	name: &稀有牌设计骨架
+	description: 填充一个每个颜色包含7张稀有牌的骨架。在控制台输入"skeleton_info()"来改变填充的数值。
+	script:	skeleton_runner(count:skeleton_rares, prefix:"R", rarity:"rare")
+add cards script:
+	name: &密稀牌设计骨架
+	description: 填充一个每个颜色包含2张密稀牌的骨架。在控制台输入"skeleton_info()"来改变填充的数值。
+	script:	skeleton_runner(count:skeleton_mythics, prefix:"M", rarity:"mythic rare")
+add cards script:
+	name: &非普通牌双色循环设计骨架
+	description: 填充一个双色组合非普通循环的骨架。在控制台输入"skeleton_info()"来改变填充的数值。
+	script:	skeleton_runner(count:skeleton_gold_uncommons, prefix:"UM", rarity:"uncommon", letter_list:blank_list_10, mana_list:mana_list_ally+mana_list_enemy)
+add cards script:
+	name: &稀有牌双色循环设计骨架
+	description: 填充一个双色组合稀有循环的骨架。在控制台输入"skeleton_info()"来改变填充的数值。
+	script:	skeleton_runner(count:skeleton_gold_rares, prefix:"RM", rarity:"rare", letter_list:blank_list_10, mana_list:mana_list_ally+mana_list_enemy)

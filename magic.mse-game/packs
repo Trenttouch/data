@@ -1,0 +1,262 @@
+﻿pack type:
+	name: random
+	select: no replace
+	filter: not is_token_card()
+pack type:
+	name: 基本地
+	select: equal
+	filter: card.rarity == "basic land" and not is_token_card() and not is_masterpiece() # can be shifted
+pack type:
+	name: 普通
+	filter: card.rarity == "common" and not is_token_card() and not is_shifted_card() and not is_masterpiece() and not is_unsorted()
+pack type:
+	name: 非普通
+	filter: card.rarity == "uncommon" and not is_token_card() and not is_shifted_card() and not is_masterpiece() and not is_unsorted()
+pack type:
+	name: 稀有
+	filter: card.rarity == "rare" and not is_token_card() and not is_shifted_card() and not is_masterpiece() and not is_unsorted()
+pack type:
+	name: 秘稀
+	filter: card.rarity == "mythic rare" and not is_masterpiece() and not is_token_card() and not is_shifted_card() and not is_unsorted()
+pack type:
+	name: 特卡
+	filter: card.rarity == "special" and not is_token_card() # can be shifted
+pack type:
+	name: 时空转移普通
+	filter: card.rarity == "common" and not is_token_card() and is_shifted_card() and not is_unsorted()
+pack type:
+	name: 时空转移非普通
+	filter: card.rarity == "uncommon" and not is_token_card() and is_shifted_card() and not is_unsorted()
+pack type:
+	name: 时空转移稀有
+	filter:
+		( card.rarity == "rare" or
+		  card.rarity == "mythic rare" # We've got to put shifted mythic rares somewhere
+		) and not is_token_card() and is_shifted_card() and not is_unsorted()
+pack type:
+	name: 衍生物 / 规则说明
+	filter: is_token_card()
+pack type:
+	name: 宝藏
+	filter: is_masterpiece()
+# shifted common if they exist, otherwise a normal common
+pack type:
+	name: 所有普通
+	selectable: false
+	select: first
+	item: 时空转移普通
+	item: 普通
+
+# basic land if it exist, otherwise a common
+pack type:
+	name: 基本地和正常普通
+	selectable: false
+	select: first
+	item: 基本地
+	item: 普通
+
+# special if it exist, otherwise a common
+pack type:
+	name: 特卡或普通
+	selectable: false
+	select: first
+	item: 特卡
+	item: 普通
+
+# shifted uncommon/rare if they exist, otherwise a normal uncommon
+pack type:
+	name: 所有非普通
+	selectable: false
+	select: first
+	item: 时空转移非普通
+	item: 非普通
+
+############################################################## Randomized selections
+
+pack type:
+	name: 稀有或秘稀
+	selectable: false
+	# In Shards of Alara there are 15 mythic rares and 53 rares.
+	# Each booster has a 1/8 chance of containing a mythic rare.
+	# This means that looking at single mythics : rares, the proportion is
+	#  1*53 : 7*15 = 53 : 105
+	# this is almost exactly 1 : 2,
+	# So, a a single mythic is 2 times as rare as a single normal rare.
+	# 
+	# We use this proportional system instead of a fixed 1:7 system,
+	#  because it copes better with cases where there are few mythics.
+	# For example, if a set has 1 mythic and 20 rares, you would actually
+	# be MORE likely to find the mythic card with the 1:7 system!
+	select: proportional
+	item:
+		name: 秘稀
+		weight: 1
+	item:
+		name: 稀有
+		weight: 2
+
+pack type:
+	name: 时空转移非普通或稀有
+	selectable: false
+	select: nonempty
+	item:
+		name: 时空转移非普通
+		weight: 3
+	item:
+		name: 时空转移稀有
+		weight: 1
+
+
+############################################################## Common proportions of cards
+
+# of the common slots, 3/10 will be shifted, 1/10 will be special
+pack type:
+	name: 普通包括时空转移牌和特卡
+	selectable: false
+	# TODO: Perhaps use some kind of proportional system here as well?
+	select: equal
+	item:
+		name: 普通
+		weight: 6
+	item:
+		name: 所有普通
+		weight: 3
+	item:
+		name: 特卡或普通
+		weight: 1
+
+# of the uncommon slots, 1/3 will be shifted, 1/4 of that will be shifted rares instead
+pack type:
+	name: 非普通包括时空转移牌
+	selectable: false
+	select: equal
+	item: 非普通
+	item: 非普通
+	item: 所有非普通
+
+############################################################## Card packs
+
+pack type:
+	name: 老竞赛包
+	item:
+		name: 稀有或秘稀
+		amount: 3
+	item:
+		name: 非普通包括时空转移牌
+		amount: 9
+	item:
+		name: 普通包括时空转移牌和特卡
+		amount: 33
+	item:
+		name: 基本地
+		amount: 30
+	item:
+		name: 衍生物 / 规则说明
+pack type:
+	name: 补充包
+	item:
+		name: 稀有或秘稀
+		amount: 1
+	item:
+		name: 非普通
+		amount: 3
+							 
+	item:
+		name: 普通
+		amount: 9
+	item:
+		name: 基本地和正常普通
+		amount: 1
+	item:
+		name: 衍生物 / 规则说明
+		amount: 1
+pack type:
+	name: 宝藏包（2稀有或秘稀+1闪牌）
+	item:
+		name: 稀有或秘稀
+		weight: 3
+
+		  
+					  
+				 
+		  
+						
+										  
+pack type:
+	name: 整盒补充包（36补充包，仅显示金、秘稀和闪）
+	item:
+		name: 稀有或秘稀
+		amount: 36
+pack type:
+	name: 大师系列整盒补充包（24补充包，仅显示金、秘稀和闪）
+	item:
+		name: 稀有或秘稀
+		amount: 24
+pack type:
+	name: 售前组合包（6补充包+1售前闪金或秘稀）
+	item:
+		name: 稀有或秘稀
+		amount: 7
+	item:
+		name: 非普通
+		amount: 18
+	item:
+		name: 普通
+		amount: 54
+	item:
+		name: 普通
+		amount: 6
+	item:
+		name: 基本地和正常普通
+		amount: 6
+	item:
+		name: 衍生物 / 规则说明
+		amount: 6
+pack type:
+	name: 假日礼盒（5补充包+1闪银+20基本地）
+			  
+	item:
+		name: 稀有或秘稀
+		amount: 5
+	item:
+		name: 非普通
+		amount: 16
+	item:
+		name: 普通
+		amount: 45
+	item:
+		name: 普通
+		amount: 5
+	item:
+		name: 基本地和正常普通
+		amount: 5
+	item:
+		name: 基本地
+		amount: 20
+	item:
+		name: 衍生物 / 规则说明
+		amount: 5
+pack type:
+	name: 肥包（10补充包，100地不显示）
+			  
+	item:
+		name: 稀有或秘稀
+		amount: 10
+	item:
+		name: 非普通
+		amount: 30
+	item:
+		name: 普通
+		amount: 90
+	item:
+		name: 普通
+		amount: 10
+	item:
+		name: 基本地和正常普通
+		amount: 10
+	item:
+		name: 衍生物 / 规则说明
+		amount: 10
+	#item:
+	#	name: 基本地
+	#	amount: 100

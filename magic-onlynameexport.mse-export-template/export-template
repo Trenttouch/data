@@ -1,0 +1,32 @@
+﻿mse version: 0.3.8
+short name: onlyname
+full name: onlyname Export 1.4
+position hint: 006
+version: 2018-06-24
+installer group: magic/Export/onlynameexport
+create directory: true
+
+depends on:
+	package: magic.mse-game
+	version: 2020-04-01
+
+game: magic
+file type: *.txt|*.txt|*.*|*.*
+
+# By caeonosphere
+# Written by modifying thequinn's IsochronDrafter exporter ()
+# Namecheck by cajun
+script:
+	remove_linebreaks := replace@(match: "\n", replace: "")
+	
+	write_card := {
+		"\n"+remove_linebreaks(card_name())
+		}
+	##run the name check
+	write_cards := for each card in cards do write_card()
+	wordshtml := to_string(
+		 set.title+"\n"
+		 +"1.0\n"
+		 +write_cards)
+	write_text_file(file:"set.txt", wordshtml)
+	wordshtml

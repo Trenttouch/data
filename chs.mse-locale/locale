@@ -1,0 +1,1519 @@
+﻿mse version: 2.0.0
+installer group: translations/Simplified Chinese
+full name: 简体中文 (Simplified Chinese)
+version: 2013-08-21
+icon: cn.png
+
+############################################################## Menu items
+menu:
+	file:			文件	Alt+&F
+	new set:		新建套牌...	Ctrl+N
+	open set:		打开套牌...	Ctrl+O
+	save set:		保存套牌	Ctrl+S
+	save set as:		套牌另存为...	F12		
+	save set as directory:		将每张卡图导出到...
+	export:			导出
+	export html:		HTML文件
+	export image:		导出卡牌图像
+	export images:		导出全部卡牌图像
+	export apprentice:	导出到Apprentice
+	export mws:		导出到Magic Workstation...
+	check updates:		检查更新
+	print preview:		打印预览...
+	print:		打印...		Ctrl+P
+	reload data:		重新载入数据	Ctrl+F5
+	show profiler:		显示分析参数	Ctrl+F6
+	exit:			退出 Alt+F4
+ 
+	edit:			编辑	Alt+&E
+	undo:			撤销%s	Ctrl+Z
+	redo:			重做%s	Ctrl+Y
+	cut:			剪切	Ctrl+X
+	cut card:		剪切卡牌	Ctrl+X
+	cut keyword:	剪切关键词	Ctrl+X
+	copy:			复制	Ctrl+C
+	copy card:		复制卡牌	Ctrl+C
+	copy keyword:	复制关键词	Ctrl+C
+	paste:			粘贴	Ctrl+V
+	paste card:		粘贴卡牌	Ctrl+V
+	paste keyword:	粘贴关键词	Ctrl+V
+	select all:		全选	Ctrl+A
+	find:			查找	Ctrl+F
+	find next:		查找下一个	F3
+	replace:		替换	&H
+	auto replace:		自动替换...	&L
+	preferences:		参数设置...	&P			  
+	
+	cards:			卡牌	Alt+&D
+	previous card:		选择上一张卡牌	PgUp
+	next card:		选择下一张卡牌	PgDn	
+	search cards:	搜索卡牌	Ctrl+K	
+	add card:		添加卡牌	Ctrl+Enter
+	add cards:		批量添加卡牌...	
+	remove card:		删除所选卡牌	&D
+	orientation:		旋转	&O
+	rotate 0:		不旋转	&N
+	rotate 270:		顺时针旋转90°	&C
+	rotate 90:		逆时针旋转90	&O
+	rotate 180:		上下翻转180°	&U
+	card list columns:	卡牌列表栏...	&A
+	
+	keywords:		关键词	Alt+&K
+	previous keyword:	选择上一个关键词	PgUp
+	next keyword:		选择下一个关键词	PgDn
+	search keywords:	查找关键词	Ctrl+K	
+	add keyword:		添加关键词	Ctrl+Enter
+	remove keyword:		删除所选关键词	Del
+	
+	format:			字体格式	Alt+&O
+	bold:			粗体	Ctrl+B
+	italic:			斜体	Ctrl+I
+	symbols:		符号	Ctrl+M
+	underline:		下划线	&M
+	reminder text:		提示文本	&R
+	insert symbol:		插入符号	&N
+#_ADD	# spelling
+#_ADD	no spelling suggestions:	(no suggestions)
+	
+	graph:			图像	Alt+&G
+	pie:			饼形图	1	&P
+	bar:			条形图	2	&B
+	stack:			堆叠条形图	3	&S
+	scatter:		散点图	4	&C
+	scatter pie:	散饼图	5	&A
+
+	console:			控制台
+	clear console:		清空控制台	Ctrl+L	
+	
+	window:			窗口	Alt+&W 
+	new window:		新建窗口	&N
+	cards tab:		卡牌编辑	F5
+	style tab:		风格选择	F6
+	set info tab:	套牌信息	F7
+	keywords tab:	关键词	F8
+	stats tab:		统计结果	F9
+	random pack tab:	随机开包	F10
+	console tab:		控制台	F11
+	
+	help:			帮助	Alt+&H
+	index:			索引...	F1
+	website:		官方网站...	&W
+	about:			关于Magic Set Editor...	&A
+	
+	# symbol editor
+	
+	new symbol:		新建...	&N
+	open symbol:		打开...	&O
+	save symbol:		保存	&S
+	save symbol as:		另存为...	F12
+	store symbol:		储存	Ctrl+Enter	&T
+	close symbol editor:    关闭	Alt+F4
+	
+	duplicate:		复制	&D
+	group:			分组	&G
+	ungroup:		取消分组	&U
+	
+	tool:			工具	Alt+&T
+	select:			选择	F5	&S
+	rotate:			旋转	F6	&R
+	points:			控制点	F7	&P
+	basic shapes:	基本形状	F8	&B
+	symmetry:		对称效果	F9	&Y
+	paint:			笔刷	F10	&A
+
+############################################################## Menu help texts
+help:
+	welcome:		欢迎使用 Magic Set Editor
+	
+	file:
+	new set:		创建新套牌
+	open set:		打开已有套牌
+	last opened set:	打开 '%s'
+	save set:		保存现有套牌
+	save set as:		使用新文件名保存套牌
+	save set as directory:		将每张卡牌分开保存
+	export:			导出套牌...
+	export html:		将套牌导出成网页格式
+	export image:		将所选卡牌导出成为一张图片
+	export images:		将所有卡牌导出成图片
+	export apprentice:	将套牌导出成为能在 Apprentice 中使用的格式
+	export mws:		将套牌导出成为能在 Magic Workstation 中使用的格式
+	check updates:		安装或升级文件包
+	print preview:		显示即将被打印的卡牌
+	print:			从本套牌中打印这张牌
+	reload data:		重新载入所有模板（游戏类型和样式）和套牌数据.
+	show profiler:		显示分析参数窗口, 包括各函数的运行用时。用于优化程序。
+	exit:			退出Magic Set Editor程序，请迅速保存你的套牌
+	
+	edit:
+	undo:			撤销上一个动作
+	redo:			重做上一个动作
+	cut:			将选中的文字剪切至剪切板
+	cut card:		将选中的卡牌剪切至剪切板
+	cut keyword:		将选中的关键词剪切至剪切板
+	copy:			将选中的文字复制至剪切板
+	copy card:		将选中的卡牌复制至剪切板
+	copy keyword:		将选中的关键词复制至剪切板
+	paste:			从剪切板插入文字
+	paste card:		从剪切板插入卡牌
+	paste keyword:		从剪切板插入关键词
+	select all:			全选
+	find:			搜索卡牌文字							 
+	find next:		查找下一个
+	replace:		替换卡牌文字
+	auto replace:		自动替换文字？
+	preferences:		修改Magic Set Editor的设置
+	
+	cards:
+	previous card:		选择列表中的上一张卡牌
+	next card:		选择列表中的下一张卡牌
+	search cards:		Filter the card list using search terms
+	add card:		添加一个新的空白卡牌到本套牌
+	add cards:		添加多张卡牌到本套牌
+	remove card:		从本套牌中删除所选卡牌
+	orientation:		调整所显示卡牌的方向
+	rotate card:		将所显示卡牌顺时针旋转90°
+	rotate 0:		将所显示卡牌还原为正常模式
+	rotate 270:		将所显示卡牌顺时针旋转
+	rotate 90:		将所显示卡牌逆时针旋转
+	rotate 180:		将所显示卡牌上下翻转
+	card list columns:	调整卡牌列表栏显示项目和显示顺序
+	
+	keywords:
+	previous keyword:	从列表中选择上一个关键词
+	next keyword:		从列表中选择下一个关键词
+	search keywords:	从列表中搜索下一个关键词
+	add keyword:		添加一个新关键词到本套牌中
+	remove keyword:		从本套牌中删除选中的关键词
+	
+	format:
+	bold:			将所选文字设为粗体
+	italic:			将所选文字设为斜体
+	symbols:		将所选文字改成符号
+	underline:		下划线
+	reminder text:		对选择的关键词显示提示文本
+#_ADD	# spelling
+	no spelling suggestions:	无拼写错误的修改建议
+	
+	graph:
+	pie:			饼状图，每一份的大小取决与卡牌数量
+	bar:			条形图，条形高度取决于卡牌数量
+	stack:			条形图，堆叠条形图
+	scatter:		散点图，每一个散点的大小取决与卡牌数量
+	scatter pie:		散饼图，每一个三点都是一个小型饼状图
+
+	#console:
+	clear console:		清空控制台
+	
+	window:
+	new window:		创建一个额外窗口用来编辑同一套牌
+	cards tab:		编辑套牌中的卡牌
+	set info tab:		编辑套牌信息，例如创建者，其他
+	style tab:		改变卡牌样式
+	keywords tab:		定义本套牌额外的关键词
+	stats tab:		显示本套牌的统计情况
+	random pack tab:	通过生成随机包来测试套牌的实战效果。
+	console tab:		显示错误信息并允许执行脚本命令
+	
+	help:		
+	index:			
+	website:			
+	about:				
+
+	# New Set Window
+	search game list control: Filter the game list. Use - to exclude games. Use field: to search in a specific field. Use quotes for literal search. Separate multiple queries with a space.
+	search stylesheet list control: Filter the stylesheet list. Use - to exclude styles. Use field: to search in a specific field. Use quotes for literal search. Separate multiple queries with a space.
+	
+	# Cards panel
+	collapse notes:		隐藏卡牌信息栏
+	expand notes:		显示卡牌信息栏
+	search cards control: 筛选卡片列表。使用-来排除卡片。使用字段：在一个特定的字段中搜索。使用引号进行字面搜索。用空格分隔多个查询。
+	# Keywords panel
+	search keywords control: 筛选关键词列表。使用-来排除卡片。使用字段：在一个特定的字段中搜索。使用引号进行字面搜索。用空格分隔多个查询。												  
+	# Random pack panel
+	random seed:		每次产生不同的随机包。
+	fixed seed:			使用固定随机种子每次产生相同的“随机”包。
+	seed:				用于产生随机数的种子。相同的种子会产生相同的“随机”包。
+	edit pack type:		双击编辑随机包类型
+	number of packs:	生成%ss的数量
+	
+	# Preferences
+	app language:
+		注意: 你必须重新启动MSE才能使语言修改生效.
+	zoom export:
+		（当关闭该项的时候，卡牌会按照以下规则导出:
+		 100%大小，不旋转）
+	
+	# apprentice export
+	set code:		套牌代码是一个双字节代码，它能被Apprentice识别成一幅套牌
+	
+	# Symbol editor
+	new symbol:		创建一个新的系列符号
+	open symbol:		打开一个系列符号
+	save symbol:		保存系列符号
+	save symbol as:		使用不同文件名保存系列符号
+	store symbol:		将系列符号储存进套牌
+	close symbol editor:    关闭系列符号编辑器
+	
+	duplicate:		复制所选图形
+	group:			所选图形分成一组
+	ungroup:		取消所选分组
+	
+	grid:			显示网格线
+	snap:			吸附形状和控制点到网格线
+	
+	tool:
+	select:			选择并移动形状
+	rotate:			旋转并修剪形状
+	points:			编辑形状控制点
+	basic shapes:		绘制基本形状，例如矩形和圆形
+	symmetry:		给系列符号添加对称效果
+	paint:			用笔刷在图形上绘制
+	
+	select editor:
+	merge:			把这个图形融合到下面
+	subtract:		把这个图形从下面剪掉，仅保留不在这个图形，但是在下面图形的区域
+	intersect:		把这个图形和下面相交，仅保留图像共有区域
+	difference:		这个图形和下面不相交，仅仅保留不在其他图形的区域
+	overlap:		替换并且将边框覆盖到上面的图形
+	border:			把这个图形绘制为边框
+	
+	drag to shear:		拖拽，修改选定的 %s
+	drag to rotate:		拖拽，修改选定部分的旋转角度 %s；按住Ctrl，强制旋转15°
+	drag to resize:		拖拽，修改选定部分的大小 %s,；按住Ctrl，强制修改大小
+	click to select shape:	点击，选择图形；拖拽，移动图形；双击，编辑图形
+	
+	ellipse:		绘制圆形及椭圆形
+	rectangle:		绘制正方形及矩形
+	polygon:		绘制多边形
+	star:			绘制星形
+	sides:			确定多边形或者星形的边数
+	drag to draw shape:	拖拽，调整图形大小，按住Ctrl，强制修改图形，按住Shift，图形居中
+	draw ellipse:		点击并且拖拽，绘制一个椭圆形，按住Ctrl，绘制圆形
+	draw rectangle:		点击并且拖拽，绘制一个矩形，按住Ctrl，绘制正方形
+	draw polygon:		点击并且拖拽，绘制一个多边形
+	draw star:		点击并且拖拽，绘制一个星形
+	
+	line segment:		将所选线段变成直线
+	curve segment:		将所选线段变成曲线
+	free point:		允许两个控制点自由移动
+	smooth point:		使被选择的点平滑，用两个控制点互相相反的方式替换
+	symmetric point:	将被选择的点做对称效果
+	drag to move curve:	拖拽来移动曲线
+	drag to move line:	按住Alt键并且拖拽，移动曲线；双击，在线上添加一个点
+	drag to move point:	点击并拖拽，移动控制点；双击，移除该点
+	
+	rotation:		旋转对称（环形效果）
+	reflection:		反转对称（镜像效果）
+	add symmetry:		所选部分添加对称效果
+	remove symmetry:	移除对称效果
+	copies:			输入反转数值（包含原始数值）
+	
+	# Card select
+	filename format:	（使用{card.name}作为卡片名称；文件类型由扩展名决定）
+
+############################################################## Toolbar
+tool:
+	undo:			撤销
+	redo:			重做
+	
+	cards tab:		卡牌编辑 F5
+	set info tab:		套牌信息 F7
+	style tab:		风格样式 F6
+	keywords tab:		关键词 F8
+	stats tab:		统计结果 F9
+	random pack tab:	随机开包 F10
+	console tab:		控制台 F11
+	
+	# symbol editor
+	store symbol:		储存
+
+	grid:			网格
+	snap:			吸附
+	
+	select:			选择
+	rotate:			旋转
+	points:			控制点
+	basic shapes:		基本形状
+	symmetry:		对称效果
+	paint:			笔刷
+	
+	merge:			融合
+	subtract:		减去
+	intersect:		相交
+	difference:		不相交
+	overlap:		覆盖
+	border:			边框
+	
+	ellipse:		椭圆形
+	rectangle:		矩形
+	polygon:		多边形
+	star:			星形
+	
+	rotation:		旋转
+	reflection:		反转
+	add symmetry:		添加对称效果
+	remove symmetry:	移除对称效果
+	line segment:		直线
+	curve segment:		曲线
+	free point:		自由
+	smooth point:		平滑
+	symmetric point:	对称
+	clear console:		清空控制台
+	
+############################################################## Toolbar help text
+tooltip:
+	cards tab:		卡牌编辑	
+	set info tab:		套牌信息
+	style tab:		风格样式	
+	keywords tab:		关键词
+	stats tab:		统计结果
+	random pack tab:	随机开包
+	console tab:		控制台
+		
+	new set:		新建套牌
+	open set:		打开套牌
+	save set:		保存套牌
+	export:			导出
+	
+	cut:			剪切
+	copy:			复制
+	paste:			粘贴
+	undo:			撤销%s
+	redo:			重做%s
+	
+	add card:		添加卡牌
+	remove card:		移除选中卡牌
+	rotate card:		旋转卡牌
+	
+	add keyword:		添加关键词
+	remove keyword:		移除所选关键词
+	
+	bold:			粗体
+	italic:			斜体
+	symbols:		系列符号
+	underline:		下划线
+	reminder text:		提示文本
+	
+	pie:			饼形图
+	bar:			条形图
+	stack:			堆叠条形图
+	scatter:		散点图
+	scatter pie:		散饼图
+	
+	# symbol editor
+	store symbol:		将系列符号保存到套牌
+	
+	grid:			显示网格
+	snap:			吸附网格
+	
+	select:			选择	F5
+	rotate:			旋转	F6
+	points:			控制点	F7
+	basic shapes:	基本形状	F8
+	symmetry:		对称效果	F9
+	paint:			笔刷	F10
+	
+	merge:			和下面的图形融合
+	subtract:		从下面的图形减去
+	intersect:		和下面的图形相交
+	difference:		和下面的图形不相交
+	overlap:		覆盖上面的其他图形
+	border:			绘制边框
+	
+	ellipse:		圆形 / 椭圆形
+	rectangle:		正方形 /矩形
+	polygon:		多边形
+	star:			星型
+	
+	rotation:		旋转对称（环形效果）
+	reflection:		反转对称（镜像效果）
+	add symmetry:		所选部分添加对称效果
+	remove symmetry:	移除对称效果
+	
+	line segment:		变成直线
+	curve segment:		变成曲线
+	free point:		解锁点
+	smooth point:		点平滑效果
+	symmetric point:	点对称效果
+	
+	clear console:		清空控制台						  
+############################################################## Labels in the GUI
+label:
+	# Cards tab								
+	card notes:		卡牌信息:
+	search cards:		搜索卡牌...
+	# Keywords tab
+	search keywords:	搜索关键字...
+	keyword:		关键词
+	match:			匹配
+	mode:			类型
+	uses:			使用次数
+	reminder:		提示文本
+	rules:			额外规则
+	standard keyword:
+		这是一个标准的 %s 关键词，你不需要编辑它。
+		如果你做了一个关键词的备份，那么你的备份将优先被使用
+	
+	# Style tab
+	styling options:	样式选项
+
+
+	
+	# Random pack panel
+	pack selection:		选择随机包
+	pack totals:		随机包总数
+	pack name:			随机包名称
+	seed:				随机数种子
+	total cards:		总卡牌数
+		
+	# Other set window dialogs
+	save changes:
+		套牌 '%s' 已经被修改。
+		
+		你想保存修改吗?
+	
+	# New set window
+	game type:		游戏类型:	&G
+	style type:		风格样式:	&S
+	search stylesheet list: Filter Stylesheets
+	
+	stylesheet not found:
+		你要打开的套牌使用的是 "%s" 样式表
+		这个样式表在你的系统里没有找到，请选择其他方案
+	
+	# Preferences
+	language:		语言
+	windows:			打开套牌
+	app language:		程序界面语言
+	card display:		Card Display
+	storage: 			Storage
+	zoom:			&缩放
+	export: 			导出
+	scale: 				规模						
+	percent of normal:	 %显示
+	external programs:	外部程序
+	apprentice:		Apprentice:	&A
+	apprentice exe:		可执行Apprentice
+	check at startup:	程序运行时检查新版本
+	internal scale desc:
+		Scale to internally store card images at.
+		Changing this may impact how Sharpening looks.
+		Does not retroactively apply to existing images.
+	check at startup:	Check for new versions at startup			
+	checking requires internet:
+		检查新版本需要接入互联网。
+		没有接入互联网的时候不检查更新。
+		
+		检查更新时不会搜集用户信息。
+	
+	# Column select
+	select columns:		选择你要显示的栏目
+	columns:		栏目:
+	
+	# Card select / images export
+	select cards:			要导出的卡牌
+	selected card count:	%s 此卡将被导出
+	select cards print:	选择需要打印的卡牌
+	filename format:	格式: 	&F
+	filename conflicts:	处理重复文件名:	&H
+	export filenames:	文件名
+#	cards to export:	导出卡牌
+	filename is ignored: 	（忽略文件名）
+	
+	# apprentice export
+	set code:		设置套牌代码:	&C
+	apprentice export cancelled: 导出到 Apprentice 的过程被取消
+	
+	# Html export
+	html template:		模板:
+	html export options:    导出选项
+	
+	# Image slicer
+	original:		原始:
+	result:			结果:
+	size:			大小
+	original size:			原始尺寸	&O
+	size to fit:			同比例缩放	&F
+	force to fit:			强制缩放	&R
+	custom size:			自定义尺寸	&C
+	selection:		选取
+	selection left:			左	&L
+	selection top:			上	&T
+	selection width:		宽	&W
+	selection height:		高	&H
+	zoom:			缩放
+	fix aspect ratio:		固定长宽比
+	zoom amount:			缩放度
+	zoom amount x:			缩放&X
+	zoom amount y:			缩放&Y
+	zoom %:					%
+	filter:			滤镜
+	sharpen filter:			锐化滤镜	&S
+	
+	# Auto replace
+	auto match:		匹配
+	auto replace:		替换
+	
+	# Symbol editor
+	sides:			侧
+	
+	# Packages window
+	package name:		文件包
+	package status:		状态
+	package action:		动作
+	package conflicts:	矛盾修改
+	package modified:	本地修改
+	package updates:	可用升级
+	package installed:	已安装
+	package installable:	未安装
+	install package:	安装
+	reinstall package:		重新安装
+	upgrade package:	升级
+	remove package:		移除
+
+	installed version:		已安装的版本:
+	installable version:	可安装的最新版本:
+	installer size:			文件大小:
+	installer status:		安装状态:
+	no version:				无可用版本
+ 
+############################################################## Buttons/checkboxes/choices in the GUI
+button:
+	# Editor
+	edit symbol:		编辑
+	symbol gallery:		画廊
+	
+	# Style panel
+	use for all cards:	应用到全部卡牌	&A
+	use custom styling options: 本张卡牌使用特殊设置	&S
+	
+	# Keywords panel
+	insert parameter:	插入参数...
+	refer parameter:	提交参数...
+	
+	# Random pack panel
+	generate pack:		生成随机包	&G
+	random seed:		随机数种子（随机性较差）	&R
+	fixed seed:			设定随机数种子	&F
+	add custom pack:	添加自定义随机包	&C
+	
+	# Console panel
+	evaluate:			测试	Ctrl+F9
+	clear:				清空
+	
+	# Welcome
+	new set:		新建套牌
+	open set:		打开套牌
+	check updates:		检查更新
+	last opened set:	上一次打开的套牌
+	
+	# Preferences
+	open sets in new window:	在新窗口打开整个系列	&W
+	select:			&选择...
+	browse:			&浏览...
+	high quality: &高质量渲染效果
+	show lines: &各个编辑区域显示线
+	show editing hints: &卡牌编辑区显示虚线提示框
+	zoom export: &当导出时采用上面缩放和旋转设置
+	spellcheck enabled:  &检查卡牌拼写错误
+	check now:		立刻检查
+	always:			总是
+	if internet connection exists:	仅有网时
+	never:			从不
+	internal image extension: 以文件扩展名在内部存储图像
+	
+	# Column select
+	move up:		向上移动	&U
+	move down:		向下移动	&D
+	show:			显示	&S
+	hide:			隐藏	&H
+	
+	# Card select
+	export entire set:				整个系列
+	export generated packs:			生成的随机包
+	export custom cards selection:	自定义选取范围
+	select cards:		选取卡牌...	&S
+	select all:		全选	&A
+	select none:		全不选	&N
+	overwrite:		覆盖旧文件
+	keep old:		保留旧文件
+	number:			文件名添加序号
+	number overwrite:	文件名添加序号，覆盖上次导出的结果
+	
+	# Auto replace
+	use auto replace:	使用自动替换
+	add item:		添加项	&A
+	remove item:		移除项	&R
+	defaults:		还原默认	&D
+	enabled:		开启
+	whole word:		匹配整个字符串
+	
+	# Old style update checker  (NOTE: this will be removed in a feature version)
+	close:			关闭
+	
+	# Packages window
+	keep package:		不修改	&D
+	don't install package:	不安装	&O
+	install package:	安装	&I
+	upgrade package:	升级	&U
+	reinstall package:		重新安装	&E
+	remove package:		移除	&R
+	install group:		全部安装	&I
+	upgrade group:		全部升级	&U
+	remove group:		全部移除	&M
+	
+############################################################## Titles in the GUI
+title:
+	magic set editor:	Magic Set Editor
+	%s - magic set editor:	%s - Magic Set Editor
+	untitled:		无标题
+	about:			关于Magic Set Editor 由slimeking，彼方，慕容儒风汉化制作
+	symbol editor:		系列符号编辑器 由slimeking，彼方，慕容儒风汉化制作
+	# dialogs
+	new set:		新建套牌
+	open set:		打开套牌
+	save set:		套牌另存为
+	save set as directory:	保存为单独文件									 
+	save image:		保存图片
+	updates available:	可用更新
+	save changes:		保存修改？
+	select stylesheet:	选择样式表
+	#preferences
+	preferences:		设置
+	global:			全局
+	display:		显示
+	directories:		目录
+	internal:               内部							 
+	updates:		升级更新
+	update check:		检查更新
+	locate apprentice:	定位 Apprentice
+	# select
+	select columns:		选择栏目
+	select cards:		选择卡牌
+	select cards export:    导出选中的卡牌
+	select cards print:	选择要打印的卡牌									   
+	# slice
+	slice image:		图片切片
+	# pack
+	custom pack:		自定义随机包的类型
+	# print
+	print preview:		打印预览
+	# export
+	export images:		导出为图像
+	export cancelled:	取消导出
+	export html:		导出为HTML
+	save html:		保存为HTML
+	# auto replace
+	auto replaces:		自动替换
+	
+	# Package Update Window
+	packages window:	文件包管理器
+	installing updates:	安装更新
+	
+	cannot create file:	无法创建文件
+
+############################################################## Action (undo/redo) names
+action:
+	# List boxes
+	add item:		添加 %s
+	remove item:		移除 %s
+	
+	# Text editor
+	typing:			键入
+	enter:			进入
+	soft line break:	软换行
+	insert symbol:		插入符号
+	backspace:		退格
+	delete:			删除
+	cut:			剪切
+	paste:			粘贴
+	auto replace:		自动替换
+	correct:			拼写修正
+	# Choice/color editors
+	change:			修改 %s
+	
+	# Symbol Actions
+	move:			移动 %s
+	rotate:			旋转 %s
+	shear:			修剪 %s
+	scale:			改变尺寸 %s
+	duplicate:		复制 %s
+	reorder parts:		再添加
+	change combine mode:	改变联合模式
+	change shape name:	改变图形名字
+	group parts:		分组
+	ungroup parts:		取消分组
+	
+	# Symbol Part Actions
+	convert to line:	转换成直线
+	convert to curve:	转换成曲线
+	lock point:		锁定点
+	move handle:		移动手柄
+	move curve:		移动曲线
+	add control point:	添加控制点
+	delete point:		删除控制点
+	delete points:		删除多个控制点
+	
+	# Symmetry
+	add symmetry:		添加对称效果
+	#remove symmetry:	移除对称效果
+	move symmetry center:	移动对称中心
+	move symmetry handle:	改变对称方向
+	change symmetry type:	改变对称类型
+	change symmetry copies:	反转角度
+
+############################################################## Error messages
+error:
+	# File related
+	file not found:		没有找到文件: '%s' 在 '%s' 文件包中
+	file not found package like:
+		没有找到文件:'%s' 在 '%s' 文件包中
+		如果你尝试从别的文件包中打开文件， 使用以下格式"/package/filename"
+	file parse error:
+		处理文件发生错误:'%s'
+		%s
+	package not found:		文件包没有找到: '%s'
+	package out of date:		文件包 '%s' （版本 %s） 过期，需要 %s 以上版本
+	package too new:		文件包 '%s' （版本 %s）与这个版本不兼容 %s，需要 '%s' 以上版本
+	unable to open output file:	保存时出错，无法打开输出文件
+	unable to store file:		保存时出错，无法储存文件
+	dependency not given:
+		文件包 '%s' 所使用的文件来自于文件包 '%s' ，但是列表中并没有该附加项
+		要解决这个问题，添加:
+		  depends on: %s %s
+	
+	# Script stuff
+	has no member:			%s 没有成员 '%s'
+	can't convert:			无法将 %s 转换成 %s 
+	has no member value:		字符串 "%s" 没有成员 '%s'
+	can't convert value:		无法将 "%s" 从 %s 转化成 %s
+	unsupported format:		无效字符串格式:'%s'
+	in function:
+		%s
+		  在函数中 %s
+	in parameter:
+		参数 %s: %s
+	in keyword reminder:
+		%s
+		  在提示文本里的关键词 '%s'
+	
+	# Image stuff
+	coordinates for blending overlap:			坐标混合重叠
+	images used for blending must have the same size:	边框用图像必须使用相同大小
+	
+	# Error from files
+	no game specified:			没有为 %s 指定游戏类型
+	no stylesheet specified for the set:	没有为套牌制定样式表
+	stylesheet and set refer to different game:
+		样式表文件有错误，样式表和套牌与该游戏类型不相关。
+	unsupported field type:		不支持的区域类型:'%s'
+	unsupported fill type:		不支持的填充类型: '%s'
+	unrecognized value:		无法识别的值:'%s'，默认值'%s'
+	expected key:			预期中的关键:'%s'
+	aborting parsing:		遇到致命错误，放弃读取
+	newer version:
+		%s
+		这个文件是由更高版本的 Magic Set Editor (%s) 制作的
+		当你打开它的时候，文件中的一些界面会丢失
+		推荐你升级到最新版本（由于是整合版，请勿使用此升级功能）
+		浏览官方网站 http:://magicseteditor.sourceforge.net/
+	word list type not found:	词语列表类型 %s 没有找到 （从<word-list> 标签中）
+	pack type not found:				未找到该类型的随机包 "%s" (在包类别中)
+	
+	# Update checking
+	checking updates failed:	检查更新失败。
+	no updates:			没有可用更新。
+	
+	# Stats panel
+	dimension not found:		没有统计数据 '%s'
+	
+	# Random packs
+	pack type duplicate name:
+		已存在同名文件 '%s'.
+		请重新命名。
+	
+	# Package update window
+##	checking updates:		检查更新
+	can't download installer:
+		无法为文件包 %s 下载安装程序，从 %s
+		没有更新被安装
+	
+	downloading updates:		更新文件下载中 (%d of %d)
+	installing updates:		文件包升级中 (%d of %d)
+	
+	remove packages:
+		即将移除 %s 文件包，你想继续吗？
+	remove packages modified:
+		在 %s 安装修改完毕后，将要移除 %s 文件包
+		被移除的文件将无法恢复。
+		
+		你想继续吗？
+	install packages successful:	%s 文件包被成功安装
+	remove packages successful:	%s 文件包被成功移除.
+	change packages successful:	%s 文件包被成功修改
+	
+	cannot create file:		无法创建文件 '%s' ，继续安装？
+
+############################################################## Types used in scripts / shape names
+type:
+	function:		函数
+	collection:		收集
+	collection of:		收集 %ss
+	object:			目标
+	double:			实数
+	integer:		整数
+	string:			字符串
+	boolean:		逻辑型
+	color:			颜色
+	image:			图像
+	date:			日期
+	nil:			空
+	
+	# Object types
+	package:		文件包
+	locale:			翻译
+	game:			游戏
+	set:			套牌
+	stylesheet:		样式表
+	export template:	导出模板
+	symbol:			符号
+	card:			卡牌
+	cards:			多张卡牌
+	field:			区域
+	style:			样式
+	value:			值
+	keyword:		关键词
+	keywords:		关键词
+	pack:			随机包类别
+	
+	# Symbol editor shapes
+	shape:			图形
+	shapes:			多个图形
+	circle:			圆形
+	ellipse:		椭圆形
+	square:			正方形
+	rectangle:		矩形
+	triangle:		三角形
+	rhombus:		菱形
+	pentagon:		五边形
+	hexagon:		六边形
+	polygon:		多边形
+	star:			星形
+	
+	rotation:		旋转
+	reflection:		反转
+	group:			分组
+	
+	point:			控制点
+	points:			多个控制点
+	
+
+############################################################## Magic
+package:
+	magic.mse-game:
+		# Card fields
+		Name:				牌名
+		Name 2:				牌名2
+		CC:					法术力费用
+		CC2:				法术力费用2
+		CC3:				法术力费用3
+		CC4:				法术力费用4
+		type:				类型
+		P/T:				攻/防
+		rarity:				稀有度
+		card name:			卡牌名字
+		foilstamp:			防伪标记
+		shape:				卡牌类别
+		FullName:			卡牌全名
+		border color:		边框颜色
+		border color 2:		边框颜色2
+		card color:			卡牌颜色
+		card color 2:		卡牌颜色2
+		hybrid:				混色
+		radial:				径向
+		horizontal:			水平
+		vertical:			垂直
+		overlay:			叠加
+		reversed:			反转
+		text:				文本
+		card symbol:		墓碑符号
+		card symbol 2:		墓碑符号2
+		
+		type symbol:		牌类别符号
+		artifact:			神器
+		creature:			生物
+		enchantment:		结界
+		instant:			瞬间
+		land:				地
+		multitype:			多类别
+		planeswalker:		鹏洛克
+		sorcery:			法术
+		structure:			构工
+		none:				无
+		
+		transformation:		转化符号
+		day:				白天
+		night:				夜间
+		type symbol 2:		牌类别符号2
+		transformation 2:	转化符号2
+		indicator:			颜色判定圈
+		indicator 2:		颜色判定圈2
+		image:				插画
+		image 2:				插画2
+		imagepopout:		出框插画
+		imagepopout 2:		出框插画2
+		super type:			主类别
+		super type 2:		主类别2
+		sub type:			副类别
+		sub type 2:			副类别2
+		type:				类别
+		type 2:				类别2
+		
+		foilstamp:			防伪水印
+		foilstamp 2:		防伪水印2
+		Origin:				老版
+		Black:				纯黑
+		Crystal:			水晶
+		Gorgeous:			炫彩
+		Hire:				高清
+		Lotus:				莲花
+		Planewarlker:		旅法
+		Official:			官方
+		
+		rarity:				稀有度
+		rarity 2:			稀有度2
+		identity:			老颜色判定内圈
+		identity 2:			老颜色判定内圈2
+		idframe:			老颜色判定外圈
+		idframe 2:			老颜色判定外圈2
+		rule text:			规则叙述
+		rule text 2:		规则叙述2
+		rule text 3:		规则叙述3
+		rule text 4:		规则叙述4
+		rule text 5:		规则叙述5
+		rule text 6:		规则叙述6
+		flavor text:		背景叙述
+#		flavor text 2:		背景叙述2
+		text:				叙述
+		text 2:				叙述2
+		watermark:			水印
+		watermark 2:		水印2
+		loyalty:			忠诚度
+		loyalty 2:			忠诚度2
+		loyalty cost 1:		忠诚度费用1
+		loyalty cost 2:		忠诚度费用2
+		loyalty cost 3:		忠诚度费用3
+		loyalty cost 4:		忠诚度费用4
+		loyalty cost 5:		忠诚度费用5
+		loyalty cost 6:		忠诚度费用6
+		loyalty cost 7:		忠诚度费用7
+		loyalty cost 8:		忠诚度费用8
+		level 1:			等级1
+		level 2:			等级2
+		power:				力量
+		toughness:			防御力
+		pt:					攻防
+		power 2:			力量2
+		toughness 2:		防御力2
+		P/T2:				攻防2
+		power 3:			力量3
+		toughness 3:		防御力3
+		P/T3:				攻防3
+		card number:		卡牌编号
+		card number m15:	M15卡牌编号
+		custom number:		自定义卡牌编号
+		set code:			套牌代码
+		set code 2:			套牌代码2
+		card code text:		自定义卡牌编号文本
+		illustrator:		画家
+		illustrator 2:		画家2
+		designer:			设计者
+		designer 2:			设计者2
+		copyright:			版权
+		copyright 2:		版权2
+		copyright line:		版权栏
+		copyright line 2:	版权栏2
+		
+		
+	magic-stylingfield.mse-include:
+		CN newfont: 中文旧字体
+		chop top: 文本栏上缘留空
+		chop bottom: 文本栏下缘留空
+		
+	magic-m15-*.mse-style:
+		default:									默认
+		white:										白色
+		blue:										蓝色
+		black:										黑色
+		red:										红色
+		green:										绿色
+		purple:										紫色
+		pink:										粉色
+		artifact:									神器
+		snow:										雪境
+		multicolor:									多色
+		spectral:									幽魅
+		colorless:									无色
+		modern:										摩登
+		old:										老牌
+		diagonal T:									斜纹
+		
+		# Set info
+		double click to edit symbol:				双击编辑系列符号
+		# descriptions/help text
+		artifact style:			神器风格
+		saturated multicolor:		标准多色牌
+		shifted sorting: 		排序变换
+		darker artifacts: 		更深色神器
+		grey hybrid typeline:		混色牌类型线变灰
+		one textline tokens:		一条文本线 衍生物
+		alpha style blending:		阿尔法风格混合
+		type of gradient multicolor:	倾斜多色类型
+		type of gradient artifact:	倾斜神器类型
+		tap symbol:			横置符号
+		image size:			图像大小
+		cardname font:			卡牌名字字体
+		font color:			字体颜色
+		text box mana symbols:		文字栏法术力符号
+		green style:			绿色风格
+		land style:			地牌风格
+		center text:			文字居中
+		colored rarities:		稀有度变色
+		left align artist:		画家左对齐
+		inverted common symbol:		铁牌稀有度标志用反相显示
+		
+	magic-mana-*.mse-symbol-font:
+		# note: reminder/shortcut must start with a space, otherwise it is used as a shortcut提示文本和快捷键必须以空格开始
+		#       so typing T *anywhere* would insert a symbol (which would be bad)
+		menu item T:		横置符号	 T
+		menu item Q:		重置符号	 Q
+		menu item H:		时空符号	 H
+		menu item O:		混沌符号	 O
+		menu item W:		白色法术力	 W
+		menu item U:		蓝色法术力	 U
+		menu item B:		黑色法术力	 B
+		menu item R:		红色法术力	 R
+		menu item G:		绿色法术力	 G
+		menu item C:		无色法术力	 C
+		menu item S:		雪境法术力	 S
+		menu item X:		可变法术力 X	 X
+		menu item Y:		可变法术力 Y	 Y
+		menu item Z:		可变法术力 Z	 Z
+		menu item I:		无限法术力	 I
+		menu item colorless:	无色法术力...
+		title colorless:	任意数量的法术力
+		message colorless:	输入任意法术力数量:
+		menu item half:		一半法术力
+		menu item |W:		半白色法术力	 |W
+		menu item |U:		半蓝色法术力	 |U
+		menu item |B:		半黑色法术力	 |B
+		menu item |R:		半红色法术力	 |R
+		menu item |G:		半绿色法术力	 |G
+		menu item |S:		半雪境法术力	 |S
+		menu item |O:		半混沌法术力	 |O
+		menu item 1/2:		半无色法术力	1/2
+		menu item hybrid:	混合法术力（双色）
+		menu item hybrid 1:	混合法术力（双色）
+		menu item hybrid 2:	混合法术力（双色，防分裂）
+		menu item W/U:		白/蓝 法术力	 W/U
+		menu item U/B:		蓝/黑 法术力	 U/B
+		menu item B/R:		黑/红 法术力	 B/R
+		menu item R/G:		红/绿 法术力	 R/G
+		menu item G/W:		绿/白 法术力	 G/W
+		menu item W/B:		白/黑 法术力	 W/B
+		menu item U/R:		蓝/红 法术力	 U/R
+		menu item B/G:		黑/绿 法术力	 B/G
+		menu item R/W:		红/白 法术力	 R/W
+		menu item G/U:		绿/蓝 法术力	 G/U
+		menu item W/C:		白/无 法术力	 W/C
+		menu item U/C:		蓝/无 法术力	 U/C
+		menu item B/C:		黑/无 法术力	 B/C
+		menu item R/C:		红/无 法术力	 R/C
+		menu item G/C:		绿/无 法术力	 G/C
+		menu item ①:		白/蓝 法术力	 ①
+		menu item ②:		蓝/黑 法术力	 ②
+		menu item ③:		黑/红 法术力	 ③
+		menu item ④:		红/绿 法术力	 ④
+		menu item ⑤:		绿/白 法术力	 ⑤
+		menu item ⑥:		白/黑 法术力	 ⑥
+		menu item ⑦:		蓝/红 法术力	 ⑦
+		menu item ⑧:		黑/绿 法术力	 ⑧
+		menu item ⑨:		红/白 法术力	 ⑨
+		menu item ⑩:		绿/蓝 法术力	 ⑩
+		menu item hybrid 3:	混合法术力（三色）
+		menu item W/U/B:	白/蓝/黑 法术力	 W/U/B
+		menu item U/B/R:	蓝/黑/红 法术力	 U/B/R
+		menu item B/R/G:	黑/红/绿 法术力	 B/R/G
+		menu item R/G/W:	红/绿/白 法术力	 R/G/W
+		menu item G/W/U:	绿/白/蓝 法术力	 G/W/U
+		menu item W/B/R:	白/黑/红 法术力	 W/B/R
+		menu item U/R/G:	蓝/红/绿 法术力	 U/R/G
+		menu item B/G/W:	黑/绿/白 法术力	 B/G/W
+		menu item R/W/U:	红/白/蓝 法术力	 R/W/U
+		menu item G/U/B:	绿/蓝/黑 法术力	 G/U/B
+		Menu item Phyrexian:		非瑞克西亚法术力
+		menu item Phyrexian 1:		非瑞克西亚法术力
+		menu item Phyrexian 2:		非瑞克西亚法术力（修正）
+		menu item Mirrodin:		秘罗地法术力
+		menu item Mirrodin 1:		秘罗地法术力
+		menu item Mirrodin 2:		秘罗地法术力（修正）
+		menu item Discard:		弃牌法术力
+		menu item colored x:		带颜色的X
+		menu item 2/W:		二/白 法术力	 2/W
+		menu item 2/U:		二/蓝 法术力	 2/U
+		menu item 2/B:		二/黑 法术力	 2/B
+		menu item 2/R:		二/红 法术力	 2/R
+		menu item 2/G:		二/绿 法术力	 2/G
+		menu item 2/C:		二/无 法术力	 2/C
+
+		
+	magic-*.mse-style:
+		chop top:	规则叙述与边框的上间距
+		chop bottom:	规则叙述与边框的下间距
+		shrink name text:	牌名字体缩小值
+		shrink typeline text:	类别字体缩小值
+		
+		frames:		特殊边框
+		adventure:	历险
+		lesson:		课程
+		map:		宝藏图
+		devoid:		虚色
+		clear:		透明
+		borderless art:		无边画
+		frameless art:		无框画
+		fullart:		全画
+		puma:		编号外puma
+		mutate:		合变
+		fnm promo:		fnm 特卡
+		inverted:		深色
+		planeshifted:		时空转移
+		legend:		传奇
+		#season:		虚色
+		conspiracy:		诡局
+		draft matters:		轮抓卡
+		miracle:		奇迹
+		vehicle:		载具
+		nyx:		尼兹结界
+		leveler:		升级
+		snow:		雪境
+		use phyrexian font: 使用非瑞字体
+		standard:		标准
+		companion:		行侣
+		
+		Custom symbol:		自定义图案
+		Legend crown:		传奇框风格
+		Custom crown location:		自定义传奇框位置
+		
+		Other options:		其它选项
+		prerelease stamp:		预售稀有标贴
+		brown legendary vehicle pt:		棕色传奇载具攻防框
+		godzilla style alias:		哥斯拉真名框
+		pokemon evobar:		宝可梦进化框
+		Ancestral generic mana:		旧版数字法术力
+		Override-style text:		覆盖式文本
+		always center map names:		宝藏图名字居中
+		use starting loyalty:		使用初始忠诚
+		regular pt on levelers:		单一升级攻防框
+		auto vehicles:		自动载具框
+		auto snow:		自动雪境框
+		auto nyx crowns:		自动尼兹结界框
+		text watermarks:		文本水印
+		clear tops:		无色顶框
+		
+		Font cap:	字体大小
+		d20 dividers:	D20分隔栏
+		d20 mode:	d20模式
+		off:	关闭
+		all breaks:	每一段分颜色
+		all breaks +1:	第二段开始变换颜色
+		all breaks +2:	第三段开始变换颜色
+		all breaks +3:	第四段开始变换颜色
+		
+		Arrow or bullet offsets:		箭头位置调整
+		Level offset:		升级文本栏调整
+		Level label:		升级栏标签
+		
+		Level containers:		升级栏外框
+		Arrows:		箭头
+		Pt boxes:		攻防栏
+		Loyalty boxes:		忠诚度栏
+		Use holofoil stamps:		使用防伪标记
+		Color indicator dot:		使用颜色标识圈
+		Remove from autocount:		移除自动序号
+		Alt rarity color:		替代稀有度颜色
+		Card watermark:		卡牌水印
+		Hybrid name:		混血卡牌边框颜色
+		Grey:		灰色
+		Gold:		金色
+		Hybrid:		混合
+		Colored multicolor land name:		多色地牌标题栏变色
+		Use guild mana symbols:		使用公会法术力符号
+		Tap symbol:			横置符号
+		Popup style:			摩登
+		Text box mana symbols:		文字栏法术力符号
+		Center text:			文字居中
+		Inverted common symbol:			反相显示铁牌的稀有度标志
+		Overlay: 闪卡贴膜
+		
+		hover art fix: 破框画位置修正
+		custom mask: 自定义蒙版
+		others: 其它选项
+		hover art:破框画(可使用png透明底图片)
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		#vorthos box:		行侣
+		#pride pinlines	:		行侣
+		
+		#全能双面牌
+		front face mode:	正面款式
+		back face mode:		背面款式
+		Reverse:			反转
+		God:				结界
+		Vehicle:			载具
+		Miracle:			奇迹
+		Meld:				是否为融合牌
+		Vehicle transformation:		载具牌转变
+		Standard:			正常画
+		Extended:			括画	
+		#阿芒凯祝愿
+		center typeline:		类别栏文字居中
+		show normal rarity:		正常显示稀有度图标
+		silver border:			使用银色底边
+		snap cartouche to name:	牌名框镶边紧包牌名
+		nonexistent mana cost:	隐藏法术力费用栏
+		Papyrus font:			使用Papyrus字体
+		Beleren font:			使用Beleren字体
+		#M15高衍生物
+		Use clear frames:		使用透明大画
+		#通用
+		CN newfont: 			中文旧字体
+		chop top: 				文本栏上缘留空
+		chop bottom: 			文本栏下缘留空
+		title:					标题
+		description:			描述
+		artist:					画家
+		designer:				设计者
+		copyright:				版权
+		set code:				系列代码
+		set language:			语言代码
+		symbol:					系列符号
+		default foilstamp:		默认防伪标记
+		default rarity:			默认稀有度
+		Defaults and Automation:	默认和自动选项
+		border color:				边框颜色
+		card language:				卡牌语言
+		automatic reminder text:	自动提示关键字文本
+		automatic card numbers:		自动卡牌编号
+		sort special rarity:		特殊稀有度卡牌排序
+		mark errors:			标出错误
+		use gradient multicolor:	使用倾斜多色
+		sort multicolor in pairs:	法术力符号是否自动排序
+		color identity:	类别栏颜色标记
+		artifact style:	神器牌风格
+		saturated multicolor:		多色牌不渲染标题栏
+
+		CHNFontsize: 中文规则叙述字体大小
+		CHNFlavorsize: 中文背景叙述字体大小
+		CHNSymbolsize: 中文法术力符号大小
+		ENGFontsize: 英文规则叙述字体大小
+		ENGSymbolsize: 英文法术力符号大小
+		PaddingLeft: 规则叙述与边框的间距
+		grey hybrid typeline: 混色牌不渲染类别栏
+		casting cost mana symbols: 标题栏法术力符号
+		display border: 显示边框
+		artist font color: 画家与版权字体颜色
+		setting color: 正在设置卡牌颜色
+		overlay: 闪卡贴膜
+		promo: 是否为奖励卡
+		ifmiracle: 是否为奇迹牌
+		composite image: 使用两张图片
+		image size: 图片大小
+		bigger phybrid: 更大的非瑞/混色符号
+		win7orxp: 操作系统
+		extended art: 大画
+		justify text: 调整字间距
+		card name color: 卡牌名称颜色
+		card text color: 规则文字颜色
+		frame opacity: 牌框透明度
+		left artist font color: 左侧画家与版权字体颜色
+		right artist font color: 右侧画家与版权字体颜色
+		clear side: 哪一边透明？
+		border visible: 显示边框
+		font color: 字体颜色
+		artist font color 2: 画家与版权字体颜色(背面)
+		popout image style: 出框位置设置
+		popout image style 2: 出框位置设置(第2张)
+		grey hybrid name: 混色牌牌名和类别栏变灰
+		overlay combine type:闪膜混合模式
+		visible rarity:稀有度可见
+		visible copyright:版权可见
+		pt font:攻防标示的字体
+		level label:等级栏的文字
+		colored multicolor land name:		多色地牌标题栏变色
+		
+		#clear
+		transparent: 透明度
+		semitransparency: 文本栏半透明
+		clear: 全透明
+		normal: 正常
+		#agclassis
+		use color indicator:				使用颜色指示圈
+		use guild mana symbols:				使用公会法术力符号
+		mana cost mana symbols:				法术力费用符号样式
+		multicolor pinstripe colored:		多色牌外框为金色
+		artifact pinstripe colored:			有色神器牌或产费神器牌变色
+		land pinstripe colored:				地牌变色
+		basic type to color:				基本地牌变色
+		dual land slash blending:			双色地斜向混色
+		invert snow symbol:					使用反相的雪境法术力符号
+		colored rarities:					使用有色稀有度图标
+		left align artist:					画家版权栏左对齐
+		CN urzafont:						使用克撒传简中字体
+		
+		
+		#extra
+		font style:							字体类型
+		Which font style should be used?:	选择字体类型
+		M15 CN New:							中文M15新字体
+		M15 CN Old:							中文M15旧字体
+		After Magic 2015:					英文M15字体
+		After 8th Edition:					英文摩登字体
+		Before 8th Edition:					英文摩登前字体
+		Phyrexian:							非瑞克西亚文
+		regular options:					规则选项
+		Which regular styling options would you like to use?: 你想选用哪项规则？
+		center text:						文本居中
+		color indicator dot:				卡牌颜色判定圈
+		colored multicolor land names:		多色地牌标题栏变色
+		grey hybrid names:					混色牌不渲染标题栏
+		guild mana symbols:					使用工会法术力符号
+		holofoil stamped rares:				使用防伪标记
+		promo rarity:						使用奖励牌的P稀有度
+		inverted common symbol:				反相显示铁牌的稀有度标志
+		extras:						额外选项
+		Which extra options would you like to use?: 你想选择哪些额外选项？
+		pichoro's alchemist watermark:				Pichoro的炼金术士水印
+		alpha style dual lands:						初版双色地圈形渲染
+		card creator credit field:					新的卡牌设计者区
+		takeabow's clock watermark:					Takeabow的表盘水印
+		advent's colored xyz mana:					Advent的有色XYZ法术力符号
+		circeus' colorless-colored hybrid:			Circeus的无色混色边框
+		anuttymous' frost effect:					Anuttymous的冰霜顶纹
+		holiday promo text:							假日纪念闪卡日期红字
+		dark nova's runes:							Dark Nove的符文侧框
+		lesurgo's spell-land hybrid:				Lesurgo的咒语地混色牌效果
+		circeus' tinged artifact hybrid:			Circeus的淡色神器混色牌效果
+		type symbol with name:						名称栏的牌类别符号
+		unsorted casting cost:						未分类的法术力费用
+		double watermarks:							双水印
+		grayscale:									黑白风格
+		text box mana symbols:						文本栏的法术力符号类型
+		pt box symbols:								攻防栏的法术力符号类型
+		outer color:								外框颜色
+		Should the outside of the frame be a special color?:	外框是否指定特定颜色
+		default:									默认
+		white:										白色
+		blue:										蓝色
+		black:										黑色
+		red:										红色
+		green:										绿色
+		purple:										紫色
+		pink:										粉色
+		artifact:									神器
+		snow:										雪境
+		multicolor:									多色
+		spectral:									幽魅
+		colorless:									无色
+		trim color:									内框颜色
+		inner color:								内栏颜色
+		modern:										摩登
+		old:										旧版
+		diagonal T:									斜纹
+		core:										核心
+		evergreen:									常青关键字
+		expert:										关键字异能
+		pseudo:										关键字提示
+		action:										关键字动作
+		custom:										自定义
+		Origin:										老版
+		Black:										纯黑
+		Crystal:									水晶
+		Gorgeous:									炫彩
+		Hire:										高清
+		Lotus:										莲花
+		Planewarlker:								旅法
+		Official:									官方
+		yes:										是
+		no:											否
+		force justify:								强制调整
+		Only For Two Color Cards:					仅对双色牌进行混色渲染
+		Normal:										正常
+		bubble:										气泡
+		Popup Style:								凸出
+		Abu:										前三版
+		white:										白色
+		Future Sight Style:							预知将来系列风格
+		none:										无
+		Extra Pt Syms:								额外攻防符号
+		M15 Normal w/ Extra Colors:					M15正常额外颜色
+		M15 Normal w/ Purple Modifications:			M15正常紫色修改版
+		M15 Popup w/ Extra Colors:					M15凸出额外颜色
+		M15 Popup w/ Purple Modifications:			M15凸出紫色修改版
+		
+		never:										从不
+		sometimes:									有时
+		#特殊稀有度牌在卡牌编码的排序
+		with the rest:								混在一起(不显示)
+		after other cards:							在其他卡牌后
+		separate numbering:							分开编码
+		
+		
+		Common:										铁牌
+		Uncommon:									银牌
+		Rare:										金牌
+		Mythic Rare:								秘稀
+		
+	cards tab:		卡牌
+	set info tab:	套牌信息
+	style tab:		样式
+	keywords tab:	关键词
+	stats tab:		统计

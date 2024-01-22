@@ -1,0 +1,1834 @@
+# Rarities images
+# Included by a game file
+# Edit by Heavenford 2017.1.14
+
+choice:
+	choice: basic land
+	choice: common
+	choice: uncommon
+	choice: rare
+	choice: mythic rare
+	choice: special
+	choice: masterpiece
+	line below: true
+
+choice:
+	name: MKM
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	choice:
+		name: CLU
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	line below: true
+
+choice:
+	name: LCI
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	choice:
+		name: REX
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	line below: true
+
+choice:
+	name: WOE
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	choice:
+		name: WOT
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	line below: true
+
+choice:
+	name: MOM
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	choice:
+		name: MUL
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: MAT
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	line below: true
+choice:
+	name: ONE
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	line below: true
+choice:
+	name: BRO
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	choice:
+		name: BRR
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: BOT
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	line below: true
+choice:
+	name: DMU
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	line below: true
+choice:
+	name: SNC
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	line below: true
+choice:
+	name: NEO
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	line below: true
+choice:
+	name: VOW
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+choice:
+	name: MID
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	line below: true
+
+
+######################################################### 摩登
+choice:
+	name: Modern
+	choice:
+		name: AFR
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: STX
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice:
+			name: STAJP
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+		choice:
+			name: STA
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+		line below: true
+	choice:
+		name: KHM
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: ZNR
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice:
+			name: ZRE
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+		line below: true
+	choice:
+		name: M21
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: IKO
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: THB
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: ELD
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: M20
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: WAR
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: RNA
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: GRN
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: M19
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: DOM
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: RIX
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: XLN
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: HOU
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: AKH
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Special
+		line below: true
+	choice:
+		name: AER
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: KLD
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: InvertedCommon
+		choice: Special
+		line below: true
+	choice:
+		name: EMN
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: SOI
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: OGW
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: BFZ
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: InvertedCommon
+		choice: Special
+		line below: true
+	choice:
+		name: ORI
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: DTK
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: FRF
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: KTK
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: M15
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+#choice: 塞洛斯
+	choice:
+		name: JOU
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: BNG
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: THS
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+#choice: 新拉尼卡
+	choice:
+		name: DGM
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: GTC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: RTR
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+#choice：依尼翠
+	choice:
+		name: AVR
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DKA
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: ISD
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+#choice: 新秘罗地
+	choice:
+		name: NPH
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: MBS
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: SOM
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+#choice: 赞迪卡
+	choice: ROE
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: WWK
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: ZEN
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+#choice: 阿拉若
+	choice:
+		name: ARB
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: CFX
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: ALA
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+#choice: 洛温
+	choice:
+		name: EVE
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: SHM
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: MOR
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: LRW
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+#choice: 时间
+	choice:
+		name: FUT
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: PLC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: TSP
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Special
+		line below: true
+#choice: 冰雪
+	choice:
+		name: CSP
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+#choice: 拉尼卡
+	choice:
+		name: DIS
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: GPT
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: RAV
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+#choice: 神河
+	choice:
+		name: SOK
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: BOK
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: CHK
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+#choice: 秘罗地
+	choice:
+		name: 5DN
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DST
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: MRD
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+#choice: 核心系列
+	choice:
+		name: M14
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: M13
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: M12
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: M11
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: M10
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: 10E
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: 9ED
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: 8ED
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+
+######################################################### 薪传
+choice:
+	name: Legacy
+	choice:
+		name: SCG
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: LGN
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: ONS
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: JUD
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: TOR
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: ODY
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: APC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: PLS
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: INV
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: PCY
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: NMS
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: MMQ
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: UDS
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: ULG
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: USG
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: EXO
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: STH
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: TMP
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: WTH
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: VIS
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: MIR
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: ALL
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: HML
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: ICE
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: FEM
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DRK
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: LEG
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common	
+	choice:
+		name: ATQ
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: ARN
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: 7ED
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: 6ED
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: 5ED
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: 4ED
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: RVE
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: 2ED
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: LEB
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: LEA
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+
+######################################################### 奖励
+choice:
+	name: Reward
+	choice:
+		name: SPG
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: JGP
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: FNM
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DCI
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: MPT
+		choice: Special
+	choice:
+		name: MPR
+		choice: Special
+	choice:
+		name: pMPS
+		choice: Special
+	choice:
+		name: GURU
+		choice: Special
+		choice: Common
+	choice:
+		name: MMM
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Special
+	choice:
+		name: ARE
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Special
+	choice:
+		name: ARENA
+		choice: Special
+		choice: Common
+	choice:
+		name: XED
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: XBX
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: IDW
+		choice: Rare
+		choice: Common
+
+######################################################### 对决
+choice:
+	name: Duel
+	choice:
+		name: GS1
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DDU
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DDT
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DDS
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DDR
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DDQ
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DDP
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DDO
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DDN
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DDM
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DDL
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DDK
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DDJ
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DDI
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DDH
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DDG
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DDF
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DDE
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DDD
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DDC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: JVC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: EVG
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+
+######################################################### 指挥官
+choice:
+	name: Command
+	choice:
+		name: PIP
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: MKC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: LCC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: WHO
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: WOC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: CMM
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: LTC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: MOC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: ONC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: BRC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: 40K
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DMC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: NCC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: NEC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: VOC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: MIC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: AFC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: C21
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: KHC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: ZNC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: C20
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: C19
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: C18
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: CM2
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: C17
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: C16
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: C15
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: C14
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: C13
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: CMA
+		choice: Common
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: CMAA
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: CMD
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+
+######################################################### MO
+choice:
+	name: MO-only
+	choice:
+		name: PZ2
+		choice: Common
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: PZ1
+		choice: Common
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: TPR
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: VMA
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: InvertedCommon
+		choice: Special
+		line below: true
+	choice:
+		name: ME4
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: ME3
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: ME2
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: MED
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+
+
+######################################################### 法术书
+choice:
+	name: Spellbook
+	choice:
+		name: SS3
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: SS2
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: SS1
+		choice: Mythic
+		choice: Rare
+
+######################################################### 新手包
+choice:
+	name: Starter
+	choice:
+		name: GK1
+		choice:
+			name: DIMIR
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+		choice:
+			name: IZZET
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+		choice:
+			name: GOLGARI
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+		choice:
+			name: BOROS
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+		choice:
+			name: SELESNYA
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+#########
+	choice:
+		name: GK2
+		choice:
+			name: AZORIUS
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+		choice:
+			name: ORZHOV
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+		choice:
+			name: GRUUL
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+		choice:
+			name: SIMIC
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+#########
+	choice:
+		name: SCD
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: J22
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: JMP
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: ANA
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: S00
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: S99
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: PTK
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: PO2
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: POR
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+
+######################################################### SL
+choice:
+	name: Premium
+	choice:
+		name: V17
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: V16
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: V15
+		choice: Mythic
+		choice: Common
+	choice:
+		name: V14
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: V13
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: V12
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: V11
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: V10
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: V09
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: DRB
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: PD3
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: PD2
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: H09
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: 2004
+		choice: Common
+	choice:
+		name: 2003
+		choice: Common
+	choice:
+		name: 2002
+		choice: Common
+	choice:
+		name: 2001
+		choice: Common
+	choice:
+		name: 2000
+		choice: Common
+	choice:
+		name: 1999
+		choice: Common
+
+######################################################### 轮抽
+choice:
+	name: Supplemental
+	choice:
+		name: LTR
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: CLB
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: MH2
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: JMP
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: MH1
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: BBD
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: CN2
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: CNS
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: PCA
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: PC2
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: ANN
+		choice: Common
+	choice:
+		name: E01
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: ARC
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: HOP
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: UNH
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: UGL
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: AST
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+
+######################################################### 重印包
+choice:
+	name: Masters
+	choice:
+		name: RVR
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DMR
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: 2X2
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: TSR
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: 2XM
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: UMA
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: A25
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: IMA
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: EMA
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: W16
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: MM3
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: MM2
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: MD1
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: MMA
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: CHR
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: BTD
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DKM
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: BRB
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: SDC
+		choice: Rare
+		choice: Common
+	choice:
+		name: TD2
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: TD0
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+
+######################################################### 其他
+choice:
+	name: Other
+	choice:
+		name: 30A
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: MED
+		choice: Mythic
+	choice:
+		name: UNF
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: UST
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: SUM
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: ATH
+		choice: Rare
+		choice: Common
+	choice:
+		name: ATX
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: DND
+		choice: Common
+	choice:
+		name: 3E2
+		choice: Rare
+		choice: Uncommon
+		choice: Common

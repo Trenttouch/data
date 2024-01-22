@@ -1,0 +1,218 @@
+
+
+# Language specific strings
+languages := [
+	English: [
+		code              : "en",
+		spellcheck_code   : "en_US",
+		pt_separator      : "/",
+		type_separator    : " — ",
+		subtype_separator : " ",
+		is_creature       : match@(match: "(?i)Creature")
+		is_tribal         : match@(match: "(?i)Kindred")
+		is_artifact       : match@(match: "(?i)Artifact")
+		is_land           : match@(match: "(?i)Land")
+		is_enchantment    : match@(match: "(?i)Enchantment")
+		is_spell          : match@(match: "(?i)Instant|Sorcery")
+		is_planeswalker   : match@(match: "(?i)Planeswalker|Emblem")
+		is_plane		  : match@(match: "(?i)Plane(?!swalker)")
+		is_battle		  : match@(match: "(?i)Battle")
+		word_list		  : "word_list"
+	],
+	日本語: [
+		code              : "jp",
+		spellcheck_code   : "jp_jp",
+		pt_separator      : "/",
+		type_separator    : "—"
+		subtype_separator : "·",
+		is_creature       : match@(match: "(?i)クリーチャー")
+		is_tribal         : match@(match: "(?i)亲缘")
+		is_artifact       : match@(match: "(?i)アーティファクト")
+		is_land           : match@(match: "(?i)土地")
+		is_enchantment    : match@(match: "(?i)エンチャント")
+		is_spell          : match@(match: "(?i)インスタント|ソーサリー")
+		is_planeswalker   : match@(match: "(?i)プレインズウォーカー")
+		is_plane		  : match@(match: "(?i)次元")
+		is_battle		  : match@(match: "(?i)バトル")
+		word_list		  : "word_list_chs"
+	],
+	简体中文: [
+		code              : "chs",
+		spellcheck_code   : "chs_cn",
+		pt_separator      : "/",
+		type_separator    : "～"
+		subtype_separator : "<atom-sep> / </atom-sep>",
+		is_creature       : match@(match: "(?i)生物")
+		is_tribal         : match@(match: "(?i)亲缘")
+		is_artifact       : match@(match: "(?i)神器")
+		is_land           : match@(match: "(?i)地")
+		is_enchantment    : match@(match: "(?i)结界")
+		is_spell          : match@(match: "(?i)瞬间|法术")
+		is_planeswalker   : match@(match: "(?i)旅法师|鹏洛客")
+		is_plane		  : match@(match: "(?i)时空")
+		is_battle		  : match@(match: "(?i)战役")
+		word_list		  : "word_list_chs"
+	], 
+	"English (British)": [
+		code              : "en",
+		spellcheck_code   : "en_GB",
+		pt_separator      : "/",
+		type_separator    : " — ",
+		subtype_separator : " ",
+		is_creature       : match@(match: "(?i)Creature")
+		is_tribal         : match@(match: "(?i)Kindred")
+		is_artifact       : match@(match: "(?i)Artifact")
+		is_land           : match@(match: "(?i)Land")
+		is_enchantment    : match@(match: "(?i)Enchantment")
+		is_spell          : match@(match: "(?i)Instant|Sorcery")
+		is_planeswalker   : match@(match: "(?i)Planeswalker|Emblem")
+		is_plane		  : match@(match: "(?i)Plane(?!swalker)")
+		is_battle		  : match@(match: "(?i)Battle")
+		word_list		  : "word_list"
+	],  
+	"English (Canadian)": [
+		code              : "en",
+		spellcheck_code   : "en_CA",
+		pt_separator      : "/",
+		type_separator    : " — ",
+		subtype_separator : " ",
+		is_creature       : match@(match: "(?i)Creature")
+		is_tribal         : match@(match: "(?i)Kindred")
+		is_artifact       : match@(match: "(?i)Artifact")
+		is_land           : match@(match: "(?i)Land")
+		is_enchantment    : match@(match: "(?i)Enchantment")
+		is_spell          : match@(match: "(?i)Instant|Sorcery")
+		is_planeswalker   : match@(match: "(?i)Planeswalker|Emblem")
+		is_plane		  : match@(match: "(?i)Plane(?!swalker)")
+		word_list		  : "word_list"
+	],  
+	Russian: [
+		code              : "ru",
+		spellcheck_code   : "ru_RU",
+		pt_separator      : "/",
+		type_separator    : " — ",
+		subtype_separator : " ",
+		is_creature       : match@(match: "(?i)Существо")
+		is_tribal         : match@(match: "(?i)Племенное")
+		is_artifact       : match@(match: "(?i)Артефакт")
+		is_land           : match@(match: "(?i)Земля")
+		is_enchantment    : match@(match: "(?i)Чары")
+		is_spell          : match@(match: "(?i)Мгновенное заклинание|Волшебство")
+		is_planeswalker   : match@(match: "(?i)Planeswalker|Emblem")
+		is_plane		  : match@(match: "(?i)Plane(?!swalker)")
+		word_list		  : "word_list_ru"
+	],
+	Italiano: [
+		code              : "it",
+		spellcheck_code   : "it_IT",
+		pt_separator      : "/",
+		type_separator    : " — ",
+		subtype_separator : " ",
+		is_creature       : match@(match: "(?i)Creatura")
+		is_tribal         : match@(match: "(?i)Kindrede")
+		is_artifact       : match@(match: "(?i)Artefatto")
+		is_land           : match@(match: "(?i)Terra")
+		is_enchantment    : match@(match: "(?i)Incantesimo")
+		is_spell          : match@(match: "(?i)Istantaneo|Stregoneria")
+		is_planeswalker   : match@(match: "(?i)Planeswalker|Emblem")
+		is_plane		  : match@(match: "(?i)Plane(?!swalker)")
+		word_list		  : "word_list_it"
+	],  
+	"Português do Brasil" : [
+		code              : "pt-br",
+		spellcheck_code   : "pt_BR",
+		pt_separator      : "/",
+		type_separator    : " — ",
+		subtype_separator : " ",
+		is_creature       : match@(match: "(?i)Criatura")
+		is_tribal         : match@(match: "(?i)Kindred")
+		is_artifact       : match@(match: "(?i)Artefato")
+		is_land           : match@(match: "(?i)Terreno")
+		is_enchantment    : match@(match: "(?i)Encantamento")
+		is_spell          : match@(match: "(?i)Mágica Instantânea|Feitiço")
+		is_planeswalker   : match@(match: "(?i)Planeswalker|Emblem")
+		is_plane		  : match@(match: "(?i)Plane(?!swalker)")
+		word_list		  : "word_list_pt"
+	],	
+	Français: [
+		code              : "fr",
+		spellcheck_code   : "fr_FR",
+		pt_separator      : "/",
+		type_separator    : " : "
+		subtype_separator : "<atom-sep> et </atom-sep>",
+		is_creature       : match@(match: "(?i)Creature|Créature")
+		is_tribal         : match@(match: "(?i)Kindred")
+		is_artifact       : match@(match: "(?i)Artefact")
+		is_land           : match@(match: "(?i)Terrain")
+		is_enchantment    : match@(match: "(?i)Enchantement")
+		is_spell          : match@(match: "(?i)Éphémère|Rituel")
+		is_planeswalker   : match@(match: "(?i)Planeswalker")
+		is_plane		  : match@(match: "(?i)Plane(?!swalker)")
+		word_list		  : "word_list_fr"
+	]
+]
+
+# The selected language
+language := { languages[set.card_language] or else language.简体中文 }
+spanish_number := {
+	input := remove_tags(input)
+	espanol_ones_array := ["cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce", "trece", "catorce", "quince"]
+	espanol_tens_array := ["cero", "diec", "viente", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa"]
+	function_map := [
+		small: {espanol_ones_array[input]},
+		large: {
+			ones := input mod 10
+			tens := (input - ones) / 10
+			final_answer := espanol_tens_array[tens] + " y " + espanol_ones_array[ones]
+			final_answer := replace(final_answer, match:" y cero", replace:"") ##remove redundant "and zero"
+			final_answer := replace(final_answer, match:"(diec|vient)e? y ", replace:"\\1i") ##16-29 are one word
+			final_answer
+		},
+		oversized: {input}
+	]
+	if input == "number" then ""
+	else if input < 16 then function_map["small"]()
+	else if input < 100 then function_map["large"]()
+	else function_map["oversized"]()
+}
+portuguese_number := {
+	input := remove_tags(input)
+	portugues_ones_array := ["zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "catorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"]
+	portugues_tens_array := ["zero", "deze", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"]
+	function_map := [
+		small: {portugues_ones_array[input]},
+		large: {
+			ones := input mod 10
+			tens := (input - ones) / 10
+			final_answer := portugues_tens_array[tens] + " e " + portugues_ones_array[ones]
+			final_answer := replace(final_answer, match:" e zero", replace:"") ##remove redundant "and zero"
+			final_answer
+		},
+		oversized: {input}
+	]
+	if input == "number" then ""
+	else if input < 20 then function_map["small"]()
+	else if input < 100 then function_map["large"]()
+	else function_map["oversized"]()
+}
+french_number := {
+	input := remove_tags(input)
+	francais_ones_array := ["zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "nuef", "dix", "onze", "douze", "treize", "quatorze", "quinze", "seize","dix-sept","dix-huit","dix-neuf"]
+	francais_tens_array := ["zéro", "dix", "vingt", "trente", "quarante", "cinquante", "soixante", "soixante-dix", "quatre-vingts", "quatre-vingt-dix"]
+	function_map := [
+		small: {francais_ones_array[input]},
+		large: {
+			ones := input mod 10
+			tens := (input - ones) / 10
+			final_answer := francais_tens_array[tens] + "-" + francais_ones_array[ones]
+			final_answer := replace(final_answer, match:"-zéro", replace:"") ##remove redundant "and zero"
+			final_answer := replace(final_answer, match:"-un", replace:" et un") ##21, 31 et al. use "et un"
+			final_answer
+		},
+		oversized: {input}
+	]
+	if input == "number" then ""
+	else if input < 20 then function_map["small"]()
+	else if input < 100 then function_map["large"]()
+	else function_map["oversized"]()
+}

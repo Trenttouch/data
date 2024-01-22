@@ -1,0 +1,158 @@
+﻿mse version: 2.0.0
+game: magic
+short name: HD高清图片使用测试
+full name: HD pic test
+icon: card-sample.png
+installer group: magic/m15 style/normal cards
+position hint: 000
+
+version: 2024-01-01
+depends on:
+	package: magic.mse-game
+	version: 2014-06-25
+depends on:
+	package: magic-default-image.mse-include
+	version: 2007-09-23
+depends on:
+	package: magic-watermarks.mse-include
+	version: 2007-09-23
+depends on:
+	package: magic-identity-new.mse-include
+	version: 2012-01-22
+depends on:
+	package: magic-mana-large.mse-symbol-font
+	version: 2007-09-23
+depends on:
+	package: magic-mana-small.mse-symbol-font
+	version: 2007-09-23
+depends on:
+	package: magic-mainframe-extras.mse-include
+	version: 2007-09-23
+depends on: 
+	package: magic-rarity.mse-include
+	version: 2013-08-21
+card width: 3000
+card height: 4200
+card dpi: 600
+
+############################################################## Extra scripts
+init script:
+	# Load scripts for image box
+	include file: /magic-default-image.mse-include/scripts
+	
+	# Should hybrids have a grey name?
+	mask_hybrid_with_land := { styling.grey_hybrid_name }
+	
+	#Should multicolor lands with basic land types have a colored name?
+	mask_multi_land_with_color := { styling.colored_multicolor_land_name }
+	
+	template_prefix := []
+	template_suffix := []
+
+	
+	template      := { template_prefix[type] + input + template_suffix[type] }
+	land_template := { template_prefix[type] + input + template_suffix[type] }
+
+	landless := {if input == "card" then true else false}
+
+	is_doubleface := { styling.is_doubleface }
+	
+	
+	# Use land templates for previews because they show more contrast
+	hybrid_previews := "land,hybrid"
+
+############################################################## Extra style options
+styling field:
+	type: text
+	name: card pic width
+	description: card pic width
+styling field:
+	type: text
+	name: card pic height
+	description: card pic height
+styling field:
+	type: text
+	name: card pic width 2
+	description: card pic width 2
+styling field:
+	type: text
+	name: card pic height 2
+	description: card pic height 2
+styling field:
+	type: choice
+	name: 点击这里寻求帮助!
+	choice: 点击这里寻求帮助!
+	choice: 关于此模板的工作原理及使用说明：
+	choice: 		MSE的图片读取方式是将载入图片存为bitmap后保存在set文件压缩包里；
+	choice: 		这导致切换模板并不会变化图片，只会进行压缩；
+	choice: 		我们以此可以使用大模板导入图片，随后切换至同比例的HD模板中来实现更高清的图像。
+	choice: 		使用操作如下：
+	choice: 				使用其他卡牌模板确认好大小后，前往最右侧的控制台（F11）
+	choice: 				输入以下两条代码获取图片的长宽信息：
+	choice: 						card_style.image.width      (卡图宽度)
+	choice: 						card_style.image.height		(卡图高度)
+	choice: 						(注意，如果是双面牌，应输入card_style.image_2来查看背面卡图的尺寸)
+	choice: 				之后来到该模板的位置在上面输入宽高属性，然后导入图片；
+	choice: 				最后回到原来使用的模板。
+	choice: 		（注意！）
+	choice: 		（切换模板是对单张牌做的设置会消失）
+	choice: 		（也包括卡图尺寸，所以很可能切换之后会图片会被压缩）
+	choice: 		（换回模板之后需要重新进行设置！！！）
+
+styling field:
+	type: boolean
+	name: is doubleface
+	description: 是否为双面牌卡图？
+	initial: no
+
+styling field:
+	type: boolean
+	name: is foil
+	description: 是否为闪卡？
+	initial: no
+styling field:
+	type: choice
+	name: CHNFlavorsize
+	initial: 25
+############################################################## Card fields
+card style:
+	############################# Image
+	image:
+		left: 0
+		top: 0
+		width: 
+			script:
+				if is_doubleface() then 
+					if styling.card_pic_width != "" then to_number(styling.card_pic_width)*2 else 1500
+				else
+					if styling.card_pic_width != "" then to_number(styling.card_pic_width)*4 else 3000
+
+		height: 
+			script:
+				if is_doubleface() then 
+					if styling.card_pic_height != "" then to_number(styling.card_pic_height)*2 else 2100
+				else
+					if styling.card_pic_height != "" then to_number(styling.card_pic_height)*4 else 4200
+
+		z index: 0
+		default: {default_image(card.card_color)}
+
+	image 2:
+		left: {card_style.image.width}
+		top: 0
+		width: 
+			script:
+				if is_doubleface() then 
+					if styling.card_pic_width_2 != "" then to_number(styling.card_pic_width_2)*2 else 1500
+				else
+					if styling.card_pic_width_2 != "" then to_number(styling.card_pic_width_2)*4 else 3000
+
+		height: 
+			script:
+				if is_doubleface() then 
+					if styling.card_pic_height_2 != "" then to_number(styling.card_pic_height_2)*2 else 2100
+				else
+					if styling.card_pic_height_2 != "" then to_number(styling.card_pic_height_2)*4 else 4200
+
+		z index: 0
+		default: {default_image(card.card_color)}
