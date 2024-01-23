@@ -234,6 +234,7 @@ init script:
 	is_legend := {set.auto_legends and ( contains(card.super_type, match:"Legendary") or contains(card.super_type, match:"LEGENDARY") or contains(card.super_type, match:"传奇") or contains(card.type, match:"Mewk")) }
 	is_vehicle := {contains(card.type, match:"Vehicle") or contains(card.type, match:"载具")}
 	is_tll := {styling.frames=="textless land(zendikar)" or styling.frames=="textless land(innistrad)"}
+	
 	mana_sort := {
 		if styling.unsorted_casting_cost then
 			input
@@ -524,6 +525,29 @@ init script:
 	stamp_img_height := {to_number(pull_comma_array(stamp_img_set(), cell:3, end:false))}
 
 
+
+	#####编号位置####
+	is_serialized := { chosen(styling.others, choice:"serialized") }
+	serialized_img_set := {
+		if styling.frames== "invention" then "78,516"
+		else if styling.frames=="mystical archive" then "57,510"
+		else if styling.frames=="equinox" then "55,513"
+		else if styling.frames=="neon" then "47.5,500"
+		else if styling.frames=="goldenage" then "71,516"
+		else if styling.frames=="glass" then "48.5, 516"
+		else if styling.frames=="ravnica" then "56, 506"
+		else if styling.frames=="ixalan" then "60, 510"
+		else if styling.frames=="tarkir" then "48, 516"
+		else if styling.frames=="crystal" then "48,503"
+		else if styling.frames=="storybook" or styling.frames=="storybook adventure" then "74,500"
+		else "67,516"
+	}
+	serialized_img_left := {to_number(pull_comma_array(serialized_img_set(), cell:0, end:false))}
+	serialized_img_top := {to_number(pull_comma_array(serialized_img_set(), cell:1, end:false))}
+
+
+
+
 	
 	# d20
 	is_d20 := {styling.d20_dividers != "off"}
@@ -673,6 +697,7 @@ styling field:
 	choice: original background
 	choice: universe beyond(For some frames)
 	choice: use phyrexian font
+	choice: serialized
 styling field:
 	type: text
 	name: shrink adventure name text
@@ -1405,6 +1430,20 @@ extra card field:
 	editable: true
 	show statistics: false
 
+extra card field:
+	type: choice
+	name: serialized
+	choice: bar
+	editable: false
+	save value: false
+	show statistics: false
+extra card field:
+	type: text
+	name: serialized number 1
+	editable: true
+	show statistics: false
+	save value: true
+
 extra card style:
 	card code:
 		left: 48
@@ -1620,3 +1659,28 @@ extra card style:
 		render style: image
 		image: {if hover_art_fix_bot()!=0 then "" else "sourcebook/framefix.png"}
 		visible: {styling.frames=="dnd sourcebook"}
+	
+	serialized:
+		left:	{serialized_img_left()}
+		top:	{serialized_img_top()}
+		width:	178
+		height:	55
+		z index: 5
+		visible: { is_serialized() }
+		render style: image
+		image: { "Serialized.png" }
+
+	serialized number 1:
+		left: {if is_serialized() then (serialized_img_left()+5) else 0 }
+		top: {if is_serialized() then (serialized_img_top()+5) else 0 }
+		width: {if is_serialized() then (178-10) else 0 }
+		height: {if is_serialized() then (55-10) else 0 }
+		z index: 6
+		alignment: middle center
+		font:
+			name: {"Magic Gotham Medium"}
+			size: {23}
+			color: white
+			weight: {"bold"}
+		visible: {is_serialized()}
+	
