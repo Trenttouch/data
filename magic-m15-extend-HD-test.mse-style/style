@@ -159,6 +159,7 @@ init script:
 	is_adventure := { chosen(styling.frames, choice:"adventure(no tall art)") and not(chosen(styling.frames, choice:"tall art")) }
 	is_ub := { chosen(styling.frames, choice:"universe beyond") }
 	is_level := { chosen(styling.frames, choice:"leveler") }
+	is_serialized := { chosen(styling.frames, choice:"serialized") }
 	
 	is_prototype := { chosen(styling.frames, choice:"prototype") }
 	
@@ -277,6 +278,7 @@ styling field:
 	choice: miracle
 	choice: snow
 	choice: use phyrexian font
+	choice: serialized
 styling field:
 	type: choice
 	name: d20 dividers
@@ -1207,6 +1209,20 @@ extra card field:
 	show statistics: false
 	save value: true
 
+extra card field:
+	type: choice
+	name: serialized
+	choice: bar
+	editable: false
+	save value: false
+	show statistics: false
+extra card field:
+	type: text
+	name: serialized number 1
+	editable: true
+	show statistics: false
+	save value: true
+
 extra card style:
 
 	card code:
@@ -1489,3 +1505,27 @@ extra card style:
 			color: black
 			weight: {"bold"}
 		visible: {is_level()}
+
+	serialized:
+		left:	47
+		top:	{516 + (if is_tallart() then 45 else 0 ) + 9.5}
+		width:	178
+		height:	55
+		z index: 5
+		visible: { is_serialized() }
+		render style: image
+		image: { "Serialized.png" }
+
+	serialized number 1:
+		left: {if is_serialized() then (47+5) else 0 }
+		top: {if is_serialized() then (516 + (if is_tallart() then 45 else 0 ) + 9.5 +5) else 0 }
+		width: {if is_serialized() then (178-10) else 0 }
+		height: {if is_serialized() then (55-10) else 0 }
+		z index: 6
+		alignment: middle center
+		font:
+			name: {"Magic Gotham Medium"}
+			size: {23}
+			color: white
+			weight: {"bold"}
+		visible: {is_serialized()}

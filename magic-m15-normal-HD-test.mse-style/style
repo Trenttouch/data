@@ -184,6 +184,7 @@ init script:
 	is_fullart := { chosen(styling.frames, choice:"fullart") }
 	is_adventure := { chosen(styling.frames, choice:"adventure") }
 	is_level := { chosen(styling.frames, choice:"leveler") }
+	is_serialized := { chosen(styling.frames, choice:"serialized") }
 	use_acorn_stamp := { styling.use_acorn_stamp }
 	use_phyrexian_font := { chosen(styling.frames, choice:"use phyrexian font") }
 
@@ -319,6 +320,7 @@ styling field:
 	choice: miracle
 	choice: snow
 	choice: use phyrexian font
+	choice: serialized
 styling field:
 	type: choice
 	name: d20 dividers
@@ -1265,6 +1267,20 @@ extra card field:
 	editable: true
 	show statistics: false
 	save value: true
+
+extra card field:
+	type: choice
+	name: serialized
+	choice: bar
+	editable: false
+	save value: false
+	show statistics: false
+extra card field:
+	type: text
+	name: serialized number 1
+	editable: true
+	show statistics: false
+	save value: true
 	
 extra card style:
 	card code:
@@ -1554,3 +1570,29 @@ extra card style:
 			color: black
 			weight: {"bold"}
 		visible: {is_level()}
+	
+	serialized:
+		left:	67
+		top:	516
+		width:	178
+		height:	55
+		z index: 5
+		visible: { is_serialized() }
+		render style: image
+		image: { "Serialized.png" }
+
+	serialized number 1:
+		left: {if is_serialized() then (67+5) else 0 }
+		top: {if is_serialized() then (516+5) else 0 }
+		width: {if is_serialized() then (178-10) else 0 }
+		height: {if is_serialized() then (55-10) else 0 }
+		z index: 6
+		alignment: middle center
+		font:
+			name: {"Magic Gotham Medium"}
+			size: {23}
+			color: white
+			weight: {"bold"}
+		visible: {is_serialized()}
+	
+

@@ -128,6 +128,7 @@ init script:
 	is_adventure := { chosen(styling.frames, choice:"adventure") and not ( chosen(styling.frames, choice:"tall art") or chosen(styling.frames, choice:"short textbox") ) }
 	is_tallart := { chosen(styling.frames, choice:"tall art") and not chosen(styling.frames, choice:"short textbox") }
 	is_short := { chosen(styling.frames, choice:"short textbox") and not chosen(styling.frames, choice:"tall art") }
+	is_serialized := { chosen(styling.frames, choice:"serialized") }
 	blackframe := { chosen(styling.frames, choice:"use black twins") }
 	colored_crown := { chosen(styling.frames, choice:"↑ only type and oracle black") }
 	has_alias := { chosen(styling.frames, choice:"use alias") or is_nickname() }
@@ -248,7 +249,7 @@ styling field:
 	choice: use acorn stamp
 	choice: use phyrexian font
 	choice: use shadow
-
+	choice: serialized
 styling field:
 	type: choice
 	name: d20 dividers
@@ -927,7 +928,19 @@ extra card field:
 	save value: true
 	editable: true
 	show statistics: false
-
+extra card field:
+	type: choice
+	name: serialized
+	choice: bar
+	editable: false
+	save value: false
+	show statistics: false
+extra card field:
+	type: text
+	name: serialized number 1
+	editable: true
+	show statistics: false
+	save value: true
 
 extra card style:
 	card code:
@@ -1114,3 +1127,27 @@ extra card style:
 		image: { mix_background() }
 		z index: 0
 		visible: {is_adventure()}
+
+	serialized:
+		left:	47
+		top:	{ 516 + (if is_tallart() then 48 else 0 ) }
+		width:	178
+		height:	55
+		z index: 5
+		visible: { is_serialized() }
+		render style: image
+		image: { "Serialized.png" }
+
+	serialized number 1:
+		left: {if is_serialized() then (47+5) else 0 }
+		top: {if is_serialized() then (516 + (if is_tallart() then 48 else 0 )+5) else 0 }
+		width: {if is_serialized() then (178-10) else 0 }
+		height: {if is_serialized() then (55-10) else 0 }
+		z index: 6
+		alignment: middle center
+		font:
+			name: {"Magic Gotham Medium"}
+			size: {23}
+			color: white
+			weight: {"bold"}
+		visible: {is_serialized()}
