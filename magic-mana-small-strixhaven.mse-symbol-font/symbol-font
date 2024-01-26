@@ -255,20 +255,64 @@ symbol:
 	image font size: 120
 ###################################################################################### Regular Mana Symbols
 symbol:
+	code: X
+	image: x.png
+	enabled: {ancestral_mana()}
+symbol:
+	code: 9
+	image: 9.png
+	enabled: {ancestral_mana()}
+symbol:
+	code: 8
+	image: 8.png
+	enabled: {ancestral_mana()}
+symbol:
+	code: 7
+	image: 7.png
+	enabled: {ancestral_mana()}
+symbol:
+	code: 6
+	image: 6.png
+	enabled: {ancestral_mana()}
+symbol:
+	code: 5
+	image: 5.png
+	enabled: {ancestral_mana()}
+symbol:
+	code: 4
+	image: 4.png
+	enabled: {ancestral_mana()}
+symbol:
+	code: 3
+	image: 3.png
+	enabled: {ancestral_mana()}
+symbol:
+	code: 2
+	image: 2.png
+	enabled: {ancestral_mana()}
+symbol:
+	code: 1
+	image: 1.png
+	enabled: {ancestral_mana()}
+symbol:
+	code: 0
+	image: 0.png
+	enabled: {ancestral_mana()}
+symbol:
 	code: W
-	image: mana_w.png
+	image: {if ancestral_mana() then "w.png" else "mana_w.png"}
 symbol:
 	code: U
-	image: mana_u.png
+	image: {if ancestral_mana() then "u.png" else "mana_u.png"}
 symbol:
 	code: B
-	image: mana_b.png
+	image: {if ancestral_mana() then "b.png" else "mana_b.png"}
 symbol:
 	code: R
-	image: mana_r.png
+	image: {if ancestral_mana() then "r.png" else "mana_r.png"}
 symbol:
 	code: G
-	image: mana_g.png
+	image: {if ancestral_mana() then "g.png" else "mana_g.png"}
 symbol:
 	code: P
 	image: mana_p.png
@@ -280,10 +324,10 @@ symbol:
 	image: mana_a.png
 symbol:
 	code: C
-	image: mana_c.png
+	image: {if ancestral_mana() then "c.png" else "mana_c.png"}
 symbol:
 	code: S
-	image: mana_s.png
+	image: {if ancestral_mana() then "s.png" else "mana_s.png"}
 ###################################################################################### #/C Hybrid Symbols
 symbol:
 	image: { masked_blend(dark: "mana_circle_large.png", light: "mana_ww.png", mask: "mask_hybrid.png") }
