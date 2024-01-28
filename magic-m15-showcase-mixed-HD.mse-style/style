@@ -712,7 +712,7 @@ styling field:
 	choice: original background
 	choice: universe beyond(For some frames)
 	choice: use phyrexian font
-	####choice: chinese dossier use unofficial font
+	choice: chinese dossier use unofficial font
 	choice: serialized
 styling field:
 	type: text
