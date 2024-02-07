@@ -35,6 +35,8 @@ card width: 750
 card height: 1050
 card dpi: 600
 
+###剩下adventure，alias，snow没有重置完
+
 ############################################################## Extra scripts
 init script:
 	# Load scripts for image box
@@ -1407,7 +1409,7 @@ extra card style:
 		width:	750
 		height:	1050
 		render style: image
-		image: {if has_alias() then aliascrown_background() else crown_background()}
+		image: {if has_alias() then aliascrown_background() else if is_devoid() then "crown/clcrown.png" else if is_colorless() then "crown/wlcrown.png" else crown_background()}
 		z index: 2
 		visible: { is_legend() or has_alias() }
 		mask: {if is_miracle() and not is_colorless() then "miracle/lmask.png" else ""}
@@ -1430,7 +1432,7 @@ extra card style:
 		image: {nyx_background()}
 		z index: 1
 		visible: {is_nyx() and not (is_colorless() or is_devoid())}
-		mask: {"nyx/" + (if contains(card.type, match:"神器") or is_snow() then "a_" else "") + "mask.png"}
+		mask: {if contains(card.type, match:"神器") or is_snow() then "nyx/a_mask.png" else ""}
 	miracle overlay:
 		left: 0
 		top: 0
