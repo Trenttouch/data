@@ -35,6 +35,8 @@ card width: 750
 card height: 1050
 card dpi: 600
 
+###剩下adventure，alias，snow没有重置完
+
 ############################################################## Extra scripts
 init script:
 	# Load scripts for image box
@@ -55,7 +57,7 @@ init script:
 	 
 	mix:"adventure/" lp:"adventure/leftpage/" rp:"adventure/rightpage/" 
 	snow:"snow/" 
-	ub:"ub/" circuit:"ub/circuit/" ubstamp:"ub/stamp/" 
+	ub:"ub/" circuit:"ub/circuit/" ubstamp:"ub/stamp/" ubpt:"ub/pt/"
 	nyx: "nyx/" 
 	miracle:"miracle/" 
 	aliascrown:"alias/" crown:"crown/" innercrown:"innercrown/" 
@@ -71,7 +73,7 @@ init script:
 	level:"card.png" levelarrow:"arrow.png" levelpt:"pt.png"
 	
 	mix:"card.png" lp:"lp.png" rp:"rp.png" 
-	ub:"card.png" circuit:"card.png"
+	ub:"card.png" circuit:"card.png" ubpt: "pt.png"
 	snow:"card.png" 
 	nyx: "nyx.png" 
 	miracle:"miracle.png" 
@@ -109,7 +111,7 @@ init script:
 	hybrid_previews := "land,hybrid"
 	
 	
-	landless := {if input == "levelarrow" or input == "levelpt" or input == "devoid" or input == "nyx" or input == "crown" or input == "aliascrown" or input == "innercrown" or input == "pt" or input == "pt2" or input == "stamp" or input == "ubstamp" or input == "miracle" or input == "lp" or input == "rp" or input == "mix" or input == "prototype" or input == "manabox" then true else false}
+	landless := {if input == "levelarrow" or input == "levelpt" or input == "ubpt" or input == "devoid" or input == "nyx" or input == "crown" or input == "aliascrown" or input == "innercrown" or input == "pt" or input == "pt2" or input == "stamp" or input == "ubstamp" or input == "miracle" or input == "lp" or input == "rp" or input == "mix" or input == "prototype" or input == "manabox" then true else false}
 	
 	
 	crown_background := { color_background(type:"crown",     base_hybrid:card_hybrid) }
@@ -123,6 +125,7 @@ init script:
 	ub_background := { color_background(type:"ub",     base_hybrid:card_hybrid) }
 	circuit_background := { color_background(type:"circuit",     base_hybrid:card_hybrid) }
 	ubstamp_background := { color_background(type:"ubstamp",     base_hybrid:stamp_hybrid) }
+	ubpt_background := { color_background(type:"ubpt",     base_hybrid:card_hybrid) }
 	
 	# adventure_background := { color_background(type:"adventure",     base_hybrid:card_hybrid) }
 	leftpage_background := { color_background(type:"lp",     base_hybrid:card_hybrid) }
@@ -1311,7 +1314,17 @@ extra card style:
 		z index: 4
 		visible: { card.pt != "" or card.pt_2 != "" or card.pt_3 != ""}
 		render style: image
-		image: {if is_level() then if is_vehicle() then "level/pt/vpt.png" else level_pt() else if is_devoid() then "pt/devoidpt.png" else if is_vehicle() then "pt/vpt.png" else card_ptbox() }
+		image: 
+			script:
+				if is_level() then
+					if is_vehicle() then "level/pt/vpt.png"
+					else level_pt()
+				else if is_ub() then
+					if is_vehicle() then "ub/pt/vpt.png"
+					else ubpt_background()
+				else if is_devoid() then "pt/devoidpt.png"
+				else if is_vehicle() then "pt/vpt.png"
+				else card_ptbox()
 	prototype pt box:
 		left:	0
 		top:	0
@@ -1407,7 +1420,7 @@ extra card style:
 		width:	750
 		height:	1050
 		render style: image
-		image: {if has_alias() then aliascrown_background() else crown_background()}
+		image: {if has_alias() then aliascrown_background() else if is_devoid() then "crown/clcrown.png" else if is_colorless() then "crown/wlcrown.png" else crown_background()}
 		z index: 2
 		visible: { is_legend() or has_alias() }
 		mask: {if is_miracle() and not is_colorless() then "miracle/lmask.png" else ""}
@@ -1430,7 +1443,7 @@ extra card style:
 		image: {nyx_background()}
 		z index: 1
 		visible: {is_nyx() and not (is_colorless() or is_devoid())}
-		mask: {"nyx/" + (if contains(card.type, match:"神器") or is_snow() then "a_" else "") + "mask.png"}
+		mask: {if contains(card.type, match:"神器") or is_snow() then "nyx/a_mask.png" else ""}
 	miracle overlay:
 		left: 0
 		top: 0

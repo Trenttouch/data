@@ -290,6 +290,7 @@ styling field:
 	name: language
 	choice: English
 	choice: Japanese
+	initial: Japanese
 styling field:
 	type: text
 	name: text chops
