@@ -228,7 +228,7 @@ init script:
 	un_png := replace@(match:".png", replace: "")
 	ancestral_mana := { contains(styling.other_options, match:"ancestral generic")}
 	
-	opacity := {pull_comma_array(styling.opacity, cell:input, end:false, default:50)}
+	#opacity := {pull_comma_array(styling.opacity, cell:input, end:false, default:50)}
 
 	is_clear := {styling.clear or contains(styling.other_options, match:"clear frame")}
 	use_phyrexian_font := { chosen(styling.other_options, choice:"use phyrexian font") }
@@ -294,10 +294,10 @@ styling field:
 	type: text
 	name: shift loyalty costs
 	description: Moves loyalty costs up the specified amount. Use negative to move down. Formatted as "1,2,3,4,"
-styling field:
-	type: text
-	name: opacity
-	description: set opacity for stripes, from 0 to 255.
+#styling field:
+	#type: text
+	#name: opacity
+	#description: set opacity for stripes, from 0 to 255.
 styling field:
 	type: text
 	name: shrink name text
@@ -329,7 +329,7 @@ styling field:
 	choice: use taller frame
 	choice: use compleat frame
 	choice: ancestral generic mana
-	choice: prerelease stamp
+	#choice: prerelease stamp
 	choice: un-indent nonloyalty abilities
 	choice: mythic edition fullart
 	choice: fullart black twins
@@ -570,7 +570,7 @@ card style:
 		top: {if comma_count(styling.popout_image_style) == ",,,," then split_text(match:",", styling.popout_image_style).1 else "0"}
 		width: {if comma_count(styling.popout_image_style) == ",,,," then split_text(match:",", styling.popout_image_style).2 else "0"}
 		height: {if comma_count(styling.popout_image_style) == ",,,," then split_text(match:",", styling.popout_image_style).3 else "0"}
-		z index: -1
+		z index: 1
 	############################# Card type
 	indicator:
 		left: 62
@@ -992,11 +992,11 @@ extra card field:
 	script:
 		forward_editor(field: card.special_text)
 		special_text()
-extra card field:
-	type: color
-	name: opac filter
-	script: rgb(opacity(0), opacity(0), opacity(0))
-	save value: false
+#extra card field:
+	#type: color
+	#name: opac filter
+	#script: rgb(opacity(0), opacity(0), opacity(0))
+	#save value: false
 
 extra card style:
 	card code:
