@@ -913,7 +913,7 @@ card style:
 	pt 2:
 		z index: 5
 		left: {if is_level() then 586 else if is_prototype() then 586 else 0}
-		top: {if is_level() then if is_tallart() then 780+20 else 780 else if is_prototype() then 722 else 0}
+		top: {if is_level() then if is_tallart() then 780+20 else 780 else if is_prototype() then  if is_tallart() then 722+45 else 722 else 0}
 		width: {if is_level() or is_prototype() then 120 else 0}
 		height:	{if is_level() or is_prototype() then 56 else 0}
 		visible: {is_level() or is_prototype()}

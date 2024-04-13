@@ -582,7 +582,7 @@ card style:
 		z index: 0
 		render style: image
 		popup style: in place
-		image: { if is_ub() then ubcard_background() else card_background() }
+		image: { if is_ub() then ubcard_background() else if(card.card_color == "colorless") then "normal/ccard1.png" else card_background() }
 		mask: {if is_class() or is_case() then "frame_mask_class.png" else if is_ub() then "ub/frame_mask.png" else "frame_mask.png"}
 	############################# Name line
 	name:
@@ -717,12 +717,12 @@ card style:
 			name: magic-mana-small
 			size: 22
 		alignment: middle right
-	############################# Image
+	############################# Image 28,30,693,946
 	image:
-		left: {if is_class() or is_case() then 57 else 376 }
-		top: 118
-		width: 317
-		height:	763
+		left: {if(card.card_color == "colorless") then 28 else if is_class() or is_case() then 57 else 376 }
+		top: {if(card.card_color == "colorless") then 30 else 118}
+		width: {if(card.card_color == "colorless") then 693 else 317}
+		height:	{if(card.card_color == "colorless") then 946 else 763}
 		z index: -1
 		default: {default_image(card.card_color)}
 	############################# Card type
@@ -1619,7 +1619,7 @@ extra card style:
 		width:	750
 		height:	1050
 		render style: image
-		image: {if has_alias() then aliascrown_background() else crown_background()}
+		image: {if(card.card_color == "colorless") then if has_alias() then if is_legend() then "alias/wlaliascrown.png" else "alias/waliascrown.png" else "crown/wlcrown.png" else if has_alias() then aliascrown_background() else crown_background()}
 		z index: 3
 		visible: { is_legend() or has_alias() }
 	innercrown:
@@ -1638,7 +1638,7 @@ extra card style:
 		width: {if is_ub() then 314.5 else 318}
 		height: {if is_ub() then 758 else 762}
 		render style: image
-		image: {if is_ub() then ubsagapaper_background() else sagapaper_background()}
+		image: {if is_ub() then ubsagapaper_background() else if(card.card_color == "colorless") then "paper/cpaper1.png" else sagapaper_background()}
 		z index: 1
 		
 	snow twin:

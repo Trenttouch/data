@@ -122,6 +122,7 @@ init script:
 	is_promo := { styling.promo }
 	is_legend := {set.auto_legends and (contains(card.super_type, match:"Legendary") or contains(card.super_type, match:"传奇") or contains(card.type, match:"Mewk")) }
 	
+	is_fullart := { chosen(styling.frames, choice:"full art frame") }
 	is_ub := { chosen(styling.frames, choice:"universe beyond") }
 	is_newpt := { chosen(styling.frames, choice:"new pt style") }
 	is_nickname := { chosen(styling.frames, choice:"godzilla nickname") }
@@ -237,6 +238,7 @@ styling field:
 	type: multiple choice
 	name: frames
 	description: 使用边框，高优先级边框可能覆盖低优先级边框。
+	choice: full art frame
 	choice: universe beyond
 	choice: adventure
 	choice: new pt style
@@ -436,7 +438,7 @@ card style:
 		popup style: in place
 		image: { if is_short() then short_background() else if is_tallart() then tallart_background() else card_background() }
 		
-		mask: {(if is_short() then "short/" else if is_tallart() then "tallart/" else "normal/") + (if is_nickname() or blackframe() then "nickname_" else "") + "frame_mask.png" }
+		mask: {(if is_short() then "short/" else if is_tallart() then "tallart/" else "normal/") + (if is_nickname() or blackframe() then "nickname_" else "") + (if is_fullart() then "fa_" else "") +"frame_mask.png" }
 	card color 2:
 		left: { if is_adventure() then 36 else  0 }
 		top:  { if is_adventure() then 654 else  0 }
@@ -528,10 +530,10 @@ card style:
 		left: 0
 		top: 0
 		width: 750
-		height:	970
+		height:	{if is_fullart() then 1050 else 970}
 		z index: -1
 		default: {default_image(card.card_color)}
-		mask: image_mask.png
+		mask: {if is_fullart() then "fa_image_mask.png" else "image_mask.png"}
 	############################# Card type
 	indicator:
 		left: 62

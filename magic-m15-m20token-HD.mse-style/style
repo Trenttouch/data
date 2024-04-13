@@ -164,6 +164,7 @@ styling field:
 	type: boolean
 	name: use holofoil stamps
 	description: Change to no to disable rare holofoil stamps
+	initial: no
 styling field:
 	type: boolean
 	name: is foil

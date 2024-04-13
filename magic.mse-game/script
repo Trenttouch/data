@@ -317,16 +317,14 @@ sort_index := {
 	(if contains(card.shape, match:"split")   then "S" else " ") + # split cards come after normal ones
 	":"
 }
-# Process the name for sorting rules         ###### \a|\b|\c|\d|\e|\f|\g|\h|\i|\j|\k|\l|\m|\n|\o|\p|\q|\r|\s|\t|\u|\v|\w|\x|\y|\z
+# Process the name for sorting rules
 sort_name :=
 	# Remove "The", "A", and "An" at the beginning
-	# replace@(match: "^(The|An?) ", replace: "") +
+	replace@(match: "^(The|An?) ", replace: "") +
 	# Remove commas and apostrophes
 	replace@(match: "(,|'|’)", replace: "") +
 	# Remove bold and italic tags
 	replace@(match: "(<b>|<i>|</b>|</i>)", replace: "") +
-	# remove "\t"
-	replace@(match: "(\t|\n)", replace: "") +    
 	# Make lowercase
 	to_lower
 
@@ -393,7 +391,7 @@ color_of_card := {
 		else if chosen(choice:"green", card_color) then "F"              # Green
 		else                                            "J"              # Artifact
 	) else (
-		# Cards with costs.
+		                                                            # Cards with costs.
 		colors := sort_text(casting_cost, order: "<WUBRG>")
 		if colors == "" and ( contains(type, match:"Artifact") or contains(type, match:"神器") ) then "J"    # Artifact
 		else if colors == ""  then "A"                                   # Clear Colorless
@@ -483,9 +481,7 @@ card_number := {
 		in: set
 		order_by: { rarity_sort() + sort_index() + sort_name(card.name) + sort_name(export_name())}
 		filter:   set_filter()
-	)
-	+ 1
-	+ to_number(card_number_offset())
+	) + 1 + to_number(card_number_offset())
 }
 card_count := {
 	number_of_items(in: set, filter: set_filter()) + to_number(set_number_offset())

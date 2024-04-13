@@ -74,7 +74,8 @@ init script:
 	
 	mix:"card.png" lp:"lp.png" rp:"rp.png" 
 	ub:"card.png" circuit:"card.png" ubpt: "pt.png"
-	snow:"card.png" 
+	snow:"card.png"
+	spree:"card.png"
 	nyx: "nyx.png" 
 	miracle:"miracle.png" 
 	aliascrown:"aliascrown.png" crown:"crown.png" innercrown:"crown.png" 
@@ -92,6 +93,10 @@ init script:
 			else if card_style.casting_cost_2.content_width <= 175 then [manabox:"prototype/mana/5/"]
 			else if card_style.casting_cost_2.content_width <= 210 then [manabox:"prototype/mana/6/"]
 			else [manabox:"prototype/mana/6/"]
+		else if type == "spree" then
+			if is_ub() then [spree:"spree/ub/"]
+			else if is_snow() then [spree:"spree/snow/"]
+			else [spree:"spree/"]
 		else
 			template_prefix_normal 
 	}
@@ -111,7 +116,7 @@ init script:
 	hybrid_previews := "land,hybrid"
 	
 	
-	landless := {if input == "levelarrow" or input == "levelpt" or input == "ubpt" or input == "devoid" or input == "nyx" or input == "crown" or input == "aliascrown" or input == "innercrown" or input == "pt" or input == "pt2" or input == "stamp" or input == "ubstamp" or input == "miracle" or input == "lp" or input == "rp" or input == "mix" or input == "prototype" or input == "manabox" then true else false}
+	landless := {if input == "spree" or input == "levelarrow" or input == "levelpt" or input == "ubpt" or input == "devoid" or input == "nyx" or input == "crown" or input == "aliascrown" or input == "innercrown" or input == "pt" or input == "pt2" or input == "stamp" or input == "ubstamp" or input == "miracle" or input == "lp" or input == "rp" or input == "mix" or input == "prototype" or input == "manabox" then true else false}
 	
 	
 	crown_background := { color_background(type:"crown",     base_hybrid:card_hybrid) }
@@ -142,7 +147,7 @@ init script:
 	
 	devoid_background := { color_background(type:"devoid",     base_hybrid:card_hybrid) }
 	
-	
+	spree_background := { color_background(type:"spree",     base_hybrid:card_hybrid) }
 	
 	
 	
@@ -187,6 +192,7 @@ init script:
 	is_fullart := { chosen(styling.frames, choice:"fullart") }
 	is_adventure := { chosen(styling.frames, choice:"adventure") }
 	is_level := { chosen(styling.frames, choice:"leveler") }
+	is_spree := { chosen(styling.frames, choice:"spree") }
 	is_serialized := { chosen(styling.frames, choice:"serialized") }
 	use_acorn_stamp := { styling.use_acorn_stamp }
 	use_phyrexian_font := { chosen(styling.frames, choice:"use phyrexian font") }
@@ -322,6 +328,7 @@ styling field:
 	choice: mutate
 	choice: miracle
 	choice: snow
+	choice: spree
 	choice: use phyrexian font
 	choice: serialized
 styling field:
@@ -518,7 +525,15 @@ card style:
 		z index: 0
 		render style: image
 		popup style: in place
-		image: { if is_devoid() then devoid_background() else if is_colorless() and not is_fullart() then "vcard.png" else if is_ub() then ub_background() else if is_circuit() then circuit_background() else if is_snow() then snow_background() else card_background() }
+		image: 
+			script:
+				if is_spree() then spree_background()
+				else if is_devoid() then devoid_background()
+				else if is_colorless() and not is_fullart() then "vcard.png"
+				else if is_ub() then ub_background()
+				else if is_circuit() then circuit_background()
+				else if is_snow() then snow_background()
+				else card_background()
 		mask: { if is_fullart() then "frame_mask_fullart.png" else if is_mutate() then "frame_mask_mutate.png" else "frame_mask.png" }
 	card color 2:
 		left: { if is_adventure() then 36 else  50 }
