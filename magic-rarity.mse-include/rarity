@@ -2,6 +2,21 @@
 # Edit by Heavenford 2017.1.14
 
 choice images:
+	BLB Mythic: 	/magic-rarity.mse-include/BLB_M.png
+
+	OTJ Mythic: 	/magic-rarity.mse-include/OTJ_M.png
+	OTJ Rare: 		/magic-rarity.mse-include/OTJ_R.png
+	OTJ Uncommon: 	/magic-rarity.mse-include/OTJ_U.png
+	OTJ Common: 	/magic-rarity.mse-include/OTJ_C.png
+	OTJ OTP Mythic: 	/magic-rarity.mse-include/OTP_M.png
+	OTJ OTP Rare: 		/magic-rarity.mse-include/OTP_R.png
+	OTJ OTP Uncommon: 	/magic-rarity.mse-include/OTP_U.png
+	OTJ OTP Common: 	/magic-rarity.mse-include/OTP_C.png
+	OTJ BIG Mythic: 	/magic-rarity.mse-include/BIG_M.png
+	OTJ BIG Rare: 		/magic-rarity.mse-include/BIG_R.png
+	OTJ BIG Uncommon: 	/magic-rarity.mse-include/BIG_U.png
+	OTJ BIG Common: 	/magic-rarity.mse-include/BIG_C.png
+
 	MKM Mythic: 	/magic-rarity.mse-include/MKM_M.png
 	MKM Rare: 		/magic-rarity.mse-include/MKM_R.png
 	MKM Uncommon: 	/magic-rarity.mse-include/MKM_U.png
@@ -695,6 +710,12 @@ choice images:
 	Duel EVG Uncommon: /magic-rarity.mse-include/EVG_U.png
 	Duel EVG Common: /magic-rarity.mse-include/EVG_C.png
 
+
+	Command OTC Mythic: 	/magic-rarity.mse-include/OTC_M.png
+	Command OTC Rare: 		/magic-rarity.mse-include/OTC_R.png
+	Command OTC Uncommon: 	/magic-rarity.mse-include/OTC_U.png
+	Command OTC Common: 	/magic-rarity.mse-include/OTC_C.png
+
 	Command PIP Mythic: 	/magic-rarity.mse-include/PIP_M.png
 	Command PIP Rare: 		/magic-rarity.mse-include/PIP_R.png
 	Command PIP Uncommon: 	/magic-rarity.mse-include/PIP_U.png
@@ -1036,7 +1057,15 @@ choice images:
 	Premium 2000 Common: /magic-rarity.mse-include/W00_C.png
 	Premium 1999 Common: /magic-rarity.mse-include/W99_C.png
 	
-	
+	Supplemental ACR Mythic: /magic-rarity.mse-include/ACR_M.png
+	Supplemental ACR Rare: /magic-rarity.mse-include/ACR_R.png
+	Supplemental ACR Uncommon: /magic-rarity.mse-include/ACR_U.png
+	Supplemental ACR Common: /magic-rarity.mse-include/ACR_C.png
+
+	Supplemental MH3 Mythic: /magic-rarity.mse-include/MH3_M.png
+	Supplemental MH3 Rare: /magic-rarity.mse-include/MH3_R.png
+	Supplemental MH3 Uncommon: /magic-rarity.mse-include/MH3_U.png
+	Supplemental MH3 Common: /magic-rarity.mse-include/MH3_C.png
 
 	Supplemental LTR Mythic: /magic-rarity.mse-include/LTR_M.png
 	Supplemental LTR Rare: /magic-rarity.mse-include/LTR_R.png

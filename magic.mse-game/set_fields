@@ -27,7 +27,7 @@ set field:
 set field:
 	type: text
 	name: copyright
-	default: "™ & © 2024 Wizards of the Coast"
+	default: "™ & © 2023 Wizards of the Coast"
 set field:
 	type: text
 	name: set code
@@ -279,7 +279,6 @@ set field:
 	choice: Português do Brasil
 	choice: Russian
 	choice: 简体中文
-	choice: 日本語
 	initial: 简体中文
 set field:
 	type: boolean
@@ -525,7 +524,6 @@ default set style:
 			Italiano: /magic.mse-game/icons/language-it.png
 			Português_do_Brasil: /magic.mse-game/icons/language-br.png
 			简体中文: /magic.mse-game/icons/language-chs.png
-			日本語: /magic.mse-game/icons/language-jp.png
 	mana symbol options:
 		render style: checklist
 		direction: vertical

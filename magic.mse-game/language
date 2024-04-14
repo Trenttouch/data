@@ -19,23 +19,6 @@ languages := [
 		is_battle		  : match@(match: "(?i)Battle")
 		word_list		  : "word_list"
 	],
-	日本語: [
-		code              : "jp",
-		spellcheck_code   : "jp_jp",
-		pt_separator      : "/",
-		type_separator    : "—"
-		subtype_separator : "·",
-		is_creature       : match@(match: "(?i)クリーチャー")
-		is_tribal         : match@(match: "(?i)亲缘")
-		is_artifact       : match@(match: "(?i)アーティファクト")
-		is_land           : match@(match: "(?i)土地")
-		is_enchantment    : match@(match: "(?i)エンチャント")
-		is_spell          : match@(match: "(?i)インスタント|ソーサリー")
-		is_planeswalker   : match@(match: "(?i)プレインズウォーカー")
-		is_plane		  : match@(match: "(?i)次元")
-		is_battle		  : match@(match: "(?i)バトル")
-		word_list		  : "word_list_chs"
-	],
 	简体中文: [
 		code              : "chs",
 		spellcheck_code   : "chs_cn",

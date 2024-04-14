@@ -38,6 +38,45 @@ card dpi: 600
 ####### images from digiman
 ############################################################## Extra scripts
 init script:
+	card_hybrid_2 := { 
+		if styling.frames=="scroll" then
+			masked_blend(mask: "scroll/scroll_blend.png", light: template(colors.0), dark: template(colors.1))
+		else
+			linear_blend( image1: template( colors[0] ), image2: template( colors[1] ), x1: 0.4,	y1: 0 x2: 0.6, y2: 0 )
+	}
+	horizontal_card_hybrid :=
+	[
+		0:	horizontal_card_hybrid[0]
+		1:	horizontal_card_hybrid[1]
+		2:	card_hybrid_2
+		3:	horizontal_card_hybrid[3]
+		4:	horizontal_card_hybrid[4]
+		5:	horizontal_card_hybrid[5]
+		6:	horizontal_card_hybrid[6]
+		7:	horizontal_card_hybrid[7]
+	]
+	card_hybrid :=
+	[
+		radial:		card_hybrid["radial"]
+		horizontal:	horizontal_card_hybrid
+		overlay:	card_hybrid["overlay"]
+		vertical:	card_hybrid["vertical"]
+	]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	# Load scripts for image box
 	include file: /magic-default-image.mse-include/scripts
 	
@@ -74,6 +113,7 @@ init script:
 
 	glass:"glass/" glasscrown:"glass/crown/" glasspt:"glass/pt/"
 
+	scroll:"scroll/" scrollcrown:"scroll/crown/" scrollpt:"scroll/pt/"
 	ring:"ring/" ringcrown:"ring/crown/" ringpt:"ring/pt/"
 
 	tardis:"tardis/" tardiscrown:"tardis/crown/"
@@ -88,6 +128,10 @@ init script:
 	dossier:"dossier/" dossiercrown:"dossier/crown/"
 
 	pipboy:"pipboy/" pipboycrown:"pipboy/crown/"
+	
+	vault:"vault/" vaultcrown:"vault/crown/" vaultpt:"vault/pt/" vaultstamp:"vault/stamp/"
+
+	breakingnews:"breakingnews/" breakingnewscrown:"breakingnews/crown/" breakingnewspt:"breakingnews/pt/"
 	
 	unstable:"unstable/"
 	zdktll:"tll/zdk/" instll:"tll/ins/" thstll:"tll/ths/"
@@ -125,6 +169,7 @@ init script:
 
 	glass:"card.png" glasscrown:"crown.png" glasspt:"pt.png"
 
+	scroll:"card.png" scrollcrown:"crown.png" scrollpt:"pt.png"
 	ring:"card.png" ringcrown:"crown.png" ringpt:"pt.png"
 
 	tardis:"card.png" tardiscrown:"crown.png"
@@ -139,6 +184,10 @@ init script:
 	dossier:"card.png" dossiercrown:"crown.png"
 
 	pipboy:"card.png" pipboycrown:"crown.png"
+
+	vault:"card.png" vaultcrown:"crown.png" vaultpt:"pt.png" vaultstamp:"stamp.png"
+
+	breakingnews:"card.png" breakingnewscrown:"crown.png" breakingnewspt:"pt.png"
 	
 	unstable:"card.png"
 	zdktll:"card.png" instll:"card.png" thstll:"card.png" onetll:"card.png"
@@ -323,6 +372,10 @@ init script:
 	ring_crown_background := { color_background(type:"ringcrown",     base_hybrid:card_hybrid) }
 	ring_pt_background := { color_background(type:"ringpt",     base_hybrid:card_hybrid) }
 
+	scroll_background := { color_background(type:"scroll",     base_hybrid:card_hybrid) }
+	scroll_crown_background := { color_background(type:"scrollcrown",     base_hybrid:card_hybrid) }
+	scroll_pt_background := { color_background(type:"scrollpt",     base_hybrid:card_hybrid) }
+
 	tardis_background := { color_background(type:"tardis",     base_hybrid:card_hybrid) }
 	tardis_crown_background := { color_background(type:"tardiscrown",     base_hybrid:card_hybrid) }
 
@@ -344,6 +397,15 @@ init script:
 
 	pipboy_background := { color_background(type:"pipboy",     base_hybrid:card_hybrid) }
 	pipboy_crown_background := { color_background(type:"pipboycrown",     base_hybrid:card_hybrid) }
+
+	vault_background := { color_background(type:"vault",     base_hybrid:card_hybrid) }
+	vault_crown_background := { color_background(type:"vaultcrown",     base_hybrid:card_hybrid) }
+	vault_pt_background := { color_background(type:"vaultpt",     base_hybrid:card_hybrid) }
+	vaultstamp_background := { color_background(type:"vaultstamp",     base_hybrid:stamp_hybrid) }
+
+	breakingnews_background := { color_background(type:"breakingnews",     base_hybrid:card_hybrid) }
+	breakingnews_crown_background := { color_background(type:"breakingnewscrown",     base_hybrid:card_hybrid) }
+	breakingnews_pt_background := { color_background(type:"breakingnewspt",     base_hybrid:card_hybrid) }
 
 	# texless_background := { color_background(type:"texless",     base_hybrid:card_hybrid) }
 
@@ -377,7 +439,7 @@ init script:
 		else if styling.frames=="textless land(unstable)" then unstable_background()
 		else if styling.frames=="textless land(All will be one)" then onetll_background()
 		else if styling.frames=="dnd sourcebook" then dndsb_background()
-		else if styling.frames=="etched" then etched_background()
+		else if styling.frames=="etched" then if card.card_color == "land" then "etched/clcard.png" else etched_background()
 		else if styling.frames=="equinox" then equinox_background()
 		else if styling.frames=="magicfest" then magicfest_background()
 		else if styling.frames=="artdeco" then artdeco_background()
@@ -389,6 +451,7 @@ init script:
 		else if styling.frames=="crystal" then crystal_background()
 		else if styling.frames=="invocation" then invocation_background()
 		else if styling.frames=="ring" then ring_background()
+		else if styling.frames=="scroll" then scroll_background()
 		else if styling.frames=="tardis" then tardis_background()
 		else if styling.frames=="glass" then glass_background()
 		else if styling.frames=="mystical archive" then archive_background()
@@ -396,7 +459,9 @@ init script:
 		else if styling.frames=="storybook adventure" then storyadv_background()
 		else if styling.frames=="tale" then tale_background()
 		else if styling.frames=="pipboy" then pipboy_background()
+		else if styling.frames=="vault" then vault_background()
 		else if styling.frames=="dossier" then dossier_background()
+		else if styling.frames=="breakingnews" then breakingnews_background()
 		else if styling.frames=="neon" and is_vehicle() and chosen(choice:"colorless", card.card_color) then "neon/voverlay.png"
 		else if styling.frames=="neon" then if (is_rare() and styling.use_holofoil_stamps) then neon_background() else neon_background2()
 		else ""
@@ -431,6 +496,7 @@ init script:
 		else if styling.frames=="crystal" and (is_rare() and styling.use_holofoil_stamps) then "crystal/frame_mask.png"
 		else if styling.frames=="crystal" then "crystal/back/frame_mask.png"
 		else if styling.frames=="invocation" then "invocation/frame_mask.png"
+		else if styling.frames=="scroll" then "scroll/frame_mask.png"
 		else if styling.frames=="ring" then "ring/frame_mask.png"
 		else if styling.frames=="tardis" then "tardis/frame_mask.png"
 		else if styling.frames=="glass" then "glass/frame_mask.png"
@@ -438,7 +504,9 @@ init script:
 		else if styling.frames=="storybook adventure" then "storybook/adventure/frame_mask.png"
 		else if styling.frames=="tale" then "tale/frame_mask.png"
 		else if styling.frames=="pipboy" then "pipboy/frame_mask.png"
+		else if styling.frames=="vault" then "vault/frame_mask.png"
 		else if styling.frames=="dossier" then "dossier/frame_mask.png"
+		else if styling.frames=="breakingnews" then "breakingnews/frame_mask.png"
 		else "frame_mask.png"
 	}
 	
@@ -450,7 +518,7 @@ init script:
 
 		else if styling.frames=="neon" and is_vehicle() then "neon/pt/vpt.png"
 
-		else if styling.frames=="etched" then etched_pt_background()
+		else if styling.frames=="etched" then if card.card_color == "land" then "etched/pt/clpt.png" else etched_pt_background()
 		else if styling.frames=="equinox" then equinox_pt_background()
 		else if styling.frames=="artdeco" then artdeco_pt_background()
 		else if styling.frames=="fang" then fang_pt_background()
@@ -461,11 +529,14 @@ init script:
 		else if styling.frames=="crystal" then crystal_pt_background()
 		else if styling.frames=="invocation" then "invocation/pt.png"
 		else if styling.frames=="ring" then ring_pt_background()
+		else if styling.frames=="scroll" then scroll_pt_background()
 		else if styling.frames=="glass" then glass_pt_background()
 		else if styling.frames=="storybook" or styling.frames=="storybook adventure" then storybook_pt_background()
 		else if styling.frames=="tale" then tale_pt_background()
 		else if styling.frames=="pipboy" then "pipboy/pt.png"
 		else if styling.frames=="dossier" then "dossier/pt.png"
+		else if styling.frames=="vault" then vault_pt_background()
+		else if styling.frames=="breakingnews" then breakingnews_pt_background()
 		else card_ptbox()
 	}
 	
@@ -500,8 +571,10 @@ init script:
 		else if styling.frames=="glass" then "30, 116.5, 690, 468"
 		else if styling.frames=="storybook" or styling.frames=="storybook adventure" then "28, 31, 698, 578"
 		else if styling.frames=="tale" then "0, 56, 750, 910"
-		else if styling.frames=="pipboy" then "57,133.5,635,431"
+		else if styling.frames=="pipboy" then "57,133.5,635,433"
+		else if styling.frames=="vault" then "0,125,750,445"
 		else if styling.frames=="dossier" then "38.5,136.5,659,428"
+		else if styling.frames=="breakingnews" then "39.5,178.5,672.5,424"
 		else "56,117,638,468"
 	}
 	
@@ -513,6 +586,25 @@ init script:
 	hover_art_fix_top := {to_number(pull_comma_array(styling.hover_art_fix, cell:0, end:false))}
 	hover_art_fix_bot := {to_number(pull_comma_array(styling.hover_art_fix, cell:1, end:false))}
 	
+	stamp_img_chose := {
+		if styling.frames=="mystical archive" then "archive/stamp.png" 
+		else if styling.frames=="ravnica" then "ravnica/stamp.png" 
+		else if styling.frames=="samurai" then "stamp.png"
+		else if styling.frames=="ixalan" then "ixalan/stamp.png"
+		else if styling.frames=="tarkir" then "tarkir/stamp.png"
+		else if styling.frames=="etched" then if card.card_color == "land" then "etched/stamp/clstamp.png" else etched_stamp_background()
+		else if styling.frames=="magicfest" then magicfeststamp_background() 
+		else if styling.frames=="invocation" then "invocation/stamp.png"
+		else if (styling.frames=="ring" or (styling.frames=="textless land(All will be one)" and is_ub())) then "ring/stamp.png"
+		else if styling.frames=="tardis" then "tardis/stamp.png"
+		else if styling.frames=="glass" then "glass/stamp.png"
+		else if styling.frames=="storybook" or styling.frames=="storybook adventure" then "storybook/stamp.png"
+		else if (styling.frames=="scroll" or styling.frames=="pipboy") then "pipboy/stamp.png"
+		else if styling.frames=="dossier" then "dossier/stamp.png"
+		else if styling.frames=="vault" then vaultstamp_background()
+		else if styling.frames=="breakingnews" then "breakingnews/stamp.png"
+		else "foil_stamp.png"
+	}
 	stamp_img_set := {
 		if styling.frames=="glass" then "341.5,963,67,33.5"
 		else if styling.frames=="etched" then "315,951.5,120,47.5"
@@ -527,14 +619,39 @@ init script:
 		else if styling.frames=="magicfest" then "329.5,944.5,91,53.5"
 		else if styling.frames=="samurai" then "327,947,98,49"
 		else if styling.frames=="storybook" or styling.frames=="storybook adventure" then "339.5, 958.5, 74, 40.5"
-		else if styling.frames=="pipboy" then "340,959.5,70,39"
+		else if (styling.frames=="scroll" or styling.frames=="pipboy") then "340,959.5,70,39"
 		else if styling.frames=="dossier" then "321.26865,947.7612,105.3571,50"
+		else if styling.frames=="vault" then "317.1641,948.2443,115.6716,49.2537"
+		else if styling.frames=="breakingnews" then "291.7910,953.3582,166.7910,43.28358"
 		else "327,947,96,49"
 	}
 	stamp_img_left := {to_number(pull_comma_array(stamp_img_set(), cell:0, end:false))}
 	stamp_img_top := {to_number(pull_comma_array(stamp_img_set(), cell:1, end:false))}
 	stamp_img_width := {to_number(pull_comma_array(stamp_img_set(), cell:2, end:false))}
 	stamp_img_height := {to_number(pull_comma_array(stamp_img_set(), cell:3, end:false))}
+
+	crown_img_chose := {
+		if styling.frames=="fang" then fang_crown_background() 
+		else if styling.frames=="artdeco" then artdeco_crown_background() 
+		else if styling.frames=="etched" then etched_crown_background() 
+		else if styling.frames=="magicfest" then magicfest_crown_background()
+		else if styling.frames=="ravnica" then ravnica_crown_background()
+		else if styling.frames=="mystical archive" then archive_crown_background()
+		else if styling.frames=="phyrexian" then phyrexian_crown_background()
+		else if styling.frames=="ixalan" then ixalan_crown_background()
+		else if styling.frames=="tarkir" then tarkir_crown_background()
+		else if styling.frames=="crystal" then crystal_crown_background()
+		else if styling.frames=="ring" then ring_crown_background()
+		else if styling.frames=="scroll" then scroll_crown_background()
+		else if styling.frames=="tardis" then tardis_crown_background()
+		else if styling.frames=="glass" then glass_crown_background()
+		else if styling.frames=="storybook" or styling.frames=="storybook adventure" then storybook_crown_background()
+		else if styling.frames=="pipboy" then pipboy_crown_background()
+		else if styling.frames=="dossier" then dossier_crown_background()
+		else if styling.frames=="vault" then vault_crown_background()
+		else if styling.frames=="breakingnews" then breakingnews_crown_background()
+		else crown_background()
+	}
 
 
 
@@ -670,12 +787,16 @@ styling field:
 
 	choice: invocation
 
+	choice: scroll
 	choice: ring
 	choice: tardis
 
 	choice: dossier
 
 	choice: pipboy
+
+	choice: vault
+	choice: breakingnews
 
 	choice: textless land(zendikar)
 	choice: textless land(innistrad)
@@ -707,12 +828,12 @@ styling field:
 	type: multiple choice
 	name: others
 	description: 其它选项
+	choice: use alias
 	choice: hover art
 	choice: magicfest hide type and rarity
 	choice: original background
 	choice: universe beyond(For some frames)
 	choice: use phyrexian font
-	choice: chinese dossier use unofficial font
 	choice: serialized
 styling field:
 	type: text
@@ -923,23 +1044,41 @@ card style:
 		visible: {styling.frames=="storybook adventure"}
 	############################# Name line
 	name:
-		left: {if styling.frames=="equinox" then 74 else 64}
+		left:
+			script:
+				if styling.frames=="breakingnews" then if set.card_language != "简体中文" then (375 - max(100,card_style.name.content_width)*0.5) else (375 - max(100,card_style.name.content_width)*0.446)
+				else if styling.frames=="equinox" then 74
+				else 64
 		top: 
 			script:
-				(if chosen(styling.others, choice:"use phyrexian font") then shrink_name()/2 else 0) + (if set.card_language != "简体中文" then 4 else 0) +
-				if styling.frames=="textless land(unstable)" then 10 
+				(if chosen(styling.others, choice:"use phyrexian font") then shrink_name()/2 else 0)
+				+ (if set.card_language != "简体中文" then 4 else 0)
+				+
+				if styling.frames=="textless land(unstable)" then 10
 				else if styling.frames=="dnd sourcebook" or styling.frames=="goldenage" then 60
 				else if styling.frames=="equinox" then 61
 				else if styling.frames=="invention" then 64 
 				else if styling.frames=="samurai" then 74 
 				else if styling.frames=="tarkir" then 55
 				else if styling.frames=="ring" then 64
-				if styling.frames=="dossier" then (55+(if set.card_language == "简体中文" then -4 else 0 ))
+				else if styling.frames=="dossier" then (55+(if set.card_language == "简体中文" then -4 else 0 ))
 				else if styling.frames=="storybook" or styling.frames=="storybook adventure" then 59
+				else if (styling.frames=="pipboy") and set.card_language == "简体中文" then 59
+				else if styling.frames=="breakingnews" then if set.card_language != "简体中文" then 91 else 96
 				else 57
-		right:  { if styling.frames=="textless land(unstable)" and styling.center_name then 686 else (682 - max(30, card_style.casting_cost.content_width)) }
-		height: {46 - 0.5*shrink_name()}
-		alignment: { if chosen(styling.others, choice:"use phyrexian font") then "top shrink-overflow" else if styling.frames=="pipboy" then "middle shrink-overflow" else if styling.center_name then "bottom center shrink-overflow" else "bottom shrink-overflow"} 
+		right:
+			script:
+				if styling.frames=="breakingnews" then if set.card_language != "简体中文" then (375 + max(100,card_style.name.content_width)*0.5) else (375 + max(100,card_style.name.content_width)*0.446)
+				else if styling.frames=="textless land(unstable)" and styling.center_name then 686
+				else (682 - max(30, card_style.casting_cost.content_width))
+		height: {if styling.frames=="breakingnews" then (70) else (46 - 0.5*shrink_name())}
+		alignment:
+			script:
+				if chosen(styling.others, choice:"use phyrexian font") then "top shrink-overflow"
+				else if styling.frames=="pipboy" then "middle shrink-overflow"
+				else if styling.frames=="breakingnews" and set.card_language == "简体中文" then "middle stretch-overflow"
+				else if styling.center_name then "bottom center shrink-overflow"
+				else "bottom shrink-overflow"
 		padding bottom: 0
 		z index: 4
 		angle: {if styling.frames=="dossier" then -1 else 0}
@@ -948,19 +1087,30 @@ card style:
 				script:
 					if chosen(styling.others, choice:"use phyrexian font") then "Phi_horizontal_gbrsh_3.0"
 					else if (styling.frames=="tardis" and set.card_language != "简体中文") then "Gill Sans"
-					else if (styling.frames=="pipboy") then
-						if set.card_language != "简体中文" then "OCR1SSK"
-						else "DFPHeiW7-GB"
+					else if (styling.frames=="pipboy") then if set.card_language != "简体中文" then "OCR1SSK" else "DFPHeiW7-GB"
+					else if (styling.frames=="breakingnews") then if set.card_language != "简体中文" then "Saloon Girl" else "华康标题宋 Std W9"
 					else if set.card_language != "简体中文" then "Beleren Bold"
 					else "华康魏碑 Std W7"
-			size: { if styling.frames=="pipboy" and set.card_language != "简体中文" then 23 - shrink_name() else if set.card_language != "简体中文" then 32 - shrink_name() else 34 - shrink_name()}
+			size:
+				script:
+					(if styling.frames=="pipboy" and set.card_language != "简体中文" then 23
+					else if styling.frames=="breakingnews" then if set.card_language != "简体中文" then 49 else 23
+					else if set.card_language != "简体中文" then 32 else 34)
+					- shrink_name()
 			color:
 				script:
-					if styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="skyscraper" or styling.frames=="artdeco" or styling.frames=="magicfest" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="textless land(innistrad)" or styling.frames=="textless land(unstable)" or styling.frames=="etched" then "white"
+					if styling.frames=="breakingnews" then rgb(52, 46, 48) else if styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="skyscraper" or styling.frames=="artdeco" or styling.frames=="magicfest" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="textless land(innistrad)" or styling.frames=="textless land(unstable)" or styling.frames=="etched" then "white"
 					else "black"
 	
 	casting cost:
-		right: { if styling.frames=="dossier" then 670 else if styling.frames=="fang" then 684 else if styling.frames=="equinox" then 688 else if styling.frames=="invention" or styling.frames=="goldenage" then 684 else 692}
+		right:
+			script:
+				if styling.frames=="dossier" then 670
+				else if styling.frames=="fang" then 684
+				else if styling.frames=="equinox" then 688
+				else if styling.frames=="invention" or styling.frames=="goldenage" then 684
+				else if styling.frames=="breakingnews" then 710
+				else 692
 		top: 
 			script:
 				if styling.frames=="textless land(unstable)" then 10 
@@ -974,6 +1124,8 @@ card style:
 				else if styling.frames=="storybook" or styling.frames=="storybook adventure" then 59
 				else if styling.frames=="pipboy" then 59
 				else if styling.frames=="dossier" then 68
+				else if styling.frames=="vault" then 59
+				else if styling.frames=="breakingnews" then 33
 				else 57
 		width: { max(60, card_style.casting_cost.content_width) + 10 }
 		height: 46
@@ -983,13 +1135,35 @@ card style:
 			name: MPlantin
 			size: 30
 		symbol font:
-			name: {if styling.frames=="mystical archive" or styling.frames=="dossier" then "magic-mana-small-strixhaven" else "magic-mana-large"}
+			name:
+				script:
+					if styling.frames=="breakingnews" then "magic-mana-thunder-junction-breaking-news.mse-symbol-font"
+					else if styling.frames=="mystical archive" or styling.frames=="dossier" then "magic-mana-small-strixhaven"
+					else "magic-mana-large"
 			size: 30
 			alignment: middle right
 		always symbol: true
 		z index: 5
 		padding top: 0
 
+	alias:
+		left: {108 + (if chosen(styling.others, choice:"use alias") then 0 else 1000)}
+		top: {if styling.frames=="pipboy" then 118 else 116}
+		width: 536
+		height: 30
+		z index: 7
+		visible: { chosen(styling.others, choice:"use alias") }
+		font:
+			name: 
+				script:
+					if styling.frames=="pipboy" then
+						if set.card_language != "简体中文" then "Neo Sans Pro" else "华康圆体 - Kelvin"
+					else 
+						if set.card_language != "简体中文" then "MPlantin-Italic" else "Magic华文楷体"
+			size: {if styling.frames=="pipboy" then 17 else 20}
+			scale down to: 6
+			color: white
+		alignment: middle center
 
 	name 2:
 		left: {if styling.frames=="storybook adventure" then 64 else 0 }
@@ -1046,6 +1220,8 @@ card style:
 		render style: image
 		visible: { has_identity() }
 		image: { card_identity() }
+
+
 	type:
 		left: {if styling.frames=="equinox" then 74 else (if is_tll() and styling.frames!="textless land(theros)" then 1000 else 0) + (if has_identity() then 102 else 64) + (if styling.frames=="textless land(All will be one)" then 74 else 0) }
 		top: 
@@ -1062,11 +1238,21 @@ card style:
 				else if styling.frames=="tale" then 599
 				else if styling.frames=="pipboy" and set.card_language == "简体中文" then 599
 				else if styling.frames=="dossier" then (599+(if set.card_language == "简体中文" then -3 else 0 ))
+				else if styling.frames=="breakingnews" then 628
 				else 597) +
 				if chosen(styling.others, choice:"magicfest hide type and rarity") then 1000 else 0
-		width: { (if has_identity() then "580" else "610") - max(44,card_style.rarity.content_width) - (if styling.frames=="textless land(All will be one)" then 74 else 0)}
+		width:
+			script:
+				if styling.frames=="breakingnews" then (max(20,card_style.type.content_width)*0.892)
+				else ((if has_identity() then "580" else "610")
+				- max(44,card_style.rarity.content_width)
+				- (if styling.frames=="textless land(All will be one)" then 74 else 0))
 		height: { 40 - shrink_type() }
-		alignment: {if styling.frames=="pipboy" then "middle shrink-overflow" else "top shrink-overflow"}
+		alignment: 
+			script:
+				if styling.frames=="pipboy" or styling.frames=="breakingnews" then "middle shrink-overflow"
+				else if styling.frames=="breakingnews" and set.card_language == "简体中文" then "top stretch-overflow"
+				else "top shrink-overflow"
 		z index: 2
 		padding top: 2
 		angle: {if styling.frames=="dossier" then 0.5 else 0}
@@ -1074,18 +1260,23 @@ card style:
 			name: 
 				script:
 					if chosen(styling.others, choice:"use phyrexian font") then "Phi_horizontal_gbrsh_3.0"
-					else if(styling.frames=="tardis" and set.card_language != "简体中文") then "Gill Sans"
-					else if (styling.frames=="pipboy") then
-						if set.card_language != "简体中文" then "Dejavu Sans"
-						else "DFPHeiW7-GB"
-					else if set.card_language != "简体中文" then "Beleren Bold"
-					else "华康魏碑 Std W7"
-			size: { if styling.frames=="pipboy" then if set.card_language != "简体中文" then 21.5-shrink_name() else 30-shrink_type() else if set.card_language != "简体中文" then 26 - shrink_type() else 32 - shrink_type() }
+					else if (styling.frames=="tardis" and set.card_language != "简体中文") then "Gill Sans"
+					else if styling.frames=="pipboy" then if set.card_language != "简体中文" then "Neo Sans Pro" else "DFPHeiW7-GB"
+					else if (styling.frames=="breakingnews") then if set.card_language != "简体中文" then "Saloon Girl" else "华康标题宋 Std W9"
+					else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7"
+			size:
+				script:
+					(if styling.frames=="pipboy" then if set.card_language != "简体中文" then 21.5 else 30
+					else if styling.frames=="breakingnews" then if set.card_language != "简体中文" then 34.5 else 26.5
+					else if set.card_language != "简体中文" then 26 else 32)
+					- shrink_type()
 			color:
 				script:
-					if styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="artdeco" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="textless land(innistrad)" or styling.frames=="textless land(unstable)"  or styling.frames=="etched" then "white"
+					if styling.frames=="breakingnews" then rgb(52, 46, 48) else if styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="artdeco" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="textless land(innistrad)" or styling.frames=="textless land(unstable)"  or styling.frames=="etched" then "white"
 					else "black"
 			separator color: red
+
+
 	super type:
 		left: { (if is_tll() then 0 else 1000)+ (if has_identity() then 102 else 64) }
 		top: { shrink_type() + 862 + (if set.card_language != "简体中文" then 2 else 0) - (if chosen(styling.others, choice:"use phyrexian font") then shrink_type()/2 else 0)}
@@ -1112,6 +1303,8 @@ card style:
 			size: { if set.card_language != "简体中文" then 26 - shrink_type() else 32 - shrink_type() }
 			color: {if styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="textless land(innistrad)" then "white" else "black"}
 			separator color: red
+
+
 	type 2:
 		left: {if styling.frames=="storybook adventure" then 64 else 0 }
 		top: {if styling.frames=="storybook adventure" then if set.card_language != "简体中文" then 708 else 710 else 0 }
@@ -1128,19 +1321,26 @@ card style:
 
 
 	rarity:
-		right: {(if styling.frames=="dossier" then 681 else if styling.frames=="storybook" or styling.frames=="storybook adventure" then 694 else if styling.frames=="equinox" then 680 else if styling.frames=="ravnica" then 694 else 688) + if styling.frames=="textless land(unstable)" then 1000 else 0 }
+		right:
+			script:
+			 (if styling.frames=="dossier" then 681 
+			 else if styling.frames=="storybook" or styling.frames=="storybook adventure" or styling.frames=="ravnica" then 694
+			 else if styling.frames=="equinox" then 680
+			 else if styling.frames=="breakingnews" then 690
+			 else 688)
+			 + if styling.frames=="textless land(unstable)" then 1000 else 0
 		top: 
 			script:
 				if styling.frames=="equinox" then 598
 				else if styling.frames=="zendikar rising expeditions" or styling.frames=="zendikar expeditions" or is_tll() then 864 
 				else if chosen(styling.others, choice:"magicfest hide type and rarity") then 1200
-				else if styling.frames=="textless land(theros)" then 894
-				else if styling.frames=="textless land(All will be one)" then 894
+				else if styling.frames=="textless land(theros)" or styling.frames=="textless land(All will be one)" then 894
 				else if styling.frames=="dnd sourcebook" then 603
-				else if styling.frames=="ravnica" then 599
+				else if styling.frames=="ravnica" or styling.frames=="storybook" or styling.frames=="storybook adventure" then 599
 				else if styling.frames=="tarkir" then 595
-				else if styling.frames=="storybook" or styling.frames=="storybook adventure" then 599
 				else if styling.frames=="tale" then 601
+				else if styling.frames=="vault" then 599
+				else if styling.frames=="breakingnews" then 626
 				else 597
 		width: 88
 		height: 44
@@ -1182,13 +1382,51 @@ card style:
 					else symbol_variation(symbol: set.masterpiece_symbol, variation: "mythic rare")
 	############################# Text box
 	text:
-		left: {( if styling.frames=="pipboy" then 58+15 else if styling.frames=="storybook adventure" then 390 else if styling.frames=="equinox" or styling.frames=="fang" then 65 else if styling.frames=="phyrexian" then 63 else 58) + (if is_tll() or styling.frames=="textless land(theros)" or styling.frames=="textless land(All will be one)" or styling.frames=="magicfest" then 1000 else 0) }
-		top: { ( if styling.frames=="storybook adventure" then 654 else if styling.frames=="zendikar rising expeditions" then 595 else if styling.frames=="zendikar expeditions" then 625 else 660 ) +chop_top() }
-		width: { if styling.frames=="pipboy" then 636-32 else if styling.frames=="storybook adventure" then 318-8 else if styling.frames=="equinox" or styling.frames=="fang" then 621 else if styling.frames=="phyrexian" then 623 else 636 }
-		bottom: {( if styling.frames=="zendikar rising expeditions" then 856 else if styling.frames=="zendikar expeditions" then 850 else if styling.frames=="ninja" or styling.frames=="samurai" then 950 else if styling.frames=="phyrexian" then 960 else 970 ) - chop_bot() }
+		left: 
+			script:
+				(if styling.frames=="pipboy" then 73
+				else if styling.frames=="storybook adventure" then 390
+				else if styling.frames=="equinox" or styling.frames=="fang" then 65
+				else if styling.frames=="phyrexian" then 63
+				else 58)
+				+ (if is_tll() or styling.frames=="textless land(theros)" or styling.frames=="textless land(All will be one)" or styling.frames=="magicfest" then 1000
+				else 0)
+		top: 
+			script:
+				( if styling.frames=="storybook adventure" then 654
+				else if styling.frames=="zendikar rising expeditions" then 595
+				else if styling.frames=="zendikar expeditions" then 625
+				else if styling.frames=="breakingnews" then 680
+				else 660 )
+				+ chop_top()
+		width: 
+			script:
+				if styling.frames=="pipboy" then 604
+				else if styling.frames=="storybook adventure" then 310
+				else if styling.frames=="equinox" or styling.frames=="fang" then 621
+				else if styling.frames=="phyrexian" then 623
+				else 636
+		bottom: 
+			script:
+				( if styling.frames=="zendikar rising expeditions" then 856
+				else if styling.frames=="zendikar expeditions" then 850
+				else if styling.frames=="ninja" or styling.frames=="samurai" then 950
+				else if styling.frames=="phyrexian" then 960
+				else if styling.frames=="breakingnews" then 950
+				else 970 )
+				- chop_bot()
 		font:
-			name: { 	   if (styling.frames=="pipboy") then if set.card_language != "简体中文" then "Dejavu Sans" else "华康圆体 - Kelvin" else if styling.frames=="dossier" then (if set.card_language != "简体中文" then "Special Elite" else if chosen(styling.others, choice:"chinese dossier use unofficial font") then "京華老宋体" else "DFPKaiShu-GB5") else if chosen(styling.others, choice:"use phyrexian font") then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
-			italic name: { if styling.frames=="dossier" then (if set.card_language != "简体中文" then "Special Elite" else if chosen(styling.others, choice:"chinese dossier use unofficial font") then "Magic华文楷体" else "Magic华文楷体") else if chosen(styling.others, choice:"use phyrexian font") then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else "Magic华文楷体" }
+			name: 
+				script:
+						 if styling.frames=="pipboy"  then if set.card_language != "简体中文" then "Neo Sans Pro"  else "华康圆体 - Kelvin"
+					else if styling.frames=="dossier" then if set.card_language != "简体中文" then "Special Elite" else "DFPKaiShu-GB5"
+					else if chosen(styling.others, choice:"use phyrexian font") then "Phi_horizontal_gbrsh_3.0"
+					else if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX"
+			italic name:
+				script:
+					if styling.frames=="dossier" then if set.card_language != "简体中文" then "Special Elite" else "Magic华文楷体"
+					else if chosen(styling.others, choice:"use phyrexian font") then "Phi_horizontal_gbrsh_3.0"
+					else if set.card_language != "简体中文" then "MPlantin-Italic" else "Magic华文楷体"
 			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 28 }
 			scale down to: 6
 			color: {if styling.frames=="tale" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="tarkir" or styling.frames=="ixalan" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="etched" or styling.frames=="textless land(unstable)" then "white" else "black"}
@@ -1213,6 +1451,7 @@ card style:
 		line height soft: {if styling.frames=="dossier" then 1.1 else 0.9 }
 		line height hard max: {if is_modal(card.rule_text) then 1.0 else 1.2 }
 		line height line max: 1.6
+
 	text 2:
 		left: {if styling.frames=="storybook adventure" then 58 else 0}
 		top: { if styling.frames=="storybook adventure" then 765 else 0 }
@@ -1246,10 +1485,31 @@ card style:
 		line height line max: 1.6
 
 	watermark:
-		left: { if styling.frames=="textless land(All will be one)" then 36 else if is_tll() then 317 else if styling.frames=="textless land(theros)" or styling.frames=="magicfest" then 1000 else 50 }
-		top: { (if styling.frames=="textless land(All will be one)" then 888 else if styling.frames=="zendikar rising expeditions" then 605 else if styling.frames=="zendikar expeditions" then 630 else if is_tll() then 825 else 676) -(if styling.frames=="textless land(zendikar)" or styling.frames=="textless land(innistrad)" then 0 else 8)}
+		left: 
+			script:
+				if styling.frames=="textless land(All will be one)" then 36
+				else if is_tll() then 317
+				else if styling.frames=="textless land(theros)" or styling.frames=="magicfest" then 1000
+				else 50
+		top:
+			script:
+				(if styling.frames=="textless land(All will be one)" then 888
+				else if styling.frames=="zendikar rising expeditions" then 605
+				else if styling.frames=="zendikar expeditions" then 630
+				else if is_tll() then 825
+				else if styling.frames=="breakingnews" then 692
+				else 676)
+				 - (if styling.frames=="textless land(zendikar)" or styling.frames=="textless land(innistrad)" then 0
+				 else 8)
 		width: {if styling.frames=="textless land(All will be one)" then 75 else if is_tll() then 118 else 650}
-		height: { if styling.frames=="textless land(All will be one)" then 75 else if styling.frames=="zendikar rising expeditions" then 245 else if styling.frames=="zendikar expeditions" then 220 else if is_tll() then 118 else 278 }
+		height: 
+			script:
+				if styling.frames=="textless land(All will be one)" then 75
+				else if styling.frames=="zendikar rising expeditions" then 245
+				else if styling.frames=="zendikar expeditions" then 220
+				else if is_tll() then 118
+				else if styling.frames=="breakingnews" then 263
+				else 278
 		z index: 2
 		render style: image
 		popup style: in place
@@ -1283,15 +1543,46 @@ card style:
 
 	pt:
 		z index: 5
-		left: { if styling.frames=="dossier" then 580 else if styling.frames=="tale" then 590 else if styling.frames=="storybook" or styling.frames=="storybook adventure" then 589 else if styling.frames=="tardis" then 584 else if styling.frames=="invocation" then 1000 else if styling.frames=="ixalan" then 585 else if styling.frames=="artdeco" or styling.frames=="ravnica" then 588.5 else if styling.frames=="goldenage" then 582 else 586}
-		top:  { if (styling.frames=="pipboy") then 937 else if styling.frames=="dossier" then 933 else if styling.frames=="tardis" then 934 else if styling.frames=="invocation" then 2000 else if styling.frames=="artdeco" then 932 else if styling.frames=="goldenage" then 935 else if styling.frames=="ninja" or styling.frames=="equinox" then 934 else if styling.frames=="samurai" then 940 else 936}
+		left:
+			script:
+				if styling.frames=="dossier" then 580
+				else if styling.frames=="tale" then 590
+				else if styling.frames=="storybook" or styling.frames=="storybook adventure" then 589
+				else if styling.frames=="tardis" then 584
+				else if styling.frames=="invocation" then 1000
+				else if styling.frames=="ixalan" then 585
+				else if styling.frames=="artdeco" or styling.frames=="ravnica" then 588.5
+				else if styling.frames=="goldenage" then 582
+				else if styling.frames=="breakingnews" then 587
+				else 586
+		top:
+			script:
+				if (styling.frames=="pipboy") then 938
+				else if styling.frames=="dossier" then 933
+				else if styling.frames=="tardis" or styling.frames=="ninja" or styling.frames=="equinox" then 934
+				else if styling.frames=="invocation" then 2000
+				else if styling.frames=="artdeco" then 932
+				else if styling.frames=="goldenage" then 935
+				else if styling.frames=="samurai" then 940
+				else if styling.frames=="breakingnews" then 934
+				else 936
 		width: 120
 		height:	56
 		alignment: center middle shrink-overflow
 		angle: {if styling.frames=="dossier" then 2 else 0}
 		font:
-			name: { if (styling.frames=="pipboy") then "OCR-A" else if chosen(styling.others, choice:"use phyrexian font") then "GeishaHolidayW00-Regular" else "Beleren Bold" }
-			size: {(if styling.frames=="ravnica" or styling.frames=="dossier" then 30 else if styling.frames=="phyrexian" then 31 else 32) - (if styling.shrink_power_text != "" then to_number(styling.shrink_power_text) else 0)}
+			name:
+				script:
+					if styling.frames=="pipboy" then "OCR A Std"
+					else if chosen(styling.others, choice:"use phyrexian font") then "GeishaHolidayW00-Regular"
+					else "Beleren Bold"
+			size:
+				script:
+					(if styling.frames=="pipboy" then 29.5
+					else if styling.frames=="ravnica" or styling.frames=="dossier" then 30
+					else if styling.frames=="phyrexian" then 31 else 32)
+					- (if styling.shrink_power_text != "" then to_number(styling.shrink_power_text) else 0)
+
 			color: {if styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="artdeco" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="etched" then "white" else "black"}
 			separator color: red
 	############################# Card sorting / numbering
@@ -1304,7 +1595,7 @@ card style:
 		font:
 			name: Magic Gotham Medium
 			size: 14
-			color: white
+			color: {"white"}
 			weight: bold
 	############################# Copyright stuff
 	illustrator:
@@ -1316,7 +1607,7 @@ card style:
 		font:
 			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std W7"}
 			size: 14.5
-			color: white
+			color: {"white"}
 	copyright:
 		right: 700
 		top: { (if card.pt != "" or styling.frames=="etched" then 998 else 978 ) + if styling.frames=="storybook" or styling.frames=="storybook adventure" then 5 else 0}
@@ -1328,7 +1619,7 @@ card style:
 		font:
 			name: Matrix
 			size: 14
-			color: white
+			color: {"white"}
 			weight: bold
 ############################################################## Extra card fields
 extra card field:
@@ -1509,7 +1800,7 @@ extra card style:
 		font:
 			name: Magic Gotham Medium
 			size: 14
-			color: white
+			color: {"white"}
 			weight: bold
 	artist arrow:
 		left: { 56 + card_style.set_code.content_width }
@@ -1518,7 +1809,7 @@ extra card style:
 		height: 15
 		z index: 1
 		render style: image
-		image: artist_arrow.png
+		image: {"artist_arrow.png"}
 	pt box:
 		left:	{if styling.frames=="dossier" then 573.8806 else if styling.frames=="invocation" then 646.5 else if styling.frames=="tarkir" then 578.5 else if styling.frames=="mystical archive" then 566.5 else if styling.frames=="ravnica" then 576.5 else 0}
 		top:	{if styling.frames=="dossier" then 920.8955 else if styling.frames=="invocation" then 861 else if styling.frames=="tarkir" then 925 else if styling.frames=="mystical archive" then 923 else if styling.frames=="ravnica" then 927.5 else 0}
@@ -1545,60 +1836,28 @@ extra card style:
 				and styling.frames!="textless land(unstable)"
 				and styling.frames!="dnd sourcebook")
 		render style: image
-		image: 
-			script:
-				if styling.frames=="mystical archive" then "archive/stamp.png" 
-				else if styling.frames=="ravnica" then "ravnica/stamp.png" 
-				else if styling.frames=="samurai" then "stamp.png"
-				else if styling.frames=="ixalan" then "ixalan/stamp.png"
-				else if styling.frames=="tarkir" then "tarkir/stamp.png"
-				else if styling.frames=="etched" then etched_stamp_background()
-				else if styling.frames=="magicfest" then magicfeststamp_background() 
-				else if styling.frames=="invocation" then "invocation/stamp.png"
-				else if (styling.frames=="ring" or (styling.frames=="textless land(All will be one)" and is_ub())) then "ring/stamp.png"
-				else if styling.frames=="tardis" then "tardis/stamp.png"
-				else if styling.frames=="glass" then "glass/stamp.png"
-				else if styling.frames=="storybook" or styling.frames=="storybook adventure" then "storybook/stamp.png"
-				else if styling.frames=="pipboy" then "pipboy/stamp.png"
-				else if styling.frames=="dossier" then "dossier/stamp.png"
-				else "foil_stamp.png"
+		image: { stamp_img_chose() }
+
 	crown:
 		left: 0
 		top: 0
 		width:	750
 		height:	1050
 		render style: image
-		image:
-			script:
-				if styling.frames=="fang" then fang_crown_background() 
-				else if styling.frames=="artdeco" then artdeco_crown_background() 
-				else if styling.frames=="etched" then etched_crown_background() 
-				else if styling.frames=="magicfest" then magicfest_crown_background()
-				else if styling.frames=="ravnica" then ravnica_crown_background()
-				else if styling.frames=="mystical archive" then archive_crown_background()
-				else if styling.frames=="phyrexian" then phyrexian_crown_background()
-				else if styling.frames=="ixalan" then ixalan_crown_background()
-				else if styling.frames=="tarkir" then tarkir_crown_background()
-				else if styling.frames=="crystal" then crystal_crown_background()
-				else if styling.frames=="ring" then ring_crown_background()
-				else if styling.frames=="tardis" then tardis_crown_background()
-				else if styling.frames=="glass" then glass_crown_background()
-				else if styling.frames=="storybook" or styling.frames=="storybook adventure" then storybook_crown_background()
-				else if styling.frames=="pipboy" then pipboy_crown_background()
-				else if styling.frames=="dossier" then dossier_crown_background()
-				else crown_background()
+		image:{ crown_img_chose() }
 		z index: 1
-		visible: { is_legend() and (styling.frames=="dossier" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="storybook" or styling.frames=="storybook adventure" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="tarkir" or styling.frames=="ixalan" or styling.frames=="phyrexian" or styling.frames=="mystical archive" or styling.frames=="ravnica" or styling.frames=="fang" or styling.frames=="artdeco" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="etched" or styling.frames=="magicfest" )}
+		visible: { is_legend() and (styling.frames=="breakingnews" or styling.frames=="vault" or styling.frames=="scroll" or styling.frames=="dossier" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="storybook" or styling.frames=="storybook adventure" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="tarkir" or styling.frames=="ixalan" or styling.frames=="phyrexian" or styling.frames=="mystical archive" or styling.frames=="ravnica" or styling.frames=="fang" or styling.frames=="artdeco" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="etched" or styling.frames=="magicfest" )}
 
+	###卷轴合并在这
 	ravnica twins:
 		left: 0
 		top: 0
 		width:	750
 		height:	1050
 		render style: image
-		image:{ if styling.frames=="mystical archive" then archive_twins_background() else ravnica_twins_background() }
+		image:{ if styling.frames=="scroll" and contains(match:"multicolor,", card.card_color) then "scroll/multicolor-bar.png" else if styling.frames=="mystical archive" then archive_twins_background() else if styling.frames=="ravnica" then ravnica_twins_background() else ""}
 		z index: 1
-		visible: {styling.frames=="ravnica" or styling.frames=="mystical archive"}
+		visible: {styling.frames=="scroll" or styling.frames=="ravnica" or styling.frames=="mystical archive"}
 	
 	level 2 overlay:
 		left: 58
@@ -1648,7 +1907,7 @@ extra card style:
 		font:
 			name: mplantin
 			size: 12
-			color: white
+			color: {"white"}
 			weight: bold
 
 	copyright2:
@@ -1665,7 +1924,7 @@ extra card style:
 		font:
 			name: mplantin
 			size: 12
-			color: white
+			color: {"white"}
 			weight: bold
 
 	flavor bar:
@@ -1707,6 +1966,7 @@ extra card style:
 		image: {if styling.frames=="ixalan" then "ixalan/coinCover.png" else color_back_background()}
 		visible: {styling.frames=="ixalan" or styling.frames=="dnd sourcebook" and not chosen(styling.others, choice:"original background" )}
 
+	##辐射合并在里面
 	sourcebook fix:
 		left: 0
 		top: 0
@@ -1714,8 +1974,8 @@ extra card style:
 		height:	1050
 		z index: 6
 		render style: image
-		image: {if hover_art_fix_bot()!=0 then "" else "sourcebook/framefix.png"}
-		visible: {styling.frames=="dnd sourcebook"}
+		image: {if styling.frames=="scroll" then "scroll/framefix.png" else if styling.frames=="pipboy" then if chosen(styling.others, choice:"use alias") then "pipboy/aliasstats.png" else "pipboy/stats.png" else if hover_art_fix_bot()!=0 then "" else "sourcebook/framefix.png"}
+		visible: {styling.frames=="scroll" or styling.frames=="pipboy" or styling.frames=="dnd sourcebook"}
 	
 	serialized:
 		left:	{serialized_img_left()}

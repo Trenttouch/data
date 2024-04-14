@@ -13,6 +13,31 @@ choice:
 	line below: true
 
 choice:
+	name: BLB
+	choice: Mythic
+	line below: true
+
+choice:
+	name: OTJ
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	choice:
+		name: OTP
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: BIG
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	line below: true
+
+choice:
 	name: MKM
 	choice: Mythic
 	choice: Rare
@@ -1085,6 +1110,12 @@ choice:
 choice:
 	name: Command
 	choice:
+		name: OTC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
 		name: PIP
 		choice: Mythic
 		choice: Rare
@@ -1565,6 +1596,18 @@ choice:
 ######################################################### 轮抽
 choice:
 	name: Supplemental
+	choice:
+		name: ACR
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: MH3
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
 	choice:
 		name: LTR
 		choice: Mythic

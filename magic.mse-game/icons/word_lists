@@ -1,0 +1,829 @@
+﻿
+############################################################## Magic word lists
+
+word list:
+	name: type
+	word:
+		name: 传奇
+		is prefix: true
+	word:
+		name: 雪境
+		is prefix: true
+	word:
+		name: 衍生物
+		is prefix: true
+	word:
+		name: 部族
+		is prefix: true
+	word:
+		name: 世界
+		is prefix: true
+	word:
+		name: 基本
+		is prefix: true
+		line below: true
+	word: 诡局
+	word: 生物
+	word: 神器
+	word: 神器生物
+	word: 结界
+	word: 结界生物
+	word: 瞬间
+	word: 法术
+	word: 地
+	word: 鹏洛客
+	word: 徽记
+	word: Phenomenon时空
+	word: 时空
+
+word list:
+	name: race
+	word:
+		script: allcn_races()
+		line below: true
+	word: 人类
+	word: 猫
+	word:
+		name: 天使
+		line below: true
+	word: 精怪
+	word: 鸟
+	word: 
+		name: 人鱼
+		line below: true
+	word: 灵俑
+	word: 惊惧兽
+	word: 
+		name: 吸血鬼
+		line below: true
+	word: 元素
+	word: 鬼怪
+	word: 巨人
+	word: 
+		name: 龙
+		line below: true
+	word: 野兽
+	word: 妖精
+	word: 
+		name: 昆虫
+		line below: true
+	word: 		
+		name: 常见A-F
+		line below: true
+		word: 阿托格
+		word: 矮人
+		word: 奥夫
+		word: 
+			name: 奥扎奇
+			line below: true
+		word: 半人马
+		word: 半兽人
+		word: 蝙蝠
+		word: 
+			name: 变形兽
+			line below: true
+		word: 
+			name: 豺狼
+			line below: true
+		word: 稻草人
+		word: 地狱兽
+		word: 钉兽
+		word: 独角兽
+		word: 
+			name: 独眼巨人
+			line below: true
+		word: 恶魔
+		word: 
+			name: 鳄鱼
+			line below: true
+		word: 凡尔西诺
+		word: 飞马
+		word: 
+			name: 凤凰
+			line below: true
+	word: 
+		name: 常见G-K
+		line below: true
+		word: 盖美拉
+		word: 攻城巨车
+		word: 
+			name: 龟
+			line below: true
+		word: 海怪
+		word: 狐
+		word: 
+			name: 化身
+			line below: true
+		word: 洁英
+		word: 巨海兽
+		word: 巨灵
+		word: 巨魔
+		word: 
+			name: 巨蛇
+			line below: true
+		word: 卡甫
+		word: 寇族
+		word: 
+			name: 骷髅妖
+			line below: true
+	word: 
+		name: 常见M-N
+		line below: true
+		word: 狼
+		word: 狼人
+		word: 立吸怪
+		word: 猎犬
+		word: 裂片妖
+		word: 流浆
+		word: 
+			name: 龙兽
+			line below: true
+		word: 马
+		word: 梦魇
+		word: 麋鹿
+		word: 秘耳
+		word: 魔鬼
+		word: 魔神
+		word: 
+			name: 魔像
+			line below: true
+		word: 那迦
+		word: 宁芙
+		word: 牛
+		word: 牛头怪
+		word: 奴兽
+	word: 
+		name: 常见Q-T
+		line below: true
+		word: 
+			name: 墙
+			line below: true
+		word: 蛇
+		word: 蛇发妖
+		word: 神
+		word: 圣者
+		word: 狮鹫
+		word: 石像鬼
+		word: 食人魔
+		word: 史芬斯
+		word: 鼠
+		word: 树灵
+		word: 树妖
+		word: 
+			name: 索尔兽
+			line below: true
+		word: 统领
+	word: 
+		name: 常见W-X
+		line below: true
+		word: 蛙
+		word: 
+			name: 维多肯
+			line below: true
+		word: 犀牛
+		word: 蜥怪
+		word: 蜥蜴
+		word: 仙灵
+		word: 象
+		word: 小恶魔
+		word: 蟹
+		word: 熊
+		word: 虚影
+		word: 
+			name: 雪怪
+			line below: true
+	word: 
+		name: 常见Y-Z
+		line below: true
+		word: 亚龙
+		word: 羊蹄人
+		word: 野猪
+		word: 夜潜魔
+		word: 以太种
+		word: 阴魂
+		word: 幽灵
+		word: 鱼
+		word: 猿猴
+		word: 
+			name: 月人
+			line below: true
+		word: 造妖
+		word: 章人
+		word: 真菌
+		word: 振翼机
+		word: 蜘蛛
+		word: 植物
+		word: 蛭
+		word: 
+			name: 组构体
+			line below: true
+	word: 		
+		name: 稀有
+		word: 
+			name: A-G
+			line below: true
+			word: 
+				name: 矮从瓦格
+				line below: true
+			word: 哔宝精
+			word: 病菌
+			word: 
+				name: 病媒
+				line below: true
+			word: 袋熊
+			word: 道西
+			word: 
+				name: 地侏
+				line below: true
+			word: 法球
+			word: 仿索蓝人
+			word: 分节
+			word: 
+				name: 腐生物
+				line below: true
+			word: 怪灵
+			word: 怪奇
+			word: 光蛾
+			word: 鬼魂
+				name: 鬼仔
+				line below: true
+		word: 
+			name: H-K
+			line below: true
+			word: 哈痞
+			word: 海绵
+			word: 海星
+			word: 害虫
+			word: 河马
+			word: 荷马利
+			word: 猴
+			word: 后裔
+			word: 獾
+			word: 
+				name: 火蜥蜴
+				line below: true
+			word: 金属工人
+			word: 进化体
+			word: 鲸
+			word: 巨神灵
+			word: 
+				name: 骏鹰
+				line below: true
+			word: 卡马利
+			word: 
+				name: 蛞蝓
+				line below: true
+		word: 
+			name: L-R
+			line below: true
+			word: 拉高耶夫
+			word: 拉玛苏
+			word: 拉弥亚
+			word: 狼獾
+			word: 棱镜
+			word: 鬣狗
+			word: 羚羊
+			word: 
+				name: 骆驼
+				line below: true
+			word: 猫鼬
+			word: 绵羊
+			word: 魔判官
+			word: 牡蛎
+			word: 
+				name: 墓生
+				line below: true
+			word: 农奴
+			word: 
+				name: 诺格
+				line below: true
+			word: 
+				name: 欧格
+				line below: true
+			word: 
+				name: 麒麟
+				line below: true
+			word: 
+				name: 蠕虫
+				line below: true
+		word: 
+			name: S-W
+			line below: true
+			word: 萨拉卡斯
+			word: 塞连
+			word: 三分节
+			word: 砂
+			word: 山羊
+			word: 
+				name: 石化鸡蛇
+				line below: true
+			word: 水母
+			word: 斯立兹
+			word: 四分节
+			word: 松鼠
+			word: 苏拉卡
+			word: 碎片
+			word: 
+				name: 索泰利
+				line below: true
+			word: 
+				name: 兔
+				line below: true
+			word: 乌贼
+			word: 巫婆
+			word: 无面鬼
+			word: 
+				name: 无畏舰
+				line below: true
+		word: 
+			name: X-Z
+			line below: true
+			word: 蝎子
+			word: 信使
+			word: 雪貂
+			word: 
+				name: 驯鹿
+				line below: true
+			word: 眼
+			word: 鼹鼠
+			word: 异狮
+			word: 翼狮
+			word: 鹦鹉螺
+			word: 
+				name: 映影
+				line below: true
+			word: 
+				name: 原牛
+				line below: true
+			word: 章鱼
+			word: 整备师
+			word: 紫貂
+			word: 紫河马
+			word: 自动机	
+word list:
+	name: class
+	word:
+		script: allcn_classes()
+		line below: true
+	word: 士兵
+	word: 战士
+	word: 浪客
+	word: 骑士
+	word: 斥候
+	word: 弓箭手
+	word: 狂战士
+	word: 
+		name: 杀手
+		line below: true
+	word: 法术师
+	word: 祭师
+	word: 僧侣
+	word: 德鲁伊
+	word: 神器师
+	word: 
+		name: 修行僧
+		line below: true
+	word: 
+		name: 不常见	
+		word: 反抗军
+		word: 贩商
+		word: 海盗
+		word: 伙伴
+		word: 驾手
+		word: 秘教徒
+		word: 奴仆
+		word: 旗手
+		word: 忍者
+		word: 塑法师
+		word: 突变体
+		word: 武士
+		word: 野蛮人
+		word: 佣兵
+		word: 游牧人
+		word: 长老
+		line below: true
+	word: 
+		name: 仅衍生物	
+		word: 孽裔
+		word: 懦夫
+		word: 钳手
+		word: 市民
+		word: 逃亡者
+		word: 幸存者
+		line below: true
+	word: 
+		name: 第二种族	
+		word: 人类
+		word: 猫
+		word:
+			name: 天使
+			line below: true
+		word: 精怪
+		word: 鸟
+		word: 
+			name: 人鱼
+			line below: true
+		word: 灵俑
+		word: 惊惧兽
+		word: 
+			name: 吸血鬼
+			line below: true
+		word: 元素
+		word: 鬼怪
+		word: 巨人
+		word: 
+			name: 龙
+			line below: true
+		word: 野兽
+		word: 妖精
+		word: 
+			name: 昆虫
+			line below: true
+		word: 		
+			name: 常见A-F
+			line below: true
+			word: 阿托格
+			word: 矮人
+			word: 奥夫
+			word: 
+				name: 奥扎奇
+				line below: true
+			word: 半人马
+			word: 半兽人
+			word: 蝙蝠
+			word: 
+				name: 变形兽
+				line below: true
+			word: 
+				name: 豺狼
+				line below: true
+			word: 稻草人
+			word: 地狱兽
+			word: 钉兽
+			word: 独角兽
+			word: 
+				name: 独眼巨人
+				line below: true
+			word: 恶魔
+			word: 
+				name: 鳄鱼
+				line below: true
+			word: 凡尔西诺
+			word: 飞马
+			word: 
+				name: 凤凰
+				line below: true
+		word: 
+			name: 常见G-K
+			line below: true
+			word: 盖美拉
+			word: 攻城巨车
+			word: 
+				name: 龟
+				line below: true
+			word: 海怪
+			word: 狐
+			word: 
+				name: 化身
+				line below: true
+			word: 洁英
+			word: 巨海兽
+			word: 巨灵
+			word: 巨魔
+			word: 
+				name: 巨蛇
+				line below: true
+			word: 卡甫
+			word: 寇族
+			word: 
+				name: 骷髅妖
+				line below: true
+		word: 
+			name: 常见M-N
+			line below: true
+			word: 狼
+			word: 狼人
+			word: 立吸怪
+			word: 猎犬
+			word: 裂片妖
+			word: 流浆
+			word: 
+				name: 龙兽
+				line below: true
+			word: 马
+			word: 梦魇
+			word: 麋鹿
+			word: 秘耳
+			word: 魔鬼
+			word: 魔神
+			word: 
+				name: 魔像
+				line below: true
+			word: 那迦
+			word: 宁芙
+			word: 牛
+			word: 牛头怪
+			word: 奴兽
+		word: 
+			name: 常见Q-T
+			line below: true
+			word: 
+				name: 墙
+				line below: true
+			word: 蛇
+			word: 蛇发妖
+			word: 神
+			word: 圣者
+			word: 狮鹫
+			word: 石像鬼
+			word: 食人魔
+			word: 史芬斯
+			word: 鼠
+			word: 树灵
+			word: 树妖
+			word: 
+				name: 索尔兽
+				line below: true
+			word: 统领
+		word: 
+			name: 常见W-X
+			line below: true
+			word: 蛙
+			word: 
+				name: 维多肯
+				line below: true
+			word: 犀牛
+			word: 蜥怪
+			word: 蜥蜴
+			word: 仙灵
+			word: 象
+			word: 小恶魔
+			word: 蟹
+			word: 熊
+			word: 虚影
+			word: 
+				name: 雪怪
+				line below: true
+		word: 
+			name: 常见Y-Z
+			line below: true
+			word: 亚龙
+			word: 羊蹄人
+			word: 野猪
+			word: 夜潜魔
+			word: 以太种
+			word: 阴魂
+			word: 幽灵
+			word: 鱼
+			word: 猿猴
+			word: 
+				name: 月人
+				line below: true
+			word: 造妖
+			word: 章人
+			word: 真菌
+			word: 振翼机
+			word: 蜘蛛
+			word: 植物
+			word: 蛭
+			word: 
+				name: 组构体
+				line below: true
+		word: 		
+			name: 稀有
+			word: 
+				name: A-G
+				line below: true
+				word: 
+					name: 矮从瓦格
+					line below: true
+				word: 哔宝精
+				word: 病菌
+				word: 
+					name: 病媒
+					line below: true
+				word: 袋熊
+				word: 道西
+				word: 
+					name: 地侏
+					line below: true
+				word: 法球
+				word: 仿索蓝人
+				word: 分节
+				word: 
+					name: 腐生物
+					line below: true
+				word: 怪灵
+				word: 怪奇
+				word: 光蛾
+				word: 鬼魂
+					name: 鬼仔
+					line below: true
+			word: 
+				name: H-K
+				line below: true
+				word: 哈痞
+				word: 海绵
+				word: 海星
+				word: 害虫
+				word: 河马
+				word: 荷马利
+				word: 猴
+				word: 后裔
+				word: 獾
+				word: 
+					name: 火蜥蜴
+					line below: true
+				word: 金属工人
+				word: 进化体
+				word: 鲸
+				word: 巨神灵
+				word: 
+					name: 骏鹰
+					line below: true
+				word: 卡马利
+				word: 
+					name: 蛞蝓
+					line below: true
+			word: 
+				name: L-R
+				line below: true
+				word: 拉高耶夫
+				word: 拉玛苏
+				word: 拉弥亚
+				word: 狼獾
+				word: 棱镜
+				word: 鬣狗
+				word: 羚羊
+				word: 
+					name: 骆驼
+					line below: true
+				word: 猫鼬
+				word: 绵羊
+				word: 魔判官
+				word: 牡蛎
+				word: 
+					name: 墓生
+					line below: true
+				word: 农奴
+				word: 
+					name: 诺格
+					line below: true
+				word: 
+					name: 欧格
+					line below: true
+				word: 
+					name: 麒麟
+					line below: true
+				word: 
+					name: 蠕虫
+					line below: true
+			word: 
+				name: S-W
+				line below: true
+				word: 萨拉卡斯
+				word: 塞连
+				word: 三分节
+				word: 砂
+				word: 山羊
+				word: 
+					name: 石化鸡蛇
+					line below: true
+				word: 水母
+				word: 斯立兹
+				word: 四分节
+				word: 松鼠
+				word: 苏拉卡
+				word: 碎片
+				word: 
+					name: 索泰利
+					line below: true
+				word: 
+					name: 兔
+					line below: true
+				word: 乌贼
+				word: 巫婆
+				word: 无面鬼
+				word: 
+					name: 无畏舰
+					line below: true
+			word: 
+				name: X-Z
+				line below: true
+				word: 蝎子
+				word: 信使
+				word: 雪貂
+				word: 
+					name: 驯鹿
+					line below: true
+				word: 眼
+				word: 鼹鼠
+				word: 异狮
+				word: 翼狮
+				word: 鹦鹉螺
+				word: 
+					name: 映影
+					line below: true
+				word: 
+					name: 原牛
+					line below: true
+				word: 章鱼
+				word: 整备师
+				word: 紫貂
+				word: 紫河马
+				word: 自动机
+
+word list:
+	name: artifact
+	word:
+		script: allcn_sub_types(match: "神器")
+		line below: true
+	word: 武具
+	word: 载具
+	word: 线索		
+	word: 工事
+
+word list:
+	name: land
+	word:
+		script: allcn_sub_types(match: "地")
+		line below: true
+	word: 平原
+	word: 海岛
+	word: 沼泽
+	word: 山脉
+	word: 
+		name: 树林
+		line below: true
+	word: 沙漠
+	word: 巢穴
+	word: 处所
+	word: 克撒的塔
+	word: 克撒的矿脉
+	word: 克撒的动力炉
+word list:
+	name: enchantment
+	word:
+		script: allcn_sub_types(match: "结界")
+		line below: true
+	word: 灵气
+	word: 诅咒
+	word: 祭祠	
+	word: 魔符
+
+word list:
+	name: spell
+	word:
+		script: allcn_sub_types(match: "瞬间") + "," + allcn_sub_types(match: "法术")
+		line below: true
+	word: 陷阱
+	word: 禁咒
+	word: 符箓
+	word: 古咒
+
+
+word list:
+	name: planeswalker
+	word:
+		script: allcn_sub_types(match: "鹏洛客") + "," + allcn_sub_types(match: "旅法师")
+		line below: true
+	word: 基定
+	word: 杰斯
+	word: 莉莲娜
+	word: 茜卓
+	word: 妮莎
+	word: 
+		name: 阿耶尼
+		line below: true
+	word: 贾路
+	word: 寇斯
+	word: 艾紫培
+	word: 波拉斯
+	word: 萨坎
+	word: 索霖
+	word: 泰兹瑞
+	word: 寇斯
+	word: 凡瑟
+	word: 卡恩
+	word: 提勃
+	word: 多美代
+	word: 波拉斯
+	word: 瓦丝卡
+	word: 多密
+	word: 基定
+	word: 拉尔
+	word: 谢纳戈斯
+	word: 安梭苛
+	word: 奇奥拉
+	word: 戴克
+	word: 妃雅丽兹
+	word: 达雷迪
+	word: 尼希兹
+	word: 泰菲力
+	word: 娜希丽
+	word: 乌金
+	word: 娜尔施
+	word: 雅琳
+	word: 卡娅
+	word: 多温
+	word: 莎希莉
