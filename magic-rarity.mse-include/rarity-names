@@ -13,8 +13,28 @@ choice:
 	line below: true
 
 choice:
+	name: FDN
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	line below: true
+
+
+choice:
+	name: DSK
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	line below: true
+
+choice:
 	name: BLB
 	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
 	line below: true
 
 choice:
@@ -131,38 +151,38 @@ choice:
 	choice: Uncommon
 	choice: Common
 	line below: true
-choice:
-	name: SNC
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	line below: true
-choice:
-	name: NEO
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	line below: true
-choice:
-	name: VOW
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-choice:
-	name: MID
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	line below: true
 
 
 ######################################################### 摩登
 choice:
 	name: Modern
+	choice:
+		name: SNC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: NEO
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: VOW
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: MID
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
 	choice:
 		name: AFR
 		choice: Mythic
@@ -379,7 +399,6 @@ choice:
 		choice: Rare
 		choice: Uncommon
 		choice: Common
-#choice: 塞洛斯
 	choice:
 		name: JOU
 		choice: Mythic
@@ -399,7 +418,7 @@ choice:
 		choice: Uncommon
 		choice: Common
 		line below: true
-#choice: 新拉尼卡
+
 	choice:
 		name: DGM
 		choice: Mythic
@@ -419,7 +438,7 @@ choice:
 		choice: Uncommon
 		choice: Common
 		line below: true
-#choice：依尼翠
+
 	choice:
 		name: AVR
 		choice: Mythic
@@ -439,7 +458,7 @@ choice:
 		choice: Uncommon
 		choice: Common
 		line below: true
-#choice: 新秘罗地
+
 	choice:
 		name: NPH
 		choice: Mythic
@@ -1109,6 +1128,24 @@ choice:
 ######################################################### 指挥官
 choice:
 	name: Command
+	choice:
+		name: DKC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: BLC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
+		name: M3C
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
 	choice:
 		name: OTC
 		choice: Mythic

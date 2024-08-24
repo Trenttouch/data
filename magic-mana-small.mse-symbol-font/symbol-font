@@ -276,6 +276,10 @@ symbol:
 	code: clothing
 	image: cloth.png
 	image font size: 200
+symbol:
+	code: P
+	image: pawprint.png
+	image font size: 925
 ###################################################################################### Tri-hybrid Symbols
 symbol:
 	code: W/U/B
@@ -738,6 +742,18 @@ symbol:
 	image font size: 145
 ###################################################################################### Colorless XYZ Symbols
 symbol:
+	code: X
+	image: mana_x.png
+	enabled: {ancestral_mana()}
+symbol:
+	code: Y
+	image: mana_y.png
+	enabled: {ancestral_mana()}
+symbol:
+	code: Z
+	image: mana_z.png
+	enabled: {ancestral_mana()}
+symbol:
 	image: mana_circle.png
 	code: [XYZ]
 	regex: yes
@@ -919,6 +935,8 @@ symbol:
 		color: black
 		max stretch: 0.57
 #########################################################################################################
+
+#########################################################################################################
 # Insert-symbol menu
 insert symbol menu:
 	item: T
@@ -928,6 +946,10 @@ insert symbol menu:
 	item:
 		type: custom
 		name: colorless
+	item:
+		type: line
+	item: K
+	item: P
 	item:
 		type: line
 	item: W

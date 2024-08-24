@@ -1,0 +1,119 @@
+styling field:
+	type: text
+	name: text chops
+	description: Format as "X,Y,Z". Shrinks textbox X pixels from the top and Y from bottom and Z from right.
+styling field:
+	type: text
+	name: shrink name text
+	description: Shrinks name X pixels
+styling field:
+	type: text
+	name: shrink typeline text
+	description: Shrinks type X pixels
+styling field:
+	type: text
+	name: shrink power text
+	description: Shrinks power X pixels
+styling field:
+	type: text
+	name: font cap
+	description: 所有规则文本框的字体大小，默认为28。
+styling field:
+	type: choice
+	name: chinese new font
+	initial: no
+	choice: no
+	choice: yes
+	description: 中文是否使用新字体。
+styling field:
+	type: choice
+	name: justify text
+	initial: no
+	choice: no
+	choice: yes
+	choice: force justify
+styling field:
+	type: choice
+	name: CHNFlavorsize
+	initial: 25
+	choice:	10
+	choice:	10.33
+	choice:	10.67
+	choice:	11
+	choice:	11.33
+	choice:	11.67
+	choice:	12
+	choice:	12.33
+	choice:	12.67
+	choice:	13
+	choice:	13.33
+	choice:	13.67
+	choice:	14
+	choice:	14.33
+	choice:	14.67
+	choice:	15
+	choice:	15.33
+	choice:	15.67
+	choice:	16
+	choice:	16.33
+	choice:	16.67
+	choice:	17
+	choice:	17.33
+	choice:	17.67
+	choice:	18
+	choice:	18.33
+	choice:	18.67
+	choice:	19
+	choice:	19.33
+	choice:	19.67
+	choice:	20
+	choice:	20.33
+	choice:	20.67
+	choice:	21
+	choice:	21.33
+	choice:	21.67
+	choice:	22
+	choice:	22.33
+	choice:	22.67
+	choice:	23
+	choice:	23.33
+	choice:	23.67
+	choice:	24
+	choice:	24.33
+	choice:	24.67
+	choice:	25
+	choice:	25.33
+	choice:	25.67
+	choice:	26
+	choice:	26.33
+	choice:	26.67
+	choice:	27
+	choice:	27.33
+	choice:	27.67
+	choice:	28
+	choice:	28.33
+	choice:	28.67
+	choice:	29
+	choice:	29.33
+	choice:	29.67
+	choice:	30
+	choice:	30.33
+	choice:	30.67
+	choice:	31
+	choice:	31.33
+	choice:	31.67
+	choice:	32
+	choice:	32.33
+	choice:	32.67
+	choice:	33
+	choice:	33.33
+	choice:	33.67
+	choice:	34
+styling field:
+	type: text
+	name: rarity shift
+	description: Rarity icon shift to right.
+styling field:
+	type: text
+	name: shrink setcode text
+	description: Shrinks setcode X pixels

@@ -1,6 +1,8 @@
 # Watermark images
 
 choice images:
+	Not For Sale:				script: set_alpha(alpha: 0.4, input:"/magic-watermarks.mse-include/notforsale.png")
+
 	mana symbol white:			/magic-watermarks.mse-include/watermark_w.png
 	mana symbol blue:			/magic-watermarks.mse-include/watermark_u.png
 	mana symbol black:			/magic-watermarks.mse-include/watermark_b.png
@@ -180,8 +182,7 @@ choice images:
 		{ set_combine(combine:"shadow",
 		   set_alpha(
 		    alpha: 0.5,
-		    #symbol_variation(symbol: set.symbol, variation: "common")
-		    drop_shadow(offset_x: -0.01, offset_y: 0.03, blur_radius: 0.02, alpha: 1, color: rgb(0,0,0),
+		    drop_shadow(offset_x: 0, offset_y: 0, blur_radius: 0.02, alpha: 1, color: rgb(0,0,0),
 		     enlarge(border_size: 0.03,
 		      symbol_variation(symbol: set.symbol, variation: "watermark")
 		     )
@@ -189,3 +190,18 @@ choice images:
 		   )
 		  )
 		}
+
+#	set symbol:
+#		{ set_combine(combine:"shadow",
+#		   set_alpha(
+#		    alpha: 0.5,
+#		    drop_shadow(offset_x: -0.01, offset_y: 0.03, blur_radius: 0.02, alpha: 1, color: rgb(0,0,0),
+#		     enlarge(border_size: 0.03,
+#		      symbol_variation(symbol: set.symbol, variation: "watermark")
+#		     )
+#		    )
+#		   )
+#		  )
+#		}
+
+

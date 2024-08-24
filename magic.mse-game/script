@@ -986,7 +986,11 @@ text_filter :=
 	 )+
 	 replace@(
 	 	match: "^(·)([^·]+)",
-	 	replace: {"<li><bullet>" + _1 + "</bullet>" + _2 + "</li>"}
+	 	replace: {"<li><bullet>" + _1 + "</bullet>" + _2 + "</li>" }
+	 )+
+	 replace@(
+	 	match: "^(`)([^`]+)",
+	 	replace: {"<li><bullet>" + _1 + "</bullet>" + _2 + "</li>" }
 	 )+
 	# step 7c : clean up modals
 	 {
@@ -999,8 +1003,7 @@ text_filter :=
 		match: "([ ]*: |—| — )" # preceded by this
 		     + "([[:lower:]])" # match this
 		     + "(?![)])",      # not followed by this
-		replace: { _1 + to_upper(_2) }) +
-	CHN_filter			   
+		replace: { _1 + to_upper(_2) }) +	   
 	# step 9 : spellcheck
 	{
 		if set.auto_correct then
@@ -1010,7 +1013,7 @@ text_filter :=
 		if set.auto_errata then
 			auto_errata(input)
 		else input } +
-	{ if set.mark_errors then
+	{ if (set.mark_errors and set.card_language != "简体中文") then
 		check_spelling(
 			language: language().spellcheck_code,
 			extra_dictionary: "/magic.mse-game/dictionary/magic-words",
@@ -1171,7 +1174,7 @@ is_rare := { contains(card.rarity, match:"ythic") or contains(card.rarity, match
 is_EN := match@(match: "[A-Z,a-z0-9’™&© ]*[A-Za-z]")
 #is_CN := match@(match: "[\\u4e00-\\u9fa5]")
 is_CN := match@(match: "[\\u4e00-\\u9fa5a-zA-Z0-9]")
-is_pureEN := match@(match: "^[A-Z,a-z0-9’™&© ]+")
+is_pureEN := match@(match: "^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9’™&© ]+")
 # Shape of cards, can be changed in style files
 card_shape := { "normal" }
 

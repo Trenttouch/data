@@ -174,8 +174,8 @@ statistics dimension:
 	
 	script:
 		if ((contains(card.type, match:"asic") or (contains(card.super_type, match:"基本") and contains(card.super_type, match:"地"))) and card.shape != "token") then "基本地"
-		else if (((contains(card.rarity, match:"ommon") and not contains(card.rarity, match:"un") ) or contains(card.rarity, match:"InvertedCommon")) and not is_token_card()) then "common"
 		else if (contains(card.rarity, match:"ncommon") and not is_token_card()) then "uncommon"
+		else if (((contains(card.rarity, match:"ommon") and not contains(card.rarity, match:"un") ) or contains(card.rarity, match:"InvertedCommon")) and not is_token_card()) then "common"
 		else if ((contains(card.rarity, match:"are") and not contains(card.rarity, match:"mythic")) and not is_token_card()) then "rare"
 		else if (contains(card.rarity, match:"ythic") and not is_token_card()) then "mythic rare"
 		else if (contains(card.rarity, match:"pecial") and not is_token_card()) then "special"

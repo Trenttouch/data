@@ -1167,6 +1167,43 @@ package:
 		menu item 2/G:		二/绿 法术力	 2/G
 		menu item 2/C:		二/无 法术力	 2/C
 
+
+	magic-*.mse-include:
+		text chops: 规则叙述与边框的上下间距
+		chop top:	规则叙述与边框的上间距
+		chop bottom:	规则叙述与边框的下间距
+		shrink name text:	牌名字体缩小值
+		shrink typeline text:	类别字体缩小值
+		shrink power text:	攻防字体缩小值
+		font cap: 规则叙述字体大小
+		inner crown style: 传奇内框样式
+		use alias: 使用假名框？
+		shrink adventure name text: 历险牌名字体缩小值
+		font cap extra: 第二规则叙述字体大小(历险，试作等)
+		extra shrink power text: 第二攻防字体缩小值(试作等)
+		use holofoil stamps: 使用稀有标记？
+		is foil: 闪卡？(标记为 · 还是 ★ )
+		use acron stamp: 使用橡果标(鸡飞牌)？
+		remove from autocount: 自定义卡牌编号？
+		ancestral mana symbols: 预定义法术力图标(建议开启)
+		tap symbol: 横置符号
+		Use holofoil stamps:		使用防伪标记
+		Color indicator dot:		使用颜色标识圈
+		Remove from autocount:		移除自动序号
+		Alt rarity color:		替代稀有度颜色
+		Card watermark:		卡牌水印
+		Hybrid name:		混血卡牌边框颜色
+		Grey:		灰色
+		Gold:		金色
+		Hybrid:		混合
+		Colored multicolor land name:		多色地牌标题栏变色
+		Use guild mana symbols:		使用公会法术力符号
+		Tap symbol:			横置符号
+		Popup style:			摩登
+		Text box mana symbols:		文字栏法术力符号
+		Center text:			文字居中
+		Inverted common symbol:			反相显示铁牌的稀有度标志
+		Overlay: 闪卡贴膜
 		
 	magic-*.mse-style:
 		text chops: 规则叙述与边框的上下间距

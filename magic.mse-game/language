@@ -24,7 +24,7 @@ languages := [
 		spellcheck_code   : "chs_cn",
 		pt_separator      : "/",
 		type_separator    : "～"
-		subtype_separator : "<atom-sep> / </atom-sep>",
+		subtype_separator : "<atom-sep>／</atom-sep>",
 		is_creature       : match@(match: "(?i)生物")
 		is_tribal         : match@(match: "(?i)亲缘")
 		is_artifact       : match@(match: "(?i)神器")
