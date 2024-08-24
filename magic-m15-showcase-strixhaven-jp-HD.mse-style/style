@@ -31,6 +31,9 @@ depends on:
 depends on: 
 	package: magic-rarity.mse-include
 	version: 2013-08-21
+depends on: 
+	package: magic-all-style.mse-include
+	version: 2024-06-30
 
 card width: 750
 card height: 1050
@@ -42,6 +45,7 @@ card dpi: 150
 init script:
 	# Load scripts for image box
 	include file: /magic-default-image.mse-include/scripts
+	include file: /magic-all-style.mse-include/script
 	#include file: blends
 	
 	# Should hybrids have a grey name?
@@ -266,11 +270,6 @@ init script:
 	has_identity := { styling.color_indicator_dot }
 	is_unsorted := {styling.remove_from_autocount}
 
-	chop_top := {to_number(pull_comma_array(styling.text_chops, cell:0, end:false))}
-	chop_bot := {to_number(pull_comma_array(styling.text_chops, cell:1, end:false))}
-	chop_correction := { chop_bot() }
-	shrink_type := {if styling.shrink_typeline_text != "" then to_number(styling.shrink_typeline_text) else 0}
-	shrink_name := {if styling.shrink_name_text != "" then to_number(styling.shrink_name_text) else 0}
 	use_main_rarity := { contains(set.mainframe_rarity_name, match: ".png")}
 	un_png := replace@(match:".png", replace: "")
 	jp_name_length := {card_style.name.content_height * length(card.name) - 4 * (length(card.name)-2) }
@@ -291,26 +290,10 @@ styling field:
 	choice: English
 	choice: Japanese
 	initial: Japanese
-styling field:
-	type: text
-	name: text chops
-	description: Format as "X,Y". Shrinks textbox X pixels from the top and Y from bottom.
-styling field:
-	type: text
-	name: shrink name text
-	description: Shrinks name X pixels
-styling field:
-	type: text
-	name: shrink typeline text
-	description: Shrinks type X pixels
-styling field:
-	type: text
-	name: shrink power text
-	description: Shrinks power X pixels
-styling field:
-	type: text
-	name: font cap
-	description: 规则文本框的字体大小，默认为14。
+
+### 通用1 ###
+include file: /magic-all-style.mse-include/style1
+
 styling field:
 	type: boolean
 	name: use STAJP rarity
@@ -329,81 +312,10 @@ styling field:
 	name: Type frame fix
 	description: 修复图片导出时候的类别栏右侧割裂(不要随意使用)   Fix the split on the right side of the category bar when exporting pictures(Do not use when there is no problem)
 	initial: no
-styling field:
-	type: boolean
-	name: color indicator dot
-	description: Use the color indicator dot
-	initial: no
-styling field:
-	type: boolean
-	name: remove from autocount
-	description: Removes the automatic card number for specific cards, to allow for overcounted cards like in Planeswalker Decks.
-	initial: no
-styling field:
-	type: boolean
-	name: grey hybrid name
-	description: Use a grey background for the name and type line on hybrid cards. This is done on real cards.
-styling field:
-	type: boolean
-	name: unsorted casting cost
-	description: Disables automatic mana symbol sorting.
-	initial: no
-styling field:
-	type: boolean
-	name: ancestral mana symbols
-	description: Enables ancestral's modified generic mana.
-	initial: no
-styling field:
-	type: boolean
-	name: colored multicolor land name
-	description: Use a colored background for the name and type on multicolor land cards with a basic land type. This is done on real cards.
-styling field:
-	type: boolean
-	name: use guild mana symbols
-	description: Use the Ravnica guild symbols instead of the official half/half circles for hybrid mana.
-	initial: no
-styling field:
-	type: choice
-	name: tap symbol
-	description: What tap and untap symbols should be used on cards?
-	initial: modern
-	choice: modern
-	choice: old
-	choice: diagonal T
-styling field:
-	type: package choice
-	name: text box mana symbols
-	match: magic-mana-*.mse-symbol-font
-	initial: magic-mana-small.mse-symbol-font
-styling field:
-	type: choice
-	name: center text
-	description: When to center text (short text only means only on one-line cards with no flavor text)
-	choice: always
-	choice: short text only
-	choice: never
-	initial: never
-styling field:
-	type: boolean
-	name: promo
-	description: Is this card a promo card, with the "P" rarity?
-	initial: no
-styling field:
-	type: boolean
-	name: masterpiece
-	description: Is this card a Masterpiece?
-	initial: no
-styling field:
-	type: boolean
-	name: inverted common symbol
-	description: Should the common rarity symbol be inverted, like in Coldsnap?
-	initial: no
-styling field:
-	type: package choice
-	name: overlay
-	description: Should there be an overlay applied, such as foil?
-	match: magic-overlay-*.mse-include
-	required: false
+
+### 通用2 ###
+include file: /magic-all-style.mse-include/style2
+
 styling style:
 	use guild mana symbols:
 		choice images:
@@ -425,53 +337,7 @@ styling style:
 		choice images:
 			no:  { symbol_variation(symbol: set.symbol, variation: "common") }
 			yes: { symbol_variation(symbol: set.symbol, variation: "invertedcommon") }
-styling field:
-	type: choice
-	name: CHNFlavorsize
-	initial: 25
-	choice:	20
-	choice:	20.33
-	choice:	20.67
-	choice:	21
-	choice:	21.33
-	choice:	21.67
-	choice:	22
-	choice:	22.33
-	choice:	22.67
-	choice:	23
-	choice:	23.33
-	choice:	23.67
-	choice:	24
-	choice:	24.33
-	choice:	24.67
-	choice:	25
-	choice:	25.33
-	choice:	25.67
-	choice:	26
-	choice:	26.33
-	choice:	26.67
-	choice:	27
-	choice:	27.33
-	choice:	27.67
-	choice:	28
-	choice:	28.33
-	choice:	28.67
-	choice:	29
-	choice:	29.33
-	choice:	29.67
-	choice:	30
-	choice:	30.33
-	choice:	30.67
-	choice:	31
-	choice:	31.33
-	choice:	31.67
-	choice:	32
-	choice:	32.33
-	choice:	32.67
-	choice:	33
-	choice:	33.33
-	choice:	33.67
-	choice:	34
+
 ############################################################## Card fields
 card style:
 	############################# Background stuff is_rare()
@@ -553,8 +419,8 @@ card style:
 			color: black
 			separator color: red
 	rarity:
-		right: 688
-		top: {if styling.use_STAJP_rarity then 281+281 else 298+298}
+		right: {688 + rarity_shift()}
+		top: {if styling.use_STAJP_rarity then 562 else 596}
 		width: {if styling.use_STAJP_rarity then 90 else 88}
 		height: {if styling.use_STAJP_rarity then 90 else 44}
 		z index: 2
@@ -595,9 +461,9 @@ card style:
 					else symbol_variation(symbol: set.masterpiece_symbol, variation: "mythic rare")
 	############################# Text box
 	text:
-		left: {58 + 4}
+		left: {62}
 		top: { 654 +chop_top()}
-		width: {636 - 4*2}
+		width: {628}
 		bottom: {960-chop_bot()}
 		
 		#left: 32
@@ -605,14 +471,14 @@ card style:
 		#width: 314
 		#bottom: {478 - chop_bot()}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
-			italic name: { if set.card_language != "简体中文" then "MPlantin-Italic" else "Magic华文楷体" }
-			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 28 }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: { if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
+			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 27 }
 			scale down to: 6
 			color: black
 		symbol font:
 			name: { styling.text_box_mana_symbols }
-			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 28 }
+			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 27 }
 			scale down to: 6
 		alignment:
 			script:
@@ -623,14 +489,23 @@ card style:
 				   styling.center_text == "always"
 				then "middle center"
 				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
 		z index: 2
 		padding left:   6
-		padding right:  4
-		line height hard: {if is_modal(card.rule_text) then 0.9 else 1.1 }
-		line height line: 1.5
-		line height soft: 0.9
-		line height hard max: {if is_modal(card.rule_text) then 1.0 else 1.2 }
-		line height line max: 1.6
+		padding right:  {4 + chop_right()}
+		line height hard: 1.1
+		line height line: { if chinese_new_font() then 1.6 else 1.5 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: 1.2
+		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
+
+
+		#padding right:  4
+		#line height hard: {if is_modal(card.rule_text) then 0.9 else 1.1 }
+		#line height line: 1.5
+		#line height soft: 0.9
+		#line height hard max: {if is_modal(card.rule_text) then 1.0 else 1.2 }
+		#line height line max: 1.6
 	watermark:
 		left: 50
 		top: { 676 -8}
@@ -656,50 +531,75 @@ card style:
 			separator color: red
 	############################# Card sorting / numbering
 	set code:
-		left: 48
-		top: 996
+		left: 48.5
+		top: 998
 		width: 80
 		height: 20
 		z index: 1
+		alignment: middle left
 		font:
 			name: Magic Gotham Medium
-			size: 14
+			size: {13-shrink_setcode()}
 			color: white
-			weight: bold
+
+	language code:
+		left: 106
+		top: 998
+		width: 10
+		height: 20
+		z index: 1
+		alignment: middle left
+		font:
+			name: Magic Gotham Medium
+			size: {13-shrink_setcode()}
+			color: white
 	############################# Copyright stuff
 	illustrator:
-		left: { 80 + card_style.set_code.content_width }
-		top: 995
+		left: { 166 }
+		top: 997
 		width: 400
 		height: 20
 		z index: 1
 		font:
 			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std W7"}
-			size: 14.5
-			color: white
-	copyright:
-		right: 700
-		top: 1000
-		width: 280
-		height: 20
-		z index: 2
-		visible: {not set.automatic_copyright}
-		alignment: middle right shrink-overflow
-		font:
-			name: Matrix
 			size: 14
 			color: white
-			weight: bold
+	copyright:
+		right: 699
+		top: { if (card.pt != "") then 998 else 981 }
+		width: 252
+		height: 20
+		z index: 2
+		alignment: middle right shrink-overflow
+		visible: {not set.automatic_copyright}
+		font:
+			name: mplantin
+			size: 13
+			color: white
 ############################################################## Extra card fields
+extra card field:
+	type: text
+	name: dot
+	script: if styling.is_foil then "★" else "•"
+	save value: false
+	editable: false
+	show statistics: false
 extra card field:
 	type: text
 	name: card code
 	save value: false
+	editable: false
+	script: rarity_code()
+extra card field:
+	type: text
+	name: card number
+	save value: false
 	script:
 		if set.automatic_card_numbers and not styling.remove_from_autocount then
-			forward_editor(prefix: rarity_code() + "<size:10>  </size>" + card_number_m15() + " ", field: card.card_code_text) 
+			forward_editor(prefix: card_number_m15(), field: card.card_code_text) 
 		else
-			combined_editor(field1: card.card_code_text, separator: "" + rarity_code() + "<size:10>  </size>", field2: card.custom_card_number)
+			forward_editor(prefix: "", field: card.custom_card_number)
+
 extra card field:
 	type: choice
 	name: artist arrow
@@ -774,25 +674,49 @@ extra card field:
 	editable: false
 
 extra card style:
+	dot:
+		left: {48.5 + card_style.set_code.content_width}
+		right: {card_style.language_code.left}
+		top: 998
+		#width: 10
+		height: 20
+		z index: 1
+		alignment: middle center
+		font:
+			name: Magic Gotham Medium
+			size: {13-shrink_setcode()}
+			color: white
+
 	card code:
-		left: 48
-		top: 976
-		width: 240
+		left: 48.5
+		top: 979
+		width: 20
 		height: 20
 		z index: 1
 		font:
 			name: Magic Gotham Medium
-			size: 14
+			size: 13
 			color: white
-			weight: bold
+	card number:
+		left: 69
+		top: 979
+		width: 220
+		height: 20
+		z index: 1
+		font:
+			name: Magic Gotham Medium
+			size: 13
+			color: white
+
 	artist arrow:
-		left: { 56 + card_style.set_code.content_width }
-		top: 1000
-		width: 24
-		height: 15
+		left: { 143 }
+		top: 1002
+		width: {24*0.9}
+		height: {15*0.9}
 		z index: 1
 		render style: image
 		image: artist_arrow.png
+
 	pt box:
 		left:	0
 		top:	0
@@ -867,18 +791,18 @@ extra card style:
 ##card_stamp()
 
 	auto copyright:
-		right: 700
-		top: { if card.pt != "" then 998 else 978 }
-		width: 280
+		right: 699
+		top: { if card.pt != "" then 998 else 981 }
+		width: 252
 		height: 20
 		z index: 2
 		alignment: middle right shrink-overflow
 		visible: {set.automatic_copyright}
 		font:
 			name: mplantin
-			size: 12
+			size: 13
 			color: white
-			weight: bold
+
 	flavor bar:
 		left: 0
 		top: { bar_equation() - 4 }

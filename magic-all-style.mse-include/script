@@ -1,0 +1,18 @@
+	##统一##
+	chop_top := {to_number(pull_comma_array(styling.text_chops, cell:0, end:false))}
+	chop_bot := {to_number(pull_comma_array(styling.text_chops, cell:1, end:false))}
+	chop_correction := { chop_bot() }
+	shrink_type := {if styling.shrink_typeline_text != "" then to_number(styling.shrink_typeline_text) else 0}
+	shrink_name := {if styling.shrink_name_text != "" then to_number(styling.shrink_name_text) else 0}
+	
+
+	##新加##
+	chop_right := {to_number(pull_comma_array(styling.text_chops, cell:2, end:false))}
+
+	shrink_setcode := {if styling.shrink_setcode_text != "" then to_number(styling.shrink_setcode_text) else 0}
+
+	chinese_new_font := { styling.chinese_new_font }
+	ch_font := { if chinese_new_font() then "MSE华康黑体W3(P)" else "方正细等线_GBK_FIX" }
+	ch_flavor_font := { if chinese_new_font() then "MSE华康楷体W5(P)" else "Magic华文楷体" }
+
+	rarity_shift := {if styling.rarity_shift != "" then to_number(styling.rarity_shift) else 0 }

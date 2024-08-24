@@ -124,9 +124,16 @@ init script:
 
 	global_chop_top := { to_int(pull_comma_array(styling.combined_chop, cell:0, end:0, default:0))}
 	global_chop_bot := { to_int(pull_comma_array(styling.combined_chop, cell:1, end:0, default:0))}
-	global_chop_right := { to_int(pull_comma_array(styling.combined_chop, cell:3, end:0, default:0))}
+	#global_chop_left := {to_int(pull_comma_array(styling.combined_chop, cell:2, end:0, default:0))}
+	global_chop_right := { to_int(pull_comma_array(styling.combined_chop, cell:2, end:0, default:0))}
 	top_of_textbox := {if has_four_abilities() then ( 590 + global_chop_top() + (if is_clear() then 10 else 0) ) else ( 658 + global_chop_top() ) }
 
+	chinese_new_font := { styling.chinese_new_font }
+	ch_font := { if chinese_new_font() then "MSE华康黑体W3(P)" else "方正细等线_GBK_FIX" }
+	ch_flavor_font := { if chinese_new_font() then "MSE华康楷体W5(P)" else "Magic华文楷体" }
+	rarity_shift := {if styling.rarity_shift != "" then to_number(styling.rarity_shift) else 0 }
+
+	shrink_setcode := {if styling.shrink_setcode_text != "" then to_number(styling.shrink_setcode_text) else 0}
 
 	# text_size := { 14 -(if styling.font_size == "" then 0 else if contains(styling.font_size, match: ".5") then to_int(split_text(match:".5", styling.font_size).0) else styling.font_size) }
 	stripe01 := {if length(card_style.text.layout.separators) or else 0 > 0 then card_style.text.top + card_style.text.layout.separators[0] + stripe_adj(top:0, bot:1) else 0}
@@ -197,17 +204,30 @@ init script:
 		else "auto"
 	}
 	
-	margin_left := {
-		if input == "lv1" then (if card.loyalty_cost_1 == "" and unindent() then 0 else 270)
-		else if input == "lv2" then (if card.loyalty_cost_2 == "" and unindent() then 0 else 270)
-		else if input == "lv3" then (if card.loyalty_cost_3 == "" and unindent() then 0 else 270)
-		else if input == "lv4" then (if card.loyalty_cost_4 == "" and unindent() then 0 else 270)
-		else if input == "lv5" then (if card.loyalty_cost_5 == "" and unindent() then 0 else 270)
-		else if input == "lv6" then (if card.loyalty_cost_6 == "" and unindent() then 0 else 270)
+	margin_right := {
+		if styling.justify_text == "yes" or styling.justify_text == "force justify" then
+		(
+			if input == "lv1" then (if card.loyalty_cost_1 == "" and unindent() then 0 else 280)
+			else if input == "lv2" then (if card.loyalty_cost_2 == "" and unindent() then 0 else 280)
+			else if input == "lv3" then (if card.loyalty_cost_3 == "" and unindent() then 0 else 280)
+			else if input == "lv4" then (if card.loyalty_cost_4 == "" and unindent() then 0 else 280)
+			else if input == "lv5" then (if card.loyalty_cost_5 == "" and unindent() then 0 else 280)
+			else if input == "lv6" then (if card.loyalty_cost_6 == "" and unindent() then 0 else 280)
+			else 0
+		)
 		else 0
 	}
-	
-	margin_top := {to_int(pull_comma_array(styling.combined_chop, cell:2, end:0, default:0))}
+
+	margin_left := {
+		if input == "lv1" then (if card.loyalty_cost_1 == "" and unindent() then 0 else 280)
+		else if input == "lv2" then (if card.loyalty_cost_2 == "" and unindent() then 0 else 280)
+		else if input == "lv3" then (if card.loyalty_cost_3 == "" and unindent() then 0 else 280)
+		else if input == "lv4" then (if card.loyalty_cost_4 == "" and unindent() then 0 else 280)
+		else if input == "lv5" then (if card.loyalty_cost_5 == "" and unindent() then 0 else 280)
+		else if input == "lv6" then (if card.loyalty_cost_6 == "" and unindent() then 0 else 280)
+		else 0
+	}
+
 	add_spacers := { if input == "" and inner_level(name) then "​" else input}
 	inner_level := {
 		if input == "lv5" and max_level() > 5 then true
@@ -289,7 +309,7 @@ styling field:
 styling field:
 	type: text
 	name: combined chop
-	description: Formatted "X,Y,Z", shrinks the top X pixels, shrinks bottom Y pixels toward center, widens small stripes Z pixels.
+	description: Formatted "X,Y,Z", shrinks the top X pixels, shrinks bottom Y pixels toward center, shrinks Z pixels from right.
 styling field:
 	type: text
 	name: shift loyalty costs
@@ -310,6 +330,105 @@ styling field:
 	type: text
 	name: font size
 	description: Use to overwrite the font size. Default is size 12.
+styling field:
+	type: choice
+	name: chinese new font
+	initial: no
+	choice: no
+	choice: yes
+	description: 中文是否使用新字体。
+styling field:
+	type: choice
+	name: justify text
+	initial: no
+	choice: no
+	choice: yes
+	choice: force justify
+styling field:
+	type: choice
+	name: CHNFlavorsize
+	initial: 25
+	choice:	10
+	choice:	10.33
+	choice:	10.67
+	choice:	11
+	choice:	11.33
+	choice:	11.67
+	choice:	12
+	choice:	12.33
+	choice:	12.67
+	choice:	13
+	choice:	13.33
+	choice:	13.67
+	choice:	14
+	choice:	14.33
+	choice:	14.67
+	choice:	15
+	choice:	15.33
+	choice:	15.67
+	choice:	16
+	choice:	16.33
+	choice:	16.67
+	choice:	17
+	choice:	17.33
+	choice:	17.67
+	choice:	18
+	choice:	18.33
+	choice:	18.67
+	choice:	19
+	choice:	19.33
+	choice:	19.67
+	choice:	20
+	choice:	20.33
+	choice:	20.67
+	choice:	21
+	choice:	21.33
+	choice:	21.67
+	choice:	22
+	choice:	22.33
+	choice:	22.67
+	choice:	23
+	choice:	23.33
+	choice:	23.67
+	choice:	24
+	choice:	24.33
+	choice:	24.67
+	choice:	25
+	choice:	25.33
+	choice:	25.67
+	choice:	26
+	choice:	26.33
+	choice:	26.67
+	choice:	27
+	choice:	27.33
+	choice:	27.67
+	choice:	28
+	choice:	28.33
+	choice:	28.67
+	choice:	29
+	choice:	29.33
+	choice:	29.67
+	choice:	30
+	choice:	30.33
+	choice:	30.67
+	choice:	31
+	choice:	31.33
+	choice:	31.67
+	choice:	32
+	choice:	32.33
+	choice:	32.67
+	choice:	33
+	choice:	33.33
+	choice:	33.67
+	choice:	34
+styling field:
+	type: text
+	name: rarity shift
+	description: Rarity icon shift to right.
+styling field:
+	type: text
+	name: shrink setcode text
+	description: Shrinks setcode X pixels
 styling field:
 	type: choice
 	name: override levels
@@ -436,53 +555,6 @@ styling style:
 		render style: checklist
 		direction: vertical
 styling field:
-	type: choice
-	name: CHNFlavorsize
-	initial: 25
-	choice:	20
-	choice:	20.33
-	choice:	20.67
-	choice:	21
-	choice:	21.33
-	choice:	21.67
-	choice:	22
-	choice:	22.33
-	choice:	22.67
-	choice:	23
-	choice:	23.33
-	choice:	23.67
-	choice:	24
-	choice:	24.33
-	choice:	24.67
-	choice:	25
-	choice:	25.33
-	choice:	25.67
-	choice:	26
-	choice:	26.33
-	choice:	26.67
-	choice:	27
-	choice:	27.33
-	choice:	27.67
-	choice:	28
-	choice:	28.33
-	choice:	28.67
-	choice:	29
-	choice:	29.33
-	choice:	29.67
-	choice:	30
-	choice:	30.33
-	choice:	30.67
-	choice:	31
-	choice:	31.33
-	choice:	31.67
-	choice:	32
-	choice:	32.33
-	choice:	32.67
-	choice:	33
-	choice:	33.33
-	choice:	33.67
-	choice:	34
-styling field:
 	type: text
 	name: first bottom
 	description: 第一技能下标栏位置修正。
@@ -536,7 +608,7 @@ card style:
 		z index: 5
 		visible: { contains(styling.other_options, match:"alias fullart frame") }
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin-Italic" else "Magic华文楷体" }
+			name: { if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: 20
 			scale down to: 6
 			color: white
@@ -595,7 +667,7 @@ card style:
 			color: { if (contains(styling.other_options, match:"alias fullart frame") or contains(styling.other_options, match:"fullart black twins")) then "white" else "black"}
 			separator color: red
 	rarity:
-		right: 688
+		right: {688 + rarity_shift()}
 		top: { (if has_four_abilities() then 526 else 595)  }
 		width: 88
 		height: 44
@@ -642,8 +714,8 @@ card style:
 		width: {600 - global_chop_right()}
 		bottom: {964-global_chop_bot()-(if is_stamped() then 4 else 0)}
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
-			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin-Italic" else "Magic华文楷体" }
+			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: { if styling.font_size != "" then styling.font_size else if has_four_abilities() then 27.6 else 28 }
 			scale down to: 6
 			color: { if contains(styling.other_options, match:"alias white text") then "white" else "black"}
@@ -659,14 +731,22 @@ card style:
 				   styling.center_text == "always"
 				then "middle center"
 				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
 		mask: {"walker_text_mask.png"}
 		z index: 6
 		padding left:   6
-		padding right:  4
 		padding top: 4
+		padding right:  {4 + global_chop_right() }
+		#line height hard: 1.1
+		#line height line: { if chinese_new_font() then 1.2 else 1.2 }
+		#line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		#line height hard max: 1.2
+		#line height line max: { if chinese_new_font() then 1.7 else 1.6 }
+		
+		#padding right:  4
 		line height hard: 1.2
 		line height line: 1.2
-		line height soft: { if has_four_abilities() then 0.9 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
 		line height hard max: 0.5
 		line height line max: 2.2
 	
@@ -762,50 +842,75 @@ card style:
 			color: white
 	############################# Card sorting / numbering
 	set code:
-		left: 48
-		top: 996
+		left: 48.5
+		top: 998
 		width: 80
 		height: 20
 		z index: 1
+		alignment: middle left
 		font:
 			name: Magic Gotham Medium
-			size: 14
+			size: {13-shrink_setcode()}
 			color: white
-			weight: bold
+
+	language code:
+		left: 106
+		top: 998
+		width: 10
+		height: 20
+		z index: 1
+		alignment: middle left
+		font:
+			name: Magic Gotham Medium
+			size: {13-shrink_setcode()}
+			color: white
 	############################# Copyright stuff
 	illustrator:
-		left: { 80 + card_style.set_code.content_width }
-		top: 995
+		left: { 166 }
+		top: 997
 		width: 400
 		height: 20
 		z index: 1
 		font:
 			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std W7"}
-			size: 14.5
-			color: white
-	copyright:
-		right: 700
-		top: 1000
-		width: 280
-		height: 20
-		z index: 2
-		visible: {not set.automatic_copyright}
-		alignment: middle right shrink-overflow
-		font:
-			name: Matrix
 			size: 14
 			color: white
-			weight: bold
+	copyright:
+		right: 699
+		top: { 998 }
+		width: 252
+		height: 20
+		z index: 2
+		alignment: middle right shrink-overflow
+		visible: {not set.automatic_copyright}
+		font:
+			name: mplantin
+			size: 13
+			color: white
 ############################################################## Extra card fields
+extra card field:
+	type: text
+	name: dot
+	script: if styling.is_foil then "★" else "•"
+	save value: false
+	editable: false
+	show statistics: false
 extra card field:
 	type: text
 	name: card code
 	save value: false
+	editable: false
+	script: rarity_code()
+extra card field:
+	type: text
+	name: card number
+	save value: false
 	script:
 		if set.automatic_card_numbers and not styling.remove_from_autocount then
-			forward_editor(prefix: rarity_code() + "<size:10>  </size>" + card_number_m15() + " ", field: card.card_code_text) 
+			forward_editor(prefix: card_number_m15(), field: card.card_code_text) 
 		else
-			combined_editor(field1: card.card_code_text, separator: "" + rarity_code() + "<size:10>  </size>", field2: card.custom_card_number)
+			forward_editor(prefix: "", field: card.custom_card_number)
+
 extra card field:
 	type: choice
 	name: artist arrow
@@ -999,25 +1104,49 @@ extra card field:
 	#save value: false
 
 extra card style:
+	dot:
+		left: {48.5 + card_style.set_code.content_width}
+		right: {card_style.language_code.left}
+		top: 998
+		#width: 10
+		height: 20
+		z index: 1
+		alignment: middle center
+		font:
+			name: Magic Gotham Medium
+			size: {13-shrink_setcode()}
+			color: white
+
 	card code:
-		left: 48
-		top: 976
-		width: 240
+		left: 48.5
+		top: 979
+		width: 20
 		height: 20
 		z index: 1
 		font:
 			name: Magic Gotham Medium
-			size: 14
+			size: 13
 			color: white
-			weight: bold
+	card number:
+		left: 69
+		top: 979
+		width: 220
+		height: 20
+		z index: 1
+		font:
+			name: Magic Gotham Medium
+			size: 13
+			color: white
+
 	artist arrow:
-		left: { 56 + card_style.set_code.content_width }
-		top: 1000
-		width: 24
-		height: 15
+		left: { 143 }
+		top: 1002
+		width: {24*0.9}
+		height: {15*0.9}
 		z index: 1
 		render style: image
 		image: artist_arrow.png
+
 	loyalty box:
 		right: {724-4}
 		top: {932-10}
@@ -1317,18 +1446,17 @@ extra card style:
 ##########################################################################################################################
 
 	auto copyright:
-		right: 700
-		top: 998
-		width: 280
+		right: 699
+		top: { 998 }
+		width: 252
 		height: 20
 		z index: 2
 		alignment: middle right shrink-overflow
 		visible: {set.automatic_copyright}
 		font:
 			name: mplantin
-			size: 12
+			size: 13
 			color: white
-			weight: bold
 
 	promo label:
 		left: 40

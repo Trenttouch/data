@@ -129,6 +129,11 @@ styling field:
 	initial: no
 styling field:
 	type: boolean
+	name: pt box
+	description: pt隔断
+	initial: no
+styling field:
+	type: boolean
 	name: color indicator dot
 	description: Use the color indicator dot
 	initial: no
@@ -446,14 +451,32 @@ card style:
 			color: black
 			weight: bold
 
+	illustrator:
+		left: { 23+34 }
+		top: 958
+		width: 400
+		height: 20
+		z index: 1
+		font:
+			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std W7"}
+			size: 14
+			color: black
+
 ############################################################## Extra card fields
 extra card field:
 	type: text
-	name: illustrator
+	name: illustrator2
 	save value: false
 	script:
-		"<b><i>测试用牌</i> —— 不可用于正式比赛</b>"
+		"<b><i>测试用牌</i> —— 不可用于构筑比赛</b>"
 	editable: false
+
+extra card field:
+	type: choice
+	name: artist arrow
+	editable: false
+	save value: false
+	choice: white
 
 extra card field:
 	type: text
@@ -475,8 +498,16 @@ extra card field:
 
 	
 extra card style:
+	artist arrow:
+		left: { 34 }
+		top: {958+5}
+		width: {24*0.9}
+		height: {15*0.9}
+		z index: 1
+		render style: image
+		image: artist_arrow_reverse.png
 
-	illustrator:
+	illustrator2:
 		left: 95
 		top: 912
 		width:330
@@ -508,6 +539,6 @@ extra card style:
 		width: 635
 		height: 1005
 		z index: 1
-		visible: { card.pt != "" }
+		visible: { card.pt != "" and styling.pt_box }
 		render style: image
 		image: { card_ptbox() }

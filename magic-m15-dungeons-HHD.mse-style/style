@@ -62,6 +62,8 @@ init script:
 		)
 
 	# styling stuff
+	chinese_new_font := { styling.chinese_new_font }
+	ch_font := { if chinese_new_font() then "MSE华康黑体W3(P)" else "方正细等线_GBK_FIX" }
 	card_shape := {"token"}
 	shrink_name := {if styling.shrink_name_text != "" then to_int(styling.shrink_name_text) else 0 }
 	note_cleaner := replace@(match:"\\+", replace:"")
@@ -627,6 +629,13 @@ styling field:
 	initial: no
 styling field:
 	type: choice
+	name: chinese new font
+	initial: no
+	choice: no
+	choice: yes
+	description: 中文是否使用新字体。
+styling field:
+	type: choice
 	name: 点击这里寻求帮助!
 	choice: 点击这里寻求帮助!
 	choice: 房间数 -
@@ -973,7 +982,7 @@ card style:
 		width: {box_w(x:1, y:1)*2}
 		height: {box_h(x:1, y:1)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -988,18 +997,18 @@ card style:
 		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	level 1 text:
 		left: {box_x(x:2, y:1)*2}
 		top: {box_y(x:2, y:1)*2+4}
 		width: {box_w(x:2, y:1)*2}
 		height: {box_h(x:2, y:1)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -1010,20 +1019,22 @@ card style:
 			scale down to: 6
 		alignment: middle center
 		z index: 5
+		padding top: 3
+		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	level 2 text:
 		left: {box_x(x:3, y:1)*2}
 		top: {box_y(x:3, y:1)*2+4}
 		width: {box_w(x:3, y:1)*2}
 		height: {box_h(x:3, y:1)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -1038,18 +1049,18 @@ card style:
 		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	level 3 text:
 		left: {box_x(x:1, y:2)*2}
 		top: {box_y(x:1, y:2)*2+4}
 		width: {box_w(x:1, y:2)*2}
 		height: {box_h(x:1, y:2)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -1064,18 +1075,18 @@ card style:
 		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	level 4 text:
 		left: {box_x(x:2, y:2)*2}
 		top: {box_y(x:2, y:2)*2+4}
 		width: {box_w(x:2, y:2)*2}
 		height: {box_h(x:2, y:2)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -1090,18 +1101,18 @@ card style:
 		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	level 5 text:
 		left: {box_x(x:3, y:2)*2}
 		top: {box_y(x:3, y:2)*2+4}
 		width: {box_w(x:3, y:2)*2}
 		height: {box_h(x:3, y:2)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -1116,18 +1127,18 @@ card style:
 		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	level 6 text:
 		left: {box_x(x:1, y:3)*2}
 		top: {box_y(x:1, y:3)*2+4}
 		width: {box_w(x:1, y:3)*2}
 		height: {box_h(x:1, y:3)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -1142,18 +1153,18 @@ card style:
 		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	level 7 text:
 		left: {box_x(x:2, y:3)*2}
 		top: {box_y(x:2, y:3)*2+4}
 		width: {box_w(x:2, y:3)*2}
 		height: {box_h(x:2, y:3)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -1168,18 +1179,18 @@ card style:
 		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	level 8 text:
 		left: {box_x(x:3, y:3)*2}
 		top: {box_y(x:3, y:3)*2+4}
 		width: {box_w(x:3, y:3)*2}
 		height: {box_h(x:3, y:3)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -1194,18 +1205,18 @@ card style:
 		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	level 9 text:
 		left: {box_x(x:1, y:4)*2}
 		top: {box_y(x:1, y:4)*2+4}
 		width: {box_w(x:1, y:4)*2}
 		height: {box_h(x:1, y:4)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -1220,18 +1231,18 @@ card style:
 		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	level 10 text:
 		left: {box_x(x:2, y:4)*2}
 		top: {box_y(x:2, y:4)*2+4}
 		width: {box_w(x:2, y:4)*2}
 		height: {box_h(x:2, y:4)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -1246,18 +1257,18 @@ card style:
 		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	level 11 text:
 		left: {box_x(x:3, y:4)*2}
 		top: {box_y(x:3, y:4)*2+4}
 		width: {box_w(x:3, y:4)*2}
 		height: {box_h(x:3, y:4)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -1272,18 +1283,18 @@ card style:
 		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	level 12 text:
 		left: {box_x(x:1, y:5)*2}
 		top: {box_y(x:1, y:5)*2+4}
 		width: {box_w(x:1, y:5)*2}
 		height: {box_h(x:1, y:5)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -1298,18 +1309,18 @@ card style:
 		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	level 13 text:
 		left: {box_x(x:2, y:5)*2}
 		top: {box_y(x:2, y:5)*2+4}
 		width: {box_w(x:2, y:5)*2}
 		height: {box_h(x:2, y:5)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -1324,18 +1335,18 @@ card style:
 		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	level 14 text:
 		left: {box_x(x:3, y:5)*2}
 		top: {box_y(x:3, y:5)*2+4}
 		width: {box_w(x:3, y:5)*2}
 		height: {box_h(x:3, y:5)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -1350,18 +1361,18 @@ card style:
 		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	level 15 text:
 		left: {box_x(x:1, y:6)*2}
 		top: {box_y(x:1, y:6)*2+4}
 		width: {box_w(x:1, y:6)*2}
 		height: {box_h(x:1, y:6)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -1376,18 +1387,18 @@ card style:
 		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	level 16 text:
 		left: {box_x(x:2, y:6)*2}
 		top: {box_y(x:2, y:6)*2+4}
 		width: {box_w(x:2, y:6)*2}
 		height: {box_h(x:2, y:6)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -1402,18 +1413,18 @@ card style:
 		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	level 17 text:
 		left: {box_x(x:3, y:6)*2}
 		top: {box_y(x:3, y:6)*2+4}
 		width: {box_w(x:3, y:6)*2}
 		height: {box_h(x:3, y:6)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -1428,18 +1439,18 @@ card style:
 		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	level 18 text:
 		left: {box_x(x:1, y:7)*2}
 		top: {box_y(x:1, y:7)*2+4}
 		width: {box_w(x:1, y:7)*2}
 		height: {box_h(x:1, y:7)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -1454,18 +1465,18 @@ card style:
 		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	level 19 text:
 		left: {box_x(x:2, y:7)*2}
 		top: {box_y(x:2, y:7)*2+4}
 		width: {box_w(x:2, y:7)*2}
 		height: {box_h(x:2, y:7)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -1480,11 +1491,11 @@ card style:
 		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 
 	rule text 2:
 		left: {box_x(x:3, y:7)*2}
@@ -1492,7 +1503,7 @@ card style:
 		width: {box_w(x:3, y:7)*2}
 		height: {box_h(x:3, y:7)*2+4}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -1507,11 +1518,11 @@ card style:
 		padding bottom: 2
 		padding left: 5
 		padding right: 5
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	############################# Card sorting / numbering
 	set code:
 		left: 48
@@ -2615,7 +2626,7 @@ extra card style:
 		height: 58
 		z index: 3
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: MPlantin-Italic
 			size: {font_size()}
 			scale down to: 6
@@ -2626,11 +2637,11 @@ extra card style:
 			scale down to: 6
 		alignment: middle center
 		z index: 2
-		line height hard: 0.9
-		line height line: 0.9
-		line height soft: 0.9
-		line height hard max: 0.9
-		line height line max: 0.9
+		line height hard: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line: { if chinese_new_font() then 1.0 else 0.9 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: { if chinese_new_font() then 1.0 else 0.9 }
+		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	artist arrow:
 		left: { 56 + card_style.set_code.content_width }
 		top: 1000

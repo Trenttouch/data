@@ -2,7 +2,20 @@
 # Edit by Heavenford 2017.1.14
 
 choice images:
+	FDN Mythic: 	/magic-rarity.mse-include/FDN_M.png
+	FDN Rare: 		/magic-rarity.mse-include/FDN_R.png
+	FDN Uncommon: 	/magic-rarity.mse-include/FDN_U.png
+	FDN Common: 	/magic-rarity.mse-include/FDN_C.png
+
+	DSK Mythic: 	/magic-rarity.mse-include/DSK_M.png
+	DSK Rare: 		/magic-rarity.mse-include/DSK_R.png
+	DSK Uncommon: 	/magic-rarity.mse-include/DSK_U.png
+	DSK Common: 	/magic-rarity.mse-include/DSK_C.png
+
 	BLB Mythic: 	/magic-rarity.mse-include/BLB_M.png
+	BLB Rare: 		/magic-rarity.mse-include/BLB_R.png
+	BLB Uncommon: 	/magic-rarity.mse-include/BLB_U.png
+	BLB Common: 	/magic-rarity.mse-include/BLB_C.png
 
 	OTJ Mythic: 	/magic-rarity.mse-include/OTJ_M.png
 	OTJ Rare: 		/magic-rarity.mse-include/OTJ_R.png
@@ -80,25 +93,25 @@ choice images:
 	DMU Uncommon: 	/magic-rarity.mse-include/DMU_U.png
 	DMU Common: 	/magic-rarity.mse-include/DMU_C.png
 
-	SNC Mythic: 	/magic-rarity.mse-include/SNC_M.png
-	SNC Rare: 		/magic-rarity.mse-include/SNC_R.png
-	SNC Uncommon: 	/magic-rarity.mse-include/SNC_U.png
-	SNC Common: 	/magic-rarity.mse-include/SNC_C.png
+	Modern SNC Mythic: 	/magic-rarity.mse-include/SNC_M.png
+	Modern SNC Rare: 		/magic-rarity.mse-include/SNC_R.png
+	Modern SNC Uncommon: 	/magic-rarity.mse-include/SNC_U.png
+	Modern SNC Common: 	/magic-rarity.mse-include/SNC_C.png
 
-	NEO Mythic: 	/magic-rarity.mse-include/NEO_M.png
-	NEO Rare: 		/magic-rarity.mse-include/NEO_R.png
-	NEO Uncommon: 	/magic-rarity.mse-include/NEO_U.png
-	NEO Common: 	/magic-rarity.mse-include/NEO_C.png
+	Modern NEO Mythic: 	/magic-rarity.mse-include/NEO_M.png
+	Modern NEO Rare: 		/magic-rarity.mse-include/NEO_R.png
+	Modern NEO Uncommon: 	/magic-rarity.mse-include/NEO_U.png
+	Modern NEO Common: 	/magic-rarity.mse-include/NEO_C.png
 
-	VOW Mythic: 	/magic-rarity.mse-include/VOW_M.png
-	VOW Rare: 		/magic-rarity.mse-include/VOW_R.png
-	VOW Uncommon: 	/magic-rarity.mse-include/VOW_U.png
-	VOW Common: 	/magic-rarity.mse-include/VOW_C.png
+	Modern VOW Mythic: 	/magic-rarity.mse-include/VOW_M.png
+	Modern VOW Rare: 		/magic-rarity.mse-include/VOW_R.png
+	Modern VOW Uncommon: 	/magic-rarity.mse-include/VOW_U.png
+	Modern VOW Common: 	/magic-rarity.mse-include/VOW_C.png
 
-	MID Mythic: 	/magic-rarity.mse-include/MID_M.png
-	MID Rare: 		/magic-rarity.mse-include/MID_R.png
-	MID Uncommon: 	/magic-rarity.mse-include/MID_U.png
-	MID Common: 	/magic-rarity.mse-include/MID_C.png
+	Modern MID Mythic: 	/magic-rarity.mse-include/MID_M.png
+	Modern MID Rare: 		/magic-rarity.mse-include/MID_R.png
+	Modern MID Uncommon: 	/magic-rarity.mse-include/MID_U.png
+	Modern MID Common: 	/magic-rarity.mse-include/MID_C.png
 
 	Modern AFR Mythic: 	/magic-rarity.mse-include/AFR_M.png
 	Modern AFR Rare: 		/magic-rarity.mse-include/AFR_R.png
@@ -710,6 +723,21 @@ choice images:
 	Duel EVG Uncommon: /magic-rarity.mse-include/EVG_U.png
 	Duel EVG Common: /magic-rarity.mse-include/EVG_C.png
 
+
+	Command DKC Mythic: 	/magic-rarity.mse-include/DKC_M.png
+	Command DKC Rare: 		/magic-rarity.mse-include/DKC_R.png
+	Command DKC Uncommon: 	/magic-rarity.mse-include/DKC_U.png
+	Command DKC Common: 	/magic-rarity.mse-include/DKC_C.png
+
+	Command BLC Mythic: 	/magic-rarity.mse-include/BLC_M.png
+	Command BLC Rare: 		/magic-rarity.mse-include/BLC_R.png
+	Command BLC Uncommon: 	/magic-rarity.mse-include/BLC_U.png
+	Command BLC Common: 	/magic-rarity.mse-include/BLC_C.png
+
+	Command M3C Mythic: 	/magic-rarity.mse-include/M3C_M.png
+	Command M3C Rare: 		/magic-rarity.mse-include/M3C_R.png
+	Command M3C Uncommon: 	/magic-rarity.mse-include/M3C_U.png
+	Command M3C Common: 	/magic-rarity.mse-include/M3C_C.png
 
 	Command OTC Mythic: 	/magic-rarity.mse-include/OTC_M.png
 	Command OTC Rare: 		/magic-rarity.mse-include/OTC_R.png

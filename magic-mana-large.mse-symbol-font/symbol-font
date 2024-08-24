@@ -538,6 +538,18 @@ symbol:
 		max stretch: 0.5
 	image font size: 145
 symbol:
+	code: X
+	image: mana_x.png
+	enabled: {ancestral_mana()}
+symbol:
+	code: Y
+	image: mana_y.png
+	enabled: {ancestral_mana()}
+symbol:
+	code: Z
+	image: mana_z.png
+	enabled: {ancestral_mana()}
+symbol:
 	image: mana_circle.png
 	code: [XYZ]
 	regex: yes

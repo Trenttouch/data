@@ -5,6 +5,9 @@ choice:
 	name: none
 	line below: true
 choice:
+	name: Not For Sale
+	line below: true
+choice:
 	name: mana symbol
 	choice: white
 	choice: blue

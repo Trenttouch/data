@@ -31,6 +31,10 @@ depends on:
 depends on: 
 	package: magic-rarity.mse-include
 	version: 2013-08-21
+depends on: 
+	package: magic-all-style.mse-include
+	version: 2024-06-30
+
 card width: 1501
 card height: 1050
 card dpi: 600
@@ -39,6 +43,7 @@ card dpi: 600
 init script:
 	# Load scripts for image box
 	include file: /magic-default-image.mse-include/scripts
+	include file: /magic-all-style.mse-include/script
 	
 	# Should hybrids have a grey name?
 	mask_hybrid_with_land := { styling.grey_hybrid_name }
@@ -60,6 +65,8 @@ init script:
 	
 	pt: "front/pt/" pt2: "back/pt/"
 	hint: "front/hint/" hint2: "back/hint/"
+	extend: "front/extend/" extend2: "back/extend/"
+	floatcrown: "crown/float/"
 	stamp: "stamp/" identity: "/magic-identity-new.mse-include/" identity2: "/magic-identity-new.mse-include/"
 	]
 	
@@ -78,6 +85,8 @@ init script:
 	
 	pt: "pt.png" pt2: "pt.png" 
 	hint: "pin.png" hint2: "pin.png"
+	extend: "card.png" extend2: "card.png"
+	floatcrown: "lcrown.png"
 	stamp: "stamp.png" identity: "identity.png" identity2: "identity.png"
 	]
 	
@@ -101,7 +110,11 @@ init script:
 	hint_background := { color_background(type:"hint",     base_hybrid:card_hybrid) }
 	hint2_background := { color_background(type:"hint2",     base_hybrid:card_hybrid) }
 	
+	extend_background := { color_background(type:"extend",     base_hybrid:card_hybrid) }
+	extend2_background := { color_background(type:"extend2",     base_hybrid:card_hybrid) }
 	
+	floatcrown_background := { color_background(type:"floatcrown",     base_hybrid:card_hybrid) }
+
 	snow_background := { color_background(type:"snow",     base_hybrid:card_hybrid) }
 	
 	plw_background := { color_background(type:"plw",     base_hybrid:card_hybrid) }
@@ -146,6 +159,7 @@ init script:
 	is_devoid := { chosen(styling.frames, choice:"devoid") }
 	is_fullart := { chosen(styling.frames, choice:"fullart") }
 	is_vehicle := {contains(card.sub_type, match:"Vehicle") or contains(card.sub_type, match:"载具")}
+	is_extend := { chosen(styling.frames, choice:"extend") }
 	has_alias := { styling.use_alias }
 	
 	is_plw := {chosen(styling.frames, choice:"planeswalker")}
@@ -163,14 +177,8 @@ init script:
 	has_identity := { styling.color_indicator_dot }
 	is_unsorted := {styling.remove_from_autocount}
 
-	chop_top := {to_number(pull_comma_array(styling.text_chops, cell:0, end:false))}
-	chop_bot := {to_number(pull_comma_array(styling.text_chops, cell:1, end:false))}
-	chop_correction := { chop_bot() }
-	shrink_type := {if styling.shrink_typeline_text != "" then to_number(styling.shrink_typeline_text) else 0}
-	shrink_name := {if styling.shrink_name_text != "" then to_number(styling.shrink_name_text) else 0}
 	use_main_rarity := { contains(set.mainframe_rarity_name, match: ".png")}
 	un_png := replace@(match:".png", replace: "")
-	
 	
 	
 	# d20
@@ -500,6 +508,10 @@ init script:
 	back_has_identity := { styling.color_indicator_dot_2 and not back_is_map() }
 	backside_left_fix := {750+1}
 	
+	back_chop_top := {to_number(pull_comma_array(styling.back_text_chops, cell:0, end:false))}
+	back_chop_bot := {to_number(pull_comma_array(styling.back_text_chops, cell:1, end:false))}
+	back_chop_right := {to_number(pull_comma_array(styling.back_text_chops, cell:2, end:false))}
+
 
 	back_is_legend := {set.auto_legends and (contains(card.super_type_2, match:"Legendary") or contains(card.super_type_2, match:"传奇")) }	
 	back_is_nyx := { chosen(styling.back_frames, choice:"nyx") and (contains(card.super_type_2, match:"Enchantment") or contains(card.super_type_2, match:"结界")) }
@@ -512,6 +524,7 @@ init script:
 	back_is_map := { chosen(styling.back_frames, choice:"map") }
 	back_is_plw := {chosen(styling.back_frames, choice:"planeswalker")}
 	back_is_plw_fullart := { chosen(styling.back_frames, choice:"mythic edition fullart") }
+	back_is_extend := { chosen(styling.back_frames, choice:"extend") }
 	# back_plw_awaken := { back_is_plw() and chosen(extra_card.corner2, choice:"aetherprint") }
 
 
@@ -529,7 +542,8 @@ init script:
 		if is_saga() then "376,118,317,763"
 		else if is_devoid() then "30,30,691,939"
 		else if is_mutate() then "47,117,681,674"
-		else if is_fullart() then "47,117,681,939" 
+		else if is_fullart() then "47,117,681,939"
+		else if is_extend() then "0,85,750,567" 
 		else if is_plw() then 
 			if is_plw_fullart() then "0,0,750,1050" else "50,104,662,858" 
 		else "56,117,638,467"
@@ -546,7 +560,8 @@ init script:
 		if back_is_devoid() then "30,30,691,939"
 		else if back_is_map() then "30,114,691,477"
 		else if back_is_mutate() then "47,117,681,674"
-		else if back_is_fullart() then "47,117,656,939" 
+		else if back_is_fullart() then "47,117,656,939"
+		else if back_is_extend() then "0,85,750,567" 
 		else if back_is_plw() then 
 			if back_is_plw_fullart() then "0,0,750,1050" else "50,104,662,858" 
 		else "56,117,638,467"
@@ -573,26 +588,9 @@ set info style:
 			fill color:   rgb(255,255,255)
 			border color: rgb(0,0,0)
 ############################################################## Extra style options
-styling field:
-	type: text
-	name: text chops
-	description: Format as "X,Y". Shrinks textbox X pixels from the top and Y from bottom.
-styling field:
-	type: text
-	name: shrink name text
-	description: Shrinks name X pixels
-styling field:
-	type: text
-	name: shrink typeline text
-	description: Shrinks type X pixels
-styling field:
-	type: text
-	name: shrink power text
-	description: Shrinks power X pixels
-styling field:
-	type: text
-	name: font cap
-	description: 所有规则文本框的字体大小，默认为28。
+### 通用1 ###
+include file: /magic-all-style.mse-include/style1
+
 styling field:
 	type: choice
 	name: inner crown style
@@ -620,6 +618,7 @@ styling field:
 	choice: devoid
 	choice: fullart
 	choice: mutate
+	choice: extend
 	# choice: miracle
 	choice: snow
 styling field:
@@ -656,8 +655,6 @@ styling field:
 	name: wider watermarks
 	description: Use the full watermark size for custom full-size backgrounds.
 	initial: no
-
-
 styling field:
 	type: choice
 	name: d20 dividers
@@ -668,6 +665,11 @@ styling field:
 	choice: all breaks +2
 	choice: all breaks +3
 	description: 正常地d20分隔，关闭，每一段隔断，在除第一段以外每一段隔断，等等。
+
+styling field:
+	type: text
+	name: back text chops
+	description: Format as "X,Y,Z". Shrinks textbox X pixels from the top and Y from bottom and Z from right.
 styling field:
 	type: text
 	name: back shrink power text
@@ -696,6 +698,7 @@ styling field:
 	choice: devoid
 	choice: fullart
 	choice: mutate
+	choice: extend
 	# choice: miracle
 	choice: snow
 	choice: map
@@ -711,6 +714,12 @@ styling field:
 
 styling field:
 	type: boolean
+	name: color indicator dot 2
+	description: Use the color indicator dot
+	initial: no
+
+styling field:
+	type: boolean
 	name: use holofoil stamps
 	description: Change to no to disable rare holofoil stamps
 styling field:
@@ -718,86 +727,10 @@ styling field:
 	name: is foil
 	description: 是否为闪卡？
 	initial: no
-styling field:
-	type: boolean
-	name: color indicator dot
-	description: Use the color indicator dot
-	initial: no
-styling field:
-	type: boolean
-	name: color indicator dot 2
-	description: Use the color indicator dot
-	initial: no
-styling field:
-	type: boolean
-	name: remove from autocount
-	description: Removes the automatic card number for specific cards, to allow for overcounted cards like in Planeswalker Decks.
-	initial: no
-styling field:
-	type: boolean
-	name: grey hybrid name
-	description: Use a grey background for the name and type line on hybrid cards. This is done on real cards.
-styling field:
-	type: boolean
-	name: unsorted casting cost
-	description: Disables automatic mana symbol sorting.
-	initial: no
-styling field:
-	type: boolean
-	name: ancestral mana symbols
-	description: Enables ancestral's modified generic mana.
-	initial: no
-styling field:
-	type: boolean
-	name: colored multicolor land name
-	description: Use a colored background for the name and type on multicolor land cards with a basic land type. This is done on real cards.
-styling field:
-	type: boolean
-	name: use guild mana symbols
-	description: Use the Ravnica guild symbols instead of the official half/half circles for hybrid mana.
-	initial: no
-styling field:
-	type: choice
-	name: tap symbol
-	description: What tap and untap symbols should be used on cards?
-	initial: modern
-	choice: modern
-	choice: old
-	choice: diagonal T
-styling field:
-	type: package choice
-	name: text box mana symbols
-	match: magic-mana-*.mse-symbol-font
-	initial: magic-mana-small.mse-symbol-font
-styling field:
-	type: choice
-	name: center text
-	description: When to center text (short text only means only on one-line cards with no flavor text)
-	choice: always
-	choice: short text only
-	choice: never
-	initial: never
-styling field:
-	type: boolean
-	name: promo
-	description: Is this card a promo card, with the "P" rarity?
-	initial: no
-styling field:
-	type: boolean
-	name: masterpiece
-	description: Is this card a Masterpiece?
-	initial: no
-styling field:
-	type: boolean
-	name: inverted common symbol
-	description: Should the common rarity symbol be inverted, like in Coldsnap?
-	initial: no
-styling field:
-	type: package choice
-	name: overlay
-	description: Should there be an overlay applied, such as foil?
-	match: magic-overlay-*.mse-include
-	required: false
+
+### 通用2 ###
+include file: /magic-all-style.mse-include/style2
+
 styling style:
 	use guild mana symbols:
 		choice images:
@@ -825,53 +758,7 @@ styling style:
 	back frames:
 		render style: checklist
 		direction: vertical
-styling field:
-	type: choice
-	name: CHNFlavorsize
-	initial: 25
-	choice:	20
-	choice:	20.33
-	choice:	20.67
-	choice:	21
-	choice:	21.33
-	choice:	21.67
-	choice:	22
-	choice:	22.33
-	choice:	22.67
-	choice:	23
-	choice:	23.33
-	choice:	23.67
-	choice:	24
-	choice:	24.33
-	choice:	24.67
-	choice:	25
-	choice:	25.33
-	choice:	25.67
-	choice:	26
-	choice:	26.33
-	choice:	26.67
-	choice:	27
-	choice:	27.33
-	choice:	27.67
-	choice:	28
-	choice:	28.33
-	choice:	28.67
-	choice:	29
-	choice:	29.33
-	choice:	29.67
-	choice:	30
-	choice:	30.33
-	choice:	30.67
-	choice:	31
-	choice:	31.33
-	choice:	31.67
-	choice:	32
-	choice:	32.33
-	choice:	32.67
-	choice:	33
-	choice:	33.33
-	choice:	33.67
-	choice:	34
+
 ############################################################## Card fields
 card style:
 	############################# Background stuff
@@ -888,7 +775,8 @@ card style:
 				if is_saga() then saga_background()
 				else if is_devoid() and not is_fullart() then "front/vcard.png" 
 				else if is_snow() then snow_background() 
-				else if is_plw() then if has_four_abilities() then plwtall_background() else plw_background() 
+				else if is_plw() then if has_four_abilities() then plwtall_background() else plw_background()
+				else if is_extend() then extend_background()
 				else card_background()
 		mask: 
 			script:
@@ -902,6 +790,7 @@ card style:
 				else if is_saga() then "front/saga/frame_mask.png" 
 				else if is_mutate() then "frame_mask_mutate.png" 
 				else if is_fullart() then "front/frame_mask_fullart.png" 
+				else if is_extend() then if is_legend() then "front/extend/frame_mask_legend.png" else "front/extend/frame_mask.png"
 				else "frame_mask.png"
 	card color 2:
 		left:	{0+backside_left_fix()}
@@ -911,7 +800,14 @@ card style:
 		z index: 0
 		render style: image
 		popup style: in place
-		image: { if back_is_devoid() and not back_is_fullart() then "back/vcard.png" else if back_is_snow() then backsnow_background() else if back_is_plw() then if back_has_four_abilities() then backplwtall_background() else backplw_background() else if back_is_map() then map_background() else backcard_background() }
+		image:
+			script:
+				if back_is_devoid() and not back_is_fullart() then "back/vcard.png"
+				else if back_is_snow() then backsnow_background()
+				else if back_is_plw() then if back_has_four_abilities() then backplwtall_background() else backplw_background()
+				else if back_is_map() then map_background()
+				else if back_is_extend() then extend2_background()
+				else backcard_background()
 		mask: 
 			script:
 				if back_is_plw() 
@@ -921,7 +817,8 @@ card style:
 						 "frame_mask.png")
 				else if back_is_mutate() then "frame_mask_mutate.png" 
 				else if back_is_fullart() then "back/frame_mask_fullart.png" 
-				else if back_is_map() then "back/map/frame_mask_map.png" 
+				else if back_is_map() then "back/map/frame_mask_map.png"
+				else if back_is_extend() then if back_is_legend() then "front/extend/frame_mask_legend.png" else "front/extend/frame_mask.png"
 				else "frame_mask.png"
 	############################# Name line
 	name:
@@ -960,7 +857,7 @@ card style:
 		z index: 5
 		visible: { has_alias() }
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin-Italic" else "Magic华文楷体" }
+			name: { if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: 20
 			scale down to: 6
 			color: white
@@ -1006,7 +903,7 @@ card style:
 		z index: 5
 		visible: { has_alias() }
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin-Italic" else "Magic华文楷体" }
+			name: { if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: 20
 			scale down to: 6
 			color: white
@@ -1050,10 +947,10 @@ card style:
 		font:
 			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
 			size: { if set.card_language != "简体中文" then 26 - shrink_type() else 32 - shrink_type() }
-			color: {if is_fullart() then "white" else "black" }
+			color: {if is_fullart() or is_extend() then "white" else "black" }
 			separator color: red
 	rarity:
-		right: 688
+		right: {688 + rarity_shift()}
 		top: {(if is_plw() and has_four_abilities() then 526 else if is_saga() then 894 else 598)}
 		width: 88
 		height: 44
@@ -1118,10 +1015,10 @@ card style:
 		font:
 			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
 			size: { if set.card_language != "简体中文" then 26 - shrink_type() else 32 - shrink_type() }
-			color: { if back_is_devoid() or back_is_map() then "black" else "white" }
+			color: { if back_is_devoid() or back_is_map() or back_is_extend() then "black" else "white" }
 			separator color: red
 	rarity 2:
-		right: {(if back_is_map() then 397 else 688) + backside_left_fix() + (if styling.map_rarity_shift!="" then to_number(styling.map_rarity_shift) else 0)}
+		right: {(if back_is_map() then 397 else 688 + rarity_shift()) + backside_left_fix() + (if styling.map_rarity_shift!="" then to_number(styling.map_rarity_shift) else 0)}
 		top: { (if back_is_map() then 96 else 598) + (if back_is_plw() then if back_has_four_abilities() then -72 else 0)}
 		width: 88
 		height: 44
@@ -1174,8 +1071,8 @@ card style:
 		bottom: {(if is_mutate() then 790 else 0) + (if is_saga() then if split_12() == "" then 498 else split_12() else 0)}
 		visible: {is_mutate() or is_saga()}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
-			italic name: MPlantin-Italic
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: { if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 28}
 			scale down to: 6
 			color: {if is_fullart() then "white" else "black" }
@@ -1192,14 +1089,15 @@ card style:
 				   styling.center_text == "always"
 				   then "middle center"
 				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
 		z index: 3
 		padding left:   6
-		padding right:  4
-		line height hard: {if is_modal(card.level_1_text) then 0.9 else 1.1 }
-		line height line: 1.5
-		line height soft: 0.9
-		line height hard max: {if is_modal(card.level_1_text) then 1.0 else 1.2 }
-		line height line max: 1.6
+		padding right:  {4 + chop_right()}
+		line height hard: 1.1
+		line height line: { if chinese_new_font() then 1.6 else 1.5 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: 1.2
+		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
 	level 5 text:
 		left: {58+backside_left_fix()}
 		top: {if back_is_mutate() then 658 else 0}
@@ -1207,8 +1105,8 @@ card style:
 		bottom: {if back_is_mutate() then 790 else 0}
 		visible: {back_is_mutate()}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
-			italic name: MPlantin-Italic
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: { if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: {if styling.back_font_cap != "" then to_number(styling.back_font_cap) else 28}
 			scale down to: 6
 			color: black
@@ -1225,14 +1123,15 @@ card style:
 				   styling.center_text == "always"
 				   then "middle center"
 				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
 		z index: 3
 		padding left:   6
-		padding right:  4
-		line height hard: {if is_modal(card.level_1_text) then 0.9 else 1.1 }
-		line height line: 1.5
-		line height soft: 0.9
-		line height hard max: {if is_modal(card.level_1_text) then 1.0 else 1.2 }
-		line height line max: 1.6
+		padding right:  {4 + back_chop_right()}
+		line height hard: 1.1
+		line height line: { if chinese_new_font() then 1.6 else 1.5 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: 1.2
+		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
 				
 	
 	
@@ -1242,8 +1141,8 @@ card style:
 		width: {636 + (if is_plw() then -36 else 0) + (if is_saga() then -636 else 0)}
 		bottom: {930-chop_bot()}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
-			italic name: { if set.card_language != "简体中文" then "MPlantin-Italic" else "Magic华文楷体" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: { if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 28 }
 			scale down to: 6
 			color: {if is_fullart() then "white" else "black" }
@@ -1260,26 +1159,27 @@ card style:
 				   styling.center_text == "always"
 				then "middle center"
 				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
 		z index: 2
 		padding left:   6
-		padding right:  4
-		line height hard: {if is_modal(card.rule_text) then 0.9 else 1.1 }
-		line height line: 1.5
-		line height soft: 0.9
-		line height hard max: {if is_modal(card.rule_text) then 1.0 else 1.2 }
-		line height line max: 1.6
+		padding right:  {4 + chop_right()}
+		line height hard: 1.1
+		line height line: { if chinese_new_font() then 1.6 else 1.5 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: 1.2
+		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
 	
 	
 	
 	
 	text 2:
 		left: {58+backside_left_fix() + (if back_is_map() then 20 else 0) + (if back_is_plw() then 38 else 0)}
-		top: {if back_is_plw() then if back_has_four_abilities() then (590 + chop_top()) else (658 + chop_top()) else if back_is_mutate() then 791+chop_top() else 654+chop_top() }
+		top: {if back_is_plw() then if back_has_four_abilities() then (590 + back_chop_top()) else (658 + back_chop_top()) else if back_is_mutate() then 791+back_chop_top() else 654+back_chop_top() }
 		width: {636 + (if back_is_map() then -40 else 0) + (if back_is_plw() then -36 else 0)}
-		bottom: {930-chop_bot()}
+		bottom: {930-back_chop_bot()}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
-			italic name: { if set.card_language != "简体中文" then "MPlantin-Italic" else "Magic华文楷体" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: { if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: {if styling.back_font_cap != "" then to_number(styling.back_font_cap) else 28 }
 			scale down to: 6
 			color: {if back_is_fullart() then "white" else "black" }
@@ -1296,14 +1196,15 @@ card style:
 				   styling.center_text == "always"
 				then "middle center"
 				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
 		z index: 2
 		padding left:   6
-		padding right:  4
-		line height hard: {if is_modal(card.rule_text_2) then 0.9 else 1.1 }
-		line height line: 1.5
-		line height soft: 0.9
-		line height hard max: {if is_modal(card.rule_text_2) then 1.0 else 1.2 }
-		line height line max: 1.6
+		padding right:  {4 + back_chop_right()}
+		line height hard: 1.1
+		line height line: { if chinese_new_font() then 1.6 else 1.5 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: 1.2
+		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
 	
 	watermark:
 		left: {if is_saga() then (if styling.wider_watermarks then 58 else 90) else 50}
@@ -1334,8 +1235,8 @@ card style:
 		bottom: {chapter0()}
 		z index: 3
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
-			italic name: MPlantin-Italic
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: { if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: { if styling.font_cap != "" then styling.font_cap else 26 }
 			scale down to: 6
 			color: black
@@ -1351,23 +1252,24 @@ card style:
 				   styling.center_text == "always"
 				then "middle center"
 				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
 		mask: {crop(to_image("front/saga/textmask.png"), height:chapter0()-220, width:153, offset_x:0, offset_y:0)}
 		z index: 5
 		padding left:   3
 		padding right:  1
-		line height hard: 1.2
-		line height line: 1.5
-		line height soft: 0.85
+		line height hard: 1.1
+		line height line: { if chinese_new_font() then 1.6 else 1.5 }
+		line height soft: { if chinese_new_font() then 0.95 else 0.85 }
 		line height hard max: 1.2
-		line height line max: 1.6
+		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
 	level 2 text:
 		left: {90}
 		top: { if split_12() == "" then 498 else split_12() }
 		width: { if is_saga() then 276 else 0 }
 		bottom: { if split_23() == "" then 686 else split_23() }
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
-			italic name: MPlantin-Italic
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: { if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: { if styling.font_cap != "" then styling.font_cap else 26 }
 			scale down to: 6
 			color: black
@@ -1383,24 +1285,25 @@ card style:
 				   styling.center_text == "always"
 				then "middle center"
 				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
 		z index: 5
 		padding left:   6
-		padding right:  4
+		padding right:  {4 + chop_right()}
 		padding top: 3
 		padding bottom: 3
-		line height hard: 1.2
-		line height line: 1.5
-		line height soft: 0.9
+		line height hard: 1.1
+		line height line: { if chinese_new_font() then 1.6 else 1.5 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
 		line height hard max: 1.2
-		line height line max: 1.6
+		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
 	level 3 text:
 		left: { 90 }
 		top: { if split_23() == "" then 686 else split_23() }
 		width: { if is_saga() then 276 else 0 }
 		bottom: {if split_34() == "" then 834 else split_34() }
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
-			italic name: MPlantin-Italic
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: { if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: { if styling.font_cap != "" then styling.font_cap else 26 }
 			scale down to: 6
 			color: black
@@ -1416,24 +1319,25 @@ card style:
 				   styling.center_text == "always"
 				then "middle center"
 				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
 		z index: 5
 		padding left:   6
-		padding right:  4
+		padding right:  {4 + chop_right()}
 		padding top: 3
 		padding bottom: 3
-		line height hard: 1.2
-		line height line: 1.5
-		line height soft: 0.9
+		line height hard: 1.1
+		line height line: { if chinese_new_font() then 1.6 else 1.5 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
 		line height hard max: 1.2
-		line height line max: 1.6
+		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
 	level 4 text:
 		left: { 90 }
 		top: {if split_34() == "" then 834 else split_34() }
 		width: { if is_saga() then 276 else 0 }
 		bottom: {834}
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
-			italic name: MPlantin-Italic
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: { if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: { if styling.font_cap != "" then styling.font_cap else 26 }
 			scale down to: 6
 			color: black
@@ -1449,16 +1353,17 @@ card style:
 				   styling.center_text == "always"
 				then "middle center"
 				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
 		z index: 5
 		padding left:   6
-		padding right:  4
+		padding right:  {4 + chop_right()}
 		padding top: 3
 		padding bottom: 3
-		line height hard: 1.2
-		line height line: 1.5
-		line height soft: 0.9
+		line height hard: 1.1
+		line height line: { if chinese_new_font() then 1.6 else 1.5 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
 		line height hard max: 1.2
-		line height line max: 1.6
+		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
 	############################# PT
 	pt:
 		z index: 5
@@ -1645,74 +1550,98 @@ card style:
 			color: white
 	############################# Card sorting / numbering
 	set code:
-		left: 48
-		top: {(if is_plw() then 10 else 0) + 996}
+		left: 48.5
+		top: 998
 		width: 80
 		height: 20
 		z index: 1
+		alignment: middle left
 		font:
 			name: Magic Gotham Medium
-			size: 14
+			size: {13-shrink_setcode()}
 			color: white
-			weight: bold
+
+	language code:
+		left: 106
+		top: 998
+		width: 10
+		height: 20
+		z index: 1
+		alignment: middle left
+		font:
+			name: Magic Gotham Medium
+			size: {13-shrink_setcode()}
+			color: white
+
 	set code 2:
-		left: {48 + backside_left_fix()}
-		top: {(if back_is_plw() then 10 else 0) + 996}
+		left: {48.5+ backside_left_fix()}
+		top: 998
 		width: 80
 		height: 20
 		z index: 1
+		alignment: middle left
 		font:
 			name: Magic Gotham Medium
-			size: 14
+			size: {13-shrink_setcode()}
 			color: white
-			weight: bold
+
+	language code 2:
+		left: {106 + backside_left_fix()}
+		top: 998
+		width: 10
+		height: 20
+		z index: 1
+		alignment: middle left
+		font:
+			name: Magic Gotham Medium
+			size: {13-shrink_setcode()}
+			color: white
 	############################# Copyright stuff
 	illustrator:
-		left: { 80 + card_style.set_code.content_width }
-		top: {(if is_plw() then 10 else 0) + 995}
+		left: { 166 }
+		top: 997
 		width: 400
 		height: 20
 		z index: 1
 		font:
 			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std W7"}
-			size: 14.5
-			color: white
-	copyright:
-		right: 700
-		top: {(if is_plw() then 10 else 0) + 1000}
-		width: 280
-		height: 20
-		z index: 2
-		visible: {not set.automatic_copyright}
-		alignment: middle right shrink-overflow
-		font:
-			name: Matrix
 			size: 14
 			color: white
-			weight: bold
+	copyright:
+		right: 699
+		top: { if card.pt != "" or (is_plw() or card.loyalty != "") then 998 else 981 }
+		width: 252
+		height: 20
+		z index: 2
+		alignment: middle right shrink-overflow
+		visible: {not set.automatic_copyright}
+		font:
+			name: mplantin
+			size: 13
+			color: white
+
 	illustrator 2:
-		left: { 80 + card_style.set_code_2.content_width + backside_left_fix()}
-		top: {(if back_is_plw() then 10 else 0) + 995}
+		left: { 166 + backside_left_fix()}
+		top: 997
 		width: 400
 		height: 20
 		z index: 1
 		font:
-			name: { if is_pureEN(card.illustrator_2) then "Beleren Small Caps Bold" else "华康魏碑 Std W7"}
-			size: 14.5
-			color: white
-	copyright 2:
-		right: {700 + backside_left_fix()}
-		top: {(if back_is_plw() then 10 else 0) + 1000}
-		width: 280
-		height: 20
-		z index: 2
-		visible: {not set.automatic_copyright}
-		alignment: middle right shrink-overflow
-		font:
-			name: Matrix
+			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std W7"}
 			size: 14
 			color: white
-			weight: bold
+	copyright 2:
+		right: {699+ backside_left_fix()}
+		top: { if card.pt_2 != "" or (back_is_plw() or card.loyalty_2 != "") then 998 else 981 }
+		width: 252
+		height: 20
+		z index: 2
+		alignment: middle right shrink-overflow
+		visible: {not set.automatic_copyright}
+		font:
+			name: mplantin
+			size: 13
+			color: white
 ############################################################## Extra card fields
 extra card field:
 	type: choice
@@ -1724,24 +1653,53 @@ extra card field:
 	name: hint 2
 	script: card.card_color
 	editable: false
+
+extra card field:
+	type: text
+	name: dot
+	script: if styling.is_foil then "★" else "•"
+	save value: false
+	editable: false
+	show statistics: false
 extra card field:
 	type: text
 	name: card code
 	save value: false
+	editable: false
+	script: rarity_code()
+extra card field:
+	type: text
+	name: card number
+	save value: false
 	script:
 		if set.automatic_card_numbers and not styling.remove_from_autocount then
-			forward_editor(prefix: rarity_code() + "<size:10>  </size>" + card_number_m15() + " ", field: card.card_code_text) 
+			forward_editor(prefix: card_number_m15(), field: card.card_code_text) 
 		else
-			combined_editor(field1: card.card_code_text, separator: "" + rarity_code() + "<size:10>  </size>", field2: card.custom_card_number)
+			forward_editor(prefix: "", field: card.custom_card_number)	
+
+extra card field:
+	type: text
+	name: dot 2
+	script: if styling.is_foil then "★" else "•"
+	save value: false
+	editable: false
+	show statistics: false
 extra card field:
 	type: text
 	name: card code 2
 	save value: false
+	editable: false
+	script: rarity_code()
+extra card field:
+	type: text
+	name: card number 2
+	save value: false
 	script:
 		if set.automatic_card_numbers and not styling.remove_from_autocount then
-			forward_editor(prefix: rarity_code() + "<size:10>  </size>" + card_number_m15() + " ", field: card.card_code_text_2) 
+			forward_editor(prefix: card_number_m15(), field: card.card_code_text) 
 		else
-			combined_editor(field1: card.card_code_text_2, separator: "" + rarity_code() + "<size:10>  </size>", field2: card.custom_card_number)
+			forward_editor(prefix: "", field: card.custom_card_number)	
+
 extra card field:
 	type: choice
 	name: artist arrow
@@ -2386,44 +2344,92 @@ extra card style:
 		render style: image
 		image: {hint2_background()}
 		z index: 5
+	
+	dot:
+		left: {48.5 + card_style.set_code.content_width}
+		right: {card_style.language_code.left}
+		top: 998
+		#width: 10
+		height: 20
+		z index: 1
+		alignment: middle center
+		font:
+			name: Magic Gotham Medium
+			size: {13-shrink_setcode()}
+			color: white
+
 	card code:
-		left: 48
-		top: {(if is_plw() then 10 else 0) + 976}
-		width: 240
+		left: 48.5
+		top: 979
+		width: 20
 		height: 20
 		z index: 1
 		font:
 			name: Magic Gotham Medium
-			size: 14
+			size: 13
 			color: white
-			weight: bold
+	card number:
+		left: 69
+		top: 979
+		width: 220
+		height: 20
+		z index: 1
+		font:
+			name: Magic Gotham Medium
+			size: 13
+			color: white
+
+	dot 2:
+		left: {48.5 + card_style.set_code_2.content_width + backside_left_fix()}
+		right: {card_style.language_code_2.left}
+		top: 998
+		#width: 10
+		height: 20
+		z index: 1
+		alignment: middle center
+		font:
+			name: Magic Gotham Medium
+			size: {13-shrink_setcode()}
+			color: white
+
 	card code 2:
-		left:{48 + backside_left_fix()}
-		top: {(if back_is_plw() then 10 else 0) + 976}
-		width: 240
+		left: {48.5 + backside_left_fix()}
+		top: 979
+		width: 20
 		height: 20
 		z index: 1
 		font:
 			name: Magic Gotham Medium
-			size: 14
+			size: 13
 			color: white
-			weight: bold
+	card number 2:
+		left: {69 + backside_left_fix()}
+		top: 979
+		width: 220
+		height: 20
+		z index: 1
+		font:
+			name: Magic Gotham Medium
+			size: 13
+			color: white
+
 	artist arrow:
-		left: { 56 + card_style.set_code.content_width }
-		top: {(if is_plw() then 10 else 0) + 1000}
-		width: 24
-		height: 15
+		left: { 143 }
+		top: 1002
+		width: {24*0.9}
+		height: {15*0.9}
 		z index: 1
 		render style: image
 		image: artist_arrow.png
 	artist arrow 2:
-		left: { 56 + card_style.set_code_2.content_width +backside_left_fix()}
-		top: {(if back_is_plw() then 10 else 0) + 1000}
-		width: 24
-		height: 15
+		left: { 143 + backside_left_fix()}
+		top: 1002
+		width: {24*0.9}
+		height: {15*0.9}
 		z index: 1
 		render style: image
 		image: artist_arrow.png
+
 	pt box:
 		left:	0
 		top:	{(if is_plw() then 1000 else 0) + 0}
@@ -2455,31 +2461,30 @@ extra card style:
 		mask: {if is_plw() then ((if is_plw_fullart() then "stamp/planeswalker/mythic" else "stamp/planeswalker/") + "stamp_mask.png") else ""}
 	
 	auto copyright:
-		right: 700
-		top: { (if is_plw() then 10 else 0) + if card.pt != "" or card.loyalty != "" then 998 else 978 }
-		width: 280
+		right: 699
+		top: { if card.pt != "" or (is_plw() or card.loyalty != "") then 998 else 981 }
+		width: 252
 		height: 20
 		z index: 2
 		alignment: middle right shrink-overflow
 		visible: {set.automatic_copyright}
 		font:
 			name: mplantin
-			size: 12
+			size: 13
 			color: white
-			weight: bold
+
 	auto copyright 2:
-		right: {700+backside_left_fix()}
-		top: { (if back_is_plw() then 10 else 0) + if card.pt_2 != "" or card.loyalty_2 != "" then 998 else (if back_is_plw() then 998 else 978) }
-		width: 280
+		right: {699 + backside_left_fix()}
+		top: { if card.pt_2 != "" or (back_is_plw() or card.loyalty_2 != "") then 998 else 981 }
+		width: 252
 		height: 20
 		z index: 2
 		alignment: middle right shrink-overflow
 		visible: {set.automatic_copyright}
 		font:
 			name: mplantin
-			size: 12
+			size: 13
 			color: white
-			weight: bold
 
 	flavor bar:
 		left: {0}
@@ -2527,7 +2532,7 @@ extra card style:
 		width:	750
 		height:	1050
 		render style: image
-		image: {if has_alias() then aliascrown_background() else crown_background()}
+		image: {if is_extend() then floatcrown_background() else if has_alias() then aliascrown_background() else crown_background()}
 		z index: 3
 		visible: { (is_legend() or has_alias()) and not is_plw() }
 	innercrown:
@@ -2545,7 +2550,7 @@ extra card style:
 		width:	750
 		height:	1050
 		render style: image
-		image: {if has_alias() then aliascrown_background2() else crown_background()}
+		image: {if back_is_extend() then floatcrown_background() else if has_alias() then aliascrown_background2() else crown_background()}
 		z index: 3
 		visible: { (back_is_legend() or  has_alias()) and not back_is_map() and not back_is_plw()}
 	innercrown 2:
@@ -3367,7 +3372,7 @@ extra card style:
 		height: 28
 		z index: 8
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			size: 20
 			color: white
 		symbol font:
@@ -3392,7 +3397,7 @@ extra card style:
 		height: 28
 		z index: 8
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			size: 20
 			color: black
 		symbol font:

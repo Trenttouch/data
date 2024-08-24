@@ -31,6 +31,10 @@ depends on:
 depends on: 
 	package: magic-rarity.mse-include
 	version: 2013-08-21
+depends on: 
+	package: magic-all-style.mse-include
+	version: 2024-06-30
+
 card width: 1050
 card height: 750
 card dpi: 600
@@ -38,6 +42,7 @@ card dpi: 600
 init script:
 	# Load scripts for image box
 	include file: /magic-default-image.mse-include/scripts
+	include file: /magic-all-style.mse-include/script
 	
 	# Should hybrids have a grey name?
 	mask_hybrid_with_land := { styling.grey_hybrid_name }
@@ -85,12 +90,8 @@ init script:
 	ancestral_mana := { contains(styling.other_options, match:"ancestral generic")}
 
 
-	left_font_size := {to_number(pull_comma_array(styling.font_size_cap, end:false, cell:0, default:27))}
-	right_font_size := {to_number(pull_comma_array(styling.font_size_cap, end:false, cell:1, default:left_font_size()))}
-
-	shrink_type := {if styling.shrink_typeline_text != "" then to_number(styling.shrink_typeline_text) else 0}
-	shrink_name := {if styling.shrink_name_text != "" then to_number(styling.shrink_name_text) else 0}
-
+	left_font_size := {to_number(pull_comma_array(styling.font_cap, end:false, cell:0, default:27))}
+	right_font_size := {to_number(pull_comma_array(styling.font_cap, end:false, cell:1, default:left_font_size()))}
 
 	bridge_colored := {
 		
@@ -205,23 +206,9 @@ set info style:
 			fill color:   rgb(255,255,255)
 			border color: rgb(0,0,0)
 ############################################################## Extra style options
-styling field:
-	type: text
-	name: shrink name text
-	description: Shrinks name X pixels
-styling field:
-	type: text
-	name: shrink typeline text
-	description: Shrinks type X pixels
-styling field:
-	type: boolean
-	name: is foil
-	description: 是否为闪卡？
-	initial: no
-styling field:
-	type: text
-	name: font size cap
-	description: Maximum font size for both textboxes, or "X,Y" to set individual caps
+### 通用1 ###
+include file: /magic-all-style.mse-include/style1
+
 styling field:
 	type: multiple choice
 	name: other options
@@ -229,65 +216,14 @@ styling field:
 	choice: prerelease stamp
 	choice: use phyrexian font
 
-styling field:
-	type: boolean
-	name: color indicator dot
-	description: Use the color indicator dot
-	initial: no
+### 通用2 ###
+include file: /magic-all-style.mse-include/style2
+
 styling field:
 	type: boolean
 	name: color indicator dot 2
 	description: Use the color indicator dot
 	initial: no
-styling field:
-	type: boolean
-	name: remove from autocount
-	description: Removes the automatic card number for specific cards, to allow for overcounted cards like in Planeswalker Decks.
-	initial: no
-styling field:
-	type: boolean
-	name: holofoil stamped rares
-	description: Use holofoil stamps on rares?
-	initial: yes
-styling field:
-	type: boolean
-	name: is foil
-	description: 是否为闪卡？
-	initial: no
-styling field:
-	type: boolean
-	name: grey hybrid name
-	description: Use a grey background for the name and type line on hybrid cards. This is done on real cards.
-styling field:
-	type: boolean
-	name: colored multicolor land name
-	description: Use a colored background for the name and type on multicolor land cards with a basic land type. This is done on real cards.
-styling field:
-	type: boolean
-	name: use guild mana symbols
-	description: Use the Ravnica guild symbols instead of the official half/half circles for hybrid mana.
-	initial: no
-styling field:
-	type: choice
-	name: tap symbol
-	description: What tap and untap symbols should be used on cards?
-	initial: modern
-	choice: modern
-	choice: old
-	choice: diagonal T
-styling field:
-	type: package choice
-	name: text box mana symbols
-	match: magic-mana-*.mse-symbol-font
-	initial: magic-mana-small.mse-symbol-font
-styling field:
-	type: choice
-	name: center text 1
-	description: When to center text on the first card (short text only means only on one-line cards with no flavor text)
-	choice: always
-	choice: short text only
-	choice: never
-	initial: never
 styling field:
 	type: choice
 	name: center text 2
@@ -296,6 +232,12 @@ styling field:
 	choice: short text only
 	choice: never
 	initial: never
+styling field:
+	type: boolean
+	name: is foil
+	description: 是否为闪卡？
+	initial: no
+
 styling field:
 	type: boolean
 	name: inverted common symbol
@@ -318,7 +260,7 @@ styling style:
 			modern:     /magic-mana-large.mse-symbol-font/mana_t.png
 			old:        /magic-mana-large.mse-symbol-font/mana_t_old.png
 			diagonal T: /magic-mana-large.mse-symbol-font/mana_t_older.png
-	center text 1:
+	center text:
 		render style: both
 		choice images:
 			always:          /magic.mse-game/icons/center-all-text.png
@@ -337,53 +279,7 @@ styling style:
 	other options:
 		render style: checklist
 		direction: vertical
-styling field:
-	type: choice
-	name: CHNFlavorsize
-	initial: 25
-	choice:	20
-	choice:	20.33
-	choice:	20.67
-	choice:	21
-	choice:	21.33
-	choice:	21.67
-	choice:	22
-	choice:	22.33
-	choice:	22.67
-	choice:	23
-	choice:	23.33
-	choice:	23.67
-	choice:	24
-	choice:	24.33
-	choice:	24.67
-	choice:	25
-	choice:	25.33
-	choice:	25.67
-	choice:	26
-	choice:	26.33
-	choice:	26.67
-	choice:	27
-	choice:	27.33
-	choice:	27.67
-	choice:	28
-	choice:	28.33
-	choice:	28.67
-	choice:	29
-	choice:	29.33
-	choice:	29.67
-	choice:	30
-	choice:	30.33
-	choice:	30.67
-	choice:	31
-	choice:	31.33
-	choice:	31.67
-	choice:	32
-	choice:	32.33
-	choice:	32.67
-	choice:	33
-	choice:	33.33
-	choice:	33.67
-	choice:	34
+
 ############################################################## Card fields
 card style:
 	############################# Background stuff
@@ -534,7 +430,7 @@ card style:
 			separator color: red
 	
 	rarity:
-		right: 514
+		right: {514 + rarity_shift()}
 		top: 412
 		width: 62
 		height: 28
@@ -575,7 +471,7 @@ card style:
 					if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "mp.png"
 					else symbol_variation(symbol: set.masterpiece_symbol, variation: "mythic rare")
 	rarity 2:
-		right: 993.5
+		right: {993.5 + rarity_shift()}
 		top: 412
 		width: 62
 		height: 28
@@ -618,12 +514,12 @@ card style:
 	############################# Text box
 	text:
 		left: 105
-		top: 458
+		top: {458 + chop_top()}
 		width: 407
-		height: { if use_fuse() then 210 else 240 }
+		height: { (if use_fuse() then 210 else 240)-chop_bot() }
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
-			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else "Magic华文楷体" }
+			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: { left_font_size() }
 			scale down to: 6
 			color: black
@@ -632,29 +528,31 @@ card style:
 			size: { left_font_size() }
 		alignment:
 			script:
-				if (styling.center_text_1 == "short text only" and
+				if (styling.center_text == "short text only" and
 				   not contains(match:"\n", card.rule_text) and
 				   card.flavor_text == "<i-flavor></i-flavor>" and
 				   card_style.text.content_lines <= 2) or
-				   styling.center_text_1 == "always"
+				   styling.center_text == "always"
 				then "middle center"
 				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
 		z index: 2
 		padding left:   6
-		padding right:  4
-		line height hard: 1.2
-		line height line: 1.5
-		line height soft: 0.9
-		line height hard max: 1.3
-		line height line max: 1.6
+		padding right:  {4 + chop_right()}
+		line height hard: 1.1
+		line height line: { if chinese_new_font() then 1.6 else 1.5 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: 1.2
+		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
+
 	text 2:
 		left: 585
-		top: 458
+		top: {458 + chop_top()}
 		width: 407
-		height: { if use_fuse() then 210 else 240 }
+		height: { (if use_fuse() then 210 else 240)-chop_bot() }
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
-			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else "Magic华文楷体" }
+			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: { right_font_size() }
 			scale down to: 6
 			color: black
@@ -670,14 +568,15 @@ card style:
 				   styling.center_text_2 == "always"
 				then "middle center"
 				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
 		z index: 2
 		padding left:   6
-		padding right:  4
-		line height hard: 1.2
-		line height line: 1.5
-		line height soft: 0.9
-		line height hard max: 1.3
-		line height line max: 1.6
+		padding right:  {4 + chop_right()}
+		line height hard: 1.1
+		line height line: { if chinese_new_font() then 1.6 else 1.5 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: 1.2
+		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
 	
 	rule text 3:
 		top : 678
@@ -685,8 +584,8 @@ card style:
 		right: { 550 + max(890,card_style.rule_text_3.content_width)*0.5 }
 		height: 36
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" }
-			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else "Magic华文楷体" }
+			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: 22
 			scale down to: 6
 			color: black
@@ -724,53 +623,78 @@ card style:
 
 	############################# Card sorting / numbering
 	set code:
-		left: 54
-		top: 48
+		left: {1050-998}
+		top: 48.5
 		width: 80
 		height: 20
 		z index: 1
 		angle: 270
+		alignment: middle left
 		font:
 			name: Magic Gotham Medium
-			size: 14
+			size: {13-shrink_setcode()}
 			color: white
-			weight: bold
+
+	language code:
+		left: {1050-998}
+		top: 106
+		width: 10
+		height: 20
+		z index: 1
+		angle: 270
+		alignment: middle left
+		font:
+			name: Magic Gotham Medium
+			size: {13-shrink_setcode()}
+			color: white
 	############################# Copyright stuff
 	illustrator:
-		left: 55
-		top: { 80 + card_style.set_code.content_width }
+		left: {1050-997}
+		top: 166
 		width: 400
 		height: 20
 		z index: 1
 		angle: 270
 		font:
 			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std W7"}
-			size: 14.5
+			size: 14
 			color: white
 	copyright:
-		right: 50
-		top: 700
-		width: 280
+		left: {1050-981}
+		top: 699
+		width: 252
 		height: 20
 		z index: 2
 		angle: 270
-		visible: {not set.automatic_copyright}
 		alignment: middle right shrink-overflow
+		visible: {not set.automatic_copyright}
 		font:
-			name: Matrix
-			size: 14
+			name: mplantin
+			size: 13
 			color: white
-			weight: bold
 ############################################################## Extra card fields
+extra card field:
+	type: text
+	name: dot
+	script: if styling.is_foil then "★" else "•"
+	save value: false
+	editable: false
+	show statistics: false
 extra card field:
 	type: text
 	name: card code
 	save value: false
+	editable: false
+	script: rarity_code()
+extra card field:
+	type: text
+	name: card number
+	save value: false
 	script:
 		if set.automatic_card_numbers and not styling.remove_from_autocount then
-			forward_editor(prefix: rarity_code() + "<size:10>  </size>" + card_number_m15() + " ", field: card.card_code_text) 
+			forward_editor(prefix: card_number_m15(), field: card.card_code_text) 
 		else
-			combined_editor(field1: card.card_code_text, separator: "" + rarity_code() + "<size:10>  </size>", field2: card.custom_card_number)
+			forward_editor(prefix: "", field: card.custom_card_number)
 
 extra card field:
 	type: choice
@@ -830,23 +754,46 @@ extra card field:
 	show statistics: false
 
 extra card style:
+	dot:
+		left: 31.5
+		right:51.5
+		top: {48 + card_style.set_code.content_width}
+		bottom: {card_style.language_code.top}
+		z index: 1
+		alignment: middle center
+		font:
+			name: Magic Gotham Medium
+			size: {13-shrink_setcode()}
+			color: white
+
 	card code:
-		left: 74
-		top: 48
-		width: 240
+		left: {1050-979}
+		top: 48.5
+		width: 20
 		height: 20
 		z index: 1
 		angle: 270
 		font:
 			name: Magic Gotham Medium
-			size: 14
+			size: 13
 			color: white
-			weight: bold
+	card number:
+		left: {1050-979}
+		top: 69
+		width: 220
+		height: 20
+		z index: 1
+		angle: 270
+		font:
+			name: Magic Gotham Medium
+			size: 13
+			color: white
+
 	artist arrow:
-		left: 50
-		top: { 56 + card_style.set_code.content_width }
-		width: 24
-		height: 15
+		left: {1050-1002}
+		top: { 143 }
+		width: {24*0.9}
+		height: {15*0.9}
 		z index: 1
 		angle: 270
 		render style: image
@@ -874,19 +821,18 @@ extra card style:
 		image: { "stamp/stamp.png" }
 
 	auto copyright:
-		right: 72
-		top: 700
-		width: 280
+		right: {1050-981}
+		top: 699
+		width: 252
 		height: 20
 		z index: 2
-		angle: 270
 		alignment: middle right shrink-overflow
+		angle: 270
 		visible: {set.automatic_copyright}
 		font:
 			name: mplantin
-			size: 12
+			size: 13
 			color: white
-			weight: bold
 	
 	flavor bar:
 		left:	70.5

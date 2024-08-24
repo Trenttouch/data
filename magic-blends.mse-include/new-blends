@@ -1501,7 +1501,6 @@ archive_hybrid_2 := {linear_blend(
 horizontal_archive_hybrid := [
 	1:	{							template(				colors[0])				}
 	2:								archive_hybrid_2
-
 	3: {linear_blend(
 		image1:							template(				colors[(to_int(offset) + 0 ) mod 3]	),
 										x1: 0.22,	y1: 0
@@ -1528,7 +1527,6 @@ horizontal_archive_hybrid := [
 										x1: 0.69,	y1: 0
 										x2: 0.85,	y2: 0
 	)))}
-
 	5: {linear_blend(
 		image1: 						template(				colors[(to_int(offset) + 0 ) mod 5]	),
 										x1:  2.0 / 15,	y1: 0
@@ -1547,7 +1545,6 @@ horizontal_archive_hybrid := [
 										x1: 11.0 / 15,	y1: 0
 										x2: 13.0 / 15,	y2: 0
 	))))}
-
 	6: {linear_blend(
 		image1:							template(				colors[(to_int(offset) + 0 ) mod 6]	),
 										x1:  1.5 / 15,	y1: 0
@@ -1570,7 +1567,6 @@ horizontal_archive_hybrid := [
 										x1: 11.9 / 15,	y1: 0
 										x2: 13.5 / 15,	y2: 0
 	)))))}
-
 	7: {linear_blend(
 		image1:							template(				colors[(to_int(offset) + 0 ) mod 7]	),
 										x1:  1.3 / 15,	y1: 0
@@ -1687,4 +1683,92 @@ archive_hybrid := [
 		7:			vertical_card_hybrid
 	]
 	overlay:		overlay_hybrid
+]
+
+########################################################################
+# universe beyond setting
+########################################################################
+ubstamp_hybrid_2 := {linear_blend(
+				image1:					template(				colors[0]				),
+			image2:						template(				colors[1]				),
+										x1: -0.17,	y1: 0
+										x2:  1.17,	y2: 0
+	)
+}
+
+horizontal_ubstamp_hybrid := [
+	1: {								template(					colors[0])				}
+	2: ubstamp_hybrid_2
+	3: {								template(					colors[(to_int(offset) + 1 ) mod 3])	}
+	4: { linear_blend(
+		image1:							template(					colors[(to_int(offset) + 1 ) mod 4]	),
+		image2:							template(					colors[(to_int(offset) + 2 ) mod 4]	),
+										x1: -0.3,	y1: 0
+										x2:  1.3,	y2: 0
+	)}
+	5: {linear_blend(
+		image1:							template(					colors[(to_int(offset) + 1 ) mod 5]	)
+										x1: -0.55,	y1: 0
+										x2:  0.2,	y2: 0
+		image2: linear_blend(
+			image1:						template(					colors[(to_int(offset) + 2 ) mod 5]	),
+			image2:						template(					colors[(to_int(offset) + 3 ) mod 5]	),
+										x1: 0.8,	y1: 0
+										x2: 1.55,	y2: 0
+	))}
+	6: { linear_blend(
+		image1:							template(					colors[(to_int(offset) + 2 ) mod 6]	),
+		image2:							template(					colors[(to_int(offset) + 3 ) mod 6]	),
+										x1: 0.1,	y1: 0
+										x2: 0.9,	y2: 0
+	)}
+	7: {linear_blend(
+		image1:							template(					colors[(to_int(offset) + 2 ) mod 7]	),
+										x1: -0.55,	y1: 0
+										x2:  0.2,	y2: 0
+		image2: linear_blend(
+			image1:						template(					colors[(to_int(offset) + 3 ) mod 7]	),
+			image2:						template(					colors[(to_int(offset) + 5 ) mod 7]	),
+										x1: 0.8,	y1: 0
+										x2: 1.55,	y2: 0
+	))}
+]
+
+ubstamp_hybrid := [
+	radial: [
+		0: {							template(					"c")					}
+		1: {							template(					colors[0])				}
+		2: { linear_blend(
+			image1:						template(					colors[0]				),
+			image2:						template(					colors[1]				),
+										x1: -0.3,	y1: 0
+										x2:  1.3,	y2: 0
+		)}
+		3: {							template(					colors[(to_int(offset) + 2) mod 3])	}
+		4: { linear_blend(
+			image1:						template(					colors[(to_int(offset) + 3) mod 4]	),
+			image2:						template(					colors[(to_int(offset) + 2) mod 4]	),
+										x1: -0.3,	y1: 0
+										x2:  1.3,	y2: 0
+		)}
+		5: {							template(					colors[(to_int(offset) + 3) mod 5])	}
+		6: { linear_blend(
+			image1:						template(					colors[(to_int(offset) + 4) mod 6]	),
+			image2:						template(					colors[(to_int(offset) + 3) mod 6]	),
+										x1: -0.3,	y1: 0
+										x2:  1.3,	y2: 0
+		   )}
+		7: {							template(					colors[(to_int(offset) + 4 ) mod 7])	}
+	]
+	horizontal: horizontal_ubstamp_hybrid
+	vertical: [
+		1: {							template(					colors[0])				}
+		2: {							template(					colors[1])				}
+		3: {							template(					colors[(to_int(offset) + 2 ) mod 3])	}
+		4: {							template(					colors[(to_int(offset) + 3 ) mod 4])	}
+		5: {							template(					colors[(to_int(offset) + 4 ) mod 5])	}
+		6: {							template(					colors[(to_int(offset) + 5 ) mod 6])	}
+	#	7: {							template(					colors[(to_int(offset) + 6 ) mod 7])	}
+	]
+	overlay: overlay_hybrid
 ]

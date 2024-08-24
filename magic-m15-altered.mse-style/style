@@ -4,7 +4,7 @@ short name: M15 主牌框
 full name: 主牌框和一些变体
 icon: card-sample.png
 installer group: magic/m15 style/normal cards
-position hint: 001
+position hint: 010
 
 version: 2020-09-04
 depends on:
