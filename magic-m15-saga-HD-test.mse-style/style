@@ -132,6 +132,7 @@ init script:
 
 	chinese_new_font := { styling.chinese_new_font }
 	ch_font := { if chinese_new_font() then "MSE华康黑体W3(P)" else "方正细等线_GBK_FIX" }
+	ch_flavor_font := { if chinese_new_font() then "MSE华康楷体W5(P)" else "Magic华文楷体" }
 	use_acorn_stamp := { styling.use_acorn_stamp }
 	rarity_shift := {if styling.rarity_shift != "" then to_number(styling.rarity_shift) else 0 }
 	chop_right := {if styling.chop_right != "" then to_number(styling.chop_right) else 0}
