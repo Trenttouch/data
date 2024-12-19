@@ -771,8 +771,92 @@ symbol:
 	code: ∞
 ###################################################################################### Colorless Mana Symbols
 symbol:
-	code: 100
-	image: 100.png
+	image: mana_circle_1000000.png
+	code: [0-9],[0-9][0-9][0-9],[0-9][0-9][0-9]
+	regex: yes
+	draw text: 0
+	text margin left:   .23
+	text margin right:  .23
+	text margin top:    -.11
+	text margin bottom: -.11
+	text font:
+		name: MPlantin
+		size: 1
+		color: black
+		weight: {"bold"}
+symbol:
+	image: mana_circle_100000.png
+	code: [0-9][0-9][0-9],[0-9][0-9][0-9]
+	regex: yes
+	draw text: 0
+	text margin left:   .23
+	text margin right:  .23
+	text margin top:    -.11
+	text margin bottom: -.11
+	text font:
+		name: MPlantin
+		size: 1
+		color: black
+		weight: {"bold"}
+symbol:
+	image: mana_circle_10000.png
+	code: [0-9][0-9],[0-9][0-9][0-9]
+	regex: yes
+	draw text: 0
+	text margin left:   .23
+	text margin right:  .23
+	text margin top:    -.11
+	text margin bottom: -.11
+	text font:
+		name: MPlantin
+		size: 1
+		color: black
+		weight: {"bold"}
+symbol:
+	image: mana_circle_1000.png
+	code: [0-9],[0-9][0-9][0-9]
+	regex: yes
+	draw text: 0
+	text margin left:   .23
+	text margin right:  .23
+	text margin top:    -.11
+	text margin bottom: -.11
+	text font:
+		name: MPlantin
+		size: 1
+		color: black
+		weight: {"bold"}
+symbol:
+	image: mana_circle_100.png
+	code: [0-9][0-9][0-9]
+	regex: yes
+	draw text: 0
+	text margin left:   .23
+	text margin right:  .23
+	text margin top:    -.11
+	text margin bottom: -.11
+	text font:
+		name: MPlantin
+		size: 1
+		color: black
+		weight: {"bold"}
+symbol:
+	image: mana_circle.png
+	code: [3-9][0-9]
+	regex: yes
+	draw text: 0
+	text margin left:   .11
+	text margin right:  .11
+	text margin top:    -.22
+	text margin bottom: -.11
+	text font:
+		name: MPlantin
+		size: 1
+		color: black
+		weight: {"bold"}
+#symbol:
+#	code: 100
+#	image: 100.png
 symbol:
 	code: 99(?!/)
 	regex: yes

@@ -1169,7 +1169,13 @@ package:
 
 
 	magic-*.mse-include:
-		text chops: 规则叙述与边框的上下间距
+		chinese new font: 中文新字体
+		justify text: 对齐规则文字(某些情况不使用)
+		CHNFlavorsize: 中文背景叙述字体大小
+		rarity shift: 稀有标志右偏移量
+		shrink setcode text: 缩小系列编码字体大小
+
+		text chops: 规则叙述与边框的上下右间距
 		chop top:	规则叙述与边框的上间距
 		chop bottom:	规则叙述与边框的下间距
 		shrink name text:	牌名字体缩小值
@@ -1184,6 +1190,48 @@ package:
 		use holofoil stamps: 使用稀有标记？
 		is foil: 闪卡？(标记为 · 还是 ★ )
 		use acron stamp: 使用橡果标(鸡飞牌)？
+		remove from autocount: 自定义卡牌编号？
+		ancestral mana symbols: 预定义法术力图标(建议开启)
+		tap symbol: 横置符号
+		color indicator dot:		使用颜色标识圈
+		remove from autocount:		移除自动序号
+		alt rarity color:		替代稀有度颜色
+		card watermark:		卡牌水印
+		hybrid name:		混血卡牌边框颜色
+		grey:		灰色
+		gold:		金色
+		hybrid:		混合
+		colored multicolor land name:		多色地牌标题栏变色
+		use guild mana symbols:		使用公会法术力符号
+		tap symbol:			横置符号
+		popup style:			摩登
+		text box mana symbols:		文字栏法术力符号
+		center text:			文字居中
+		inverted common symbol:			反相显示铁牌的稀有度标志
+		overlay: 闪卡贴膜
+		promo: 是否为奖励卡(没用)
+		masterpiece: 是否为大师牌(没用)
+		grey hybrid name: 混血牌时灰色牌名栏/类别栏
+		unsorted casting cost: 非自动排序的法术力费用
+		use acorn stamp: 使用橡果标(鸡飞牌)？
+
+	magic-*.mse-style:
+
+		text chops: 规则叙述与边框的上下右间距
+		chop top:	规则叙述与边框的上间距
+		chop bottom:	规则叙述与边框的下间距
+		shrink name text:	牌名字体缩小值
+		shrink typeline text:	类别字体缩小值
+		shrink power text:	攻防字体缩小值
+		font cap: 规则叙述字体大小
+		inner crown style: 传奇内框样式
+		use alias: 使用假名框？
+		shrink adventure name text: 历险牌名字体缩小值
+		font cap extra: 第二规则叙述字体大小(历险，试作等)
+		extra shrink power text: 第二攻防字体缩小值(试作等)
+		use holofoil stamps: 使用稀有标记？
+		is foil: 闪卡？(标记为 · 还是 ★ )
+		use acorn stamp: 使用橡果标(鸡飞牌)？
 		remove from autocount: 自定义卡牌编号？
 		ancestral mana symbols: 预定义法术力图标(建议开启)
 		tap symbol: 横置符号
@@ -1204,27 +1252,10 @@ package:
 		Center text:			文字居中
 		Inverted common symbol:			反相显示铁牌的稀有度标志
 		Overlay: 闪卡贴膜
-		
-	magic-*.mse-style:
-		text chops: 规则叙述与边框的上下间距
-		chop top:	规则叙述与边框的上间距
-		chop bottom:	规则叙述与边框的下间距
-		shrink name text:	牌名字体缩小值
-		shrink typeline text:	类别字体缩小值
-		shrink power text:	攻防字体缩小值
-		font cap: 规则叙述字体大小
-		inner crown style: 传奇内框样式
-		use alias: 使用假名框？
-		shrink adventure name text: 历险牌名字体缩小值
-		font cap extra: 第二规则叙述字体大小(历险，试作等)
-		extra shrink power text: 第二攻防字体缩小值(试作等)
-		use holofoil stamps: 使用稀有标记？
-		is foil: 闪卡？(标记为 · 还是 ★ )
-		use acron stamp: 使用橡果标(鸡飞牌)？
-		remove from autocount: 自定义卡牌编号？
-		ancestral mana symbols: 预定义法术力图标(建议开启)
-		tap symbol: 横置符号
-		
+
+
+
+
 		frames:		特殊边框
 		universe beyond: 无疆新宇宙
 		circuit(universe beyond DIY): 线路板(无疆新宇宙DIY)
@@ -1253,6 +1284,27 @@ package:
 		use phyrexian font: 使用非瑞字体
 		standard:		标准
 		companion:		行侣
+		planeswalker: 鹏洛客
+		use unindent nonloyalty abilities: 鹏洛客使用非忠诚异能
+		mythic edition fullart: 全画鹏洛客
+		saga: 传纪
+		remove bookmark: 传纪去除标记和书签
+		extend: 左右扩边框
+		eldrazi melds: 奥札奇融合
+		battle: 战役
+		tallart battle: 高画战役
+		full art battle: 透明规则叙述战役
+		bot: （变形金刚）破碎镜像
+		showcase: 无边框
+		↑ black type and oracle frame: ↑黑色透明类别和叙述栏
+		↑ new pt style: ↑新攻防框
+		no rarity: 无稀有度标志
+		prototype: 试作
+		spree: 追欢
+		serialized: 限量编号
+		tall art: 高画
+		adventure(no tall art): 历险（没有高画）
+
 		
 		Custom symbol:		自定义图案
 		Legend crown:		传奇框风格
@@ -1291,64 +1343,107 @@ package:
 		Arrows:		箭头
 		Pt boxes:		攻防栏
 		Loyalty boxes:		忠诚度栏
-		Use holofoil stamps:		使用防伪标记
-		Color indicator dot:		使用颜色标识圈
-		Remove from autocount:		移除自动序号
-		Alt rarity color:		替代稀有度颜色
-		Card watermark:		卡牌水印
-		Hybrid name:		混血卡牌边框颜色
-		Grey:		灰色
-		Gold:		金色
-		Hybrid:		混合
-		Colored multicolor land name:		多色地牌标题栏变色
-		Use guild mana symbols:		使用公会法术力符号
-		Tap symbol:			横置符号
-		Popup style:			摩登
-		Text box mana symbols:		文字栏法术力符号
-		Center text:			文字居中
-		Inverted common symbol:			反相显示铁牌的稀有度标志
-		Overlay: 闪卡贴膜
-		
+
 		hover art fix: 破框画位置修正
 		custom mask: 自定义蒙版
 		others: 其它选项
 		hover art:破框画(可使用png透明底图片)
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
+		extra text chops: 第二规则叙述与边框的上下右间距
 		
 
-	
+		shift loyalty costs: 忠诚异能偏移量
+		chapter textboxes: 传纪章节数量
+		snap chapter to box: 将章节标号分配给异能
+		chapter divider coordinates: 断章横线的绝对位置
+		reminder coordinate: 传纪规则提示框横断线的绝对位置
+		chapter number coordinates: 章节标号的绝对位置
+		wider watermarks: 更宽的水印（传纪）
 		
+		back text chops: （背面）规则叙述与边框的上下右间距
+		back shrink power text:	（背面）攻防字体缩小值
+		back font cap: （背面）规则叙述字体大小
+		back inner crown style: （背面）传奇内框样式
+		back frames: （背面）特殊边框
+		back shift loyalty costs: （背面）忠诚异能偏移量
+		map rarity shift: （背面）地图框稀有度右偏移量
+		color indicator dot 2 :（背面）卡牌颜色判定圈
 		
+		back chapter textboxes: （背面）传纪章节数量
+		back snap chapter to box: （背面）将章节标号分配给异能
+		back chapter divider coordinates: （背面）断章横线的绝对位置
+		back reminder coordinate: （背面）传纪规则提示框横断线的绝对位置
+		back chapter number coordinates: （背面）章节标号的绝对位置
+		back wider watermarks: （背面）更宽的水印（传纪）
 		
+		font cap 2: 规则叙述2字体大小
+		use universe beyond stamps: 使用无疆新宇宙稀有标志
+		attraction visit: 景点“造访”点数
+		combined chop: 组合上下边距
+		font size: 规则叙述字体大小
+		chinese new font: 中文新字体
+		justify text: 对齐规则文字(某些情况不使用)
+		CHNFlavorsize: 中文背景叙述字体大小
+		rarity shift: 稀有标志右偏移量
+		shrink setcode text: 缩小系列编码字体大小
+		override levels: 忠诚异能数量
+		oher options: 其它选项
 		
+		bigger image size: 更大的图片
+		use taller frame: 使用4忠诚异能框
+		use compleat frame: 使用完化鹏洛客框
+		ancestral generic mana: 预定义法术力图标(建议开启)
+		un-indent nonloyalty abilities: 鹏洛客使用非忠诚异能
+		fullart black twins: 全画鹏洛客透明名字类别栏
+		alias fullart frame: 假名全画鹏洛客框
+		alias white text: 假名鹏洛客规则颜色白色
+		first bottom: 第一规则下隔断修正
+		third top: 第三规则上隔断修正
+		third bottom: 第三规则下隔断修正
+		fifth top: 第五规则上隔断修正
+		fifth bottom: 第五规则下隔断修正
 		
+		chop right: 规则叙述与边框的右间距
+		reminder text size: 传纪规则提示字体大小
+		separate text size: 规则叙述字体大小
+		alternate reminder: 自定义规则提示
+		custom chapter location: 自定义章节标号文件地址
+		custom chapter location: 自定义章节标号调用名称
+		universe beyond(saga only): 无疆新宇宙（仅传纪）
+		read ahead: 跳读
+		class: 职业
+		case: 案件
+		custom crown location: 自定义传奇框文件地址
+		replacement chapter location: 替换章节标号文件夹地址
+		custom chapter coordinate: 自定义章节标号绝对位置
 		
+		full art frame: (完全)全画
+		new pt style: 新攻防框
+		short textbox: 更矮的规则框
+		godzilla nickname: 假名框
+		use black twins: 使用黑透明规则栏
+		↑ only type and oracle black: ↑只有类别栏和规则栏黑透明
+		use shadow: 使用字体阴影
 		
+		hide type and rarity: 隐藏类别和稀有标志
+		original background: （透明画时）使用原有图片垫底
+		universe beyond(For some frames): 无疆新宇宙（针对某些模板）
+		center name: 名称居中
+
+		use STAJP rarity: 使用日文秘典稀有标志大小
+		type frame fix: 类别位置修正
 		
+		shrink name text 2: 牌名第二部分字体缩小值
+		reverse name place: 颠倒名字上下位置
 		
+		pt box: 是否存在攻防栏
 		
-		
-		
-		
-		
-		
-		
-		
-		
+		nyx room style: 尼兹结界房间框
+		ub room style: 无疆新宇宙房间框
+		snow room style: 雪境房间框
+		center text 2: 规则文字2居中
+
+
 		
 		
 		

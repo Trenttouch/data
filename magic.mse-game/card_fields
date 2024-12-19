@@ -139,6 +139,8 @@ card field:
 	icon: stats/card_symbol.png
 	choice: none
 	choice: tombstone
+	choice: up
+	choice: down
 	description: 墓碑标志
 card field:
 	type: choice
@@ -580,6 +582,7 @@ card field:
 	default: set.artist
 	description: 卡牌原画作者，默认值可在“套牌信息”界面设置
 	show statistics: false
+	script: illustrator_language_check(card.illustrator)
 card field:
 	type: text
 	name: copyright
@@ -1022,6 +1025,7 @@ card field:
 	default: set.artist
 	show statistics: false
 	description: The illustrator of the image
+	script: illustrator_language_check(card.illustrator_2)
 card field:
 	type: text
 	name: copyright 2
@@ -1045,6 +1049,7 @@ card field:
 	default: set.artist
 	show statistics: false
 	description: The illustrator of the image
+	script: illustrator_language_check(card.illustrator_3)
 card field:
 	type: text
 	name: copyright 3

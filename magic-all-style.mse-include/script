@@ -16,3 +16,10 @@
 	ch_flavor_font := { if chinese_new_font() then "MSE华康楷体W5(P)" else "Magic华文楷体" }
 
 	rarity_shift := {if styling.rarity_shift != "" then to_number(styling.rarity_shift) else 0 }
+
+	#illustrator_check :={
+	#	##首先判断是否有/
+	#	##再根据每个部分进行字体判断
+	#	##最后想办法写入（最困难！）（或许能用<i></i>可以试试）
+	#	##想想以前是怎么在set code 插入空格的
+	#}

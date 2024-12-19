@@ -9,13 +9,14 @@ languages := [
 		type_separator    : " — ",
 		subtype_separator : " ",
 		is_creature       : match@(match: "(?i)Creature")
-		is_tribal         : match@(match: "(?i)Tribal")
+		is_tribal         : match@(match: "(?i)Kindred")
 		is_artifact       : match@(match: "(?i)Artifact")
 		is_land           : match@(match: "(?i)Land")
 		is_enchantment    : match@(match: "(?i)Enchantment")
 		is_spell          : match@(match: "(?i)Instant|Sorcery")
 		is_planeswalker   : match@(match: "(?i)Planeswalker|Emblem")
 		is_plane		  : match@(match: "(?i)Plane(?!swalker)")
+		is_battle		  : match@(match: "(?i)Battle")
 		word_list		  : "word_list"
 	],
 	简体中文: [
@@ -23,15 +24,16 @@ languages := [
 		spellcheck_code   : "chs_cn",
 		pt_separator      : "/",
 		type_separator    : "～"
-		subtype_separator : "<atom-sep> / </atom-sep>",
+		subtype_separator : "<atom-sep>／</atom-sep>",
 		is_creature       : match@(match: "(?i)生物")
-		is_tribal         : match@(match: "(?i)部族")
+		is_tribal         : match@(match: "(?i)亲缘")
 		is_artifact       : match@(match: "(?i)神器")
 		is_land           : match@(match: "(?i)地")
 		is_enchantment    : match@(match: "(?i)结界")
 		is_spell          : match@(match: "(?i)瞬间|法术")
 		is_planeswalker   : match@(match: "(?i)旅法师|鹏洛客")
 		is_plane		  : match@(match: "(?i)时空")
+		is_battle		  : match@(match: "(?i)战役")
 		word_list		  : "word_list_chs"
 	], 
 	"English (British)": [
@@ -41,13 +43,14 @@ languages := [
 		type_separator    : " — ",
 		subtype_separator : " ",
 		is_creature       : match@(match: "(?i)Creature")
-		is_tribal         : match@(match: "(?i)Tribal")
+		is_tribal         : match@(match: "(?i)Kindred")
 		is_artifact       : match@(match: "(?i)Artifact")
 		is_land           : match@(match: "(?i)Land")
 		is_enchantment    : match@(match: "(?i)Enchantment")
 		is_spell          : match@(match: "(?i)Instant|Sorcery")
 		is_planeswalker   : match@(match: "(?i)Planeswalker|Emblem")
 		is_plane		  : match@(match: "(?i)Plane(?!swalker)")
+		is_battle		  : match@(match: "(?i)Battle")
 		word_list		  : "word_list"
 	],  
 	"English (Canadian)": [
@@ -57,7 +60,7 @@ languages := [
 		type_separator    : " — ",
 		subtype_separator : " ",
 		is_creature       : match@(match: "(?i)Creature")
-		is_tribal         : match@(match: "(?i)Tribal")
+		is_tribal         : match@(match: "(?i)Kindred")
 		is_artifact       : match@(match: "(?i)Artifact")
 		is_land           : match@(match: "(?i)Land")
 		is_enchantment    : match@(match: "(?i)Enchantment")
@@ -89,7 +92,7 @@ languages := [
 		type_separator    : " — ",
 		subtype_separator : " ",
 		is_creature       : match@(match: "(?i)Creatura")
-		is_tribal         : match@(match: "(?i)Tribale")
+		is_tribal         : match@(match: "(?i)Kindrede")
 		is_artifact       : match@(match: "(?i)Artefatto")
 		is_land           : match@(match: "(?i)Terra")
 		is_enchantment    : match@(match: "(?i)Incantesimo")
@@ -105,7 +108,7 @@ languages := [
 		type_separator    : " — ",
 		subtype_separator : " ",
 		is_creature       : match@(match: "(?i)Criatura")
-		is_tribal         : match@(match: "(?i)Tribal")
+		is_tribal         : match@(match: "(?i)Kindred")
 		is_artifact       : match@(match: "(?i)Artefato")
 		is_land           : match@(match: "(?i)Terreno")
 		is_enchantment    : match@(match: "(?i)Encantamento")
@@ -121,7 +124,7 @@ languages := [
 		type_separator    : " : "
 		subtype_separator : "<atom-sep> et </atom-sep>",
 		is_creature       : match@(match: "(?i)Creature|Créature")
-		is_tribal         : match@(match: "(?i)tribal")
+		is_tribal         : match@(match: "(?i)Kindred")
 		is_artifact       : match@(match: "(?i)Artefact")
 		is_land           : match@(match: "(?i)Terrain")
 		is_enchantment    : match@(match: "(?i)Enchantement")

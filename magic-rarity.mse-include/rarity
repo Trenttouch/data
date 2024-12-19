@@ -2,6 +2,11 @@
 # Edit by Heavenford 2017.1.14
 
 choice images:
+	DFT Mythic: 	/magic-rarity.mse-include/DFT_M.png
+	DFT Rare: 		/magic-rarity.mse-include/DFT_R.png
+	DFT Uncommon: 	/magic-rarity.mse-include/DFT_U.png
+	DFT Common: 	/magic-rarity.mse-include/DFT_C.png
+
 	FDN Mythic: 	/magic-rarity.mse-include/FDN_M.png
 	FDN Rare: 		/magic-rarity.mse-include/FDN_R.png
 	FDN Uncommon: 	/magic-rarity.mse-include/FDN_U.png
@@ -995,6 +1000,11 @@ choice images:
 	Starter SCD Uncommon: /magic-rarity.mse-include/SCD_U.png
 	Starter SCD Common: /magic-rarity.mse-include/SCD_C.png
 
+	Starter J25 Mythic: /magic-rarity.mse-include/J25_M.png
+	Starter J25 Rare: /magic-rarity.mse-include/J25_R.png
+	Starter J25 Uncommon: /magic-rarity.mse-include/J25_U.png
+	Starter J25 Common: /magic-rarity.mse-include/J25_C.png
+
 	Starter J22 Mythic: /magic-rarity.mse-include/J22_M.png
 	Starter J22 Rare: /magic-rarity.mse-include/J22_R.png
 	Starter J22 Uncommon: /magic-rarity.mse-include/J22_U.png
@@ -1163,6 +1173,12 @@ choice images:
 	Supplemental AST Rare: /magic-rarity.mse-include/AST_R.png
 	Supplemental AST Uncommon: /magic-rarity.mse-include/AST_U.png
 	Supplemental AST Common: /magic-rarity.mse-include/AST_C.png
+
+
+	Masters INR Mythic: /magic-rarity.mse-include/INR_M.png
+	Masters INR Rare: /magic-rarity.mse-include/INR_R.png
+	Masters INR Uncommon: /magic-rarity.mse-include/INR_U.png
+	Masters INR Common: /magic-rarity.mse-include/INR_C.png
 
 	Masters RVR Mythic: /magic-rarity.mse-include/RVR_M.png
 	Masters RVR Rare: /magic-rarity.mse-include/RVR_R.png

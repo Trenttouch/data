@@ -13,10 +13,10 @@ word list:
 		name: 衍生物
 		is prefix: true
 	word:
-		name: 部族
+		name: 亲缘
 		is prefix: true
 	word:
-		name: 世界
+		name: 普世
 		is prefix: true
 	word:
 		name: 基本
@@ -32,8 +32,9 @@ word list:
 	word: 法术
 	word: 地
 	word: 鹏洛客
+	word: 战役
 	word: 徽记
-	word: Phenomenon时空
+	word: 异象
 	word: 时空
 
 word list:
@@ -147,7 +148,6 @@ word list:
 		word: 
 			name: 魔像
 			line below: true
-		word: 那迦
 		word: 宁芙
 		word: 牛
 		word: 牛头怪
@@ -166,7 +166,7 @@ word list:
 		word: 石像鬼
 		word: 食人魔
 		word: 史芬斯
-		word: 鼠
+		word: 老鼠
 		word: 树灵
 		word: 树妖
 		word: 
@@ -827,3 +827,10 @@ word list:
 	word: 卡娅
 	word: 多温
 	word: 莎希莉
+
+word list:
+	name: battle
+	word:
+		script: allcn_sub_types(match: "战役")
+		line below: true
+	word: 围攻
