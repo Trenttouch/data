@@ -140,6 +140,15 @@ init script:
 
 	memory:"memory/" memorypt:"memory/pt/"
 	
+	lcilegend:"lcilegend/"
+
+	paranormal:"paranormal/"
+	paranormalstamp:"paranormal/stamp/"
+
+	jpshowcase:"jpshowcase/"
+	jpshowcasept:"jpshowcase/pt/"
+	jpshowcasestamp:"jpshowcase/stamp/"
+
 	unstable:"unstable/"
 	unfinityland:"unfinityland/"
 	zdktll:"tll/zdk/" instll:"tll/ins/" thstll:"tll/ths/"
@@ -199,11 +208,22 @@ init script:
 
 	memory:".png" memorypt:".png"
 	
+	lcilegend:"card.png"
+
+	paranormal:".png"
+	paranormalstamp:".png"
+
+	jpshowcase:".png"
+	jpshowcasept:"pt.png"
+	jpshowcasestamp:".png"
+
 	unstable:"card.png"
 	unfinityland:"card.png"
 	zdktll:"card.png" instll:"card.png" thstll:"card.png" onetll:"card.png"
 	colorback:".jpg"
 	crown:"crown.png" pt: "pt.png" identity: "identity.png"
+
+	crownall:"crown.png" ptall: "pt.png"
 	]
 	
 	template_prefix_inv := [inv: "invention/back/"]
@@ -269,6 +289,14 @@ init script:
 			else if styling.frames=="ninja" then template_prefix_crown_ninja
 			else if styling.frames=="samurai" then template_prefix_crown_samurai
 			else template_prefix_crown
+		else if type == "ptall" then
+			if styling.frames=="lcilegend" then [ptall: "lcilegend/pt/"]
+			else if styling.frames=="paranormal" then [ptall: "paranormal/pt/"]
+			else [ptall: ""]
+		else if type == "crownall" then
+			if styling.frames=="lcilegend" then [crownall: "lcilegend/crown/"]
+			else if styling.frames=="paranormal" then [crownall: "paranormal/crown/"]
+			else [crownall: ""]
 		else
 			template_prefix_normal 
 		}
@@ -422,6 +450,19 @@ init script:
 	memory_background := { color_background(type:"memory",     base_hybrid:card_hybrid) }
 	memory_pt_background := { color_background(type:"memorypt",     base_hybrid:card_hybrid) }
 
+	lcilegend_background := { color_background(type:"lcilegend",     base_hybrid:card_hybrid) }
+	lcilegend_crown_background := { color_background(type:"crownall",     base_hybrid:card_hybrid) }
+	lcilegend_pt_background := { color_background(type:"ptall",     base_hybrid:card_hybrid) }
+
+	paranormal_background := { color_background(type:"paranormal",     base_hybrid:card_hybrid) }
+	paranormal_crown_background := { color_background(type:"crownall",     base_hybrid:card_hybrid) }
+	paranormal_pt_background := { color_background(type:"ptall",     base_hybrid:card_hybrid) }
+	paranormal_stamp_background := { color_background(type:"paranormalstamp",     base_hybrid:stamp_hybrid) }
+
+	jpshowcase_background := { color_background(type:"jpshowcase",     base_hybrid:card_hybrid) }
+	jpshowcase_pt_background := { color_background(type:"jpshowcasept",     base_hybrid:card_hybrid) }
+	jpshowcase_stamp_background := { color_background(type:"jpshowcasestamp",     base_hybrid:stamp_hybrid) }
+
 	# texless_background := { color_background(type:"texless",     base_hybrid:card_hybrid) }
 
 	zdktll_background := { color_background(type:"zdktll",     base_hybrid:card_hybrid) }
@@ -466,16 +507,20 @@ init script:
 		else if styling.frames=="scroll" then scroll_background()
 		else if styling.frames=="tardis" then tardis_background()
 		else if styling.frames=="glass" then glass_background()
+		else if styling.frames=="bot" then if is_legend() then "bot/lcard.png" else "bot/card.png"
 		else if styling.frames=="mystical archive" then archive_background()
 		else if styling.frames=="storybook" then storybook_background()
 		else if styling.frames=="storybook adventure" then storyadv_background()
 		else if styling.frames=="tale" then tale_background()
 		else if styling.frames=="pipboy" then pipboy_background()
 		else if styling.frames=="vault" then vault_background()
+		else if styling.frames=="lcilegend" then lcilegend_background()
 		else if styling.frames=="dossier" then dossier_background()
 		else if styling.frames=="breakingnews" then breakingnews_background()
 		else if styling.frames=="memory corridor" then memory_background()
 		else if styling.frames=="imaginecritters" then if card.pt != "" then "imaginecritters/card1.png" else "imaginecritters/card.png"
+		else if styling.frames=="paranormal" then paranormal_background()
+		else if styling.frames=="jpshowcase" then jpshowcase_background()
 
 		else if styling.frames=="neon" and is_vehicle() and chosen(choice:"colorless", card.card_color) then "neon/voverlay.png"
 		else if styling.frames=="neon" then if (is_rare() and styling.use_holofoil_stamps) then neon_background() else neon_background2()
@@ -516,15 +561,19 @@ init script:
 		else if styling.frames=="ring" then "ring/frame_mask.png"
 		else if styling.frames=="tardis" then "tardis/frame_mask.png"
 		else if styling.frames=="glass" then "glass/frame_mask.png"
+		else if styling.frames=="bot" then "bot/frame_mask.png"
 		else if styling.frames=="storybook" then "storybook/frame_mask.png"
 		else if styling.frames=="storybook adventure" then "storybook/adventure/frame_mask.png"
 		else if styling.frames=="tale" then "tale/frame_mask.png"
 		else if styling.frames=="pipboy" then "pipboy/frame_mask.png"
 		else if styling.frames=="vault" then "vault/frame_mask.png"
+		else if styling.frames=="lcilegend" then "lcilegend/frame_mask.png"
 		else if styling.frames=="dossier" then "dossier/frame_mask.png"
 		else if styling.frames=="breakingnews" then "breakingnews/frame_mask.png"
 		else if styling.frames=="memory corridor" then "memory/frame_mask.png"
 		else if styling.frames=="imaginecritters" then "imaginecritters/frame_mask.png"
+		else if styling.frames=="paranormal" then "paranormal/frame_mask.png"
+		else if styling.frames=="jpshowcase" then "jpshowcase/frame_mask.png"
 		else "frame_mask.png"
 	}
 	
@@ -549,21 +598,24 @@ init script:
 		else if styling.frames=="ring" then ring_pt_background()
 		else if styling.frames=="scroll" then scroll_pt_background()
 		else if styling.frames=="glass" then glass_pt_background()
+		else if styling.frames=="bot" then "bot/pt.png"
 		else if styling.frames=="storybook" or styling.frames=="storybook adventure" then storybook_pt_background()
 		else if styling.frames=="tale" then tale_pt_background()
 		else if styling.frames=="pipboy" then "pipboy/pt.png"
 		else if styling.frames=="dossier" then "dossier/pt.png"
 		else if styling.frames=="vault" then vault_pt_background()
+		else if styling.frames=="lcilegend" then lcilegend_pt_background()
 		else if styling.frames=="breakingnews" then breakingnews_pt_background()
 		else if styling.frames=="memory corridor" then memory_pt_background()
-
+		else if styling.frames=="paranormal" then paranormal_pt_background()
+		else if styling.frames=="jpshowcase" then jpshowcase_pt_background()
 		else if styling.frames=="imaginecritters" then ""
 		
 		else card_ptbox()
 	}
 	
 	img_set := { 
-			 if styling.frames=="invention" then "30,30,691,939"
+			 if styling.frames=="invention" then "30,30,690,939"
 		else if styling.frames=="goldenage" then "48,54,654,941"
 		else if styling.frames=="zendikar rising expeditions" then "30,114,692,742"
 		else if styling.frames=="zendikar expeditions" then "56,116,638,735"
@@ -592,14 +644,18 @@ init script:
 		else if styling.frames=="ring" then "74, 125.5, 602, 460"
 		else if styling.frames=="tardis" then "57.5, 132, 635.5, 449"
 		else if styling.frames=="glass" then "30, 116.5, 690, 468"
+		else if styling.frames=="bot" then "0,0,750,965"
 		else if styling.frames=="storybook" or styling.frames=="storybook adventure" then "28, 31, 698, 578"
 		else if styling.frames=="tale" then "0, 56, 750, 910"
 		else if styling.frames=="pipboy" then "57,133.5,635,433"
 		else if styling.frames=="vault" then "0,125,750,445"
+		else if styling.frames=="lcilegend" then "30,30,690,985"
 		else if styling.frames=="dossier" then "38.5,136.5,659,428"
 		else if styling.frames=="breakingnews" then "39.5,178.5,672.5,424"
 		else if styling.frames=="memory corridor" then "0,0,750,587"
 		else if styling.frames=="imaginecritters" then if card.pt != "" then "0,0,750,990" else "0,0,750,965"
+		else if styling.frames=="paranormal" then "59,122,589,449"
+		else if styling.frames=="jpshowcase" then "0,0,750,969"
 		else "56,117,638,468"
 	}
 	
@@ -627,9 +683,12 @@ init script:
 		else if (styling.frames=="scroll" or styling.frames=="pipboy") then "pipboy/stamp.png"
 		else if styling.frames=="dossier" then "dossier/stamp.png"
 		else if styling.frames=="vault" then vaultstamp_background()
+		else if styling.frames=="lcilegend" then "lcilegend/stamp.png"
 		else if styling.frames=="breakingnews" then "breakingnews/stamp.png"
 		else if styling.frames=="memory corridor" then "memory/stamp.png"
 		else if styling.frames=="imaginecritters" then ""
+		else if styling.frames=="paranormal" then paranormal_stamp_background()
+		else if styling.frames=="jpshowcase" then jpshowcase_stamp_background()
 		else "foil_stamp.png"
 	}
 	stamp_img_set := {
@@ -649,8 +708,11 @@ init script:
 		else if (styling.frames=="scroll" or styling.frames=="pipboy") then "340,959.5,70,39"
 		else if styling.frames=="dossier" then "321.26865,947.7612,105.3571,50"
 		else if styling.frames=="vault" then "317.1641,948.2443,115.6716,49.2537"
+		else if styling.frames=="lcilegend" then "335.8209,951.4925,79.1045,41.4179"
 		else if styling.frames=="breakingnews" then "291.7910,953.3582,166.7910,43.28358"
 		else if styling.frames=="memory corridor" then "340.6716,955.597,68.6567,38.4328"
+		else if styling.frames=="paranormal" then "320.5224,944.97,108.955224,48.880597"
+		else if styling.frames=="jpshowcase" then "327.5,948,95,47.5"
 		else "327,947,96,49"
 	}
 	stamp_img_left := {to_number(pull_comma_array(stamp_img_set(), cell:0, end:false))}
@@ -677,8 +739,10 @@ init script:
 		else if styling.frames=="pipboy" then pipboy_crown_background()
 		else if styling.frames=="dossier" then dossier_crown_background()
 		else if styling.frames=="vault" then vault_crown_background()
+		else if styling.frames=="lcilegend" then lcilegend_crown_background()
 		else if styling.frames=="breakingnews" then breakingnews_crown_background()
 		else if styling.frames=="imaginecritters" then ""
+		else if styling.frames=="paranormal" then paranormal_crown_background()
 		else crown_background()
 	}
 
@@ -790,6 +854,8 @@ styling field:
 
 	choice: glass
 
+	choice: bot
+
 	choice: ravnica
 	choice: ixalan
 	choice: tarkir
@@ -805,6 +871,8 @@ styling field:
 	choice: ring
 	choice: tardis
 
+	choice: lcilegend
+
 	choice: dossier
 
 	choice: pipboy
@@ -815,6 +883,10 @@ styling field:
 	choice: memory corridor
 
 	choice: imaginecritters
+
+	choice: paranormal
+
+	choice: jpshowcase
 
 	choice: textless land(zendikar)
 	choice: textless land(innistrad)
@@ -926,6 +998,7 @@ styling style:
 			artdeco : 						artdeco/ucard.png
 			skyscraper : 					skyscraper/ucard.png
 			glass : 						glass/ucard.png
+			bot : 							bot/card.png
 			ravnica : 						ravnica/ucard.png
 			ixalan : 						ixalan/ucard.png
 			tarkir : 						tarkir/ucard.png
@@ -940,6 +1013,7 @@ styling style:
 			dossier : 						dossier/ucard.png
 			pipboy : 						pipboy/ucard.png
 			vault : 						vault/ucard.png
+			lcilegend:						lcilegend/ucard.png
 			breakingnews : 					breakingnews/ucard.png
 			memory corridor : 				memory/u.png
 			textless land(zendikar) : 		tll/zdk/ucard.png
@@ -949,6 +1023,8 @@ styling style:
 			textless land(All will be one): tll/one/ucard.png
 			textless land(unfinity) : 		unfinityland/ucard.png
 			imaginecritters: 				imaginecritters/card.png
+			paranormal:						paranormal/u.png
+			jpshowcase:						jpshowcase/u.png
 
 	others:
 		render style: checklist
@@ -1004,6 +1080,7 @@ card style:
 				else if styling.frames=="breakingnews" then if set.card_language != "简体中文" then 91 else 96
 				else if styling.frames=="memory corridor" then if set.card_language != "简体中文" then 53 else 50
 				else if styling.frames=="imaginecritters" then 52
+				else if styling.frames=="paranormal" then 44
 				else 57
 		right:
 			script:
@@ -1041,13 +1118,13 @@ card style:
 			color:
 				script:
 					if styling.frames=="breakingnews" then rgb(52, 46, 48)
-					else if styling.frames=="textless land(unfinity)" or styling.frames=="imaginecritters" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="skyscraper" or styling.frames=="artdeco" or styling.frames=="magicfest" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="textless land(innistrad)" or styling.frames=="textless land(unstable)" or styling.frames=="etched" then "white"
+					else if styling.frames=="jpshowcase" or styling.frames=="paranormal" or styling.frames=="bot" or styling.frames=="textless land(unfinity)" or styling.frames=="imaginecritters" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="skyscraper" or styling.frames=="artdeco" or styling.frames=="magicfest" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="textless land(innistrad)" or styling.frames=="textless land(unstable)" or styling.frames=="etched" then "white"
 					else "black"
 			#影子实现
 			shadow color: script: if (has_shadow()) then rgba(0,0,0,255) else rgba(0,0,0,0)
 			shadow displacement x: 2.5
 			shadow displacement y: 2.5
-			shadow blur: 1
+			shadow blur: -1
 
 	casting cost:
 		right:
@@ -1072,8 +1149,10 @@ card style:
 				else if styling.frames=="pipboy" then 59
 				else if styling.frames=="dossier" then 68
 				else if styling.frames=="vault" then 59
+				else if styling.frames=="lcilegend" then 59
 				else if styling.frames=="breakingnews" then 33
 				else if styling.frames=="imaginecritters" then 52
+				else if styling.frames=="paranormal" then 44
 				else 57
 		width: { max(60, card_style.casting_cost.content_width) + 10 }
 		height: 46
@@ -1197,6 +1276,7 @@ card style:
 				else if styling.frames=="dossier" then (599+(if set.card_language == "简体中文" then -3 else 0 ))
 				else if styling.frames=="breakingnews" then 628
 				else if styling.frames=="memory corridor" then if set.card_language != "简体中文" then 600 else 598
+				else if styling.frames=="jpshowcase" then 650
 				else 597) +
 				if chosen(styling.others, choice:"hide type and rarity") then 1000 else 0
 		width:
@@ -1233,7 +1313,7 @@ card style:
 			color:
 				script:
 					if styling.frames=="breakingnews" then rgb(52, 46, 48)
-					else if styling.frames=="imaginecritters" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="artdeco" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="textless land(innistrad)" or styling.frames=="textless land(unstable)"  or styling.frames=="etched" or styling.frames=="memory corridor" then "white"
+					else if styling.frames=="jpshowcase" or styling.frames=="paranormal" or styling.frames=="bot" or styling.frames=="imaginecritters" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="artdeco" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="textless land(innistrad)" or styling.frames=="textless land(unstable)"  or styling.frames=="etched" or styling.frames=="memory corridor" then "white"
 					else "black"
 			separator color: red
 			#影子实现
@@ -1310,6 +1390,7 @@ card style:
 				else if styling.frames=="vault" then 599
 				else if styling.frames=="breakingnews" then 626
 				else if styling.frames=="memory corridor" then 592
+				else if styling.frames=="jpshowcase" then 650
 				else 597
 		width: 88
 		height: 44
@@ -1368,6 +1449,7 @@ card style:
 				else if styling.frames=="zendikar expeditions" then 625
 				else if styling.frames=="breakingnews" then 680
 				else if styling.frames=="memory corridor" then 644
+				else if styling.frames=="jpshowcase" then 710
 				else 660 )
 				+ chop_top()
 		width: 
@@ -1402,7 +1484,7 @@ card style:
 					else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font()
 			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 27 }
 			scale down to: 6
-			color: {if styling.frames=="imaginecritters" or styling.frames=="tale" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="tarkir" or styling.frames=="ixalan" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="etched" or styling.frames=="textless land(unstable)" then "white" else "black"}
+			color: {if styling.frames=="jpshowcase" or styling.frames=="paranormal" or styling.frames=="bot" or styling.frames=="imaginecritters" or styling.frames=="tale" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="tarkir" or styling.frames=="ixalan" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="etched" or styling.frames=="textless land(unstable)" then "white" else "black"}
 			#影子实现
 			shadow color: script: if (has_shadow()) then rgba(0,0,0,255) else rgba(0,0,0,0)
 			shadow displacement x: 2.5
@@ -1479,6 +1561,7 @@ card style:
 				else if styling.frames=="zendikar expeditions" then 630
 				else if is_tll() then 825
 				else if styling.frames=="breakingnews" then 692
+				else if styling.frames=="jpshowcase" then 726
 				else 676)
 				 - (if styling.frames=="textless land(zendikar)" or styling.frames=="textless land(innistrad)" then 0
 				 else 8)
@@ -1490,6 +1573,7 @@ card style:
 				else if styling.frames=="zendikar expeditions" then 220
 				else if is_tll() then 118
 				else if styling.frames=="breakingnews" then 263
+				else if styling.frames=="jpshowcase" then 229
 				else 278
 		z index: 2
 		render style: image
@@ -1536,6 +1620,8 @@ card style:
 				else if styling.frames=="goldenage" then 582
 				else if styling.frames=="breakingnews" then 587
 				else if styling.frames=="memory corridor" then 593
+				else if styling.frames=="bot" then 590
+				else if styling.frames=="paranormal" then 585 
 				else 586
 		top:
 			script:
@@ -1546,8 +1632,11 @@ card style:
 				else if styling.frames=="artdeco" then 932
 				else if styling.frames=="goldenage" then 935
 				else if styling.frames=="samurai" then 940
+				else if styling.frames=="lcilegend" then 937
 				else if styling.frames=="breakingnews" then 934
 				else if styling.frames=="memory corridor" then 932
+				else if styling.frames=="bot" then 931
+				else if styling.frames=="jpshowcase" then 938
 				else 936
 		width: 120
 		height:	56
@@ -1568,7 +1657,7 @@ card style:
 					else 32)
 					- (if styling.shrink_power_text != "" then to_number(styling.shrink_power_text) else 0)
 
-			color: {if styling.frames=="imaginecritters" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="artdeco" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="etched" or styling.frames=="memory corridor" then "white" else "black"}
+			color: {if styling.frames=="jpshowcase" or styling.frames=="paranormal" or styling.frames=="bot" or styling.frames=="imaginecritters" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="artdeco" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="etched" or styling.frames=="memory corridor" then "white" else "black"}
 			separator color: red
 	############################# Card sorting / numbering
 	set code:
@@ -1603,7 +1692,7 @@ card style:
 		height: 20
 		z index: 1
 		font:
-			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std W7"}
+			name: Beleren Small Caps Bold
 			size: 14
 			color: white
 	copyright:
@@ -1870,7 +1959,8 @@ extra card style:
 				and styling.frames!="tale"
 				and styling.frames!="textless land(unstable)"
 				and styling.frames!="textless land(unfinity)"
-				and styling.frames!="dnd sourcebook")
+				and styling.frames!="dnd sourcebook"
+				and styling.frames!="bot")
 		render style: image
 		image: { stamp_img_chose() }
 
@@ -1882,7 +1972,7 @@ extra card style:
 		render style: image
 		image:{ crown_img_chose() }
 		z index: 1
-		visible: { is_legend() and (styling.frames=="breakingnews" or styling.frames=="vault" or styling.frames=="scroll" or styling.frames=="dossier" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="storybook" or styling.frames=="storybook adventure" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="tarkir" or styling.frames=="ixalan" or styling.frames=="phyrexian" or styling.frames=="mystical archive" or styling.frames=="ravnica" or styling.frames=="fang" or styling.frames=="artdeco" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="etched" or styling.frames=="magicfest" )}
+		visible: { is_legend() and (styling.frames=="paranormal" or styling.frames=="lcilegend" or styling.frames=="breakingnews" or styling.frames=="vault" or styling.frames=="scroll" or styling.frames=="dossier" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="storybook" or styling.frames=="storybook adventure" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="tarkir" or styling.frames=="ixalan" or styling.frames=="phyrexian" or styling.frames=="mystical archive" or styling.frames=="ravnica" or styling.frames=="fang" or styling.frames=="artdeco" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="etched" or styling.frames=="magicfest" )}
 
 	###卷轴合并在这
 	ravnica twins:

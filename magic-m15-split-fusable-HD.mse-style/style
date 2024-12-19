@@ -50,14 +50,26 @@ init script:
 	#Should multicolor lands with basic land types have a colored name?
 	mask_multi_land_with_color := { styling.colored_multicolor_land_name }
 	
-	template_prefix := [
-		card: "split/" fusecardtop: "fuse/" fusecardbot: "fuse/" stamp: "stamp/" identity: "/magic-identity-new.mse-include/"
+	template_prefix := {
+		if (type == "roomtop" or type == "roombot") then
+			if contains(styling.other_options, match:"nyx room style") then [roomtop: "room/nyx/" roombot: "room/nyx/"]
+			else if contains(styling.other_options, match:"ub room style") then [roomtop: "room/ub/" roombot: "room/ub/"]
+			else if contains(styling.other_options, match:"snow room style") then [roomtop: "room/snow/" roombot: "room/snow/"]
+			else [roomtop: "room/normal/" roombot: "room/normal/"]
+		else template_prefix_normal 
+	}
+	template_prefix_normal := [
+		card: "split/" fusecardtop: "fuse/" fusecardbot: "fuse/" 
+		
+		stamp: "stamp/" identity: "/magic-identity-new.mse-include/"
 		]
 	template_suffix := [
-		card: "card.png" fusecardtop: "card2.png" fusecardbot: "card.png", stamp: "stamp.png" identity: "identity.png"
+		card: "card.png" fusecardtop: "card2.png" fusecardbot: "card.png"
+		roomtop: "card2.png" roombot: "card.png"
+		stamp: "stamp.png" identity: "identity.png"
 		]
-	template      := { template_prefix[type] + input + template_suffix[type] }
-	land_template := { template_prefix[type] + input + template_suffix[type] }
+	template      := { template_prefix()[type] + input + template_suffix[type] }
+	land_template := { template_prefix()[type] + input + template_suffix[type] }
 	# land_template := { template_prefix[type] + (if input == "a" then "c" else input) + "l" + template_suffix[type] }
 	# Use land templates for previews because they show more contrast
 	hybrid_previews := "land,hybrid"
@@ -79,7 +91,13 @@ init script:
 	
 	card_shape := { "fuse split" }
 
-	use_fuse := { card.rule_text_3 != "" }
+	use_fuse := { card.rule_text_3 != "" and (not is_room()) }
+
+	is_room := { styling.use_room_style }
+	room_top_background := { color_background(type:"roomtop", base_hybrid:card_hybrid) }
+	room_bot_background := { color_background(type:"roombot", base_hybrid:card_hybrid) }
+
+
 
 	has_identity := { styling.color_indicator_dot }
 	has_identity2 := { styling.color_indicator_dot_2 }
@@ -92,6 +110,7 @@ init script:
 
 	left_font_size := {to_number(pull_comma_array(styling.font_cap, end:false, cell:0, default:27))}
 	right_font_size := {to_number(pull_comma_array(styling.font_cap, end:false, cell:1, default:left_font_size()))}
+	extra_font_size := {if styling.font_cap_extra != "" then to_number(styling.font_cap_extra) else 22}
 
 	bridge_colored := {
 		
@@ -164,32 +183,34 @@ init script:
 		)
 		image2 := mask_bridge(color: color2)
 		
-		linear_blend(x1:0, y1:0, x2:1, y2:0)
+		if is_room() then ( linear_blend(x1:0.1, y1:0, x2:0.9, y2:0) )
+		else( linear_blend(x1:0, y1:0, x2:1, y2:0) )
+		
 	}
 
 	mask_bridge := {
-		base := color + "bridge.png"
+		base := (if is_room() then "room/bridge/" else "") + color + "bridge.png"
 		
 		if land then
-			"cbridge.png"
+			(if is_room() then "room/bridge/" else "") + "cbridge.png"
 		else if multi then 
 			masked_blend(
-				mask:  "bridgemask.png",
-				dark:  "mbridge.png",
+				mask:  (if is_room() then "room/bridge/" else "") + "bridgemask.png",
+				dark:  (if is_room() then "room/bridge/" else "") + "mbridge.png",
 				light: base,
 			)
 		else if artifact and color_count > 1 and mask_hybrid_with_land() then 
 			masked_blend(
-				mask:  "bridgemask.png",
-				dark:  "cbridge.png",
+				mask:  (if is_room() then "room/bridge/" else "") + "bridgemask.png",
+				dark:  (if is_room() then "room/bridge/" else "") + "cbridge.png",
 				light: base
 			)
 		else if artifact then 
 			base
 		else if color_count > 1 and mask_hybrid_with_land() then
 			masked_blend(
-				mask:  "bridgemask.png",
-				dark:  "cbridge.png",
+				mask:  (if is_room() then "room/bridge/" else "") + "bridgemask.png",
+				dark:  (if is_room() then "room/bridge/" else "") + "cbridge.png",
 				light: base,
 			)
 		else base
@@ -210,8 +231,22 @@ set info style:
 include file: /magic-all-style.mse-include/style1
 
 styling field:
+	type: text
+	name: font cap extra
+	description: 额外文本框字体大小，默认为22。
+
+styling field:
+	type: boolean
+	name: use room style
+	description: Use room style from DSK
+	initial: no
+
+styling field:
 	type: multiple choice
 	name: other options
+	choice: nyx room style
+	choice: ub room style
+	choice: snow room style
 	choice: ancestral generic mana
 	choice: prerelease stamp
 	choice: use phyrexian font
@@ -237,7 +272,10 @@ styling field:
 	name: is foil
 	description: 是否为闪卡？
 	initial: no
-
+styling field:
+	type: boolean
+	name: holofoil stamped rares
+	description: Use holofoil stamped rares
 styling field:
 	type: boolean
 	name: inverted common symbol
@@ -285,30 +323,30 @@ card style:
 	############################# Background stuff
 	# 左半部分（下半部分）
 	card color:
-		left:	70.5
-		top:	19.5
-		width:	479.5
-		height:	711
+		left:	{ if is_room() then 67.5 else 70.5 }
+		top:	{ if is_room() then 20 else 19.5 }
+		width:	{ if is_room() then 480 else 479.5 }
+		height:	{ if is_room() then 708.5 else 711 }
 		z index: 0
 		render style: image
 		popup style: in place
-		image: { if use_fuse() then fusecardbot_background() else card_background() }
-		mask: { "frame_mask.png" }
+		image: { if is_room() then room_bot_background() else if use_fuse() then fusecardbot_background() else card_background() }
+		mask: { if is_room() then "room/frame_mask_bot.png" else "frame_mask.png" }
 	# 右半部分（上半部分）
 	card color 2:
-		left:	550
-		top:	19.5
-		width:	479.5
-		height:	711
+		left:	{ if is_room() then 548 else 550 }
+		top:	{ if is_room() then 20 else 19.5 }
+		width:	{ if is_room() then 480 else 479.5 }
+		height:	{ if is_room() then 708.5 else 711 }
 		z index: 0
 		render style: image
 		popup style: in place
-		image: { if use_fuse() then fusecardtop_background() else card_background() }
-		mask: { "frame_mask.png" }
+		image: { if is_room() then room_top_background() else if use_fuse() then fusecardtop_background() else card_background() }
+		mask: { if is_room() then "room/frame_mask_top.png" else "frame_mask.png" }
 	############################# Name line
 	name:
 		left: 110
-		top: {62 + (if use_phyrexian_font() then shrink_name()/4 else 0)}
+		top: {(if is_room() then 48 else 62) + (if use_phyrexian_font() then shrink_name()/4 else 0)}
 		right:  { 503 - max(30, card_style.casting_cost.content_width) }
 		height: {40 - 0.5*shrink_name()}
 		alignment: { if use_phyrexian_font() then "top shrink-overflow" else "bottom shrink-overflow"}
@@ -321,7 +359,7 @@ card style:
 
 	name 2:
 		left: 589.5
-		top: {62 + (if use_phyrexian_font() then shrink_name()/4 else 0)}
+		top: {(if is_room() then 48 else 62) + (if use_phyrexian_font() then shrink_name()/4 else 0)}
 		right:  { 984.5 - max(30, card_style.casting_cost_2.content_width) }
 		height: {40 - 0.5*shrink_name()}
 		alignment:{ if use_phyrexian_font() then "top shrink-overflow" else "bottom shrink-overflow"}
@@ -334,7 +372,7 @@ card style:
 	
 	casting cost:
 		right: 514
-		top: 61
+		top: {if is_room() then 47 else 61}
 		width: { max(60, card_style.casting_cost.content_width) + 10 }
 		height: 40
 		alignment: middle right
@@ -351,7 +389,7 @@ card style:
 	
 	casting cost 2:
 		right: 993.5
-		top: 61
+		top: {if is_room() then 47 else 61}
 		width: { max(60, card_style.casting_cost_2.content_width) + 10 }
 		height: 40
 		alignment: middle right
@@ -368,14 +406,14 @@ card style:
 
 	############################# Image
 	image:
-		left: 107
-		top: 119
-		width: 407.5
-		height:	279
+		left: { if is_room() then 93.5 else 107 }
+		top: { if is_room() then 103 else 119 }
+		width: { if is_room() then 908 else 407.5 }
+		height:	{ if is_room() then 417 else 279 }
 		z index: -1
 		default: {default_image(card.card_color)}
 	image 2:
-		left: 586.5
+		left: { if is_room() then 10000 else 586.5 }
 		top: 119
 		width: 407.5
 		height:	279
@@ -405,7 +443,7 @@ card style:
 	type:
 		left: { if has_identity() then "134" else "110" }
 		top: {shrink_type()/2 + 409.5 }
-		width: { (if has_identity() then "376" else "400") - max(32,card_style.rarity.content_width) }
+		width: { (if is_room() then 858 else 400) - (if has_identity() then 24 else 0) - max(32,card_style.rarity.content_width) }
 		height: 30
 		alignment: top shrink-overflow
 		z index: 2
@@ -413,10 +451,10 @@ card style:
 		font:
 			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
 			size: { if set.card_language != "简体中文" then 20 - shrink_type() else 22 - shrink_type() }
-			color: black
+			color: { if is_room() then "white" else "black" }
 			separator color: red
 	type 2:
-		left: { if has_identity2() then "613.5" else "589.5" }
+		left: { if is_room() then 10000 else if has_identity2() then "613.5" else "589.5" }
 		top: {shrink_type()/2 + 409.5 }
 		width: { (if has_identity() then "376" else "400") - max(32,card_style.rarity.content_width) }
 		height: 30
@@ -430,7 +468,7 @@ card style:
 			separator color: red
 	
 	rarity:
-		right: {514 + rarity_shift()}
+		right: {(if is_room() then 993.5 else 514) + rarity_shift()}
 		top: 412
 		width: 62
 		height: 28
@@ -471,7 +509,7 @@ card style:
 					if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "mp.png"
 					else symbol_variation(symbol: set.masterpiece_symbol, variation: "mythic rare")
 	rarity 2:
-		right: {993.5 + rarity_shift()}
+		right: {if is_room() then 10000 else (993.5 + rarity_shift())}
 		top: 412
 		width: 62
 		height: 28
@@ -514,9 +552,9 @@ card style:
 	############################# Text box
 	text:
 		left: 105
-		top: {458 + chop_top()}
+		top: {(if is_room() then 523 else 458) + chop_top()}
 		width: 407
-		height: { (if use_fuse() then 210 else 240)-chop_bot() }
+		height: { (if is_room() then 190 else if use_fuse() then 210 else 240)-chop_bot() }
 		font:
 			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
@@ -547,9 +585,9 @@ card style:
 
 	text 2:
 		left: 585
-		top: {458 + chop_top()}
+		top: {(if is_room() then 523 else 458) + chop_top()}
 		width: 407
-		height: { (if use_fuse() then 210 else 240)-chop_bot() }
+		height: { (if is_room() then 190 else if use_fuse() then 210 else 240)-chop_bot() }
 		font:
 			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
@@ -579,20 +617,23 @@ card style:
 		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
 	
 	rule text 3:
-		top : 678
-		left: { 550 - max(890,card_style.rule_text_3.content_width)*0.5 }
-		right: { 550 + max(890,card_style.rule_text_3.content_width)*0.5 }
-		height: 36
+		top : {if is_room() then 454 else 678}
+		left: {if is_room() then 104 else (550 - max(890,card_style.rule_text_3.content_width)*0.5) }
+		right: {if is_room() then 992 else (550 + max(890,card_style.rule_text_3.content_width)*0.5) }
+		height: {if is_room() then 65 else 36 }
 		font:
 			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
-			size: 22
+			size: { extra_font_size() }
 			scale down to: 6
-			color: black
+			color: { if is_room() then "white" else "black" }
 		symbol font:
 			name: { styling.text_box_mana_symbols }
 			size: 24
-		alignment: "middle center"
+		alignment:
+			script:
+				"middle center"
+				#+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
 		z index: 3
 		padding left:   2
 		padding right:  2
@@ -601,20 +642,20 @@ card style:
 		line height soft: 0.9
 	
 	watermark:
-		left: {100.5}
-		top: {473-4}
+		left: {if is_room() then 97 else 100.5}
+		top: { if is_room() then 525 else 469 }
 		width: {421}
-		height: {( if use_fuse() then 193 else 233 )-4}
+		height: { if is_room() then 185 else if use_fuse() then 189 else 229 }
 		z index: 1
 		render style: image
 		popup style: in place
 		alignment: middle center
 		include file: /magic-watermarks.mse-include/watermarks
 	watermark 2:
-		left: {580}
-		top: {473-4}
+		left: {if is_room() then 576.5 else 580}
+		top: { if is_room() then 525 else 469 }
 		width: {421}
-		height: {( if use_fuse() then 193 else 233 )-4}
+		height: { if is_room() then 185 else if use_fuse() then 189 else 229 }
 		z index: 1
 		render style: image
 		popup style: in place
@@ -656,7 +697,7 @@ card style:
 		z index: 1
 		angle: 270
 		font:
-			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std W7"}
+			name: Beleren Small Caps Bold
 			size: 14
 			color: white
 	copyright:
@@ -709,6 +750,15 @@ extra card field:
 	editable: false
 	save value: false
 	show statistics: false
+
+extra card field:
+	type: choice
+	name: room_bridge
+	script: "true"
+	editable: false
+	save value: false
+	show statistics: false
+
 extra card field:
 	type: choice
 	name: stamp
@@ -808,17 +858,27 @@ extra card style:
 		render style: image
 		image: { bridge_colored() }
 		visible: { use_fuse() }
-	
+
+	room_bridge:
+		left: {518.5}
+		top : {397}
+		width: {58}
+		height: {127}
+		z index: 1
+		render style: image
+		image: { bridge_colored() }
+		visible: { is_room() }
+		
 	stamp:
-		left:	96
-		top:	330
-		width:	93
-		height:	39
+		left:	{if is_room() and contains(styling.other_options, match:"ub room style") then 95.5 else 96 }
+		top:	{if is_room() and contains(styling.other_options, match:"ub room style") then 333 else 330 }
+		width:	{if is_room() and contains(styling.other_options, match:"ub room style") then 85.5 else 93 }
+		height:	{if is_room() and contains(styling.other_options, match:"ub room style") then 47.5 else 39 }
 		z index: 0
 		angle: 270
-		visible: { is_rare() and styling.holofoil_stamped_rares }
+		visible: { ((is_room() and contains(styling.other_options, match:"ub room style")) or is_rare()) and styling.holofoil_stamped_rares }
 		render style: image
-		image: { "stamp/stamp.png" }
+		image: { if (is_room() and contains(styling.other_options, match:"ub room style")) then if is_rare() then "stamp/goldstamp.png" else "stamp/graystamp.png" else "stamp/stamp.png" }
 
 	auto copyright:
 		right: {1050-981}

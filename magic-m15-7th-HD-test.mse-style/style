@@ -178,6 +178,11 @@ styling field:
 	name: is foil
 	description: 是否为闪卡？
 	initial: no
+styling field:
+	type: boolean
+	name: no rarity
+	description: 隐藏稀有度标志
+	initial: no
 
 ### 通用2 ###
 include file: /magic-all-style.mse-include/style2
@@ -252,14 +257,16 @@ card style:
 		z index: 4
 		padding top: 0
 	card symbol:
-		left: {51.5-2.5}
-		top: 52.5
-		height: 34.5
-		width: 25.5
+		left: {if chosen(card.card_symbol, choice:"up") then 50 else if chosen(card.card_symbol, choice:"down") then 673.5 else 49 }
+		top: {if chosen(card.card_symbol, choice:"up") or chosen(card.card_symbol, choice:"down") then 60.5 else 52.5 }
+		height: {if chosen(card.card_symbol, choice:"up") or chosen(card.card_symbol, choice:"down") then 20 else 34.5 }
+		width: {if chosen(card.card_symbol, choice:"up") or chosen(card.card_symbol, choice:"down") then 26.5 else 25.5 }
 		z index: 1
 		render style: image
 		choice images:
 			tombstone: tombstone.png
+			up: up.png
+			down: down.png
 	############################# Image
 	image:
 		left: {90-2.5}
@@ -287,7 +294,7 @@ card style:
 		z index: 2
 		padding top: 2
 		font:
-			name: { if set.card_language != "简体中文" then "MPlantin" else ch_flavor_font() }
+			name: { if set.card_language != "简体中文" then "MPlantin" else "Magic华文楷体" }
 			size: { if set.card_language != "简体中文" then 26 - shrink_type() else 28 - shrink_type() }
 			color: white
 			separator color: red
@@ -302,6 +309,7 @@ card style:
 		height: 44
 		z index: 2
 		render style: image
+		visible: { not styling.no_rarity }
 		alignment: middle right
 		include file: /magic-rarity.mse-include/rarity
 		choice images:
@@ -409,10 +417,9 @@ card style:
 		visible: {not set.automatic_copyright}
 		alignment: middle right shrink-overflow
 		font:
-			name: Matrix
-			size: 14
-			color: black
-			weight: bold
+			name: mplantin
+			size: 13
+			color: white
 ############################################################## Extra card fields
 extra card field:
 	type: text
@@ -488,9 +495,9 @@ extra card style:
 		alignment: middle center
 		font:
 			name: mplantin
-			size: 12
+			size: 13
 			color: { if card.card_color == "white" then "black" else "white" }
-			weight: bold
+		
 
 	illustrator:
 		left: { 375 - 330/2 }

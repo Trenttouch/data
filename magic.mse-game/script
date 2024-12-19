@@ -1175,6 +1175,31 @@ is_EN := match@(match: "[A-Z,a-z0-9’™&© ]*[A-Za-z]")
 #is_CN := match@(match: "[\\u4e00-\\u9fa5]")
 is_CN := match@(match: "[\\u4e00-\\u9fa5a-zA-Z0-9]")
 is_pureEN := match@(match: "^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9’™&© ]+")
+is_pureJP := match@(match: "^[\\x\{3040\}-\\x\{309f\}\\x\{30a0\}-\\x\{30ff\}\\x\{4e00\}-\\x\{9fa5\}0-9’™&©@/()「」~_。々. ]+$")
+
+illustrator_language_check := 
+	replace@(match:"<font:MSEMotoyaExAporo W55 W5 KP>", replace:"")+
+	replace@(match:"<size:13>", replace:"")+
+	replace@(match:"</size>", replace:"")+
+	replace@(match:"</font>", replace:"")+
+	replace@(match:"[ ][ ]$", replace:"")+
+	{
+		if match(input,match:"/") then
+			if is_pureJP(split_text(match:"/",input).0) then
+				"<font:MSEMotoyaExAporo W55 W5 KP><size:13>"+ split_text(match:"/",input).0 +"</size></font>"+"/"+ split_text(match:"/",input).1
+			else
+				input
+		else
+			for each word in split_text(match:" ",input) do(
+				(if is_pureJP(word) then
+					"<font:MSEMotoyaExAporo W55 W5 KP><size:13>"+ word +"</size></font>"
+				else
+					word)
+				+" "
+			)
+	}
+	+replace@(match:" $", replace:"")
+
 # Shape of cards, can be changed in style files
 card_shape := { "normal" }
 

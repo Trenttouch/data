@@ -13,6 +13,14 @@ choice:
 	line below: true
 
 choice:
+	name: DFT
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	line below: true
+
+choice:
 	name: FDN
 	choice: Mythic
 	choice: Rare
@@ -1420,6 +1428,12 @@ choice:
 choice:
 	name: Starter
 	choice:
+		name: J25
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+	choice:
 		name: GK1
 		choice:
 			name: DIMIR
@@ -1743,6 +1757,12 @@ choice:
 ######################################################### 重印包
 choice:
 	name: Masters
+	choice:
+		name: INR
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
 	choice:
 		name: RVR
 		choice: Mythic

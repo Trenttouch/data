@@ -27,7 +27,7 @@ set field:
 set field:
 	type: text
 	name: copyright
-	default: "™ & © 2022 Wizards of the Coast"
+	default: "™ & © 2023 Wizards of the Coast"
 set field:
 	type: text
 	name: set code
@@ -54,9 +54,22 @@ set field:
 	type: boolean
 	name: shorten types for rarity
 	description: Makes the typeline not run into the rarity symbol. Disable if you don't use rarity symbols.
+
+
 set field:
 	type: info
-	name: Watermark links
+	name: Watermark links (当使用blend with colors时，如果水印尺寸不是500*500，请在图片位置后加上',宽,高,',例如"xxx.png,582,267,")
+
+set field:
+	type: boolean
+	name: blend with colors
+	initial: no
+	description: Only works for 500x500 px watermarks. For best results, use a solid black watermark. Blend watermarks with card colors instead of a solid color.
+set field:
+	type: text
+	name: opacity when not blend with colors
+	description: Set opacity when not blend with colors
+
 set field:
 	type: text
 	name: custom watermark 1
@@ -98,13 +111,73 @@ set field:
 	name: custom watermark 10
 	description: Set this image in magic-watermarks.mse-include as Custom Watermark 10
 set field:
-	type: boolean
-	name: blend with colors
-	initial: no
-	description: Only works for 500x500 px watermarks. For best results, use a solid black watermark. Blend watermarks with card colors instead of a solid color.
+	type: text
+	name: custom watermark 11
+	description: Set this image in magic-watermarks.mse-include as Custom Watermark 11
+set field:
+	type: text
+	name: custom watermark 12
+	description: Set this image in magic-watermarks.mse-include as Custom Watermark 12
+set field:
+	type: text
+	name: custom watermark 13
+	description: Set this image in magic-watermarks.mse-include as Custom Watermark 13
+set field:
+	type: text
+	name: custom watermark 14
+	description: Set this image in magic-watermarks.mse-include as Custom Watermark 14
+set field:
+	type: text
+	name: custom watermark 15
+	description: Set this image in magic-watermarks.mse-include as Custom Watermark 15
+set field:
+	type: text
+	name: custom watermark 16
+	description: Set this image in magic-watermarks.mse-include as Custom Watermark 16
+set field:
+	type: text
+	name: custom watermark 17
+	description: Set this image in magic-watermarks.mse-include as Custom Watermark 17
+set field:
+	type: text
+	name: custom watermark 18
+	description: Set this image in magic-watermarks.mse-include as Custom Watermark 18
+set field:
+	type: text
+	name: custom watermark 19
+	description: Set this image in magic-watermarks.mse-include as Custom Watermark 19
+set field:
+	type: text
+	name: custom watermark 20
+	description: Set this image in magic-watermarks.mse-include as Custom Watermark 20
+set field:
+	type: text
+	name: custom watermark 21
+	description: Set this image in magic-watermarks.mse-include as Custom Watermark 21
+set field:
+	type: text
+	name: custom watermark 22
+	description: Set this image in magic-watermarks.mse-include as Custom Watermark 22
+set field:
+	type: text
+	name: custom watermark 23
+	description: Set this image in magic-watermarks.mse-include as Custom Watermark 23
+set field:
+	type: text
+	name: custom watermark 24
+	description: Set this image in magic-watermarks.mse-include as Custom Watermark 24
+set field:
+	type: text
+	name: custom watermark 25
+	description: Set this image in magic-watermarks.mse-include as Custom Watermark 25
+
+
+
 set field:
 	type: info
 	name: Defaults and Automation
+
+
 set field:
 	type: text
 	name: inserts
@@ -242,9 +315,13 @@ set field:
 	name: wedge mana costs
 	description: 是否自动排列法术力符号，针对KTK非常规法术力排序。
 	initial: no
+
+
 set field:
 	type: info
 	name: Mainframe Template Options
+
+
 set field:
 	type: text
 	name: mainframe rarity name
@@ -253,6 +330,11 @@ set field:
 	type: boolean
 	name: use flavor bar
 	description: Enables the flavor bar on Mainframe templates.
+set field:
+	type: boolean
+	name: white planeswalker symbol
+	description: white planeswalker symbol color for symbol used in  Carth the Lion  .
+	initial: no
 set field:
 	type: choice
 	name: default stamp

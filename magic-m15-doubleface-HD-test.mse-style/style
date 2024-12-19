@@ -615,6 +615,7 @@ init script:
 		else if is_fullart() then "47,117,681,939"
 		else if is_battle() then "28,968,939,688"
 		else if is_showcase() then "0,0,750,970"
+		else if chosen(styling.frames, choice:"bot") then "0,0,750,965"
 		else if is_plw() then 
 			if is_plw_fullart() then "0,0,750,1050" else "50,104,662,858" 
 		else "56,117,638,467"
@@ -634,6 +635,7 @@ init script:
 		else if back_is_mutate() then "47,117,681,674"
 		else if back_is_fullart() then "47,117,656,939"
 		else if back_is_showcase() then "0,0,750,970"
+		else if chosen(styling.back_frames, choice:"bot") then "0,0,750,965"
 		else if back_is_plw() then 
 			if back_is_plw_fullart() then "0,0,750,1050" else "50,104,662,858" 
 		else "56,117,638,467"
@@ -692,6 +694,7 @@ styling field:
 	choice: devoid
 	choice: fullart
 	choice: extend
+	choice: bot
 	choice: showcase
 	choice: ↑ black type and oracle frame
 	choice: ↑ new pt style
@@ -789,6 +792,7 @@ styling field:
 	choice: snow
 	choice: map
 	choice: extend
+	choice: bot
 	choice: showcase
 	choice: ↑ black type and oracle frame
 	choice: ↑ new pt style
@@ -896,12 +900,13 @@ card style:
 		image: 
 			script:
 				if is_saga() then saga_background()
+				else if chosen(styling.frames, choice:"bot") then if is_legend() then "front/bot/lcard.png" else "front/bot/card.png"
 				else if is_extend() then extendfront_background()
 				else if is_showcase() then showcasefront_background()
 				else if is_devoid() and not is_fullart() then "front/vcard.png" 
 				else if is_snow() then snow_background()
 				else if is_battle() then ( if chosen(styling.frames, choice:"tallart battle") then battletall_background() else battle_background())  
-				else if is_plw() then if has_four_abilities() then plwtall_background() else plw_background() 
+				else if is_plw() then if has_four_abilities() then plwtall_background() else plw_background()
 				else card_background()
 		mask: 
 			script:
@@ -913,6 +918,7 @@ card style:
 						  else "" ) + 
 						 "frame_mask.png")
 				else if is_saga() then "front/saga/frame_mask.png"
+				else if chosen(styling.frames, choice:"bot") then "front/bot/frame_mask.png"
 				else if is_extend() then ("front/extend/frame_mask" + (if is_legend() then "_l" else "") + ".png")
 				else if (is_showcase() and not is_showcase_black()) then ("front/showcase/frame_mask" + (if is_legend() then "_l" else "") + ".png")
 				else if (is_showcase() and is_showcase_black()) then ("front/showcase/black/frame_mask" + (if is_legend() then "_l" else "") + ".png")
@@ -932,6 +938,7 @@ card style:
 		image: 
 			script:
 				if back_is_saga() then backsaga_background()
+				else if chosen(styling.back_frames, choice:"bot") then if back_is_legend() then "back/bot/lcard.png" else "back/bot/card.png"
 				else if back_is_extend() then extendback_background()
 				else if back_is_showcase() then showcaseback_background()
 				else if back_is_devoid() and not back_is_fullart() then "back/vcard.png"
@@ -947,9 +954,10 @@ card style:
 						 (if back_is_plw_fullart() then "mythic_mask_" else "" ) + 
 						 "frame_mask.png")
 				else if back_is_saga() then "back/saga/frame_mask.png"
-				else if back_is_extend() then ("back/extend/frame_mask" + (if is_legend() then "_l" else "") + ".png")
-				else if (back_is_showcase() and not back_is_showcase_black()) then ("back/showcase/frame_mask" + (if is_legend() then "_l" else "") + ".png")
-				else if (back_is_showcase() and back_is_showcase_black()) then ("back/showcase/black/frame_mask" + (if is_legend() then "_l" else "") + ".png")
+				else if chosen(styling.back_frames, choice:"bot") then "back/bot/frame_mask.png"
+				else if back_is_extend() then ("back/extend/frame_mask" + (if back_is_legend() then "_l" else "") + ".png")
+				else if (back_is_showcase() and not back_is_showcase_black()) then ("back/showcase/frame_mask" + (if back_is_legend() then "_l" else "") + ".png")
+				else if (back_is_showcase() and back_is_showcase_black()) then ("back/showcase/black/frame_mask" + (if back_is_legend() then "_l" else "") + ".png")
 				else if back_is_mutate() then "frame_mask_mutate.png" 
 				else if back_is_fullart() then "back/frame_mask_fullart.png" 
 				else if back_is_map() then "back/map/frame_mask_map.png" 
@@ -968,7 +976,7 @@ card style:
 		font:
 			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
 			size: { if set.card_language != "简体中文" then 32 - shrink_name() else 34 - shrink_name()}
-			color: black
+			color: {if chosen(styling.frames, choice:"bot") then "white" else "black"}
 	casting cost:
 		right: {if is_battle() then 44 else 692 }
 		top: {if is_battle() then 77 else (57 + (if is_plw() then -15 else 0))}
@@ -1001,7 +1009,7 @@ card style:
 		alignment: middle center
 
 	name 2:
-		left: {118+backside_left_fix()}
+		left: {(if chosen(styling.back_frames, choice:"bot") then 64 else 118)+backside_left_fix()}
 		top: { if set.card_language != "简体中文" then 59 else 57 + (if back_is_map() then -8 else 0) + (if back_is_plw() then -17 else 0) + (if back_use_phyrexian_font() then shrink_name()/2 else 0)}
 		right:  { if back_is_map() then (backside_left_fix() +632) else (682 + backside_left_fix() - max(30, card_style.casting_cost_2.content_width)) }
 		height: {46 - 0.5*shrink_name()}
@@ -1089,7 +1097,7 @@ card style:
 		font:
 			name:  { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
 			size: { if set.card_language != "简体中文" then 26 - shrink_type() else 32 - shrink_type() }
-			color: {if is_fullart() or is_showcase_black() or is_extend() then "white" else "black" }
+			color: {if is_fullart() or is_showcase_black() or is_extend() or chosen(styling.frames, choice:"bot") then "white" else "black" }
 			separator color: red
 	rarity:
 		right: {if is_battle() then (if chosen(styling.frames, choice:"tallart battle") then 441+88 else 441 ) else 688+rarity_shift()}
@@ -1289,7 +1297,7 @@ card style:
 			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 28 }
 			scale down to: 6
-			color: {if is_fullart() or is_showcase_black() then "white" else "black" }
+			color: {if is_fullart() or is_showcase_black() or chosen(styling.frames, choice:"bot") then "white" else "black" }
 		symbol font:
 			name: { styling.text_box_mana_symbols }
 			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 28 }
@@ -1328,7 +1336,7 @@ card style:
 			italic name: { if back_use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: {if styling.back_font_cap != "" then to_number(styling.back_font_cap) else 28 }
 			scale down to: 6
-			color: {if back_is_fullart() or back_is_showcase() then "white" else "black" }
+			color: {if back_is_fullart() or back_is_showcase() or chosen(styling.back_frames, choice:"bot") then "white" else "black" }
 		symbol font:
 			name: { styling.text_box_mana_symbols }
 			size: {if styling.back_font_cap != "" then to_number(styling.back_font_cap) else 28 }
@@ -1654,20 +1662,20 @@ card style:
 	############################# PT 
 	pt:
 		z index: 5
-		left: 586
-		top: {(if is_plw() or is_battle() then 1000 else 0) + 936}
+		left: {if chosen(styling.frames, choice:"bot") then 590 else 586}
+		top: {if chosen(styling.frames, choice:"bot") then 931 else 936 + (if is_plw() or is_battle() then 1000 else 0)}
 		width: 120
 		height:	56
 		alignment: center middle shrink-overflow
 		font:
 			name:  { if use_phyrexian_font() then "GeishaHolidayW00-Regular" else "Beleren Bold" }
 			size: {32 - (if styling.shrink_power_text != "" then to_number(styling.shrink_power_text) else 0)}
-			color: {if is_vehicle() or is_newpt() then "white" else "black"}
+			color: {if is_vehicle() or is_newpt() or chosen(styling.frames, choice:"bot") then "white" else "black"}
 			separator color: red
 	pt 2:
 		z index: 5
-		left: {586 + backside_left_fix()}
-		top: {(if back_is_plw() then 1000 else 0) + 936}
+		left: {(if chosen(styling.back_frames, choice:"bot") then 590 else 586) + backside_left_fix()}
+		top: {if chosen(styling.back_frames, choice:"bot") then 931 else 936 + (if back_is_plw() then 1000 else 0)}
 		width: 120
 		height:	56
 		alignment: center middle shrink-overflow
@@ -1892,7 +1900,7 @@ card style:
 		height: 20
 		z index: 1
 		font:
-			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std W7"}
+			name: Beleren Small Caps Bold
 			size: 14
 			color: white
 	copyright:
@@ -1915,7 +1923,7 @@ card style:
 		height: 20
 		z index: 1
 		font:
-			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std W7"}
+			name: Beleren Small Caps Bold
 			size: 14
 			color: white
 	copyright 2:
@@ -2910,7 +2918,7 @@ extra card style:
 		z index: 4
 		visible: { card.pt != "" }
 		render style: image
-		image: { if is_newpt() then new_pt_background() else if is_vehicle() then "vpt.png" else card_ptbox() }
+		image: {if chosen(styling.frames, choice:"bot") then "front/bot/pt.png" else if is_newpt() then new_pt_background() else if is_vehicle() then "vpt.png" else card_ptbox() }
 	pt box 2:
 		left: {backside_left_fix()}
 		top:	{(if back_is_plw() then 1000 else 0) + 0}
@@ -2919,7 +2927,7 @@ extra card style:
 		z index: 4
 		visible: { card.pt_2 != "" }
 		render style: image
-		image: { if back_is_newpt() then new_pt_background() else if back_is_vehicle() then "vpt.png" else card_ptbox2() }
+		image: { if chosen(styling.back_frames, choice:"bot") then "front/bot/pt.png" else if back_is_newpt() then new_pt_background() else if back_is_vehicle() then "vpt.png" else card_ptbox2() }
 		
 	stamp:
 		left:	{if is_plw() then 331 else if is_saga() or is_battle() then 330 else 327}
@@ -2927,7 +2935,7 @@ extra card style:
 		width:	{if is_plw() then 88 else if is_saga() or is_battle() then 93 else 96}
 		height:	{if is_plw() then 46 else if is_saga() or is_battle() then 39 else 49}
 		z index: 5
-		visible: { is_rare() and styling.use_holofoil_stamps }
+		visible: { is_rare() and styling.use_holofoil_stamps and not chosen(styling.frames, choice:"bot")}
 		render style: image
 		image: { if is_devoid() then "stamp/wstamp.png" else if is_saga() or is_battle() then "stamp/saga/stamp.png" else if is_plw() then plw_stamp() else card_stamp() }
 		mask: {if is_plw() then ((if is_plw_fullart() then "stamp/planeswalker/mythic" else "stamp/planeswalker/") + "stamp_mask.png") else ""}
@@ -3016,7 +3024,7 @@ extra card style:
 
 
 		z index: 3
-		visible: { (is_legend() or has_alias()) and not is_plw() }
+		visible: { (is_legend() or has_alias()) and not (is_plw() or chosen(styling.frames, choice:"bot"))}
 	innercrown:
 		left: 0
 		top: 0
@@ -3042,7 +3050,7 @@ extra card style:
 				else crown_background()
 
 		z index: 3
-		visible: { (back_is_legend() or has_alias()) and not back_is_map() and not back_is_plw()}
+		visible: { (back_is_legend() or has_alias()) and not (back_is_map() or back_is_plw() or chosen(styling.back_frames, choice:"bot"))}
 	innercrown 2:
 		left: {backside_left_fix()}
 		top: 0
@@ -3224,7 +3232,7 @@ extra card style:
 			sparker colors colorless: icons/ccorner.png
 
 	corner2:
-		left: { 40 + backside_left_fix() + (if back_is_map() then 1000 else 0) }
+		left: { 40 + backside_left_fix() +(if chosen(styling.back_frames, choice:"bot") then 606 else 0) +(if back_is_map() then 1000 else 0) }
 		top: { if back_is_plw() then 36 else 49 }
 		height: { 63 }
 		width: { 64 }

@@ -399,7 +399,7 @@ card style:
 		height: 20
 		z index: 1
 		font:
-			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std W7"}
+			name: Beleren Small Caps Bold
 			size: 14
 			color: white
 	copyright:
