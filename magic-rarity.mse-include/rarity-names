@@ -18,6 +18,7 @@ choice:
 	choice: Rare
 	choice: Uncommon
 	choice: Common
+	choice: Basic Land
 	line below: true
 
 choice:

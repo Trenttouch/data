@@ -6,6 +6,7 @@ choice images:
 	DFT Rare: 		/magic-rarity.mse-include/DFT_R.png
 	DFT Uncommon: 	/magic-rarity.mse-include/DFT_U.png
 	DFT Common: 	/magic-rarity.mse-include/DFT_C.png
+	DFT Basic Land: 	/magic-rarity.mse-include/DFT_C.png
 
 	FDN Mythic: 	/magic-rarity.mse-include/FDN_M.png
 	FDN Rare: 		/magic-rarity.mse-include/FDN_R.png

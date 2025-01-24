@@ -194,10 +194,10 @@ set field:
 		color: rgb(255,255,255)
 	choice:
 		name: 银色
-		color: rgb(200,200,200)
+		color: rgb(166,176,186)
 	choice:
 		name: 金色
-		color: rgb(200,180,0)
+		color: rgb(170,137,75)
 set field:
 	type: multiple choice
 	name: automatic reminder text

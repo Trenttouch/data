@@ -227,6 +227,30 @@ init script:
 	extra_chop_bot := {to_number(pull_comma_array(styling.extra_text_chops, cell:1, end:false))}
 	extra_chop_right := {to_number(pull_comma_array(styling.extra_text_chops, cell:2, end:false))}
 
+	#############################################################################################################
+	nametype_font_choose :={
+		if styling.nametype_font != "" then styling.nametype_font else 
+		if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0"
+		else if set.card_language == "日本語" then "MotoyaF4Aporo W5 KP"
+		else if set.card_language != "简体中文" then "Beleren Bold"
+		else "华康魏碑 Std W7" 
+	}
+
+	nametop_shift := {
+		if set.card_language == "日本語" then 56
+		else if set.card_language != "简体中文" then 59
+		else 57 + (if use_phyrexian_font() then shrink_name()/2 else 0)
+		+
+		if styling.name_top_shift != "" then to_number(styling.name_top_shift) else 0
+	}
+
+	typetop_shift := {
+		shrink_type()/2 + 598 
+		+
+		if styling.type_top_shift != "" then to_number(styling.type_top_shift) else 0
+	}
+	###################################################################################################################
+
 
 	##### d20
 	is_d20 := {styling.d20_dividers != "off"}
@@ -284,6 +308,18 @@ styling field:
 	choice: nyx
 	choice: companion
 	initial: common
+styling field:
+	type: text
+	name: nametype font
+	description: 牌名字体
+styling field:
+	type: text
+	name: name top shift
+	description: 牌名字体上边距
+styling field:
+	type: text
+	name: type top shift
+	description: 类别字体上边距
 styling field:
 	type: boolean
 	name: use alias
@@ -380,6 +416,15 @@ styling style:
 ############################################################## Card fields
 card style:
 	############################# Background stuff
+	border color:
+		left:	0
+		top:	0
+		width:	750
+		height:	1050
+		z index: 4
+		mask: {"silverborder"+(if is_legend() then "_crown" else "") + ".png" }
+		visible: {card.border_color != rgb(0,0,0)}
+
 	card color:
 		left:	0
 		top:	0
@@ -410,15 +455,15 @@ card style:
 		visible: {is_adventure() or is_prototype()}
 	############################# Name line
 	name:
-		left: 64
-		top: { if set.card_language == "日本語" then 56 else if set.card_language != "简体中文" then 59 else 57 + (if use_phyrexian_font() then shrink_name()/2 else 0)}
+		left: { 64 }
+		top: { nametop_shift() }
 		right:  { 682 - max(30, card_style.casting_cost.content_width) }
 		height: {46 - 0.5*shrink_name()}
 		alignment: { if use_phyrexian_font() then "top shrink-overflow" else "bottom shrink-overflow"}
 		padding bottom: 0
 		z index: 5
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language == "日本語" then "MotoyaF4Aporo W5 KP" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: {nametype_font_choose()}
 			size: { if set.card_language == "日本語" then 26 - shrink_name() else if set.card_language != "简体中文" then 32 - shrink_name() else 34 - shrink_name()}
 			color: black
 	name 3:
@@ -510,14 +555,14 @@ card style:
 		image: { card_identity() }
 	type:
 		left: { if has_identity() then "102" else "62" }
-		top: {shrink_type()/2 + 598 }
+		top: { typetop_shift() }
 		width: { (if has_identity() then "580" else "610") - max(44,card_style.rarity.content_width) }
 		height: { 40 - shrink_type() }
 		alignment: {if set.card_language == "日本語" then "middle shrink-overflow" else "top shrink-overflow"}
 		z index: 2
 		padding top: 2
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language == "日本語" then "MotoyaF4Aporo W5 KP" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { nametype_font_choose() }
 			size: { if set.card_language == "日本語" then 20 - shrink_name() else if set.card_language != "简体中文" then 26 - shrink_type() else 32 - shrink_type() }
 			color: {if is_fullart() then "white" else "black" }
 			separator color: red

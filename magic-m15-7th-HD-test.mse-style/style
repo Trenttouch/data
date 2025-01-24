@@ -496,9 +496,15 @@ extra card style:
 		font:
 			name: mplantin
 			size: 13
-			color: { if card.card_color == "white" then "black" else "white" }
+			color:
+				script:
+					if card.card_color == "white"
+					or (contains(card.card_color, match:"white")
+					and contains(card.card_color, match:"artifact")
+					and not contains(card.card_color, match:"multicolor"))
+					then "black"
+					else "white"
 		
-
 	illustrator:
 		left: { 375 - 330/2 }
 		top: {940+5}
