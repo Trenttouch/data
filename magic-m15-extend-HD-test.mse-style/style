@@ -784,7 +784,7 @@ card style:
 	# adventure
 	text 2:
 		left:  { if is_omen() then 57 else  if is_adventure() then 58 else 0}
-		top:   { if is_omen() then 765 else if is_adventure() then 755 + extra_chop_top() else 0 }
+		top:   { (if is_omen() then 765 else if is_adventure() then 755 else 0) + extra_chop_top() }
 		width: { if is_omen() then 313 else if is_adventure() then 314 else 0 }
 		bottom: { 960 - extra_chop_bot() }
 		font:
