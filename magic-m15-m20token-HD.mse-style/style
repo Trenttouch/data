@@ -154,7 +154,13 @@ styling field:
 	choice: token
 	choice: state
 	choice: attraction
+	choice: second copyright
 	initial: token
+styling field:
+	type: boolean
+	name: second copyright
+	description: use second copyright
+	initial: no
 styling field:
 	type: choice
 	name: inner crown style
@@ -163,6 +169,10 @@ styling field:
 	choice: nyx
 	choice: companion
 	initial: common
+styling field:
+	type: text
+	name: shrink ubcopyright text
+	description: Shrinks ub copyright X pixels
 styling field:
 	type: boolean
 	name: use holofoil stamps
@@ -354,7 +364,7 @@ card style:
 		line height hard max: 1.2
 		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
 		
-#padding right:  4
+		#padding right:  4
 		#line height hard: {if is_modal(card.rule_text) then 0.9 else 1.1 }
 		#line height line: 1.5
 		#line height soft: 0.9
@@ -460,7 +470,7 @@ card style:
 			color: white
 	copyright:
 		right: 699
-		top: { if (card.pt != "" or is_ub()) then 998 else 981 }
+		top: { if (card.pt != "" or is_ub() or styling.second_copyright) then 998 else 981 }
 		width: 252
 		height: 20
 		z index: 2
@@ -517,6 +527,12 @@ extra card field:
 extra card field:
 	type: text
 	name: copyright2
+	save value: true
+	editable: true
+	show statistics: false
+extra card field:
+	type: text
+	name: card extra text
 	save value: true
 	editable: true
 	show statistics: false
@@ -663,14 +679,23 @@ extra card style:
 	card number:
 		left: 69
 		top: 979
-		width: 220
+		width: 72.5
 		height: 20
 		z index: 1
 		font:
 			name: Magic Gotham Medium
 			size: 13
 			color: white
-
+	card extra text:
+		left: 141.5
+		top: 979
+		width: 185
+		height: 20
+		z index: 1
+		font:
+			name: Magic Gotham Medium
+			size: 13
+			color: white
 	artist arrow:
 		left: { 143 }
 		top: 1002
@@ -708,7 +733,7 @@ extra card style:
 		visible: {(styling.frames != "state" and styling.frames != "attraction") and is_legend() }
 	auto copyright:
 		right: 699
-		top: { if (card.pt != "" or is_ub()) then 998 else 981 }
+		top: { if (card.pt != "" or is_ub() or styling.second_copyright) then 998 else 981 }
 		width: 252
 		height: 20
 		z index: 2
@@ -721,7 +746,7 @@ extra card style:
 
 	copyright2:
 		right: 699
-		top: { if is_ub() then 981 else 1111 }
+		top: { if is_ub() or styling.second_copyright then 981 else 1111 }
 		width: 252
 		height: 20
 		z index: 2
@@ -729,10 +754,10 @@ extra card style:
 			script:
 				if card.pt != "" then "middle left shrink-overflow"
 				else "middle right shrink-overflow"
-		visible: {set.automatic_copyright and is_ub()}
+		visible: {is_ub() or styling.second_copyright}
 		font:
 			name: mplantin
-			size: 13
+			size: {13 - (if styling.shrink_ubcopyright_text != "" then to_number(styling.shrink_ubcopyright_text) else 0)}
 			color: white
 
 	flavor bar:

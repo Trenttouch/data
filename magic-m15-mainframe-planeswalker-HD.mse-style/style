@@ -35,7 +35,6 @@ depends on:
 card width: 750
 card height: 1050
 card dpi: 600
-# width*2，height*2
 ########## new frames by silverback_ape
 ############################################################## Extra scripts
 init script:
@@ -455,7 +454,12 @@ styling field:
 	choice: alias fullart frame
 	choice: alias white text
 	choice: use phyrexian font
+	choice: second copyright
 	initial: un-indent nonloyalty abilities
+styling field:
+	type: text
+	name: shrink ubcopyright text
+	description: Shrinks ub copyright X pixels
 styling field:
 	type: text
 	name: custom mask
@@ -591,11 +595,11 @@ card style:
 	name:
 		left: 62
 		top: { 44 + (if set.card_language != "简体中文" then 2 else 0) + (if use_phyrexian_font() then shrink_name()/2 else 0)}
-		right:  { 682 - max(30, card_style.casting_cost.content_width) }
+		right:  { 682 - max(0, card_style.casting_cost.content_width) }
 		height: {46 - shrink_name()}
 		alignment: { if use_phyrexian_font() then "top shrink-overflow" else "bottom shrink-overflow"}
 		padding bottom: 0
-		z index: 5
+		z index: 4
 		font:
 			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
 			size: { if set.card_language != "简体中文" then 32 - shrink_name() else 34 - shrink_name()}
@@ -627,7 +631,7 @@ card style:
 			size: 30
 			alignment: middle right
 		always symbol: true
-		z index: 2
+		z index: 5
 		padding top: 0
 	############################# Image
 	image:
@@ -1102,6 +1106,18 @@ extra card field:
 	#name: opac filter
 	#script: rgb(opacity(0), opacity(0), opacity(0))
 	#save value: false
+extra card field:
+	type: text
+	name: copyright2
+	save value: true
+	editable: true
+	show statistics: false
+extra card field:
+	type: text
+	name: card extra text
+	save value: true
+	editable: true
+	show statistics: false
 
 extra card style:
 	dot:
@@ -1130,7 +1146,17 @@ extra card style:
 	card number:
 		left: 69
 		top: 979
-		width: 220
+		width: 72.5
+		height: 20
+		z index: 1
+		font:
+			name: Magic Gotham Medium
+			size: 13
+			color: white
+	card extra text:
+		left: 141.5
+		top: 979
+		width: 185
 		height: 20
 		z index: 1
 		font:
@@ -1457,7 +1483,19 @@ extra card style:
 			name: mplantin
 			size: 13
 			color: white
-
+	copyright2:
+		right: 699
+		top: { if chosen(styling.other_options, choice:"second copyright") then 981 else 1111 }
+		width: 252
+		height: 20
+		z index: 2
+		alignment: middle left shrink-overflow
+		visible: {chosen(styling.other_options, choice:"second copyright")}
+		font:
+			name: mplantin
+			size:{13 - (if styling.shrink_ubcopyright_text != "" then to_number(styling.shrink_ubcopyright_text) else 0)}
+			color: white
+			
 	promo label:
 		left: 40
 		top: { if has_four_abilities() then 225 else 262 }

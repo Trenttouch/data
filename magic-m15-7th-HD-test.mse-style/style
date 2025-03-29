@@ -230,7 +230,7 @@ card style:
 		height: {50 - 0.5*shrink_name()}
 		alignment: bottom shrink-overflow
 		padding bottom: 0
-		z index: 3
+		z index: 4
 		font:
 			name: { if set.card_language != "简体中文" then "MagicMedieval" else "方正大标宋_GBK" }
 			size: { if set.card_language != "简体中文" then 33 - shrink_name() else 30 - shrink_name()}
@@ -254,7 +254,7 @@ card style:
 			size: 30
 			alignment: middle right
 		always symbol: true
-		z index: 4
+		z index: 5
 		padding top: 0
 	card symbol:
 		left: {if chosen(card.card_symbol, choice:"up") then 50 else if chosen(card.card_symbol, choice:"down") then 673.5 else 49 }
@@ -496,9 +496,15 @@ extra card style:
 		font:
 			name: mplantin
 			size: 13
-			color: { if card.card_color == "white" then "black" else "white" }
+			color:
+				script:
+					if card.card_color == "white"
+					or (contains(card.card_color, match:"white")
+					and contains(card.card_color, match:"artifact")
+					and not contains(card.card_color, match:"multicolor"))
+					then "black"
+					else "white"
 		
-
 	illustrator:
 		left: { 375 - 330/2 }
 		top: {940+5}

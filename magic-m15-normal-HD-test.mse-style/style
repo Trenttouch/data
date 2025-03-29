@@ -63,6 +63,9 @@ init script:
 	mix:"adventure/" lp:"adventure/leftpage/" rp:"adventure/rightpage/" 
 	snow:"snow/" 
 	ub:"ub/" circuit:"ub/circuit/" ubstamp:"ub/stamp/" ubpt:"ub/pt/"
+
+	omenlp:"omen/leftpage/" omenrp:"omen/rightpage/" 
+
 	nyx: "nyx/" 
 	miracle:"miracle/" 
 	aliascrown:"alias/"  innercrown:"innercrown/" 
@@ -79,6 +82,9 @@ init script:
 	
 	mix:"card.png" lp:"lp.png" rp:"rp.png" 
 	ub:"card.png" circuit:"card.png" ubpt: "pt.png"
+
+	omenrp:".png"
+
 	snow:"card.png"
 	spree:"card.png"
 	nyx: "nyx.png" 
@@ -111,8 +117,9 @@ init script:
 	
 	template_suffix := {
 		if type == "ubstamp" then
-			if is_rare() then [ubstamp:"stamp.png"]
-			else [ubstamp:"ubstamp.png"]
+			if is_rare() then [ubstamp:"stamp.png"] else [ubstamp:"ubstamp.png"]
+		else if type == "omenlp" then
+			if is_rare() and styling.use_holofoil_stamps then [omenlp:"r.png"] else [omenlp:".png"]
 		else
 			template_suffix_normal 
 	}
@@ -124,7 +131,30 @@ init script:
 	hybrid_previews := "land,hybrid"
 	
 	
-	landless := {if input == "spree" or input == "levelarrow" or input == "levelpt" or input == "ubpt" or input == "devoid" or input == "nyx" or input == "crown" or input == "aliascrown" or input == "innercrown" or input == "pt" or input == "pt2" or input == "stamp" or input == "ubstamp" or input == "miracle" or input == "lp" or input == "rp" or input == "mix" or input == "prototype" or input == "manabox" then true else false}
+	landless := {
+		if input == "spree" or 
+		input == "levelarrow" or 
+		input == "levelpt" or 
+		input == "ubpt" or 
+		input == "devoid" or 
+		input == "nyx" or 
+		input == "crown" or 
+		input == "aliascrown" or 
+		input == "innercrown" or 
+		input == "pt" or 
+		input == "pt2" or 
+		input == "stamp" or 
+		input == "ubstamp" or 
+		input == "miracle" or 
+		input == "lp" or 
+		input == "rp" or 
+		input == "omenlp" or 
+		input == "omenrp" or 
+		input == "mix" or 
+		input == "prototype" or
+		input == "manabox" 
+		then true else false
+	}
 	
 	
 	crown_background := { color_background(type:"crown",     base_hybrid:card_hybrid) }
@@ -157,7 +187,8 @@ init script:
 	
 	spree_background := { color_background(type:"spree",     base_hybrid:card_hybrid) }
 	
-	
+	omen_leftpage_background := { color_background(type:"omenlp",     base_hybrid:card_hybrid) }
+	omen_rightpage_background := { color_background(type:"omenrp",     base_hybrid:card_hybrid) }
 	
 	crown_follow := {
 		if input == "crown" or input == "aliascrown" then if is_legend() then "l" else ""
@@ -201,6 +232,8 @@ init script:
 	is_adventure := { chosen(styling.frames, choice:"adventure") }
 	is_level := { chosen(styling.frames, choice:"leveler") }
 	is_spree := { chosen(styling.frames, choice:"spree") }
+	is_omen := { chosen(styling.frames, choice:"omen") }
+
 	is_serialized := { chosen(styling.frames, choice:"serialized") }
 	use_acorn_stamp := { styling.use_acorn_stamp }
 	use_phyrexian_font := { chosen(styling.frames, choice:"use phyrexian font") }
@@ -226,6 +259,30 @@ init script:
 	extra_chop_top := {to_number(pull_comma_array(styling.extra_text_chops, cell:0, end:false))}
 	extra_chop_bot := {to_number(pull_comma_array(styling.extra_text_chops, cell:1, end:false))}
 	extra_chop_right := {to_number(pull_comma_array(styling.extra_text_chops, cell:2, end:false))}
+
+	#############################################################################################################
+	nametype_font_choose :={
+		if styling.nametype_font != "" then styling.nametype_font else 
+		if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0"
+		else if set.card_language == "日本語" then "MotoyaF4Aporo W5 KP"
+		else if set.card_language != "简体中文" then "Beleren Bold"
+		else "华康魏碑 Std W7" 
+	}
+
+	nametop_shift := {
+		if set.card_language == "日本語" then 56
+		else if set.card_language != "简体中文" then 59
+		else 57 + (if use_phyrexian_font() then shrink_name()/2 else 0)
+		+
+		if styling.name_top_shift != "" then to_number(styling.name_top_shift) else 0
+	}
+
+	typetop_shift := {
+		shrink_type()/2 + 598 
+		+
+		if styling.type_top_shift != "" then to_number(styling.type_top_shift) else 0
+	}
+	###################################################################################################################
 
 
 	##### d20
@@ -285,6 +342,18 @@ styling field:
 	choice: companion
 	initial: common
 styling field:
+	type: text
+	name: nametype font
+	description: 牌名字体
+styling field:
+	type: text
+	name: name top shift
+	description: 牌名字体上边距
+styling field:
+	type: text
+	name: type top shift
+	description: 类别字体上边距
+styling field:
 	type: boolean
 	name: use alias
 	description: 启用假名栏
@@ -306,8 +375,14 @@ styling field:
 	choice: miracle
 	choice: snow
 	choice: spree
+	choice: omen
 	choice: use phyrexian font
 	choice: serialized
+	choice: second copyright
+styling field:
+	type: text
+	name: shrink ubcopyright text
+	description: Shrinks ub copyright X pixels
 styling field:
 	type: choice
 	name: d20 dividers
@@ -322,6 +397,14 @@ styling field:
 	type: text
 	name: shrink adventure name text
 	description: 历险牌牌名字体大小
+styling field:
+	type: text
+	name: name 2 top shift
+	description: 牌名2字体上边距
+styling field:
+	type: text
+	name: type 2 top shift
+	description: 类别2字体上边距
 styling field:
 	type: text
 	name: font cap extra
@@ -380,6 +463,15 @@ styling style:
 ############################################################## Card fields
 card style:
 	############################# Background stuff
+	border color:
+		left:	0
+		top:	0
+		width:	750
+		height:	1050
+		z index: 4
+		mask: {"silverborder"+(if is_legend() then "_crown" else "") + ".png" }
+		visible: {card.border_color != rgb(0,0,0)}
+
 	card color:
 		left:	0
 		top:	0
@@ -399,26 +491,26 @@ card style:
 				else card_background()
 		mask: { if is_fullart() then "frame_mask_fullart.png" else if is_mutate() then "frame_mask_mutate.png" else "frame_mask.png" }
 	card color 2:
-		left: { if is_adventure() then 36 else  50 }
-		top:  { if is_adventure() then 654 else  657 }
-		width: { if is_adventure() then 340 else  650 }
-		height: { if is_adventure() then 315 else  125 }
+		left:   { if is_omen() then 34.7015  else if is_adventure() then 36  else if is_prototype() then  50 else 0}
+		top:    { if is_omen() then 657.0164 else if is_adventure() then 654 else if is_prototype() then 657 else 1200}
+		width:  { if is_omen() then 342.5373 else if is_adventure() then 340 else if is_prototype() then 650 else 0}
+		height: { if is_omen() then 311.5671 else if is_adventure() then 315 else if is_prototype() then 125 else 0}
 		render style: image
 		popup style: in place
-		image: { if is_adventure() then leftpage_background() else prototype_background()}
-		z index: 1
-		visible: {is_adventure() or is_prototype()}
+		image: { if is_omen() then omen_leftpage_background() else if is_adventure() then leftpage_background() else prototype_background()}
+		z index: 3
+		visible: {is_adventure() or is_prototype() or is_omen() }
 	############################# Name line
 	name:
-		left: 64
-		top: { if set.card_language == "日本語" then 56 else if set.card_language != "简体中文" then 59 else 57 + (if use_phyrexian_font() then shrink_name()/2 else 0)}
-		right:  { 682 - max(30, card_style.casting_cost.content_width) }
+		left: { 64 }
+		top: { nametop_shift() }
+		right:  { 682 - max(0, card_style.casting_cost.content_width) }
 		height: {46 - 0.5*shrink_name()}
 		alignment: { if use_phyrexian_font() then "top shrink-overflow" else "bottom shrink-overflow"}
 		padding bottom: 0
 		z index: 5
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language == "日本語" then "MotoyaF4Aporo W5 KP" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: {nametype_font_choose()}
 			size: { if set.card_language == "日本語" then 26 - shrink_name() else if set.card_language != "简体中文" then 32 - shrink_name() else 34 - shrink_name()}
 			color: black
 	name 3:
@@ -447,7 +539,7 @@ card style:
 			size: 30
 			alignment: middle right
 		always symbol: true
-		z index: 2
+		z index: 5
 		padding top: 0
 	alias:
 		left: 108
@@ -464,29 +556,37 @@ card style:
 		alignment: middle center
 		
 	name 2:
-		left: {if is_adventure() then 64 else 0 }
-		top: {(if is_adventure() then if set.card_language != "简体中文" then 666 else 660 else 0)}
-		right: { if is_adventure() then (356 - max(40, card_style.casting_cost_2.content_width)) else 0 }
-		height: { if is_adventure() then (40 - 0.5*shrink_adventure_name()) else 0 }
+		left: {if is_adventure() or is_omen() then 64 else 0 }
+		top:
+			script:
+				(if styling.name_2_top_shift != "" then to_number(styling.name_2_top_shift) else 0)
+				+
+				if is_omen() then
+					if set.card_language != "简体中文" then 667 else 662
+				else if is_adventure() then
+					if set.card_language != "简体中文" then 666 else 660
+				else 0
+		right: { (if is_adventure() then 356 else if is_omen() then 355 else 0) - max(40, card_style.casting_cost_2.content_width) }
+		height: { if is_adventure() or is_omen() then (40 - 0.5*shrink_adventure_name()) else 0 }
 		alignment: { if use_phyrexian_font() then "middle shrink-overflow" else "bottom shrink-overflow"}
-		z index: 2
+		z index: 5
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
-			size: {26 - shrink_adventure_name() }
+			name: {nametype_font_choose()}
+			size: {(if is_omen() and set.card_language != "简体中文" then 23 else 26) - shrink_adventure_name() }
 			color: white
 		
 	casting cost 2:
-		right: {if is_adventure() then 362 else if is_prototype() then 688 else 0 }
-		top: {if is_adventure() then 659 else if is_prototype() then 664 else 0 }
-		width: { if is_adventure() or is_prototype() then max(20, card_style.casting_cost_2.content_width) + 10 else 0}
+		right: {if is_omen() then 360 else if is_adventure() then 362 else if is_prototype() then 688 else 0 }
+		top: {if is_omen() then 661 else if is_adventure() then 659 else if is_prototype() then 664 else 0 }
+		width: { if is_adventure() or is_prototype() or is_omen() then max(20, card_style.casting_cost_2.content_width) + 10 else 0}
 		height: 50
 		alignment: middle right
 		symbol font:
 			name: magic-mana-large
-			size: {if is_adventure() then 25 else if is_prototype() then 26 else 0 }
+			size: {if is_adventure() then 25 else if is_prototype() or is_omen() then 26 else 0 }
 			alignment: middle right
 		always symbol: true
-		z index: 4
+		z index: 5
 		padding top: 0
 
 	############################# Image
@@ -510,28 +610,37 @@ card style:
 		image: { card_identity() }
 	type:
 		left: { if has_identity() then "102" else "62" }
-		top: {shrink_type()/2 + 598 }
+		top: { typetop_shift() }
 		width: { (if has_identity() then "580" else "610") - max(44,card_style.rarity.content_width) }
 		height: { 40 - shrink_type() }
 		alignment: {if set.card_language == "日本語" then "middle shrink-overflow" else "top shrink-overflow"}
-		z index: 2
+		z index: 5
 		padding top: 2
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language == "日本語" then "MotoyaF4Aporo W5 KP" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { nametype_font_choose() }
 			size: { if set.card_language == "日本語" then 20 - shrink_name() else if set.card_language != "简体中文" then 26 - shrink_type() else 32 - shrink_type() }
 			color: {if is_fullart() then "white" else "black" }
 			separator color: red
 	type 2:
-		left: {if is_adventure() then 64 else 0 }
-		top: {if is_adventure() then if set.card_language != "简体中文" then 708 else 710 else 0 }
-		width: {if is_adventure() then 310 else 0 }
+		left: {if is_adventure() or is_omen() then 64 else 0 }
+		top:
+			script:
+				(if styling.type_2_top_shift != "" then to_number(styling.type_2_top_shift) else 0)
+				+
+				if is_omen() then
+					if set.card_language != "简体中文" then 714 else 716
+				else if is_adventure() then
+					if set.card_language != "简体中文" then 708 else 710
+				else 0
+				
+		width: {if is_adventure() or is_omen() then 310 else 0 }
 		height: { 44 - shrink_type() }
 		alignment: top shrink-overflow
-		z index: 2
+		z index: 5
 		padding top: 2
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
-			size: { 26 - shrink_type() }
+			name: { nametype_font_choose() }
+			size: { (if is_omen() and set.card_language != "简体中文" then 23 else 26) - shrink_type() }
 			color: white
 			separator color: red
 	rarity:
@@ -539,7 +648,7 @@ card style:
 		top: 598
 		width: 88
 		height: 44
-		z index: 2
+		z index: 5
 		render style: image
 		alignment: middle right
 		include file: /magic-rarity.mse-include/rarity
@@ -603,7 +712,7 @@ card style:
 				   then "middle center"
 				else "middle left"
 				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
-		z index: 3
+		z index: 5
 		padding left:   6
 		padding right:  {4 + extra_chop_right()}
 		line height hard: 1.1
@@ -758,9 +867,9 @@ card style:
 
 	##### normal text ######
 	text:
-		left: {if is_level() then 0 else if is_adventure() then 390 else 58}
-		top: {if is_level() then 0 else if is_mutate() then 791+chop_top() else if is_prototype() then 782+chop_top() else 654+chop_top() }
-		width: {(if is_level() then 0 else if is_adventure() then 636/2 else 636)}
+		left: { if is_omen() then 378 else if is_level() then 0 else if is_adventure() then 390 else 58 }
+		top:  { (if is_level() then 0 else if is_mutate() then 791 else if is_prototype() then 782 else 654) + chop_top() }
+		width: { if is_level() then 0 else if is_adventure() or is_omen() then 636/2 else 636 }
 		bottom: {960-chop_bot()}
 		visible: {not is_level()}
 		font:
@@ -768,7 +877,7 @@ card style:
 			italic name: {if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language == "日本語" then "DFGKyoKaSho-W4" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 28 }
 			scale down to: 6
-			color: {if is_fullart() and not is_adventure() then "white" else "black" }
+			color: {if is_fullart() and not (is_adventure() or is_omen()) then "white" else "black" }
 		symbol font:
 			name: { styling.text_box_mana_symbols }
 			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 28 }
@@ -783,7 +892,7 @@ card style:
 				then "middle center"
 				else "middle left"
 				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
-		z index: 2
+		z index: 5
 		padding left:   6
 		padding right:  {4 + chop_right()}
 		line height hard: 1.1
@@ -809,9 +918,9 @@ card style:
 	
 	# adventure
 	text 2:
-		left: {if is_adventure() then 58 else 0}
-		top: { if is_adventure() then 755 + extra_chop_top() else 0 }
-		width: { if is_adventure() then 314 else 0 }
+		left:  { if is_omen() then 57 else if is_adventure() then 58 else 0}
+		top:   { if is_omen() then 765 else if is_adventure() then 755 + extra_chop_top() else 0 }
+		width: { if is_omen() then 313 else if is_adventure() then 314 else 0 }
 		bottom: { 960 - extra_chop_bot() }
 		font:
 			name: {if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin" else ch_font() }
@@ -832,7 +941,7 @@ card style:
 				then "middle center"
 				else "middle left"
 				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
-		z index: 2
+		z index: 5
 		padding left:   6
 		padding right:  {4 + extra_chop_right()}
 		line height hard: 1.1
@@ -928,7 +1037,7 @@ card style:
 			color: white
 	copyright:
 		right: 699
-		top: { if ((card.pt != "" or is_ub())and not is_level()) then 998 else 981 }
+		top: { if ((card.pt != "" or is_ub() or chosen(styling.frames, choice:"second copyright"))and not is_level()) then 998 else 981 }
 		width: 252
 		height: 20
 		z index: 2
@@ -1010,7 +1119,44 @@ extra card field:
 		name: reversed
 	script: card_color_filter(value)
 	default: card_color(casting_cost: card.casting_cost, rules_text: card.rule_text, type: card.super_type, watermark: card.watermark, card_name: card.name)
-	
+
+extra card field:
+	type: multiple choice
+	name: omenstamp
+	empty choice: colorless
+	choice: white
+	choice: blue
+	choice: black
+	choice: red
+	choice:
+		name: green
+		line below: true
+	choice: artifact
+	choice: land
+	choice: multicolor
+	choice:
+		name: hybrid
+		line below: true
+	choice:
+		name: horizontal
+		type: radio
+	choice:
+		name: vertical
+		type: radio
+	choice:
+		name: radial
+		type: radio
+	choice:
+		name: diagonal
+		type: radio
+	choice:
+		name: overlay
+		type: radio
+	choice:
+		name: reversed
+	script: card_color_filter(value)
+	default: card_color(casting_cost: card.casting_cost, rules_text: card.rule_text, type: card.super_type, watermark: card.watermark, card_name: card.name)
+
 extra card field:
 	type: multiple choice
 	name: ubstamp
@@ -1171,7 +1317,12 @@ extra card field:
 	save value: true
 	editable: true
 	show statistics: false
-
+extra card field:
+	type: text
+	name: card extra text
+	save value: true
+	editable: true
+	show statistics: false
 #### level ####
 
 extra card field:
@@ -1238,14 +1389,23 @@ extra card style:
 	card number:
 		left: 69
 		top: 979
-		width: 220
+		width: 72.5
 		height: 20
 		z index: 1
 		font:
 			name: Magic Gotham Medium
 			size: 13
 			color: white
-
+	card extra text:
+		left: 141.5
+		top: 979
+		width: 185
+		height: 20
+		z index: 1
+		font:
+			name: Magic Gotham Medium
+			size: 13
+			color: white
 	artist arrow:
 		left: { 143 }
 		top: 1002
@@ -1285,12 +1445,23 @@ extra card style:
 		image: { prototype_ptbox() }
 
 	stamp:
-		left:	327
-		top:	948
-		width:	96
-		height:	49
+		left:	{if is_omen() then 0 else 327}
+		top:	{if is_omen() then 0 else 948}
+		width:	{if is_omen() then 0 else 96 }
+		height:	{if is_omen() then 0 else 49 }
 		z index: 5
-		visible: { (is_rare() and styling.use_holofoil_stamps and not (is_ub() or is_circuit())) or use_acorn_stamp()}
+		visible: { not is_omen() and ((is_rare() and styling.use_holofoil_stamps and not (is_ub() or is_circuit())) or use_acorn_stamp()) }
+		render style: image
+		image:  {if is_devoid() then "stamp/cstamp.png" else if is_colorless() then "stamp/wstamp.png" else card_stamp() }
+		mask: {if is_adventure() then "stamp/stampmask.png" else ""}
+
+	omenstamp:
+		left:	{if is_omen() then 327 else 0}
+		top:	{if is_omen() then 948 else 0}
+		width:	{if is_omen() then 96  else 0}
+		height:	{if is_omen() then 49  else 0}
+		z index: 2
+		visible: { is_omen() and ((is_rare() and styling.use_holofoil_stamps and not (is_ub() or is_circuit())) or use_acorn_stamp()) }
 		render style: image
 		image:  {if is_devoid() then "stamp/cstamp.png" else if is_colorless() then "stamp/wstamp.png" else card_stamp() }
 		mask: {if is_adventure() then "stamp/stampmask.png" else ""}
@@ -1307,7 +1478,7 @@ extra card style:
 
 	auto copyright:
 		right: 699
-		top: { if ((card.pt != "" or is_ub())and not is_level()) then 998 else 981 }
+		top: { if ((card.pt != "" or is_ub() or chosen(styling.frames, choice:"second copyright"))and not is_level()) then 998 else 981 }
 		width: 252
 		height: 20
 		z index: 2
@@ -1320,7 +1491,7 @@ extra card style:
 
 	copyright2:
 		right: 699
-		top: { if is_ub() then 981 else 1111 }
+		top: { if is_ub() or chosen(styling.frames, choice:"second copyright") then 981 else 1111 }
 		width: 252
 		height: 20
 		z index: 2
@@ -1328,23 +1499,23 @@ extra card style:
 			script:
 				if card.pt != "" then "middle left shrink-overflow"
 				else "middle right shrink-overflow"
-		visible: {set.automatic_copyright and is_ub()}
+		visible: { is_ub() or chosen(styling.frames, choice:"second copyright")}
 		font:
 			name: mplantin
-			size: 13
+			size:{13 - (if styling.shrink_ubcopyright_text != "" then to_number(styling.shrink_ubcopyright_text) else 0)}
 			color: white
 
 	flavor bar:
-		left: {if is_adventure() then 360 else 0}
+		left: {if is_omen() then 347.5 else if is_adventure() then 360 else 0}
 		top: { bar_equation() - 4}
-		width: {if is_adventure() then 375 else 750}
+		width: {if is_adventure() or is_omen() then 375 else 750}
 		height: 7
 		z index: 4
 		render style: image
 		image: bar.png
 		visible: { card.rule_text != "" and remove_tags(card.flavor_text) != "" and set.use_flavor_bar }
 	flavor bar 2:
-		left: 25
+		left: {if is_omen() then 26.5 else 25}
 		top: { bar_equation2() -4 }
 		width: 375
 		height: 7
@@ -1448,14 +1619,14 @@ extra card style:
 		visible: {(is_d20() and number_of_rolls(card.text)-no_roll(card.text) > 4) }
 
 	rightpage:
-		left: 375
-		top: 655
-		width: 341
-		height: 314
+		left:  {if is_omen() then 377.2388 else 375}
+		top:   {if is_omen() then 657.0164 else 655}
+		width: {if is_omen() then 317.5373 else 341}
+		height:{if is_omen() then 311.9402 else 314}
 		render style: image
-		image: { rightpage_background() }
+		image: { if is_omen() then omen_rightpage_background() else rightpage_background() }
 		z index: 1
-		visible: {is_adventure()}
+		visible: {is_adventure() or is_omen()}
 	advmix:
 		left: 0
 		top: 653

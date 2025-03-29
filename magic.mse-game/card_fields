@@ -58,10 +58,10 @@ card field:
 		color: rgb(255,255,255)
 	choice:
 		name: silver
-		color: rgb(200,200,200)
+		color: rgb(166,176,186)
 	choice:
 		name: gold
-		color: rgb(200,180,0)
+		color: rgb(170,137,75)
 	show statistics: false
 	description: 牌边颜色，可为任意实色。
 card field:

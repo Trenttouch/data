@@ -2,10 +2,46 @@
 # Edit by Heavenford 2017.1.14
 
 choice images:
+	SPM Mythic: 	/magic-rarity.mse-include/SPM_M.png
+	SPM Rare: 		/magic-rarity.mse-include/SPM_R.png
+	SPM Uncommon: 	/magic-rarity.mse-include/SPM_U.png
+	SPM Common: 	/magic-rarity.mse-include/SPM_C.png
+	SPM Basic Land: /magic-rarity.mse-include/SPM_C.png
+	SPM SPE Mythic: 	/magic-rarity.mse-include/SPE_M.png
+	SPM SPE Rare: 		/magic-rarity.mse-include/SPE_R.png
+	SPM SPE Uncommon: 	/magic-rarity.mse-include/SPE_U.png
+	SPM SPE Common: 	/magic-rarity.mse-include/SPE_C.png
+	SPM SPE Basic Land: /magic-rarity.mse-include/SPE_C.png
+	SPM MAR Mythic: 	/magic-rarity.mse-include/MAR.png
+
+	EOE Mythic: 	/magic-rarity.mse-include/EOE_M.png
+	EOE Rare: 		/magic-rarity.mse-include/EOE_R.png
+	EOE Uncommon: 	/magic-rarity.mse-include/EOE_U.png
+	EOE Common: 	/magic-rarity.mse-include/EOE_C.png
+	EOE Basic Land: /magic-rarity.mse-include/EOE_C.png
+
+	FIN Mythic: 	/magic-rarity.mse-include/FIN_M.png
+	FIN Rare: 		/magic-rarity.mse-include/FIN_R.png
+	FIN Uncommon: 	/magic-rarity.mse-include/FIN_U.png
+	FIN Common: 	/magic-rarity.mse-include/FIN_C.png
+	FIN Basic Land: /magic-rarity.mse-include/FIN_C.png
+	FIN FCA Mythic: 	/magic-rarity.mse-include/FCA_M.png
+	FIN FCA Rare: 		/magic-rarity.mse-include/FCA_R.png
+	FIN FCA Uncommon: 	/magic-rarity.mse-include/FCA_U.png
+	FIN FCA Common: 	/magic-rarity.mse-include/FCA_C.png
+	FIN FCA Basic Land: /magic-rarity.mse-include/FCA_C.png
+
+	TDM Mythic: 	/magic-rarity.mse-include/TDM_M.png
+	TDM Rare: 		/magic-rarity.mse-include/TDM_R.png
+	TDM Uncommon: 	/magic-rarity.mse-include/TDM_U.png
+	TDM Common: 	/magic-rarity.mse-include/TDM_C.png
+	TDM Basic Land: /magic-rarity.mse-include/TDM_C.png
+
 	DFT Mythic: 	/magic-rarity.mse-include/DFT_M.png
 	DFT Rare: 		/magic-rarity.mse-include/DFT_R.png
 	DFT Uncommon: 	/magic-rarity.mse-include/DFT_U.png
 	DFT Common: 	/magic-rarity.mse-include/DFT_C.png
+	DFT Basic Land: /magic-rarity.mse-include/DFT_C.png
 
 	FDN Mythic: 	/magic-rarity.mse-include/FDN_M.png
 	FDN Rare: 		/magic-rarity.mse-include/FDN_R.png
@@ -728,6 +764,28 @@ choice images:
 	Duel EVG Uncommon: /magic-rarity.mse-include/EVG_U.png
 	Duel EVG Common: /magic-rarity.mse-include/EVG_C.png
 
+	Command EOC Mythic: 	/magic-rarity.mse-include/EOC_M.png
+	Command EOC Rare: 		/magic-rarity.mse-include/EOC_R.png
+	Command EOC Uncommon: 	/magic-rarity.mse-include/EOC_U.png
+	Command EOC Common: 	/magic-rarity.mse-include/EOC_C.png
+	Command EOC Basic Land: /magic-rarity.mse-include/EOC_C.png
+
+	Command FIC Mythic: 	/magic-rarity.mse-include/FIC_M.png
+	Command FIC Rare: 		/magic-rarity.mse-include/FIC_R.png
+	Command FIC Uncommon: 	/magic-rarity.mse-include/FIC_U.png
+	Command FIC Common: 	/magic-rarity.mse-include/FIC_C.png
+	Command FIC Basic Land: /magic-rarity.mse-include/FIC_C.png
+
+	Command TDC Mythic: 	/magic-rarity.mse-include/TDC_M.png
+	Command TDC Rare: 		/magic-rarity.mse-include/TDC_R.png
+	Command TDC Uncommon: 	/magic-rarity.mse-include/TDC_U.png
+	Command TDC Common: 	/magic-rarity.mse-include/TDC_C.png
+	Command TDC Basic Land: /magic-rarity.mse-include/TDC_C.png
+
+	Command DRC Mythic: 	/magic-rarity.mse-include/DRC_M.png
+	Command DRC Rare: 		/magic-rarity.mse-include/DRC_R.png
+	Command DRC Uncommon: 	/magic-rarity.mse-include/DRC_U.png
+	Command DRC Common: 	/magic-rarity.mse-include/DRC_C.png
 
 	Command DKC Mythic: 	/magic-rarity.mse-include/DKC_M.png
 	Command DKC Rare: 		/magic-rarity.mse-include/DKC_R.png

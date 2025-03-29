@@ -13,11 +13,65 @@ choice:
 	line below: true
 
 choice:
+	name: SPM
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	choice: Basic Land
+	choice:
+		name:SPE
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Basic Land
+	choice:
+		name:MAR
+		choice: Mythic
+	line below: true
+
+choice:
+	name: EOE
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	choice: Basic Land
+	line below: true
+	
+choice:
+	name: FIN
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	choice: Basic Land
+	choice:
+		name:FCA
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Basic Land
+	line below: true
+
+choice:
+	name: TDM
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	choice: Basic Land
+	line below: true
+
+choice:
 	name: DFT
 	choice: Mythic
 	choice: Rare
 	choice: Uncommon
 	choice: Common
+	choice: Basic Land
 	line below: true
 
 choice:
@@ -160,8 +214,8 @@ choice:
 	choice: Common
 	line below: true
 
-
 ######################################################### 摩登
+
 choice:
 	name: Modern
 	choice:
@@ -1136,6 +1190,33 @@ choice:
 ######################################################### 指挥官
 choice:
 	name: Command
+	choice:
+		name: EOC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Basic Land
+	choice:
+		name: FIC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Basic Land
+	choice:
+		name: TDC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Basic Land
+	choice:
+		name: DRC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
 	choice:
 		name: DKC
 		choice: Mythic

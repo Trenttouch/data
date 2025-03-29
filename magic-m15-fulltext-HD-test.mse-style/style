@@ -218,11 +218,11 @@ card style:
 	name:
 		left: 64
 		top: { if set.card_language != "简体中文" then 59 else 57 + (if use_phyrexian_font() then shrink_name()/2 else 0)}
-		right:  { 682 - max(30, card_style.casting_cost.content_width) }
+		right:  { 682 - max(0, card_style.casting_cost.content_width) }
 		height: {46 - 0.5*shrink_name()}
 		alignment:  { if use_phyrexian_font() then "top shrink-overflow" else "bottom shrink-overflow"}
 		padding bottom: 0
-		z index: 5
+		z index: 4
 		font:
 			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
 			size: { if set.card_language != "简体中文" then 32 - shrink_name() else 34 - shrink_name()}
@@ -242,7 +242,7 @@ card style:
 			size: 30
 			alignment: middle right
 		always symbol: true
-		z index: 2
+		z index: 5
 		padding top: 0
 	############################# Image
 	############################# Card type

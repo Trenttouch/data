@@ -625,7 +625,7 @@ symbol:
 		weight: {"bold"}
 symbol:
 	image: mana_circle_100.png
-	code: [0-9][0-9][0-9]
+	code: [0-9][0-9][0-9](?!/[WUBRGCSTQ2])|
 	regex: yes
 	draw text: 0
 	text margin left:   .23
@@ -639,7 +639,7 @@ symbol:
 		weight: {"bold"}
 symbol:
 	image: mana_circle.png
-	code: [3-9][0-9]
+	code: [3-9][0-9](?!/[WUBRGCSTQ2])|
 	regex: yes
 	draw text: 0
 	text margin left:   .11

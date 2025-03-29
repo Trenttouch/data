@@ -54,7 +54,7 @@ init script:
 	template_prefix := [
 	card: "front/normal/" card2: "back/normal/" map: "back/map/"
 	snow:"front/snow/" snow2:"back/snow/"
-	nyx: "nyx/"
+	nyx: "nyx/" backnyx: "nyx/back/"
 	miracle:"miracle/"
 	aliascrown:"crown/alias/" aliascrown2:"crown/alias/" crown:"crown/" innercrown:"innercrown/"
 	
@@ -73,15 +73,25 @@ init script:
 	showcasefront: "front/showcase/" showcaseback: "back/showcase/" showcasecrown: "crown/showcase/"
 	
 	pt: "front/pt/" pt2: "back/pt/" newpt: "newpt/"
+
+	ubfront		:"ub/front/"
+	ubback		:"ub/back/"
+	ubfrontcrown:"ub/crown/"
+	ubbackcrown	:"ub/crown/back/"
+	ubfrontpt	:"ub/pt/"
+	ubbackpt	:"ub/pt/back/"
+	ubstamp		:"ub/stamp/"
+
+
 	
 	stamp: "stamp/" identity: "/magic-identity-new.mse-include/" identity2: "/magic-identity-new.mse-include/"
 	]
 	
 	
-	template_suffix := [
+	template_suffix_normal := [
 	card: "card.png" card2: "card.png" map: "card.png"
 	snow:"card.png" snow2:"card.png"
-	nyx: "nyx.png"
+	nyx: "nyx.png" backnyx: "nyx.png"
 	miracle:"miracle.png"
 	aliascrown:"aliascrown.png" aliascrown2:"aliascrown.png" crown:"crown.png" innercrown:"crown.png"
 
@@ -100,17 +110,32 @@ init script:
 	showcasefront: "card.png" showcaseback: "card.png" showcasecrown: "crown.png"
 	
 	pt: "pt.png" pt2: "pt.png" newpt: "pt.png" 
+
+	ubfront		:"card.png"
+	ubback		:"card.png"
+	ubfrontcrown:"lcrown.png"
+	ubbackcrown	:"lcrown.png"
+	ubfrontpt	:"pt.png"
+	ubbackpt	:"pt.png"
 	
 	stamp: "stamp.png" identity: "identity.png" identity2: "identity.png"
 	]
 	
-	template      := { template_prefix[type] + input + crown_follow(type) + innercrown_follow(type) + template_suffix[type] }
-	land_template := { template_prefix[type] + (if input == "a" then "c" else input) + (if landless(type) then "" else "l") + crown_follow(type) + innercrown_follow(type) + template_suffix[type] }
+	template_suffix := {
+		if type == "ubstamp" then
+			if is_rare() then [ubstamp:"stamp.png"]
+			else [ubstamp:"ubstamp.png"]
+		else
+			template_suffix_normal 
+	}
+
+	template      := { template_prefix[type] + input + crown_follow(type) + innercrown_follow(type) + template_suffix()[type] }
+	land_template := { template_prefix[type] + (if input == "a" then "c" else input) + (if landless(type) then "" else "l") + crown_follow(type) + innercrown_follow(type) + template_suffix()[type] }
 	# Use land templates for previews because they show more contrast
 	hybrid_previews := "land,hybrid"
 	
 	landless := {
-		if input == "nyx" 
+		if input == "nyx" or input == "backnyx"
 		or input == "crown" 
 		or input == "aliascrown" or input == "aliascrown2" or input == "innercrown" 
 		or input == "pt" or input == "pt2" or input == "stamp" 
@@ -122,6 +147,10 @@ init script:
 		or input == "paper"
 		or input == "battle"
 		or input == "showcasefront" or input == "showcaseback" or input == "showcasecrown"
+
+		or input == "ubfrontcrown" or input == "ubbackcrown"
+		or input == "ubfrontpt" or input == "ubbackpt"
+		or input == "ubstamp"
 		then 
 			true 
 		else false
@@ -129,6 +158,7 @@ init script:
 	
 	crown_background := { color_background(type:"crown",     base_hybrid:card_hybrid) }
 	nyx_background := { color_background(type:"nyx",     base_hybrid:card_hybrid) }
+	backnyx_background := { color_background(type:"backnyx",     base_hybrid:card_hybrid) }
 	miracle_background := { color_background(type:"miracle",     base_hybrid:card_hybrid) }
 	innercrown_background := { color_background(type:"innercrown",     base_hybrid:card_hybrid) }
 	aliascrown_background := { color_background(type:"aliascrown",     base_hybrid:card_hybrid) }
@@ -150,6 +180,16 @@ init script:
 	showcasefront_background := { color_background(type:"showcasefront",     base_hybrid:card_hybrid) }
 	showcaseback_background := { color_background(type:"showcaseback",     base_hybrid:card_hybrid) }
 	showcasecrown_background := { color_background(type:"showcasecrown",     base_hybrid:card_hybrid) }
+
+	ubfront_background			:= { color_background(type:"ubfront",     base_hybrid:card_hybrid) }
+	ubback_background			:= { color_background(type:"ubback",     base_hybrid:card_hybrid) }
+	ubfront_crown_background	:= { color_background(type:"ubfrontcrown",     base_hybrid:card_hybrid) }
+	ubback_crown_background		:= { color_background(type:"ubbackcrown",     base_hybrid:card_hybrid) }
+	ubfront_pt_background		:= { color_background(type:"ubfrontpt",     base_hybrid:card_hybrid) }
+	ubback_pt_background		:= { color_background(type:"ubbackpt",     base_hybrid:card_hybrid) }
+	ubstamp_background	:= { color_background(type:"ubstamp",     base_hybrid:ubstamp_hybrid) }
+
+
 
 	new_pt_background := { color_background(type:"newpt",     base_hybrid:card_hybrid) }
 	
@@ -204,6 +244,9 @@ init script:
 	
 	is_battle := { chosen(styling.frames, choice:"battle") or chosen(styling.frames, choice:"tallart battle") }
 	is_battle_fullart := { chosen(styling.frames, choice:"full art battle") }
+
+	is_ub := { chosen(styling.frames, choice:"universe beyond") }
+
 	
 	mana_sort := {
 		if styling.unsorted_casting_cost then
@@ -596,7 +639,7 @@ init script:
 	back_plw_awaken := { back_is_plw() and chosen(extra_card.corner2, choice:"aetherprint") }
 	back_use_phyrexian_font := { chosen(styling.back_frames, choice:"use phyrexian font") }
 
-
+	back_is_ub := { chosen(styling.back_frames, choice:"universe beyond") }
 
 
 
@@ -701,7 +744,13 @@ styling field:
 	choice: mutate
 	# choice: miracle
 	choice: snow
+	choice: universe beyond
+	choice: second copyright(for two sides)
 	choice: use phyrexian font
+styling field:
+	type: text
+	name: shrink ubcopyright text
+	description: Shrinks ub copyright X pixels
 styling field:
 	type: text
 	name: shift loyalty costs
@@ -790,6 +839,7 @@ styling field:
 	choice: mutate
 	# choice: miracle
 	choice: snow
+	choice: universe beyond
 	choice: map
 	choice: extend
 	choice: bot
@@ -899,7 +949,8 @@ card style:
 		popup style: in place
 		image: 
 			script:
-				if is_saga() then saga_background()
+				if is_ub() then ubfront_background()
+				else if is_saga() then saga_background()
 				else if chosen(styling.frames, choice:"bot") then if is_legend() then "front/bot/lcard.png" else "front/bot/card.png"
 				else if is_extend() then extendfront_background()
 				else if is_showcase() then showcasefront_background()
@@ -917,6 +968,7 @@ card style:
 							if (is_rare() and styling.use_holofoil_stamps) then "mythic_mask_rare_" else "mythic_mask_" 
 						  else "" ) + 
 						 "frame_mask.png")
+				else if is_ub() then  "ub/frame_mask.png"
 				else if is_saga() then "front/saga/frame_mask.png"
 				else if chosen(styling.frames, choice:"bot") then "front/bot/frame_mask.png"
 				else if is_extend() then ("front/extend/frame_mask" + (if is_legend() then "_l" else "") + ".png")
@@ -937,7 +989,8 @@ card style:
 		popup style: in place
 		image: 
 			script:
-				if back_is_saga() then backsaga_background()
+				if back_is_ub() then ubback_background()
+				else if back_is_saga() then backsaga_background()
 				else if chosen(styling.back_frames, choice:"bot") then if back_is_legend() then "back/bot/lcard.png" else "back/bot/card.png"
 				else if back_is_extend() then extendback_background()
 				else if back_is_showcase() then showcaseback_background()
@@ -953,6 +1006,7 @@ card style:
 						 (if back_has_four_abilities() then "tall/" else "") + 
 						 (if back_is_plw_fullart() then "mythic_mask_" else "" ) + 
 						 "frame_mask.png")
+				else if back_is_ub() then  "ub/frame_mask.png"
 				else if back_is_saga() then "back/saga/frame_mask.png"
 				else if chosen(styling.back_frames, choice:"bot") then "back/bot/frame_mask.png"
 				else if back_is_extend() then ("back/extend/frame_mask" + (if back_is_legend() then "_l" else "") + ".png")
@@ -967,11 +1021,11 @@ card style:
 		left: {if is_battle() then (if set.card_language != "简体中文" then 45 else 43  + (if use_phyrexian_font() then shrink_name()/2 else 0)) else 118}
 
 		top: { if is_battle() then 855 else if set.card_language != "简体中文" then 59 else 57 + (if is_plw() then -17 else 0) + (if use_phyrexian_font() then shrink_name()/2 else 0)}
-		right:  { 682 - max(30, card_style.casting_cost.content_width) + if is_battle() then 135 else 0}
+		right:  { 682 - max(0, card_style.casting_cost.content_width) + if is_battle() then 135 else 0}
 		height: {46 - 0.5*shrink_name()}
 		alignment: { if use_phyrexian_font() then "top shrink-overflow" else "bottom shrink-overflow"}
 		padding bottom: 0
-		z index: 5
+		z index: 4
 		angle: {if is_battle() then 90 else 0}
 		font:
 			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
@@ -991,7 +1045,7 @@ card style:
 			size: 30
 			alignment: middle right
 		always symbol: true
-		z index: 2
+		z index: 5
 		angle: {if is_battle() then 90 else 0}
 		padding top: 0
 	alias:
@@ -1009,9 +1063,9 @@ card style:
 		alignment: middle center
 
 	name 2:
-		left: {(if chosen(styling.back_frames, choice:"bot") then 64 else 118)+backside_left_fix()}
+		left: {(if back_is_ub() then 64 else if chosen(styling.back_frames, choice:"bot") then 64 else 118)+backside_left_fix()}
 		top: { if set.card_language != "简体中文" then 59 else 57 + (if back_is_map() then -8 else 0) + (if back_is_plw() then -17 else 0) + (if back_use_phyrexian_font() then shrink_name()/2 else 0)}
-		right:  { if back_is_map() then (backside_left_fix() +632) else (682 + backside_left_fix() - max(30, card_style.casting_cost_2.content_width)) }
+		right:  { if back_is_map() then (backside_left_fix() +632) else (682 + backside_left_fix() - max(0, card_style.casting_cost_2.content_width)) }
 		height: {46 - 0.5*shrink_name()}
 		alignment: 
 			script:
@@ -1021,7 +1075,7 @@ card style:
 					then "top shrink-overflow"
 				else "bottom shrink-overflow"				
 		padding bottom: 0
-		z index: 5
+		z index: 4
 		font:
 			name: { if back_use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
 			size: { if set.card_language != "简体中文" then 32 - shrink_name() else 34 - shrink_name()}
@@ -1040,7 +1094,7 @@ card style:
 			size: 30
 			alignment: middle right
 		always symbol: true
-		z index: 2
+		z index: 5
 		padding top: 0
 	alias 2:
 		left: {108+backside_left_fix()}
@@ -1905,7 +1959,7 @@ card style:
 			color: white
 	copyright:
 		right: 699
-		top: { if card.pt != "" or (is_plw() or card.loyalty != "") then 998 else 981 }
+		top: { if card.pt != "" or (is_plw() or card.loyalty != "") or is_ub() or chosen(styling.frames, choice:"second copyright(for two sides)") then 998 else 981 }
 		width: 252
 		height: 20
 		z index: 2
@@ -1928,7 +1982,7 @@ card style:
 			color: white
 	copyright 2:
 		right: {699+ backside_left_fix()}
-		top: { if card.pt_2 != "" or (back_is_plw() or card.loyalty_2 != "") then 998 else 981 }
+		top: { if card.pt_2 != "" or (back_is_plw() or card.loyalty_2 != "") or back_is_ub() or chosen(styling.frames, choice:"second copyright(for two sides)") then 998 else 981 }
 		width: 252
 		height: 20
 		z index: 2
@@ -2807,6 +2861,30 @@ extra card field:
 	editable: false
 	save value: false
 	show statistics: false
+extra card field:
+	type: text
+	name: copyright2
+	save value: true
+	editable: true
+	show statistics: false
+extra card field:
+	type: text
+	name: copyright2back
+	save value: true
+	editable: true
+	show statistics: false
+extra card field:
+	type: text
+	name: card extra text
+	save value: true
+	editable: true
+	show statistics: false
+extra card field:
+	type: text
+	name: card extra text back
+	save value: true
+	editable: true
+	show statistics: false
 ################################################
 
 extra card style:
@@ -2851,14 +2929,23 @@ extra card style:
 	card number:
 		left: 69
 		top: 979
-		width: 220
+		width: 72.5
 		height: 20
 		z index: 1
 		font:
 			name: Magic Gotham Medium
 			size: 13
 			color: white
-
+	card extra text:
+		left: 141.5
+		top: 979
+		width: 185
+		height: 20
+		z index: 1
+		font:
+			name: Magic Gotham Medium
+			size: 13
+			color: white
 	dot 2:
 		left: {48.5 + card_style.set_code_2.content_width + backside_left_fix()}
 		right: {card_style.language_code_2.left}
@@ -2885,14 +2972,23 @@ extra card style:
 	card number 2:
 		left: {69 + backside_left_fix()}
 		top: 979
-		width: 220
+		width: 72.5
 		height: 20
 		z index: 1
 		font:
 			name: Magic Gotham Medium
 			size: 13
 			color: white
-
+	card extra text back:
+		left: {141.5 + backside_left_fix()}
+		top: 979
+		width: 185
+		height: 20
+		z index: 1
+		font:
+			name: Magic Gotham Medium
+			size: 13
+			color: white
 	artist arrow:
 		left: { 143 }
 		top: 1002
@@ -2918,7 +3014,7 @@ extra card style:
 		z index: 4
 		visible: { card.pt != "" }
 		render style: image
-		image: {if chosen(styling.frames, choice:"bot") then "front/bot/pt.png" else if is_newpt() then new_pt_background() else if is_vehicle() then "vpt.png" else card_ptbox() }
+		image: {if is_ub() then if is_vehicle() then "ub/pt/vpt.png" else ubfront_pt_background() else if chosen(styling.frames, choice:"bot") then "front/bot/pt.png" else if is_newpt() then new_pt_background() else if is_vehicle() then "vpt.png" else card_ptbox() }
 	pt box 2:
 		left: {backside_left_fix()}
 		top:	{(if back_is_plw() then 1000 else 0) + 0}
@@ -2927,22 +3023,30 @@ extra card style:
 		z index: 4
 		visible: { card.pt_2 != "" }
 		render style: image
-		image: { if chosen(styling.back_frames, choice:"bot") then "front/bot/pt.png" else if back_is_newpt() then new_pt_background() else if back_is_vehicle() then "vpt.png" else card_ptbox2() }
+		image: {if back_is_ub() then if back_is_vehicle() then "ub/pt/back/vpt.png" else ubback_pt_background() else if chosen(styling.back_frames, choice:"bot") then "front/bot/pt.png" else if back_is_newpt() then new_pt_background() else if back_is_vehicle() then "vpt.png" else card_ptbox2() }
 		
 	stamp:
-		left:	{if is_plw() then 331 else if is_saga() or is_battle() then 330 else 327}
-		top:	{if is_plw() then 946 else if is_saga() then 956 else if is_battle() then 950 else 948}
-		width:	{if is_plw() then 88 else if is_saga() or is_battle() then 93 else 96}
-		height:	{if is_plw() then 46 else if is_saga() or is_battle() then 39 else 49}
+		left:	{if is_ub() then 319 else if is_plw() then 331 else if is_saga() or is_battle() then 330 else 327}
+		top:	{if is_ub() then 945 else if is_plw() then 946 else if is_saga() then 956 else if is_battle() then 950 else 948}
+		width:	{if is_ub() then 112 else if is_plw() then 88 else if is_saga() or is_battle() then 93 else 96}
+		height:	{if is_ub() then 54 else if is_plw() then 46 else if is_saga() or is_battle() then 39 else 49}
 		z index: 5
-		visible: { is_rare() and styling.use_holofoil_stamps and not chosen(styling.frames, choice:"bot")}
+		visible: { (is_ub() or is_rare()) and styling.use_holofoil_stamps and not chosen(styling.frames, choice:"bot")}
 		render style: image
-		image: { if is_devoid() then "stamp/wstamp.png" else if is_saga() or is_battle() then "stamp/saga/stamp.png" else if is_plw() then plw_stamp() else card_stamp() }
+		image:
+			script:
+				if is_ub() then
+					if is_vehicle() then "ub/pt/back/vpt.png"
+					else ubstamp_background()
+				else if is_devoid() then "stamp/wstamp.png"
+				else if is_saga() or is_battle() then "stamp/saga/stamp.png"
+				else if is_plw() then plw_stamp()
+				else card_stamp()
 		mask: {if is_plw() then ((if is_plw_fullart() then "stamp/planeswalker/mythic" else "stamp/planeswalker/") + "stamp_mask.png") else ""}
 	
 	auto copyright:
 		right: 699
-		top: { if card.pt != "" or (is_plw() or card.loyalty != "") then 998 else 981 }
+		top: { if card.pt != "" or (is_plw() or card.loyalty != "") or is_ub() or chosen(styling.frames, choice:"second copyright(for two sides)") then 998 else 981 }
 		width: 252
 		height: 20
 		z index: 2
@@ -2955,7 +3059,7 @@ extra card style:
 
 	auto copyright 2:
 		right: {699 + backside_left_fix()}
-		top: { if card.pt_2 != "" or (back_is_plw() or card.loyalty_2 != "") then 998 else 981 }
+		top: { if card.pt_2 != "" or (back_is_plw() or card.loyalty_2 != "") or back_is_ub() or chosen(styling.frames, choice:"second copyright(for two sides)") then 998 else 981 }
 		width: 252
 		height: 20
 		z index: 2
@@ -3016,7 +3120,8 @@ extra card style:
 		# image: {if is_showcase() or is_extend() then showcasecrown_background() else if has_alias() then aliascrown_background() else crown_background()}
 		image:
 			script:
-				if has_alias() then
+				if is_ub() then ubfront_crown_background()
+				else if has_alias() then
 					if is_showcase() or is_extend() then showcasealiascrown_background()
 					else aliascrown_background()
 				else if is_showcase() or is_extend() then showcasecrown_background()
@@ -3043,7 +3148,8 @@ extra card style:
 		# image: {if back_is_showcase() or back_is_extend() then showcasecrown_background() else if has_alias() then aliascrown_background2() else crown_background()}
 		image:
 			script:
-				if has_alias() then
+				if back_is_ub() then ubback_crown_background()
+				else if has_alias() then
 					if back_is_showcase() or back_is_extend() then showcasealiascrown_background2()
 					else aliascrown_background2()
 				else if back_is_showcase() or back_is_extend() then showcasecrown_background()
@@ -3093,17 +3199,15 @@ extra card style:
 		image: {nyx_background()}
 		z index: 1
 		visible: {is_nyx() and not is_devoid()}
-		mask: {"nyx/" + (if contains(card.type, match:"神器") or is_snow() then "a_" else "") + "fmask.png"}
 	nyx overlay 2:
 		left: { backside_left_fix() }
 		top: 0
 		width: 750
 		height: 1050
 		render style: image
-		image: {nyx_background()}
+		image: {backnyx_background()}
 		z index: 1
 		visible: {back_is_nyx() and not back_is_devoid() and not back_is_map() }
-		mask: {"nyx/" + (if contains(card.type, match:"神器") or is_snow() then "a_" else "") + "bmask.png"}
 	
 	miracle overlay:
 		left: 0
@@ -3121,20 +3225,18 @@ extra card style:
 		width: 750
 		height: 1050
 		render style: image
-		image: v.png
+		image: {if is_ub() then "ub/vf.png" else "v.png"}
 		z index: 0
 		visible: {is_vehicle()}
-		mask: {"nyx/" + "fmask.png"}
 	v overlay 2:
 		left: { backside_left_fix() }
 		top: 0
 		width: 750
 		height: 1050
 		render style: image
-		image: v.png
+		image: {if back_is_ub() then "ub/vb.png" else "v.png"}
 		z index: 0
 		visible: {back_is_vehicle() and not back_is_map() }
-		mask: {"nyx/" + "bmask.png"}
 
 	fullart overlay:
 		left: 0
@@ -3232,7 +3334,7 @@ extra card style:
 			sparker colors colorless: icons/ccorner.png
 
 	corner2:
-		left: { 40 + backside_left_fix() +(if chosen(styling.back_frames, choice:"bot") then 606 else 0) +(if back_is_map() then 1000 else 0) }
+		left: { (if back_is_ub() then 646 else 40) + backside_left_fix() +(if chosen(styling.back_frames, choice:"bot") then 606 else 0) +(if back_is_map() then 1000 else 0) }
 		top: { if back_is_plw() then 36 else 49 }
 		height: { 63 }
 		width: { 64 }
@@ -4112,3 +4214,35 @@ extra card style:
 		image: {backsagapaper_background()}
 		z index: -1
 		visible: {back_is_saga()}
+
+	copyright2:
+		right: 699
+		top: { if is_ub() or chosen(styling.frames, choice:"second copyright(for two sides)") then 981 else 1111 }
+		width: 252
+		height: 20
+		z index: 2
+		alignment: 
+			script:
+				if card.pt != "" then "middle left shrink-overflow"
+				else "middle right shrink-overflow"
+		visible: {is_ub() or chosen(styling.frames, choice:"second copyright(for two sides)")}
+		font:
+			name: mplantin
+			size: {13 - (if styling.shrink_ubcopyright_text != "" then to_number(styling.shrink_ubcopyright_text) else 0)}
+			color: white
+	
+	copyright2back:
+		right: { 699 + backside_left_fix() }
+		top: { if is_ub() or chosen(styling.frames, choice:"second copyright(for two sides)") then 981 else 1111 }
+		width: 252
+		height: 20
+		z index: 2
+		alignment: 
+			script:
+				if card.pt_2 != "" then "middle left shrink-overflow"
+				else "middle right shrink-overflow"
+		visible: {is_ub() or chosen(styling.frames, choice:"second copyright(for two sides)")}
+		font:
+			name: mplantin
+			size: {13 - (if styling.shrink_ubcopyright_text != "" then to_number(styling.shrink_ubcopyright_text) else 0)}
+			color: white

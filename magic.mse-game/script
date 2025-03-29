@@ -153,7 +153,7 @@ color_filter  := sort_text@(order: "<WUBRG>")
 color_filterH := sort_text@(order: "</>")
 mana_to_color := {
 	count  := number_of_items(in: colors)
-	if hybrid == "" and (contains(type, match:"Artifact") or contains(type, match:"神器")) then
+	if hybrid == "" and (contains(type, match:"Artifact") or contains(type, match:"神器")) and not(contains(type, match:"Land") or contains(type, match:"地")) then
 		# not a hybrid, but artifact
 		if      count == 0 then  "artifact"
 		else if count == 1 then  color_names_1() + ", artifact"
@@ -243,6 +243,31 @@ text_to_color := {
 	else ""
 }
 
+text_to_color_cn :={
+	if contains(match: card_name + "是") then (
+	  text := filter_text(match: "是 ?(无色|五色|((蓝色|白色|绿色|红色|黑色)((,|,?和|，|，?和)(蓝色|白色|绿色|红色|黑色))*))", in_context: regex_escape(card_name)+"(</[-a-z]+>)* ?<match>[\\。\\.]")
+	  if text != "" then (
+	    if contains(text, match: "五色") then (
+		colors := "WUBRG"
+		if land == "true" then land_multicolor()
+		else mana_to_color(hybrid: "")
+	    ) else (
+		colors := ""
+		if contains(text, match: "白色")	then colors := colors + "W"
+		if contains(text, match: "蓝色")	then colors := colors + "U"
+		if contains(text, match: "黑色")	then colors := colors + "B"
+		if contains(text, match: "红色")	then colors := colors + "R"
+		if contains(text, match: "绿色")	then colors := colors + "G"
+		if land == "true" then land_multicolor()
+		else mana_to_color(hybrid: "")
+	    )
+	  )
+	  else ""
+	)
+	else ""
+
+}
+
 # The color of a card
 is_creature    := match@(match: "(?i)Creature|生物")
 is_creaturish  := match@(match: "(?i)(Creature|Vehicle)|(生物|载具)")
@@ -264,10 +289,18 @@ match_snow := contains@(match:"Snow|雪境")
 
 card_color := {
 	# usually the color of mana
-	text_color := text_to_color(rules_text, land: is_land(type));
+	if(set.card_language == "简体中文") then(
+		#测试自定义设置颜色
+		text_color := replace(rules_text, match:"[#\\$]", replace:"")
+		text_color := text_to_color_cn(text_color, land: is_land(type));
+	)
+	else(
+		text_color := text_to_color(rules_text, land: is_land(type));
+	)
+	
 	if text_color == "" then (
 		mana_color := mana_to_color(colors: color_filter(casting_cost), hybrid: color_filterH(casting_cost))
-		if      mana_color == "colorless" and is_land    (type)  then land_to_color(watermark, rules:rules_text)
+		if      mana_color == "colorless" and is_land(type)  then land_to_color(watermark, rules:rules_text)
 		else if mana_color == "colorless" and is_artifact(type)  then "artifact"
 		else if mana_color == "colorless" and contains(card.shape, match:"flip") then default
 		else mana_color
@@ -1150,7 +1183,7 @@ rarity_code := {
 	else if is_promo() then "P"
 	else if is_masterpiece() then "S"
 	else if contains(card.super_type, match:"基本") and contains(card.super_type, match:"地") then "L"				   
-	else if card.rarity == "basic land" then "L" 
+	else if contains(card.rarity, match:"basic land") or contains(card.rarity, match:"Basic Land") then "L" 
 	else if contains(card.shape, match:"token") then "T"
 	else if contains(card.shape, match:"emblem") then "E"
 	else if contains(card.rarity, match:"ncommon") then "U"
