@@ -60,6 +60,8 @@ init script:
 	template_prefix := {
 		if type == "mark" then
 			if is_read_ahead() then [mark: "bookmark/ahead/"] else [mark: "bookmark/"]
+		else if type == "card" then
+			if contains(styling.other_options, match:"fullart saga") then [card: "fullartsaga/"] else [card: "normal/"]
 		else
 			template_prefix_normal 
 		}
@@ -143,7 +145,7 @@ init script:
 	is_promo := { styling.promo }
 	starting_loyalty := {chosen(styling.other_options, choice:"use starting loyalty")}
 	
-	is_stamped := { is_rare() and styling.holofoil_stamped_rares }
+	is_stamped := { (is_rare() and styling.holofoil_stamped_rares) or is_ub()}
 	split_12 := {to_number(pull_comma_array(styling.chapter_divider_coordinates, cell:0, end:true, default:(if is_case() then 360 else if one_box() then 874 else if two_boxes() then 592 else if four_boxes() then 450 else 498)))}
 	split_23 := {to_number(pull_comma_array(styling.chapter_divider_coordinates, cell:1, end:true, default:(if is_case() then (if four_boxes() then 592 else 660) else if one_box() then 874 else if two_boxes() then 874 else if four_boxes() then 592 else 686)))}
 	split_34 := {to_number(pull_comma_array(styling.chapter_divider_coordinates, cell:2, end:true, default:(if is_case() then (if four_boxes() then 734 else 874) else if one_box() then 874 else if three_boxes() then 874 else if four_boxes() then 734 else 874)))}
@@ -277,7 +279,7 @@ init script:
 	is_nyx := {contains(styling.other_options, match:"nyx")}
 	is_snow := {contains(styling.other_options, match:"snow")}
 	is_vehicle := {contains(styling.other_options, match:"vehicle")}
-
+	is_fullart_saga:={chosen(styling.other_options, choice:"fullart saga")}
 	is_class := {contains(styling.other_options, match:"class") or contains(card.sub_type, match:"Class") or contains(card.sub_type, match:"职业") }
 	un_marked := {is_class() or is_case() or contains(styling.other_options, match:"remove bookmark")}
 
@@ -339,6 +341,27 @@ init script:
 	read_ahead_fix := {54}
 	is_read_ahead := {contains(styling.other_options, match:"read ahead")}
 	#+(if is_read_ahead() then 54 else 0)
+	#"
+
+	nametype_font_choose :={
+		if styling.nametype_font != "" then styling.nametype_font
+		else if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0"
+		else if set.card_language != "简体中文" then "Beleren Bold"
+		else "华康魏碑 Std W7" 
+	}
+
+	nametop_shift := {
+		if set.card_language != "简体中文" then 59
+		else 57 + (if use_phyrexian_font() then shrink_name()/2 else 0)
+		+
+		if styling.name_top_shift != "" then to_number(styling.name_top_shift) else 0
+	}
+
+	typetop_shift := {
+		shrink_type()/2 + (if (is_ub() and not is_fullart_saga()) then 891 else 894)
+		+
+		if styling.type_top_shift != "" then to_number(styling.type_top_shift) else 0
+	}
 ############################################################## Set info fields
 set info style:
 	symbol:
@@ -396,6 +419,18 @@ styling field:
 	choice: no
 	choice: yes
 	choice: force justify
+styling field:
+	type: text
+	name: nametype font
+	description: 牌名字体
+styling field:
+	type: text
+	name: name top shift
+	description: 牌名字体上边距
+styling field:
+	type: text
+	name: type top shift
+	description: 类别字体上边距
 styling field:
 	type: text
 	name: alternate reminder
@@ -501,6 +536,7 @@ styling field:
 styling field:
 	type: multiple choice
 	name: other options
+	choice: fullart saga
 	choice: universe beyond(only saga)
 	choice: nyx
 	choice: snow
@@ -511,6 +547,11 @@ styling field:
 	choice: use starting loyalty
 	choice: remove bookmark
 	choice: use phyrexian font
+	choice: second copyright
+styling field:
+	type: text
+	name: shrink ubcopyright text
+	description: Shrinks ub copyright X pixels
 styling field:
 	type: text
 	name: shrink name text
@@ -659,18 +700,15 @@ styling style:
 ############################################################## Card fields
 card style:
 ############################# Background stuff
-	#border color:
-		#left: 0
-		#top : 0
-		#width:	375
-		#height:	523
-		#radius: 18
-		#left width:   17
-		#right width:  17
-		#top width:    17
-		#bottom width: 18
-		#z index: 4
-		#mask: { (if is_legend() then "crown_border" else "border_mask") + (if card.border_color == rgb(200,200,200) then "_silver" else "") + ".png" }
+	border color:
+		left:	0
+		top:	0
+		width:	750
+		height:	1050
+		z index: 4
+		mask: {"silverborder"+(if is_legend() then "_crown" else "") + ".png" }
+		visible: {card.border_color != rgb(0,0,0)}
+
 	card color:
 		left:	0
 		top:	0
@@ -679,21 +717,22 @@ card style:
 		z index: 0
 		render style: image
 		popup style: in place
-		image: { if is_ub() then ubcard_background() else if(card.card_color == "colorless") then "normal/ccard1.png" else card_background() }
-		mask: {if is_class() or is_case() then "frame_mask_class.png" else if is_ub() then "ub/frame_mask.png" else "frame_mask.png"}
+		image: { if (is_ub() and not is_fullart_saga()) then ubcard_background() else card_background() }
+		## else if(card.card_color == "colorless") then "normal/ccard1.png" 
+		mask: {if is_fullart_saga() then "fullartsaga/frame_mask.png" else if is_class() or is_case() then "frame_mask_class.png" else if is_ub() then "ub/frame_mask.png" else "frame_mask.png"}
 	############################# Name line
 	name:
 		left: 64
-		top: { (if use_phyrexian_font() then shrink_name()/2 else 0) + if set.card_language != "简体中文" then 59 else 57 }
-		right:  { 682 - max(30, card_style.casting_cost.content_width) }
+		top: { nametop_shift() }
+		right:  { 682 - max(3, card_style.casting_cost.content_width) }
 		height: {46 - 0.5*shrink_name()}
 		alignment: { if use_phyrexian_font() then "top shrink-overflow" else "bottom shrink-overflow"}
 		padding bottom: 0
-		z index: 5
+		z index: 4
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { nametype_font_choose() }
 			size: { if set.card_language != "简体中文" then 32 - shrink_name() else 34 - shrink_name()}
-			color: black
+			color: {if is_fullart_saga() then "white" else "black"}
 	casting cost:
 		right: 692
 		top: 57
@@ -708,7 +747,7 @@ card style:
 			size: 30
 			alignment: middle right
 		always symbol: true
-		z index: 2
+		z index: 5
 		padding top: 0
 	
 	alias:
@@ -816,10 +855,10 @@ card style:
 		alignment: middle right
 	############################# Image 28,30,693,946
 	image:
-		left: {if(card.card_color == "colorless") then 28 else if is_class() or is_case() then 57 else 376 }
-		top: {if(card.card_color == "colorless") then 30 else 118}
-		width: {if(card.card_color == "colorless") then 693 else 317}
-		height:	{if(card.card_color == "colorless") then 946 else 763}
+		left:   {if contains(styling.other_options, match:"fullart saga") then 0 else if(card.card_color == "colorless") then 28 else if is_class() or is_case() then 57 else 376 }
+		top:    {if contains(styling.other_options, match:"fullart saga") then 0 else if(card.card_color == "colorless") then 30 else 118}
+		width:  {if contains(styling.other_options, match:"fullart saga") then 750 else if(card.card_color == "colorless") then 693 else 317}
+		height:	{if contains(styling.other_options, match:"fullart saga") then 968 else if(card.card_color == "colorless") then 946 else 763}
 		z index: -1
 		default: {default_image(card.card_color)}
 	############################# Card type
@@ -834,20 +873,20 @@ card style:
 		image: { card_identity() }
 	type:
 		left: { if has_identity() then "102" else "62" }
-		top: {shrink_type()/2 + (if is_ub() then 891 else 894)}
+		top: {typetop_shift()}
 		width: { (if has_identity() then "580" else "610") - max(44,card_style.rarity.content_width) }
 		height: { 40 - shrink_type() }
 		alignment: top shrink-overflow
 		z index: 2
 		padding top: 2
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { nametype_font_choose() }
 			size: { if set.card_language != "简体中文" then 26 - shrink_type() else 32 - shrink_type() }
-			color: black
+			color: {if is_fullart_saga() then "white" else "black"}
 			separator color: red
 	rarity:
 		right: {688 + rarity_shift()}
-		top: {if is_ub() then 891 else 894}
+		top: {if (is_ub() and not is_fullart_saga()) then 891 else 894}
 		width: 88
 		height: 44
 		z index: 2
@@ -942,7 +981,7 @@ card style:
 	###传纪提示####	
 	chapter text:
 		left: {60 + (if is_class() then 316 else 0)}
-		top: 120
+		top: {if is_fullart_saga() then 1200 else 120}
 		width: {if un_marked() then 0 else 306}
 		bottom: {if un_marked() then 120 else chapter0()}
 		z index: 3
@@ -951,7 +990,7 @@ card style:
 			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: { if styling.reminder_text_size != "" then styling.reminder_text_size else 26 }
 			scale down to: 6
-			color: black
+			color: {if is_fullart_saga() then "white" else "black"}
 		symbol font:
 			name: { styling.text_box_mana_symbols }
 			size: { if styling.reminder_text_size != "" then styling.reminder_text_size else 26 }
@@ -985,7 +1024,7 @@ card style:
 	############################# 传纪文本
 	level 1 text:
 		left: {if un_marked() then if is_case() then 376 else 60 else 90}
-		top: { if un_marked() then 120 else chapter0()}
+		top: { if un_marked() then 120 else if is_fullart_saga() then 120 else chapter0()}
 		width: { if is_class() then 0 else if un_marked() then if is_case() then 312 else 306 else 276}
 		bottom: { if split_12() == "" then 498 else split_12() }
 		font:
@@ -994,7 +1033,7 @@ card style:
 			italic name: MPlantin-Italic
 			size: { if styling.separated_text_size != "" then styling.separated_text_size else 26 }
 			scale down to: 6
-			color: black
+			color: {if is_fullart_saga() then "white" else "black"}
 		symbol font:
 			name: { styling.text_box_mana_symbols }
 			size: { if styling.separated_text_size != "" then styling.separated_text_size else 26 }
@@ -1035,7 +1074,7 @@ card style:
 			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: { if styling.separated_text_size != "" then styling.separated_text_size else 26 }
 			scale down to: 6
-			color: black
+			color: {if is_fullart_saga() then "white" else "black"}
 		symbol font:
 			name: { styling.text_box_mana_symbols }
 			size: { if styling.separated_text_size != "" then styling.separated_text_size else 26 }
@@ -1076,7 +1115,7 @@ card style:
 			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: { if styling.separated_text_size != "" then styling.separated_text_size else 26 }
 			scale down to: 6
-			color: black
+			color: {if is_fullart_saga() then "white" else "black"}
 		symbol font:
 			name: { styling.text_box_mana_symbols }
 			size: { if styling.separated_text_size != "" then styling.separated_text_size else 26 }
@@ -1117,7 +1156,7 @@ card style:
 			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: { if styling.separated_text_size != "" then styling.separated_text_size else 26 }
 			scale down to: 6
-			color: black
+			color: {if is_fullart_saga() then "white" else "black"}
 		symbol font:
 			name: { styling.text_box_mana_symbols }
 			size: { if styling.separated_text_size != "" then styling.separated_text_size else 26 }
@@ -1212,7 +1251,7 @@ card style:
 			color: white
 	copyright:
 		right: 699
-		top: { if card.pt != "" or is_ub() then 998 else 981 }
+		top: { if card.pt != "" or is_ub() or chosen(styling.other_options, choice:"second copyright") then 998 else 981 }
 		width: 252
 		height: 20
 		z index: 2
@@ -1478,6 +1517,12 @@ extra card field:
 	editable: true
 	show statistics: false
 extra card field:
+	type: text
+	name: card extra text
+	save value: true
+	editable: true
+	show statistics: false
+extra card field:
 	type: choice
 	name: acorn stamp
 	choice: bar
@@ -1514,15 +1559,23 @@ extra card style:
 	card number:
 		left: 69
 		top: 979
-		width: 220
+		width: 72.5
 		height: 20
 		z index: 1
 		font:
 			name: Magic Gotham Medium
 			size: 13
 			color: white
-			#weight: bold
-
+	card extra text:
+		left: 141.5
+		top: 979
+		width: 185
+		height: 20
+		z index: 1
+		font:
+			name: Magic Gotham Medium
+			size: 13
+			color: white
 	artist arrow:
 		left: { 143 }
 		top: 1002
@@ -1552,17 +1605,22 @@ extra card style:
 			loyalty: loyalty.png
 	stamp:
 		left:	{if is_ub() then 332.5 else 328.5}
-		top:	{if is_ub() then 950 else 956}
+		top:	{if is_ub() and is_fullart_saga() then 954 else if is_ub() then 950 else 956}
 		width:	{if is_ub() then 85.5 else 93}
 		height:	{if is_ub() then 47.5 else 39}
 		z index: 2
 		visible: { is_stamped() or use_acorn_stamp()}
 		render style: image
-		image: { if is_ub() then "stamp/ubstamp.png" else "stamp/stamp.png" }
+		image:
+			script:
+				if is_rare() then
+					if is_ub() then "stamp/ubstamp.png" else "stamp/stamp.png"
+				else if is_fullart_saga() and is_ub() then "stamp/ubstampsliver.png"
+				else ""
 
 	auto copyright:
 		right: 699
-		top: { if ((card.pt != "" or is_ub())) then 998 else 981 }
+		top: { if ((card.pt != "" or is_ub() or chosen(styling.other_options, choice:"second copyright"))) then 998 else 981 }
 		width: 252
 		height: 20
 		z index: 2
@@ -1575,7 +1633,7 @@ extra card style:
 
 	copyright2:
 		right: 699
-		top: { if is_ub() then 981 else 1111 }
+		top: { if is_ub() or chosen(styling.other_options, choice:"second copyright") then 981 else 1111 }
 		width: 252
 		height: 20
 		z index: 2
@@ -1583,14 +1641,14 @@ extra card style:
 			script:
 				if card.pt != "" then "middle left shrink-overflow"
 				else "middle right shrink-overflow"
-		visible: {set.automatic_copyright and is_ub()}
+		visible: {is_ub() or chosen(styling.other_options, choice:"second copyright")}
 		font:
 			name: mplantin
-			size: 13
+			size: {13 - (if styling.shrink_ubcopyright_text != "" then to_number(styling.shrink_ubcopyright_text) else 0)}
 			color: white
 ############################################################
 	chapter 1:
-		left: 28
+		left: {if is_fullart_saga() then 23 else 28}
 		top: { if chapter1() == "" then 370 else chapter1() }
 		width: 60
 		height: 68
@@ -1599,7 +1657,7 @@ extra card style:
 		image: {alt_chapters("1")}
 		visible: {not un_marked()}
 	chapter 2:
-		left: 28
+		left: {if is_fullart_saga() then 23 else 28}
 		top: { if chapter2() == "" then 558 else chapter2() }
 		width: 60
 		height: 68
@@ -1608,7 +1666,7 @@ extra card style:
 		image: {alt_chapters("2")}
 		visible: {not un_marked()}
 	chapter 3:
-		left: 28
+		left: {if is_fullart_saga() then 23 else 28}
 		top: { if chapter3() == "" then 746 else chapter3() }
 		width: 60
 		height: 68
@@ -1617,7 +1675,7 @@ extra card style:
 		image: {alt_chapters("3")}
 		visible: {not un_marked()}
 	chapter 4:
-		left: 28
+		left: {if is_fullart_saga() then 23 else 28}
 		top: { if chapter4() == "" then 1200 else chapter4() }
 		width: 60
 		height: 68
@@ -1626,7 +1684,7 @@ extra card style:
 		image: {alt_chapters("4")}
 		visible: {not un_marked()}
 	chapter 5:
-		left: 28
+		left: {if is_fullart_saga() then 23 else 28}
 		top: { if chapter5() == "" then 1200 else chapter5() }
 		width: 60
 		height: 68
@@ -1635,7 +1693,7 @@ extra card style:
 		image: {alt_chapters("5")}
 		visible: {not un_marked()}
 	chapter 6:
-		left: 28
+		left: {if is_fullart_saga() then 23 else 28}
 		top: { if chapter6() == "" then 1200 else chapter6() }
 		width: 60
 		height: 68
@@ -1644,7 +1702,7 @@ extra card style:
 		image: {alt_chapters("6")}
 		visible: {not un_marked()}
 	chapter custom:
-		left: 28
+		left: {if is_fullart_saga() then 23 else 28}
 		top: { if chapter_custom() == "" then 1200 else chapter_custom() }
 		width: 60
 		height: 68
@@ -1654,69 +1712,69 @@ extra card style:
 		visible: {not un_marked()}
 ############################################################
 	linebreak 1:
-		left: {60+if is_class() then 315 else 0}
-		top: {if is_class() then lev0() else chapter0()}
-		width: {if is_class() then 318 else 308 }
+		left: {60+if is_class() then 315 else if is_fullart_saga() then -30 else 0}
+		top: {if is_class() then lev0() else chapter0() + if is_fullart_saga() then 1200 else 0}
+		width: {if is_class() then 318 else if is_fullart_saga() then 371.5 else 308 }
 		height: {if is_class() then 4 else 6}
 		render style: image
 		z index: 2
-		image: {if is_class() then "bar.png" else "line.png"}
+		image: {if is_class() or is_fullart_saga() then "bar.png" else "line.png"}
 		visible: {(is_class() and class_lv1_not_empty()) or not un_marked()}
 
 	linebreak 2:
-		left: {60+ if is_class() or is_case() then 315 else 0}
-		top: {if is_class() then lev2() else if split_12() == "" then 493 else split_12()-2}
-		width: {if is_class() and card.level_2_text == "​" then 0 else if un_marked() then 315 else 318}
+		left: {60+ if is_class() or is_case() then 315 else if is_fullart_saga() then -30 else 0}
+		top: {if is_class() then lev2() else if split_12() == "" then 493 else split_12()-2 + if is_fullart_saga() then -3 else 0}
+		width: {if is_class() and card.level_2_text == "​" then 0 else if un_marked() then 315 else if is_fullart_saga() then 371.5 else 318}
 		height: {if is_class() then 51 else if is_case() or un_marked() then 4 else 6}
 		render style: image
 		z index: 2
-		image: {if is_class() then "level.png" else if is_case() or un_marked() then "bar.png" else "line.png"}
+		image: {if is_class() then "level.png" else if is_case() or un_marked() or is_fullart_saga() then "bar.png" else "line.png"}
 
 	linebreak 3:
-		left: {60+ if is_class() or is_case() then 315 else 0}
-		top: {if is_class() then lev3() else if split_23() == "" then 684 else split_23()-2}
-		width: {if is_class() and card.level_3_text == "​" then 0 else if un_marked() then 315 else 318}
+		left: {60+ if is_class() or is_case() then 315 else if is_fullart_saga() then -30 else 0}
+		top: {if is_class() then lev3() else if split_23() == "" then 684 else split_23()-2 + if is_fullart_saga() then -2 else 0}
+		width: {if is_class() and card.level_3_text == "​" then 0 else if un_marked() then 315 else if is_fullart_saga() then 371.5 else 318}
 		height: {if is_class() then 51 else if is_case() or un_marked() then 4 else 6}
 		render style: image
 		z index: 2
-		image: {if is_class() then "level.png" else if is_case() or un_marked() then "bar.png" else "line.png"}
+		image: {if is_class() then "level.png" else if is_case() or un_marked() or is_fullart_saga() then "bar.png" else "line.png"}
 		visible: {three_boxes() or four_boxes() or is_case()}
 
 	linebreak 4:
-		left: {60+ if is_class() or is_case() then 315 else 0}
-		top: {if is_class() then lev4() else if split_34() == "" then 1200 else split_34()-2}
-		width: {if is_class() and card.level_4_text == "" then 0 else if un_marked() then 315 else 318}
+		left: {60+ if is_class() or is_case() then 315 else if is_fullart_saga() then -30 else 0}
+		top: {if is_class() then lev4() else if split_34() == "" then 1200 else split_34()-2 + if is_fullart_saga() then -3 else 0}
+		width: {if is_class() and card.level_4_text == "" then 0 else if un_marked() then 315 else if is_fullart_saga() then 371.5 else 318}
 		height: {if is_class() then 51 else if is_case() or un_marked() then 4 else 6}
 		render style: image
 		z index: 2
-		image: {if is_class() then "level.png" else if is_case() or un_marked() then "bar.png" else "line.png"}
+		image: {if is_class() then "level.png" else if is_case() or un_marked() or is_fullart_saga() then "bar.png" else "line.png"}
 		visible: {is_class() or four_boxes()}
 	linebreak 5:
-		left: {60+if is_class() then 314 else 0}
+		left: {60+if is_class() then 315 else if is_fullart_saga() then -30 else 0}
 		top: {to_number(pull_comma_array(styling.chapter_divider_coordinates, cell:3, end:true, default:1200))}
-		width: 316
+		width: {if is_fullart_saga() then 371.5 else 318}
 		height: 6
 		render style: image
 		z index: 2
-		image: line.png
+		image: {if is_fullart_saga() then "bar.png" else "line.png"}
 		visible: {four_boxes()}
 	linebreak 6:
-		left: {60+if is_class() then 314 else 0}
+		left: {60+if is_class() then 315 else if is_fullart_saga() then -30 else 0}
 		top: {to_number(pull_comma_array(styling.chapter_divider_coordinates, cell:4, end:true, default:1200))}
-		width: 316
+		width: {if is_fullart_saga() then 371.5 else 318}
 		height: 6
 		render style: image
 		z index: 2
-		image: line.png
+		image: {if is_fullart_saga() then "bar.png" else "line.png"}
 		visible: {four_boxes()}
 	linebreak 7:
-		left: {60+if is_class() then 314 else 0}
+		left: {60+if is_class() then 315 else if is_fullart_saga() then -30 else 0}
 		top: {to_number(pull_comma_array(styling.chapter_divider_coordinates, cell:5, end:true, default:1200))}
-		width: 316
+		width: {if is_fullart_saga() then 371.5 else 318}
 		height: 6
 		render style: image
 		z index: 2
-		image: line.png
+		image: {if is_fullart_saga() then "bar.png" else "line.png"}
 		visible: {four_boxes()}
 ############################################################
 	default level 2:
@@ -1803,7 +1861,7 @@ extra card style:
 		render style: image
 		image: {bookmark_background()}
 		z index: 3
-		visible: {not un_marked()}
+		visible: {not (un_marked() or contains(styling.other_options, match:"fullart saga"))}
 	stripe:
 		left: 32.5
 		top: {114.5+(if is_read_ahead() then 54 else 0)}
@@ -1812,7 +1870,7 @@ extra card style:
 		render style: image
 		image: {"bookmark/"+ (if is_read_ahead() then "ahead/"else"") + "stripe.png"}
 		z index: 3
-		visible: {length(write_wubrg(card.card_color))==2 and not un_marked()}
+		visible: {length(write_wubrg(card.card_color))==2 and not (un_marked() or contains(styling.other_options, match:"fullart saga"))}
 		
 	crown:
 		left: 0
@@ -1841,6 +1899,7 @@ extra card style:
 		render style: image
 		image: {if is_ub() then ubsagapaper_background() else if(card.card_color == "colorless") then "paper/cpaper1.png" else sagapaper_background()}
 		z index: 1
+		visible: {not is_fullart_saga() }
 		
 	snow twin:
 		left: 0

@@ -250,7 +250,11 @@ styling field:
 	choice: ancestral generic mana
 	choice: prerelease stamp
 	choice: use phyrexian font
-
+	choice: second copyright
+styling field:
+	type: text
+	name: shrink ubcopyright text
+	description: Shrinks ub copyright X pixels
 ### 通用2 ###
 include file: /magic-all-style.mse-include/style2
 
@@ -347,11 +351,11 @@ card style:
 	name:
 		left: 110
 		top: {(if is_room() then 48 else 62) + (if use_phyrexian_font() then shrink_name()/4 else 0)}
-		right:  { 503 - max(30, card_style.casting_cost.content_width) }
+		right:  { 503 - max(0, card_style.casting_cost.content_width) }
 		height: {40 - 0.5*shrink_name()}
 		alignment: { if use_phyrexian_font() then "top shrink-overflow" else "bottom shrink-overflow"}
 		padding bottom: 0
-		z index: 5
+		z index: 4
 		font:
 			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
 			size: { if set.card_language != "简体中文" then 32- shrink_name() else 34- shrink_name() }
@@ -360,11 +364,11 @@ card style:
 	name 2:
 		left: 589.5
 		top: {(if is_room() then 48 else 62) + (if use_phyrexian_font() then shrink_name()/4 else 0)}
-		right:  { 984.5 - max(30, card_style.casting_cost_2.content_width) }
+		right:  { 984.5 - max(0, card_style.casting_cost_2.content_width) }
 		height: {40 - 0.5*shrink_name()}
 		alignment:{ if use_phyrexian_font() then "top shrink-overflow" else "bottom shrink-overflow"}
 		padding bottom: 0
-		z index: 5
+		z index: 4
 		font:
 			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
 			size: { if set.card_language != "简体中文" then 32- shrink_name() else 34- shrink_name() }
@@ -384,7 +388,7 @@ card style:
 			size: 30
 			alignment: middle right
 		always symbol: true
-		z index: 2
+		z index: 5
 		padding top: 0
 	
 	casting cost 2:
@@ -401,7 +405,7 @@ card style:
 			size: 30
 			alignment: middle right
 		always symbol: true
-		z index: 2
+		z index: 5
 		padding top: 0
 
 	############################# Image
@@ -701,10 +705,10 @@ card style:
 			size: 14
 			color: white
 	copyright:
-		left: {1050-981}
-		top: 699
-		width: 252
-		height: 20
+		left: {if contains(styling.other_options, match:"ub room style") or contains(styling.other_options, match:"second copyright") then 52 else 69}
+		top: {699}
+		width: {252}
+		height: {20}
 		z index: 2
 		angle: 270
 		alignment: middle right shrink-overflow
@@ -802,6 +806,18 @@ extra card field:
 	editable: false
 	save value: false
 	show statistics: false
+extra card field:
+	type: text
+	name: copyright2
+	save value: true
+	editable: true
+	show statistics: false
+extra card field:
+	type: text
+	name: card extra text
+	save value: true
+	editable: true
+	show statistics: false
 
 extra card style:
 	dot:
@@ -830,7 +846,7 @@ extra card style:
 	card number:
 		left: {1050-979}
 		top: 69
-		width: 220
+		width: 72.5
 		height: 20
 		z index: 1
 		angle: 270
@@ -838,7 +854,17 @@ extra card style:
 			name: Magic Gotham Medium
 			size: 13
 			color: white
-
+	card extra text:
+		left: {1050-979}
+		top: 141.5
+		width: 185
+		height: 20
+		z index: 1
+		angle: 270
+		font:
+			name: Magic Gotham Medium
+			size: 13
+			color: white
 	artist arrow:
 		left: {1050-1002}
 		top: { 143 }
@@ -881,10 +907,10 @@ extra card style:
 		image: { if (is_room() and contains(styling.other_options, match:"ub room style")) then if is_rare() then "stamp/goldstamp.png" else "stamp/graystamp.png" else "stamp/stamp.png" }
 
 	auto copyright:
-		right: {1050-981}
-		top: 699
-		width: 252
-		height: 20
+		right: {if contains(styling.other_options, match:"ub room style") or contains(styling.other_options, match:"second copyright") then 52 else 69}
+		top: {699}
+		width: {252}
+		height: {20}
 		z index: 2
 		alignment: middle right shrink-overflow
 		angle: 270
@@ -893,7 +919,20 @@ extra card style:
 			name: mplantin
 			size: 13
 			color: white
-	
+	copyright2:
+		right: { if contains(styling.other_options, match:"ub room style") or contains(styling.other_options, match:"second copyright") then 69 else 1111 }
+		top: {699}
+		width: {252}
+		height: {20}
+		z index: 2
+		alignment: middle right shrink-overflow
+		angle: 270
+		visible: { contains(styling.other_options, match:"ub room style") or contains(styling.other_options, match:"second copyright")}
+		font:
+			name: mplantin
+			size:{13 - (if styling.shrink_ubcopyright_text != "" then to_number(styling.shrink_ubcopyright_text) else 0)}
+			color: white
+
 	flavor bar:
 		left:	70.5
 		width:	479.5
