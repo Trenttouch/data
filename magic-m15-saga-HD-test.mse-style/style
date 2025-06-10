@@ -46,14 +46,22 @@ init script:
 	
 	template_prefix_normal := [
 		card: "normal/" snowtwin: "snow/" snowtexture: "snow/" pt: "pt/"
-		stamp: "stamp/"
+		stamp: "stamp/" ubstamp: "stamp/ub/"
 		mark: "bookmark/" nyx:"nyx/", crown:"crown/" innercrown:"innercrown/" aliascrown:"alias/" sagapaper:"paper/"  identity: "/magic-identity-new.mse-include/"
+
+		fullart_creature: "fullartsaga/creature/"
+
+		creaturemark: "bookmark/creature/"
 		
 		ubcard: "ub/normal/" ubmark: "ub/bookmark/" ubsagapaper:"ub/paper/"
 		]
-	template_suffix := [
-		card: "card.png" snowtwin: "twin.png" snowtexture:"snow.png" pt:"pt.png" mark: "mark.png" stamp: "stamp.jpg" nyx:"nyx.png", crown:"crown.png" innercrown:"crown.png" aliascrown:"aliascrown.png"  sagapaper:"paper.png" identity: "identity.png"
+	template_suffix_normal := [
+		card: "card.png" snowtwin: "twin.png" snowtexture:"snow.png" pt:"pt.png" mark: "mark.png" stamp: "stamp.png" nyx:"nyx.png", crown:"crown.png" innercrown:"crown.png" aliascrown:"aliascrown.png"  sagapaper:"paper.png" identity: "identity.png"
 		
+		fullart_creature: "card.png" creature: "card.png"
+
+		creaturemark: "mark.png"
+
 		ubcard: "card.png" ubmark: "mark.png" ubsagapaper: "paper.png"
 		]
 	
@@ -61,18 +69,31 @@ init script:
 		if type == "mark" then
 			if is_read_ahead() then [mark: "bookmark/ahead/"] else [mark: "bookmark/"]
 		else if type == "card" then
-			if contains(styling.other_options, match:"fullart saga") then [card: "fullartsaga/"] else [card: "normal/"]
+			if is_fullart_saga() then [card: "fullartsaga/"] else [card: "normal/"]
+		else if type == "crown" then
+			if is_fullart_saga() then if is_ub() then [crown:"crown/float/ub/"] else [crown:"crown/float/"]
+			else if is_ub() then [crown:"crown/ub/"] else [crown:"crown/"]
+		else if type == "creature" then
+			if is_ub() then [creature:"creature/ub/"] else [creature:"creature/"]
+		else if type == "pt" then
+			if is_fullart_saga() then [pt: "pt/newpt/"] else if is_ub() then [pt: "pt/ub/"] else [pt: "pt/"]
 		else
 			template_prefix_normal 
-		}
+	}
 	
+	template_suffix := {
+		if type == "ubstamp" then
+			if is_rare() then [ubstamp:"stamp.png"] else [ubstamp:"ubstamp.png"]
+		else
+			template_suffix_normal 
+	}
 
 	
-	template      := { crown_lead(type) + template_prefix()[type] + input + crown_follow(type) + innercrown_follow(type) + template_suffix[type] }
-	land_template := { crown_lead(type) + template_prefix()[type] + (if input == "a" then "c" else input) + (if landless(type) then "" else "l") + crown_follow(type) + innercrown_follow(type) + template_suffix[type] }
+	template      := { crown_lead(type) + template_prefix()[type] + input + crown_follow(type) + innercrown_follow(type) + template_suffix()[type] }
+	land_template := { crown_lead(type) + template_prefix()[type] + (if input == "a" then "c" else input) + (if landless(type) then "" else "l") + crown_follow(type) + innercrown_follow(type) + template_suffix()[type] }
 	# Use land templates for previews because they show more contrast
 	hybrid_previews := "land,hybrid"
-	landless := {if input == "ubsagapaper" or input == "nyx" or input == "crown" or input == "mark" or input == "aliascrown" or input == "innercrown" or input == "pt" or input == "stamp" or input == "sagapaper" or input == "snowtwin" then true else false}
+	landless := {if input == "creature" or input == "creaturemark" or input == "ubsagapaper" or input == "ubstamp" or input == "nyx" or input == "crown" or input == "mark" or input == "aliascrown" or input == "innercrown" or input == "pt" or input == "stamp" or input == "sagapaper" or input == "snowtwin" then true else false}
 	
 	nyx_background := { color_background(type:"nyx",     base_hybrid:card_hybrid) }
 	snow_background := { color_background(type:"snowtexture",     base_hybrid:card_hybrid) }
@@ -88,6 +109,12 @@ init script:
 	ubcard_background := { color_background(type:"ubcard", base_hybrid: card_hybrid)}
 	ubmark_background := { color_background(type:"ubmark", base_hybrid: bookmark_hybrid)}
 	ubsagapaper_background := { color_background(type:"ubsagapaper", base_hybrid: stamp_hybrid)}
+
+	saga_creature_background := { color_background(type:"creature", base_hybrid: card_hybrid)}
+	creature_bookmark_background := { color_background(type:"creaturemark",     base_hybrid:bookmark_hybrid) }
+
+	fullart_saga_creature_background := { color_background(type:"fullart_creature", base_hybrid: card_hybrid)}
+	ubstamp_background := { color_background(type:"ubstamp",     base_hybrid:ubstamp_hybrid) }
 	
 	crown_lead := {
 		if input != "crown" then ""
@@ -119,7 +146,7 @@ init script:
 	guild_mana := { styling.use_guild_mana_symbols }	
 	
 	paintbrush_color := {
-		if to_int(card.border_color) < 96 then "white" else "black"
+		if to_number(card.border_color) < 96 then "white" else "black"
 	}
 	
 	# Loyalty cost arrows
@@ -146,9 +173,14 @@ init script:
 	starting_loyalty := {chosen(styling.other_options, choice:"use starting loyalty")}
 	
 	is_stamped := { (is_rare() and styling.holofoil_stamped_rares) or is_ub()}
-	split_12 := {to_number(pull_comma_array(styling.chapter_divider_coordinates, cell:0, end:true, default:(if is_case() then 360 else if one_box() then 874 else if two_boxes() then 592 else if four_boxes() then 450 else 498)))}
-	split_23 := {to_number(pull_comma_array(styling.chapter_divider_coordinates, cell:1, end:true, default:(if is_case() then (if four_boxes() then 592 else 660) else if one_box() then 874 else if two_boxes() then 874 else if four_boxes() then 592 else 686)))}
-	split_34 := {to_number(pull_comma_array(styling.chapter_divider_coordinates, cell:2, end:true, default:(if is_case() then (if four_boxes() then 734 else 874) else if one_box() then 874 else if three_boxes() then 874 else if four_boxes() then 734 else 874)))}
+
+	textbox_bottom := {if is_saga_creature() then 788 else 874}
+
+	split_12 := {to_number(pull_comma_array(styling.chapter_divider_coordinates, cell:0, end:true, default:(if is_case() then 360                                				else if one_box() then textbox_bottom() else if two_boxes() then (if is_saga_creature() then if is_fullart_saga() then 460 else 510 else 592)		else if four_boxes() then (if is_saga_creature() then if is_fullart_saga() then 282 else 350 else 450)		else (if is_saga_creature() then if is_fullart_saga() then 344 else 406 else 498))))}
+	split_23 := {to_number(pull_comma_array(styling.chapter_divider_coordinates, cell:1, end:true, default:(if is_case() then (if four_boxes() then 592 else 660)				else if one_box() then textbox_bottom() else if two_boxes() then textbox_bottom()																	else if four_boxes() then (if is_saga_creature() then if is_fullart_saga() then 460 else 510 else 592)		else (if is_saga_creature() then if is_fullart_saga() then 572 else 595 else 686))))}
+	split_34 := {to_number(pull_comma_array(styling.chapter_divider_coordinates, cell:2, end:true, default:(if is_case() then (if four_boxes() then 734 else textbox_bottom())  else if one_box() then textbox_bottom() else if two_boxes() then textbox_bottom()																	else if four_boxes() then (if is_saga_creature() then if is_fullart_saga() then 627 else 655 else 734)		else textbox_bottom())))}
+
+
 
 	coords_map := [
 		1: {[card_style.level_1_text.top, card_style.level_1_text.bottom-card_style.level_1_text.top]},
@@ -184,7 +216,7 @@ init script:
 		)
 		out
 	}
-	chapter0 := { if styling.reminder_coordinate != "" then max(120, min(to_number(styling.reminder_coordinate),876) ) else 310 + (if is_read_ahead() then 54 else 0) }
+	chapter0 := { if styling.reminder_coordinate != "" then max(120, min(to_number(styling.reminder_coordinate),876) ) else 310 + (if is_read_ahead() then 54 else 0) + (if is_saga_creature() then -95 else 0) }
 	chapter1 := { if length(comma_count(styling.snap_chapter_to_box)) > 0 then auto_snap(1) else to_number(pull_comma_array(styling.chapter_number_coordinates, cell:0, end:true, default:(if two_boxes() then 366 else 370))) }
 	chapter2 := { if length(comma_count(styling.snap_chapter_to_box)) > 1 then auto_snap(2) else to_number(pull_comma_array(styling.chapter_number_coordinates, cell:1, end:true, default:(if two_boxes() then 446 else 558))) }
 	chapter3 := { if length(comma_count(styling.snap_chapter_to_box)) > 2 then auto_snap(3) else to_number(pull_comma_array(styling.chapter_number_coordinates, cell:2, end:true, default:(if two_boxes() then 658 else 746))) }
@@ -197,8 +229,8 @@ init script:
 	custom_name := {if styling.custom_chapter_name == "" then "C" else styling.custom_chapter_name}
 
 	comma_count := filter_text@(match:",")
-	shrink_type := {if styling.shrink_typeline_text != "" then to_int(styling.shrink_typeline_text) else 0 }
-	shrink_name := {if styling.shrink_name_text != "" then to_int(styling.shrink_name_text) else 0 }
+	shrink_type := {if styling.shrink_typeline_text != "" then to_number(styling.shrink_typeline_text) else 0 }
+	shrink_name := {if styling.shrink_name_text != "" then to_number(styling.shrink_name_text) else 0 }
 	
 	ancestral_mana := { styling.ancestral_mana_symbols }
 	
@@ -280,6 +312,11 @@ init script:
 	is_snow := {contains(styling.other_options, match:"snow")}
 	is_vehicle := {contains(styling.other_options, match:"vehicle")}
 	is_fullart_saga:={chosen(styling.other_options, choice:"fullart saga")}
+
+	is_colorless := { card.card_color == "colorless" }
+
+	is_saga_creature:={(card.pt != "" or contains(card.type, match:"生物") or contains(card.type, match:"Creature"))}
+
 	is_class := {contains(styling.other_options, match:"class") or contains(card.sub_type, match:"Class") or contains(card.sub_type, match:"职业") }
 	un_marked := {is_class() or is_case() or contains(styling.other_options, match:"remove bookmark")}
 
@@ -358,10 +395,14 @@ init script:
 	}
 
 	typetop_shift := {
-		shrink_type()/2 + (if (is_ub() and not is_fullart_saga()) then 891 else 894)
+		shrink_type()/2 + (if is_saga_creature() then 806 else if (is_ub() and not is_fullart_saga()) then 891 else 894)
 		+
 		if styling.type_top_shift != "" then to_number(styling.type_top_shift) else 0
 	}
+
+	extra_chop_top := {to_number(pull_comma_array(styling.extra_text_chops, cell:0, end:false))}
+	extra_chop_bot := {to_number(pull_comma_array(styling.extra_text_chops, cell:1, end:false))}
+	extra_chop_right := {to_number(pull_comma_array(styling.extra_text_chops, cell:2, end:false))}
 ############################################################## Set info fields
 set info style:
 	symbol:
@@ -385,6 +426,10 @@ styling field:
 	type: text
 	name: chop right
 	description: Shrinks textbox X from right.
+styling field:
+	type: text
+	name: extra text chops
+	description: Format as "X,Y,Z". For textbox of prototype and adventure.
 styling field:
 	type: text
 	name: snap chapter to box
@@ -562,6 +607,10 @@ styling field:
 	description: Reduces the typeline text N points.
 styling field:
 	type: text
+	name: saga creature font cap
+	description: 额外文本框的字体大小。（试作大小默认为22.25，历险默认为26，合变默认为28）
+styling field:
+	type: text
 	name: shrink power text
 	description: Shrinks power X pixels
 styling field:
@@ -657,6 +706,14 @@ styling field:
 	choice: never
 	initial: never
 styling field:
+	type: choice
+	name: center text saga creature
+	description: center text for saga creature
+	choice: always
+	choice: short text only
+	choice: never
+	initial: never
+styling field:
 	type: boolean
 	name: promo
 	description: Is this card a promo card, with the "P" rarity?
@@ -684,6 +741,12 @@ styling style:
 			old:        /magic-mana-large.mse-symbol-font/mana_t_old.png
 			diagonal T: /magic-mana-large.mse-symbol-font/mana_t_older.png
 	center text:
+		render style: both
+		choice images:
+			always:          /magic.mse-game/icons/center-all-text.png
+			short text only: /magic.mse-game/icons/center-short-text.png
+			never:           /magic.mse-game/icons/center-no-text.png
+	center text saga creature:
 		render style: both
 		choice images:
 			always:          /magic.mse-game/icons/center-all-text.png
@@ -717,9 +780,25 @@ card style:
 		z index: 0
 		render style: image
 		popup style: in place
-		image: { if (is_ub() and not is_fullart_saga()) then ubcard_background() else card_background() }
+		image:
+			script:
+				if is_saga_creature() then
+					if is_fullart_saga() then fullart_saga_creature_background()
+					else saga_creature_background()
+				else if (is_ub() and not is_fullart_saga()) then ubcard_background() else card_background()
 		## else if(card.card_color == "colorless") then "normal/ccard1.png" 
-		mask: {if is_fullart_saga() then "fullartsaga/frame_mask.png" else if is_class() or is_case() then "frame_mask_class.png" else if is_ub() then "ub/frame_mask.png" else "frame_mask.png"}
+		mask:
+			script:
+				if is_saga_creature() then
+					if is_fullart_saga() then 
+						if is_legend() then "fullartsaga/creature/frame_mask_l.png"
+						else "fullartsaga/creature/frame_mask.png"
+					else "creature/frame_mask.png"
+				else if is_fullart_saga() then if is_legend() then "fullartsaga/creature/frame_mask_l.png" else "fullartsaga/frame_mask.png"
+				else if is_class() or is_case() then "frame_mask_class.png"
+				else if is_ub() then "ub/frame_mask.png"
+				else "frame_mask.png"
+
 	############################# Name line
 	name:
 		left: 64
@@ -855,10 +934,10 @@ card style:
 		alignment: middle right
 	############################# Image 28,30,693,946
 	image:
-		left:   {if contains(styling.other_options, match:"fullart saga") then 0 else if(card.card_color == "colorless") then 28 else if is_class() or is_case() then 57 else 376 }
-		top:    {if contains(styling.other_options, match:"fullart saga") then 0 else if(card.card_color == "colorless") then 30 else 118}
-		width:  {if contains(styling.other_options, match:"fullart saga") then 750 else if(card.card_color == "colorless") then 693 else 317}
-		height:	{if contains(styling.other_options, match:"fullart saga") then 968 else if(card.card_color == "colorless") then 946 else 763}
+		left:   {if is_fullart_saga() then 0 else   if is_saga_creature() then 376 else  if(card.card_color == "colorless") then 28 else if is_class() or is_case() then 57 else 376 }
+		top:    {if is_fullart_saga() then 0 else   if is_saga_creature() then 218 else  if(card.card_color == "colorless") then 30 else 118}
+		width:  {if is_fullart_saga() then 750 else if is_saga_creature() then 316 else if(card.card_color == "colorless") then 693 else 317}
+		height:	{if is_fullart_saga() then 968 else if is_saga_creature() then 574 else if(card.card_color == "colorless") then 946 else 763}
 		z index: -1
 		default: {default_image(card.card_color)}
 	############################# Card type
@@ -886,7 +965,7 @@ card style:
 			separator color: red
 	rarity:
 		right: {688 + rarity_shift()}
-		top: {if (is_ub() and not is_fullart_saga()) then 891 else 894}
+		top: {if is_saga_creature() then 806 else if (is_ub() and not is_fullart_saga()) then 891 else 894}
 		width: 88
 		height: 44
 		z index: 2
@@ -930,7 +1009,7 @@ card style:
 		left: { (if styling.wider_watermarks then 58 else 90)+if is_class() or is_case() then 316 else 0}
 		top: 120
 		width: { if styling.wider_watermarks then 314 else 271 }
-		height: 756
+		height: {if is_saga_creature() then 680 else 756}
 		z index: 4
 		render style: image
 		popup style: in place
@@ -982,7 +1061,7 @@ card style:
 	chapter text:
 		left: {60 + (if is_class() then 316 else 0)}
 		top: {if is_fullart_saga() then 1200 else 120}
-		width: {if un_marked() then 0 else 306}
+		width: {if un_marked() then 0 else if is_saga_creature() then 632 else 306}
 		bottom: {if un_marked() then 120 else chapter0()}
 		z index: 3
 		font:
@@ -1008,7 +1087,7 @@ card style:
 		z index: 5
 		padding top:   7
 		padding left:   3
-		padding right:  {1}
+		padding right:  {4 + chop_right()}
 		#line height hard: 1.2
 		#line height line: 1.5
 		#line height soft: 0.85
@@ -1109,7 +1188,7 @@ card style:
 		left: {if un_marked() then if is_case() then 376 else 60 else 90}
 		top: { if split_23() == "" then 686 else split_23() }
 		width: { if is_class() then 0 else if un_marked() then if is_case() then 312 else 306 else 276}
-		bottom: {if split_34() == "" then 874 else split_34() }
+		bottom: {if split_34() == "" then textbox_bottom() else split_34() }
 		font:
 			name:  { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
@@ -1148,9 +1227,9 @@ card style:
 
 	level 4 text:
 		left: {if un_marked() then if is_case() then 376 else 60 else 90}
-		top: {if split_34() == "" then 874 else split_34() }
+		top: {if split_34() == "" then textbox_bottom() else split_34() }
 		width: { if is_class() then 0 else if un_marked() then if is_case() then 312 else 306 else 276}
-		bottom: 874
+		bottom: { textbox_bottom() }
 		font:
 			name:  { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
@@ -1186,10 +1265,44 @@ card style:
 		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
 		line height hard max: 1.2
 		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
+	#############################传纪生物
+	text 2:
+		left: 56
+		top: {if is_saga_creature() then 868 + extra_chop_top() else 1200}
+		width: 638
+		bottom: {968-extra_chop_bot()}
+		font:
+			name: {if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: {if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
+			size: {if styling.saga_creature_font_cap != "" then to_number(styling.saga_creature_font_cap) else 28 }
+			scale down to: 6
+			color: {if is_fullart_saga() then "white" else "black"}
+		symbol font:
+			name: { styling.text_box_mana_symbols }
+			size: {if styling.saga_creature_font_cap != "" then to_number(styling.saga_creature_font_cap) else 28 }
+			scale down to: 6
+		alignment:
+			script:
+				if (styling.center_text_saga_creature == "short text only" and
+				   not contains(match:"\n", card.rule_text) and
+				   card.flavor_text == "<i-flavor></i-flavor>" and
+				   card_style.text.content_lines <= 2) or
+				   styling.center_text_saga_creature == "always"
+				then "middle center"
+				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
+		z index: 5
+		padding left:   6
+		padding right:  {4 + extra_chop_right()}
+		line height hard: 1.1
+		line height line: { if chinese_new_font() then 1.6 else 1.5 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: 1.2
+		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
 
 	############################# PT
 	pt:
-		z index: 2
+		z index: 6
 		left: 586
 		top: 936
 		width: {if starting_loyalty() then 0 else 120}
@@ -1198,7 +1311,7 @@ card style:
 		font:
 			name: { if use_phyrexian_font() then "GeishaHolidayW00-Regular" else "Beleren Bold" }
 			size: {32 - (if styling.shrink_power_text != "" then to_number(styling.shrink_power_text) else 0)}
-			color: {if is_vehicle() then "white" else "black"}
+			color: {if is_vehicle() or is_fullart_saga() then "white" else "black"}
 			separator color: red
 	loyalty:
 		z index: 7
@@ -1309,6 +1422,80 @@ extra card field:
 	choice: stamp
 	editable: false
 	save value: false
+extra card field:
+	type: multiple choice
+	name: stamp2
+	empty choice: colorless
+	choice: white
+	choice: blue
+	choice: black
+	choice: red
+	choice:
+		name: green
+		line below: true
+	choice: artifact
+	choice: land
+	choice: multicolor
+	choice:
+		name: hybrid
+		line below: true
+	choice:
+		name: horizontal
+		type: radio
+	choice:
+		name: vertical
+		type: radio
+	choice:
+		name: radial
+		type: radio
+	choice:
+		name: diagonal
+		type: radio
+	choice:
+		name: overlay
+		type: radio
+	choice:
+		name: reversed
+	script: card_color_filter(value)
+	default: card_color(casting_cost: card.casting_cost, rules_text: card.rule_text, type: card.super_type, watermark: card.watermark, card_name: card.name)
+
+extra card field:
+	type: multiple choice
+	name: ubstamp
+	empty choice: colorless
+	choice: white
+	choice: blue
+	choice: black
+	choice: red
+	choice:
+		name: green
+		line below: true
+	choice: artifact
+	choice: land
+	choice: multicolor
+	choice:
+		name: hybrid
+		line below: true
+	choice:
+		name: horizontal
+		type: radio
+	choice:
+		name: vertical
+		type: radio
+	choice:
+		name: radial
+		type: radio
+	choice:
+		name: diagonal
+		type: radio
+	choice:
+		name: overlay
+		type: radio
+	choice:
+		name: reversed
+	script: card_color_filter(value)
+	default: card_color(casting_cost: card.casting_cost, rules_text: card.rule_text, type: card.super_type, watermark: card.watermark, card_name: card.name)
+
 extra card field:
 	type: text
 	name: auto copyright
@@ -1605,7 +1792,7 @@ extra card style:
 			loyalty: loyalty.png
 	stamp:
 		left:	{if is_ub() then 332.5 else 328.5}
-		top:	{if is_ub() and is_fullart_saga() then 954 else if is_ub() then 950 else 956}
+		top:	{if is_saga_creature() then 1200 else if is_ub() and is_fullart_saga() then 954 else if is_ub() then 950 else 956}
 		width:	{if is_ub() then 85.5 else 93}
 		height:	{if is_ub() then 47.5 else 39}
 		z index: 2
@@ -1617,6 +1804,25 @@ extra card style:
 					if is_ub() then "stamp/ubstamp.png" else "stamp/stamp.png"
 				else if is_fullart_saga() and is_ub() then "stamp/ubstampsliver.png"
 				else ""
+
+	stamp2:
+		left:	{327}
+		top:	{if is_saga_creature() and (is_stamped() or use_acorn_stamp()) and not is_ub() then if is_fullart_saga() then 947.5 else 948 else 1200}
+		width:	{96}
+		height:	{49}
+		z index: 5
+		render style: image
+		image:  {if is_colorless() then "stamp/wstamp.png" else card_stamp() }
+		
+	ubstamp:
+		left:	{319}
+		top:	{if is_saga_creature() and is_ub() then if is_fullart_saga() then 944.5 else 945 else 1200}
+		width:	112
+		height:	54
+		z index: 5
+		render style: image
+		image: { ubstamp_background() }
+
 
 	auto copyright:
 		right: 699
@@ -1729,6 +1935,7 @@ extra card style:
 		render style: image
 		z index: 2
 		image: {if is_class() then "level.png" else if is_case() or un_marked() or is_fullart_saga() then "bar.png" else "line.png"}
+		visible: {not one_box()}
 
 	linebreak 3:
 		left: {60+ if is_class() or is_case() then 315 else if is_fullart_saga() then -30 else 0}
@@ -1831,7 +2038,7 @@ extra card style:
 		render style: image
 		image: {nyx_background()}
 		z index: 0
-		visible: {is_nyx()}
+		visible: {is_nyx() and not is_saga_creature()}
 		mask: {"nyx/" + (if is_vehicle() or is_snow() then "v_") + "fullmask.png"}
 	snow overlay:
 		left: 0
@@ -1854,23 +2061,24 @@ extra card style:
 		z index: 0
 		visible: {is_vehicle()}
 	bookmark:
-		left: 32.5
-		top: {114.5+(if is_read_ahead() then 54 else 0)}
-		width: 52
-		height: {760-18}
+		left:  {if is_saga_creature() then 32.4627 else 32.5}
+		top:   {if is_saga_creature() then 104.5 else (114.5+(if is_read_ahead() then 54 else 0))}
+		width: {if is_saga_creature() then 51.4925 else 52}
+		height:{if is_saga_creature() then 661.5671 else 742}
 		render style: image
-		image: {bookmark_background()}
+		image: {if is_saga_creature() then creature_bookmark_background() else bookmark_background()}
 		z index: 3
-		visible: {not (un_marked() or contains(styling.other_options, match:"fullart saga"))}
+		visible: {not (un_marked() or is_fullart_saga())}
+
 	stripe:
-		left: 32.5
-		top: {114.5+(if is_read_ahead() then 54 else 0)}
-		width: 52
-		height: 760
+		left: {if is_saga_creature() then 31.9 else 32.5}
+		top: {if is_saga_creature() then 104.5 else (114.5+(if is_read_ahead() then 54 else 0))}
+		width: {if is_saga_creature() then 51.4925 else 52}
+		height: {if is_saga_creature() then 661.5671 else 760}
 		render style: image
-		image: {"bookmark/"+ (if is_read_ahead() then "ahead/"else"") + "stripe.png"}
+		image: {if is_saga_creature() then "bookmark/creature/stripe.png" else ("bookmark/"+ (if is_read_ahead() then "ahead/"else"") + "stripe.png") }
 		z index: 3
-		visible: {length(write_wubrg(card.card_color))==2 and not (un_marked() or contains(styling.other_options, match:"fullart saga"))}
+		visible: {length(write_wubrg(card.card_color))==2 and not (un_marked() or is_fullart_saga())}
 		
 	crown:
 		left: 0
@@ -1878,9 +2086,17 @@ extra card style:
 		width:	750
 		height:	1050
 		render style: image
-		image: {if(card.card_color == "colorless") then if has_alias() then if is_legend() then "alias/wlaliascrown.png" else "alias/waliascrown.png" else "crown/wlcrown.png" else if has_alias() then aliascrown_background() else crown_background()}
+		image:
+			script:
+				if(card.card_color == "colorless") then
+					if has_alias() then if is_legend() then "alias/wlaliascrown.png"
+						else "alias/waliascrown.png"
+					else "crown/wlcrown.png"
+				else if has_alias() then aliascrown_background()
+				else crown_background()
 		z index: 3
 		visible: { is_legend() or has_alias() }
+		mask:{if is_saga_creature() and not is_fullart_saga() then "crown/sgcreature_mask.png" else ""}
 	innercrown:
 		left: 0
 		top: 0
@@ -1899,7 +2115,7 @@ extra card style:
 		render style: image
 		image: {if is_ub() then ubsagapaper_background() else if(card.card_color == "colorless") then "paper/cpaper1.png" else sagapaper_background()}
 		z index: 1
-		visible: {not is_fullart_saga() }
+		visible: {not (is_fullart_saga() or is_saga_creature()) }
 		
 	snow twin:
 		left: 0

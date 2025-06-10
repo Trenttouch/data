@@ -215,6 +215,9 @@ init script:
 	guild_mana := { styling.use_guild_mana_symbols }
 	
 	# Is the card a promo card?
+	card_shape := {if is_adventure() or is_omen() then "adventure" else "normal"}
+
+
 	is_promo := { styling.promo }
 	is_legend := {set.auto_legends and (contains(card.super_type, match:"Legendary") or contains(card.super_type, match:"传奇") or contains(card.type, match:"Mewk")) }
 	is_nyx := { chosen(styling.frames, choice:"nyx") and (contains(card.super_type, match:"Enchantment") or contains(card.super_type, match:"结界")) }
@@ -562,7 +565,7 @@ card style:
 				(if styling.name_2_top_shift != "" then to_number(styling.name_2_top_shift) else 0)
 				+
 				if is_omen() then
-					if set.card_language != "简体中文" then 667 else 662
+					if set.card_language != "简体中文" then 663 else 662
 				else if is_adventure() then
 					if set.card_language != "简体中文" then 666 else 660
 				else 0
@@ -1361,6 +1364,14 @@ extra card field:
 	editable: true
 	show statistics: false
 	save value: true
+
+extra card field:
+	type: choice
+	name: foil layer
+	choice: bar
+	editable: false
+	save value: false
+	show statistics: false
 	
 extra card style:
 	dot:
@@ -1439,7 +1450,7 @@ extra card style:
 		top:	0
 		width:	750
 		height:	1050
-		z index: 1
+		z index: 3
 		visible: { is_prototype() and card.pt_2 != "" }
 		render style: image
 		image: { prototype_ptbox() }
@@ -1652,7 +1663,7 @@ extra card style:
 		top:	0
 		width:	750
 		height:	1050
-		z index: 1
+		z index: 3
 		visible: { is_prototype() and card.casting_cost_2 != "" }
 		render style: image
 		image: { prototype_manabox() }
@@ -1725,5 +1736,13 @@ extra card style:
 			color: white
 			weight: {"bold"}
 		visible: {is_serialized()}
-	
+
+	foil layer:
+		left: 0
+		top : 0
+		width: 750
+		height: 1050
+		z index: 9
+		render style: image
+		image: {if styling.overlay == "" then nil else styling.overlay + "/overlay.png"}
 

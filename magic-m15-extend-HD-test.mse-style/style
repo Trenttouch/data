@@ -446,7 +446,7 @@ card style:
 		top:
 			script:
 				if is_omen() then
-					if set.card_language != "简体中文" then 667 else 662
+					if set.card_language != "简体中文" then 663 else 662
 				else if is_adventure() then
 					if set.card_language != "简体中文" then 666 else 660
 				else 0
@@ -592,7 +592,7 @@ card style:
 				   then "middle center"
 				else "middle left"
 				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
-		z index: 3
+		z index: 5
 		padding left:   6
 		padding right:  {4 + chop_right()}
 		line height hard: 1.1
@@ -700,7 +700,7 @@ card style:
 				   then "middle center"
 				else "middle left"
 				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
-		z index: 3
+		z index: 5
 		padding left:   6
 		padding right:  {4 + chop_right()}
 		line height hard: 1.1
@@ -736,7 +736,7 @@ card style:
 				   then "middle center"
 				else "middle left"
 				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
-		z index: 3
+		z index: 5
 		padding left:   6
 		padding right:  {4 + chop_right()}
 		line height hard: 1.1
@@ -1472,7 +1472,7 @@ extra card style:
 		top:	{0 + (if is_tallart() then 45 else 0 )}
 		width:	750
 		height:	1050
-		z index: 1
+		z index: 3
 		visible: { is_prototype() and card.pt_2 != "" }
 		render style: image
 		image: { prototype_ptbox() }
@@ -1482,7 +1482,7 @@ extra card style:
 		top:	{0 + (if is_tallart() then 45 else 0 )}
 		width:	750
 		height:	1050
-		z index: 1
+		z index: 3
 		visible: { is_prototype() and card.casting_cost_2 != "" }
 		render style: image
 		image: { prototype_manabox() }
