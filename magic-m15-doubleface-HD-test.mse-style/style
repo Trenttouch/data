@@ -1404,7 +1404,8 @@ card style:
 			scale down to: 6
 		alignment:
 			script:
-				if (styling.center_text == "short text only" and
+				if is_saga_creature() then "middle center"
+				else if (styling.center_text == "short text only" and
 				   not contains(match:"\n", card.rule_text) and
 				   card.flavor_text == "<i-flavor></i-flavor>" and
 				   card_style.text.content_lines <= 2) or
@@ -1443,7 +1444,8 @@ card style:
 			scale down to: 6
 		alignment:
 			script:
-				if (styling.center_text_2 == "short text only" and
+				if back_is_saga_creature() then "middle center"
+				else if (styling.center_text_2 == "short text only" and
 				   not contains(match:"\n", card.rule_text_2) and
 				   card.flavor_text == "<i-flavor></i-flavor>" and
 				   card_style.text_2.content_lines <= 2) or
