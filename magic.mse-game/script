@@ -1386,14 +1386,14 @@ remove_type := replace@(match: "(Artifact|Creature|Enchantment|Instant|Land|Plan
 node_script := { if card.shape == "double faced" then "transform day"  else "none" }
 
 card_new_color := {
-	if card.card_color == "white" then "w"
-	else if card.card_color == "blue" then "u"
-	else if card.card_color == "black" then "b"
-	else if card.card_color == "red" then "r"
-	else if card.card_color == "green" then "g"
-	else if contains(card.card_color, match:"artifact") then "a"
-	else if contains(card.card_color, match:"multi") or contains(card.card_color, match:"hybrid") then "m"
-	else "c"
+	if card.card_color == "white" then "W"
+	else if card.card_color == "blue" then "U"
+	else if card.card_color == "black" then "B"
+	else if card.card_color == "red" then "R"
+	else if card.card_color == "green" then "G"
+	else if contains(card.card_color, match:"artifact") then "A"
+	else if contains(card.card_color, match:"multi") or contains(card.card_color, match:"hybrid") then "M"
+	else "C"
 }
 spark_color := {
 	if card.card_color == "white" then "w"

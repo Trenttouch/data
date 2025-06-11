@@ -226,8 +226,7 @@ symbol:
 	image font size: 300
 symbol:
 	code: .5
-	image: one_half.png
-	image font size: 206
+	image: mana_1_half.png
 symbol:
 	code: S
 	image: mana_s.png

@@ -2209,7 +2209,7 @@ extra card style:
 		top: {if styling.frames=="ixalan" then 0 else 116}
 		width: {if styling.frames=="ixalan" then 750 else 690}
 		height:	{if styling.frames=="ixalan" then 1050 else 475}
-		z index: -1
+		z index: -3
 		render style: image
 		image: {if styling.frames=="ixalan" then "ixalan/coinCover.png" else color_back_background()}
 		visible: {styling.frames=="ixalan" or styling.frames=="dnd sourcebook" and not chosen(styling.others, choice:"original background" )}

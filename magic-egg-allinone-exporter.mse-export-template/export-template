@@ -1,0 +1,321 @@
+mse version: 2.0.0
+short name: MSE Hub Exporter for Chinese card
+full name: MSEHub 中文牌导出
+position hint: 009
+icon: icon.png
+version: 2025-03-31
+
+depends on:
+	package: magic.mse-game
+	version: 2014-06-25
+
+game: magic
+create directory: true
+file type: *.txt|*.txt|*.*|*.*
+
+#JSON implementation by Fungustober
+
+option field:
+	type: choice
+	name: export images
+	choice: yes
+	choice: no
+	description: Export images
+
+option field:
+	type: choice
+	name: image type
+	choice: png
+	choice: jpg
+	description: Image type
+
+option field:
+	type: choice
+	name: symbol rarity
+	choice: rare
+	choice: mythic rare
+	choice: uncommon
+	choice: common
+	description: Rarity for set logo / icon
+
+option field:
+	type: choice
+	name: draft structure
+	choice: play booster
+	choice: draft booster
+	choice: cube
+	choice: none
+	description: Format for this set's draft format
+
+option field:
+	type: text
+	name: formats
+	description: formats in which this set is included
+
+script:
+	fix_tm := replace@(match:"™", replace:"TM")
+	remove_quotes := replace@(match:"\"", replace:"")
+	
+	## clean up strays that will mess up the json
+	escape_backslash := replace@(match:"\\\\", replace:"\\\\\\\\")
+	escape_quotes := replace@(match:"\"", replace:"\\\\\"")
+	escape_breaks := replace@(match:"\n", replace:"\\\\n")
+	apos_fix := replace@(match:"’", replace:"'")
+	remove_tabs := replace@(match:"\t", replace:"") +
+		replace@(match:"	", replace:"") +
+		replace@(match:"  +", replace:" ")
+	remove_controls := replace@(match:"\r", replace:"")
+
+	sanitize := to_text +
+				escape_backslash +
+				escape_breaks +
+				escape_quotes + 
+				remove_controls + 
+				remove_tabs +
+				apos_fix +
+				trim
+
+	## remove characters that are illegal in windows filenames
+	windex := replace@(match:"[\\\\/|*<>?:\"]", replace:"")
+	## workaround windows reserved filenames
+	winfix := replace@(match:"^(CON|PRN|AUX|NUL|COM[0-9]|LPT[0-9])$", replace:{_1 + "_"})
+	adj_setcode := { winfix(set.set_code) }
+	
+	### tag management
+	exporter_name_filter := filter_text@(match:"!exporte?r?name [^\n]+")
+	exporter_name_grabber := replace@(match:"!exporte?r?name ", replace:"")
+
+	exporter_backname_filter := filter_text@(match:"!backf?a?c?e?name [^\n\<]+")
+	exporter_backname_grabber := replace@(match:"!backf?a?c?e?name ", replace:"")
+
+	card_name := { 
+		given := exporter_name_grabber(exporter_name_filter(card.notes))
+		if given == "" then given := card.name
+		sanitize(remove_quotes(given))
+	}
+	card_name_2 := { 
+		given := exporter_backname_grabber(exporter_backname_filter(card.notes))
+		if given == "" then given := card.name_2
+		sanitize(remove_quotes(given))
+	}
+
+	card_rarity := {
+		if card.rarity == "mythic rare"
+			then "mythic"
+		else if card.rarity == "basic land"
+			then "common"
+		else card.rarity
+	}
+	
+	devoid_ci := contains@(match:">Devoid<")
+	get_card_color := {
+		if devoid_ci(text) or is_land(type)
+			then ""
+		else (
+			  ( if contains(color, match:"white") or contains(cost, match:"W") then "W" else "" )
+			+ ( if contains(color, match:"blue") or contains(cost, match:"U") then "U" else "" )
+			+ ( if contains(color, match:"black") or contains(cost, match:"B") then "B" else "" )
+			+ ( if contains(color, match:"red") or contains(cost, match:"R") then "R" else "" )
+			+ ( if contains(color, match:"green") or contains(cost, match:"G") then "G" else "" )
+		)
+	}
+	card_color_1 := { get_card_color(text:card.text, type:card.type, color:card.card_color, cost:card.casting_cost) }
+	card_color_2 := { get_card_color(text:card.text_2, type:card.type_2, color:card.card_color_2, cost:card.casting_cost_2) }
+
+	##Fungustober's notes:
+	#.txt implementation example:
+	#Black Lotus	artifact	cube	Artifact	0000	C	{0}	{T}, Sacrifice this artifact: Add three mana of any one color.			normal	TST		!restricted	VintageREPLACEME
+	#.json with same info:
+	#{"name":"Black Lotus","color":"artifact","rarity":"cube","type":"Artifact","card_number":"0000","color_identity":"C","casting_cost":"{0}","rules_text":"{T}, Sacrifice this artifact: Add three mana of any one color.","shape":"normal",set:"TST",notes:"!restricted Vintage"},
+		#card_number can just be a number instead of a string, because we don't need to add a or b based on which side the card object is.
+		#having the entire DFC be just one card object make this a whole lot easier
+		#loyalty definitely cannot be a number because of the possibility of X or n+X, and PT can't be a number because of the /
+		
+	#dfc example:
+	#.txt implementation:
+	#Delver of Secrets	blue	common	Creature -- Human Wizard	0001	U	{U}	At the beginning of your upkeep, look at the top card of your library. You may reveal that card. If an instant or sorcery card is revealed this way, transform Delver of Secrets.	1/1		double faced	TST		Insectile Aberration	blue	Creature -- Human Insect	U		3/2			no longer legal in standard :(REPLACEME
+	#.json with same info:
+	#{"name":"Delver of Secrets","color":"blue","rarity":"common","type":"Creature -- Human Wizard"card_number:"0001","color_identity":"U","cost":"{U}","rules_text":"{U}	At the beginning of your upkeep, look at the top card of your library. You may reveal that card. If an instant or sorcery card is revealed this way, transform Delver of Secrets.","p/t":"1/1","shape":"double faced","set":"TST","name2":"Insectile Aberration","color2":"blue","type2":"Creature -- Human Insect","rules_text2":"3/2","notes":"no longer legal in standard :("},
+		#color_identity_statistic() uses both sides of a DFC to create the color identity, so calling it twice is redundant.	
+	
+	#now that we understand how write_card works, let's reformat it to fit JSON specifications.
+	#we're also formatting this in vertical chunks so we don't have to scroll to the right to see everything
+
+	##symbol processing
+	#adding my symbol processing functions to simplify things down the road
+	#If we make all the symbols {1}{U} here, we won't have to use tokenize/symbolize in the python scripts
+	
+	#all the mana types we need this regex to detect: (css is case-insensitive, so we don't need to worry about making things upper/lowercase)
+	#w
+	#w/p -> every mana type with a slash needs to not have that by the end
+	#u, u/p, b, b/p, r, r/p, g, g/p 
+	#w/u, w/b, u/b, u/r, b/r, b/g, r/w, r/g, g/w, g/u
+	#2/w-g, c/w-g
+	#p
+	#tap-alt (?)
+	#s
+	#q
+	#half
+	#100
+	#1000000
+	#loyalty-up (?)
+	#loyalty-down (?)
+	#loyalty-zero (?)
+	#loyalty-start (?)
+	#loyalty (?)
+	#0-20
+	#x, y, z
+	#c, e
+	#chaos
+	#½
+	#∞
+	inline_replacement := replace@(match:"<sym(-auto)?>([^<]+)</sym(-auto)?>", replace:{mana_cost_replacement_css(_2)})
+	mana_cost_replacement := replace@(match:"([+=-])([0-9X])", replace:{ if _2 == "0" or _2 == "=" then "["+_2+"]" else "["+_1+_2+"]"})+
+		replace@(match:"([0-9HWUBRGSCV])/([WUBRGCSV])(/([WUBRGCSV]))?", replace:{"\{"+_1+"/"+_2+_3+"\}"})+
+		replace@(match:"([½∞XYZWUBRGCSTQVJFENAH])", in_context:"(?<![\{[+-])(?<!/)<match>", replace:{"\{"+_1+"\}"})+
+		replace@(match:"([1-9]?[0-9]+)", in_context:"(?<![\{[+-])(?<!\\/)<match>", replace:{"\{"+_1+"\}"})
+	mana_cost_replacement_css := mana_cost_replacement +
+		replace@(match:"/", replace:"") +
+		replace@(match:"\{H([^}]*)}", replace:{"\{"+_1+"P\}"})
+	
+	convert_tags := replace@(match:"<(/?[ib])(-auto|-flavor)?>", replace:{"[" + _1 + "]"})
+
+	addonreplacement1 := replace@(match:"<soft-line>\n</soft-line>", replace:"")
+
+	addonreplacement2 := replace@(match:"#", replace:"") 
+						+replace@(match:":", replace:"：") 
+						+replace@(match:",", replace:"，") 
+						+replace@(match:"\\.", replace:"。") 
+						+replace@(match:"\\(", replace:"（") 
+						+replace@(match:"\\)", replace:"）") 
+						+replace@(match:"【", replace:"「") 
+						+replace@(match:"】", replace:"」")
+	
+	format_textbox := addonreplacement1 + inline_replacement + convert_tags + sanitize + addonreplacement2
+
+	##Slightly more advanced CI functions to let the exporter detect land types
+	get_land_type_CI := {
+		  (if contains(card.type, match:"Plains") then "W" else "")
+		+ (if contains(card.type, match:"Island") then "U" else "")
+		+ (if contains(card.type, match:"Swamp") then "B" else "")
+		+ (if contains(card.type, match:"Mountain") then "R" else "")
+		+ (if contains(card.type, match:"Forest") then "G" else "")
+	}
+	merge_ci := {
+		base := input
+		add := with
+		if length(base) > length(add) then (
+			base := with
+			add := input
+		)
+		for x from 0 to length(add)-1 do if not contains(base, match:add[x]) then base := base + add[x]
+		base
+	}
+
+	get_color_identity := {
+		land_ci := get_land_type_CI()
+		##base_ci := color_identity_statistic()
+		base_ci := card_new_color()
+		## if base_ci is colorless and land_ci isn't, use land_ci
+		## if land and land_ci isn't blank, use both
+		## otherwise use base_ci
+		if base_ci == "C" and land_ci != ""
+			then land_ci
+		else if is_land(card.type) and land_ci != ""
+			then merge_ci(base_ci, with:land_ci)
+		else base_ci
+	}
+
+	##Shape function to deal with all the non-standard shapes
+	get_shape := {
+		if card.shape == "emblem"
+		or card.shape == "counter"
+		or card.shape == "rulestip"
+		or card.shape == "checklist"
+		or contains (card.notes, match:"!token")
+			then "token"
+		else card.shape
+	}
+
+	fix_custom_card_number:= replace@(match:"^0+(?=\\d)", replace:"")
+	
+	fix_card_number:={
+		if card.custom_card_number != "" and card.styling.remove_from_autocount=="yes" then
+			fix_custom_card_number(card.custom_card_number)
+		else
+		card_number()
+	}
+
+	is_double_card := match@(match:"double|adventure|aftermath|spli")
+	q := "\""
+	write_card := {
+		strings := [
+			"{q}card_name{q}: {q}{card_name()}{q}",
+			"{q}color{q}: {q}{card_color_1()}{q}",
+			"{q}rarity{q}: {q}{if options.draft_structure == "cube" then "cube" else card_rarity()}{q}",
+			"{q}type{q}: {q}{sanitize(replace(card.type, match:"<soft><atom-sep>／</atom-sep></soft>", replace:""))}{q}",
+			"{q}number{q}: {sanitize(fix_card_number())}",
+			"{q}color_identity{q}: {q}{get_color_identity()}{q}",
+			"{q}cost{q}: {q}{mana_cost_replacement_css(card.casting_cost)}{q}",
+			"{q}rules_text{q}: {q}{format_textbox(card.rule_text)}{q}",
+			"{q}flavor_text{q}: {q}{format_textbox(card.flavor_text)}{q}",
+			"{q}pt{q}: {q}{sanitize(card.pt)}{q}",
+			"{q}special_text{q}: {q}{format_textbox(card.special_text)}{q}",
+			"{q}shape{q}: {q}{get_shape()}{q}",
+			"{q}set{q}: {q}{adj_setcode()}{q}",
+			"{q}loyalty{q}: {q}{sanitize(card.loyalty)}{q}",
+			"{q}artist{q}: {q}{sanitize(card.illustrator)}{q}"
+		]
+		if is_double_card(card.shape) then strings := strings + [
+			"{q}card_name2{q}: {q}{card_name_2()}{q}",
+			"{q}color2{q}: {q}{card_color_2()}{q}",
+			"{q}type2{q}: {q}{sanitize(replace(card.type_2, match:"<soft><atom-sep>／</atom-sep></soft>", replace:""))}{q}",
+			"{q}cost2{q}: {q}{mana_cost_replacement_css(card.casting_cost_2)}{q}",
+			"{q}rules_text2{q}: {q}{format_textbox(card.rule_text_2)}{q}",
+			"{q}flavor_text2{q}: {q}{format_textbox(card.flavor_text_2)}{q}",
+			"{q}pt2{q}: {q}{sanitize(sanitize(card.pt_2))}{q}",
+			"{q}special_text2{q}: {q}{format_textbox(card.special_text_2)}{q}",
+			"{q}loyalty2{q}: {q}{sanitize(card.loyalty_2)}{q}",
+			"{q}artist2{q}: {q}{sanitize(card.illustrator_2)}{q}"
+		]
+		strings := strings + [
+			"{q}notes{q}: {q}{sanitize(card.notes)}{q}"
+		]
+		"\{" + join(strings) + "}"
+	}
+	
+	write_cards := {
+		strings := for each card in cards do [write_card()]
+		join(strings)
+	}
+
+	write_all_images := {
+		for each card in cards do
+				if contains(card.shape, match:"double") then
+					if contains(card.type, match:"Battle|战役") then
+						write_image_file(crop(input: to_card_image(card,zoom:200), width: 1500, height: 2100, offset_x: 0, offset_y: 0), file: "img/" + fix_card_number() + "_" + card_name() + "_front" + ".{options.image_type}")
+						+ write_image_file(crop(input: to_card_image(card,zoom:200), width: 1500, height: 2100, offset_x: 1502, offset_y: 0), file: "img/" + fix_card_number() + "_" + card_name() + "_back" + ".{options.image_type}")
+					else
+						write_image_file(crop(input: to_card_image(card,zoom:200), width: 1500, height: 2100, offset_x: 0, offset_y: 0), file: "img/" + fix_card_number() + "_" + card_name() + "_front" + ".{options.image_type}")
+						+ write_image_file(crop(input: to_card_image(card,zoom:200), width: 1500, height: 2100, offset_x: 1502, offset_y: 0), file: "img/" + fix_card_number() + "_" + card_name() + "_back" + ".{options.image_type}")
+				else
+				write_image_file(card, file: "img/" + fix_card_number() + (if contains(get_shape(), match:"token") then "t_" else "_") + card_name() + ".{options.image_type}")
+	}
+
+	main_keys := [
+		"{q}name{q}: {q}{set.title}{q}",
+		"{q}formats{q}: {q}{options.formats}{q}",
+		"{q}trimmed{q}: {q}n{q}",
+		"{q}image_type{q}: {q}{options.image_type}{q}",
+		"{q}draft_structure{q}: {q}{options.draft_structure}{q}",
+		"{q}cards{q}: [{write_cards()}]"
+	]
+	##write_text_file(file: adj_setcode() + ".json", "\{" + join(main_keys) + "}")
+	write_text_file(file: adj_setcode() + ".json", "\{" + replace(join(main_keys), match:" and ", replace:" ") + "}")
+	
+
+	write_image_file({symbol_variation(symbol: set.symbol, variation: options.symbol_rarity)}(), file: "icon.png", width: 512, height: 512)
+	write_image_file({symbol_variation(symbol: set.symbol, variation: options.symbol_rarity)}(), file: "logo.png", width: 320, height: 320)
+	
+	write_images := if options.export_images == "yes" then write_all_images() else ""
+	"This file doesn't contain anything. Exported files can be found in the name-files folder with the same name you saved as."

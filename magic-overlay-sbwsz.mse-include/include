@@ -1,0 +1,6 @@
+mse version: 0.3.7
+version: 2008-08-31
+short name: sbwsz
+installer group: magic/overlays/foil/sbwsz
+position hint: 001
+icon: overlay.png

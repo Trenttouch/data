@@ -51,12 +51,12 @@ init script:
 	#Should multicolor lands with basic land types have a colored name?
 	mask_multi_land_with_color := { styling.colored_multicolor_land_name }
 	
-	template_prefix := [
+	template_prefix_normal := [
 	card: "front/normal/" card2: "back/normal/" map: "back/map/"
 	snow:"front/snow/" snow2:"back/snow/"
 	nyx: "nyx/" backnyx: "nyx/back/"
 	miracle:"miracle/"
-	aliascrown:"crown/alias/" aliascrown2:"crown/alias/" crown:"crown/" innercrown:"innercrown/"
+	aliascrown:"crown/alias/" aliascrown2:"crown/alias/" crown:"crown/" innercrown:"innercrown/" backcrown:"crown/newback/"
 	
 	sac:"crown/showcase/alias/" sac2:"crown/showcase/alias/"
 
@@ -64,7 +64,11 @@ init script:
 	backplw: "back/planeswalker/" backplwtall: "back/planeswalker/tall/"
 	
 	saga: "front/saga/" mark: "front/saga/mark/" paper: "front/saga/paper/" 
-	backsaga: "back/saga/" backmark: "back/saga/mark/" backpaper: "back/saga/paper/" 
+	backsaga: "back/saga/" backmark: "back/saga/mark/" backpaper: "back/saga/paper/"
+
+	creaturemark: "sagacreature/bookmark/"
+
+	backcreature: "sagacreature/back/ub/"
 
 	battle: "front/battle/" battletall: "front/battle/tallart/"
 
@@ -93,7 +97,7 @@ init script:
 	snow:"card.png" snow2:"card.png"
 	nyx: "nyx.png" backnyx: "nyx.png"
 	miracle:"miracle.png"
-	aliascrown:"aliascrown.png" aliascrown2:"aliascrown.png" crown:"crown.png" innercrown:"crown.png"
+	aliascrown:"aliascrown.png" aliascrown2:"aliascrown.png" crown:"crown.png" innercrown:"crown.png" backcrown:"lcrown.png"
 
 	sac:"aliascrown.png" sac2:"aliascrown.png"
 	
@@ -102,6 +106,10 @@ init script:
 	
 	saga: "card.png" mark: "mark.png" paper: "paper.png" 
 	backsaga: "card.png" backmark: "mark.png" backpaper: "paper.png"
+
+	creaturemark: "mark.png"
+
+	backcreature: ".png" creature: ".png"
 
 	battle: "card.png" battletall: "card.png"
 
@@ -120,7 +128,16 @@ init script:
 	
 	stamp: "stamp.png" identity: "identity.png" identity2: "identity.png"
 	]
-	
+
+	template_prefix := {
+		if type == "creature" then
+			if is_ub() then [creature:"sagacreature/front/ub/"] else [creature:"sagacreature/front/"]
+		else if type == "backcreature" then
+			if back_is_ub() then [backcreature: "sagacreature/back/ub/"] else [backcreature: "sagacreature/back/"]
+		else
+			template_prefix_normal 
+	}	
+
 	template_suffix := {
 		if type == "ubstamp" then
 			if is_rare() then [ubstamp:"stamp.png"]
@@ -129,14 +146,14 @@ init script:
 			template_suffix_normal 
 	}
 
-	template      := { template_prefix[type] + input + crown_follow(type) + innercrown_follow(type) + template_suffix()[type] }
-	land_template := { template_prefix[type] + (if input == "a" then "c" else input) + (if landless(type) then "" else "l") + crown_follow(type) + innercrown_follow(type) + template_suffix()[type] }
+	template      := { template_prefix()[type] + input + crown_follow(type) + innercrown_follow(type) + template_suffix()[type] }
+	land_template := { template_prefix()[type] + (if input == "a" then "c" else input) + (if landless(type) then "" else "l") + crown_follow(type) + innercrown_follow(type) + template_suffix()[type] }
 	# Use land templates for previews because they show more contrast
 	hybrid_previews := "land,hybrid"
 	
 	landless := {
 		if input == "nyx" or input == "backnyx"
-		or input == "crown" 
+		or input == "crown" or input == "backcrown" 
 		or input == "aliascrown" or input == "aliascrown2" or input == "innercrown" 
 		or input == "pt" or input == "pt2" or input == "stamp" 
 		or input == "miracle" 
@@ -148,6 +165,8 @@ init script:
 		or input == "battle"
 		or input == "showcasefront" or input == "showcaseback" or input == "showcasecrown"
 
+		or input == "creature" or input == "backcreature" or input == "creaturemark"
+
 		or input == "ubfrontcrown" or input == "ubbackcrown"
 		or input == "ubfrontpt" or input == "ubbackpt"
 		or input == "ubstamp"
@@ -157,6 +176,7 @@ init script:
 		}
 	
 	crown_background := { color_background(type:"crown",     base_hybrid:card_hybrid) }
+	back_crown_background := { color_background(type:"backcrown",     base_hybrid:card_hybrid) }
 	nyx_background := { color_background(type:"nyx",     base_hybrid:card_hybrid) }
 	backnyx_background := { color_background(type:"backnyx",     base_hybrid:card_hybrid) }
 	miracle_background := { color_background(type:"miracle",     base_hybrid:card_hybrid) }
@@ -188,8 +208,6 @@ init script:
 	ubfront_pt_background		:= { color_background(type:"ubfrontpt",     base_hybrid:card_hybrid) }
 	ubback_pt_background		:= { color_background(type:"ubbackpt",     base_hybrid:card_hybrid) }
 	ubstamp_background	:= { color_background(type:"ubstamp",     base_hybrid:ubstamp_hybrid) }
-
-
 
 	new_pt_background := { color_background(type:"newpt",     base_hybrid:card_hybrid) }
 	
@@ -486,12 +504,20 @@ init script:
 	backbookmark_background := { color_background(type:"backmark",     base_hybrid:bookmark_hybrid) }
 	backsagapaper_background := { color_background(type:"backpaper", base_hybrid: stamp_hybrid)}
 
+	saga_creature_background := { color_background(type:"creature", base_hybrid: card_hybrid)}
+	backsaga_creature_background := { color_background(type:"backcreature", base_hybrid: card_hybrid)}
+	creature_bookmark_background := { color_background(type:"creaturemark",     base_hybrid:bookmark_hybrid) }
+
 	saga_reminder := { if set.card_language == "简体中文" then "于此传纪进战场时及于你抓牌步骤后,加一个学问指示物."  else "As this Saga enters and after your draw step, add a lore counter."}
 	backsaga_reminder := { if set.card_language == "简体中文" then "于此传纪进战场时及于你抓牌步骤后,加一个学问指示物.到$$I$I$I$$后牺牲之$.$"  else "As this Saga enters and after your draw step, add a lore counter. Sacrifice after III."}
 
 	un_marked := {is_saga() and chosen(styling.frames, choice:"remove bookmark")}
 	back_un_marked := {back_is_saga() and chosen(styling.back_frames, choice:"remove bookmark")}
-	
+
+	is_saga_creature:={is_saga() and (card.pt != "" or contains(card.type, match:"生物") or contains(card.type, match:"Creature"))}
+	back_is_saga_creature:={back_is_saga() and (card.pt_2 != "" or contains(card.type_2, match:"生物") or contains(card.type_2, match:"Creature"))}
+
+
 	one_box := {styling.chapter_textboxes == "one" }
 	two_boxes := {styling.chapter_textboxes == "two" }
 	three_boxes := {styling.chapter_textboxes == "three" or comma_count(styling.chapter_divider_coordinates) == ",,"}
@@ -501,13 +527,16 @@ init script:
 	backthree_boxes := {styling.back_chapter_textboxes == "three" or comma_count(styling.chapter_divider_coordinates) == ",,"}
 	backfour_boxes := {styling.back_chapter_textboxes == "four" or comma_count(styling.chapter_divider_coordinates) == ",,,"}
 	
-	split_12 := {to_number(pull_comma_array(styling.chapter_divider_coordinates, cell:0, end:true, default:(if one_box() then 834 else if two_boxes() then 592 else if four_boxes() then 450 else 498)))}
-	split_23 := {to_number(pull_comma_array(styling.chapter_divider_coordinates, cell:1, end:true, default:(if one_box() then 834 else if two_boxes() then 834 else if four_boxes() then 592 else 686)))}
-	split_34 := {to_number(pull_comma_array(styling.chapter_divider_coordinates, cell:2, end:true, default:(if one_box() then 834 else if three_boxes() then 834 else if four_boxes() then 734 else 834)))}
+	textbox_bottom := {if is_saga_creature() then 788 else 834}
+	back_textbox_bottom := {if back_is_saga_creature() then 788 else 874}
+
+	split_12 := {to_number(pull_comma_array(styling.chapter_divider_coordinates, cell:0, end:true, default:(if one_box() then textbox_bottom() else if two_boxes()   then (if is_saga_creature() then 510 else 592) else if four_boxes() then (if is_saga_creature() then 350 else 450) else (if is_saga_creature() then 406 else 498))))}
+	split_23 := {to_number(pull_comma_array(styling.chapter_divider_coordinates, cell:1, end:true, default:(if one_box() then textbox_bottom() else if two_boxes()   then textbox_bottom() 							else if four_boxes() then (if is_saga_creature() then 510 else 592) else (if is_saga_creature() then 595 else 686))))}
+	split_34 := {to_number(pull_comma_array(styling.chapter_divider_coordinates, cell:2, end:true, default:(if one_box() then textbox_bottom() else if three_boxes() then textbox_bottom() 							else if four_boxes() then (if is_saga_creature() then 655 else 734) else textbox_bottom())))}
 	
-	backsplit_12 := {to_number(pull_comma_array(styling.back_chapter_divider_coordinates, cell:0, end:true, default:(if backone_box() then 874 else if backtwo_boxes() then 592 else if backfour_boxes() then 450 else 498)))}
-	backsplit_23 := {to_number(pull_comma_array(styling.back_chapter_divider_coordinates, cell:1, end:true, default:(if backone_box() then 874 else if backtwo_boxes() then 874 else if backfour_boxes() then 592 else 686)))}
-	backsplit_34 := {to_number(pull_comma_array(styling.back_chapter_divider_coordinates, cell:2, end:true, default:(if backone_box() then 874 else if backthree_boxes() then 874 else if backfour_boxes() then 734 else 874)))}
+	backsplit_12 := {to_number(pull_comma_array(styling.back_chapter_divider_coordinates, cell:0, end:true, default:(if backone_box() then back_textbox_bottom() else if backtwo_boxes() then (if back_is_saga_creature() then 510 else 592)	else if backfour_boxes() then (if back_is_saga_creature() then 350 else 450)	else (if back_is_saga_creature() then 406 else 498))))}
+	backsplit_23 := {to_number(pull_comma_array(styling.back_chapter_divider_coordinates, cell:1, end:true, default:(if backone_box() then back_textbox_bottom() else if backtwo_boxes() then back_textbox_bottom()								else if backfour_boxes() then (if back_is_saga_creature() then 510 else 592)	else (if back_is_saga_creature() then 595 else 686))))}
+	backsplit_34 := {to_number(pull_comma_array(styling.back_chapter_divider_coordinates, cell:2, end:true, default:(if backone_box() then back_textbox_bottom() else if backtwo_boxes() then back_textbox_bottom()								else if backfour_boxes() then (if back_is_saga_creature() then 655 else 734)	else back_textbox_bottom())))}
 
 	coords_map := [
 		1: {[card_style.level_1_text.top, card_style.level_1_text.bottom-card_style.level_1_text.top]},
@@ -546,7 +575,7 @@ init script:
 		)
 		out
 	}
-	chapter0 := { if styling.reminder_coordinate != "" then max(120,min(to_number(styling.reminder_coordinate),876)) else 310}
+	chapter0 := { if styling.reminder_coordinate != "" then max(120,min(to_number(styling.reminder_coordinate),876)) else 310 + (if is_saga_creature() then -95 else 0)}
 	chapter1 := { if length(comma_count(styling.snap_chapter_to_box)) > 0 then auto_snap(1, line:styling.snap_chapter_to_box) else to_number(pull_comma_array(styling.chapter_number_coordinates, cell:0, end:true, default:(if two_boxes() then 366 else 374))) }
 	chapter2 := { if length(comma_count(styling.snap_chapter_to_box)) > 1 then auto_snap(2, line:styling.snap_chapter_to_box) else to_number(pull_comma_array(styling.chapter_number_coordinates, cell:1, end:true, default:(if two_boxes() then 446 else 562))) }
 	chapter3 := { if length(comma_count(styling.snap_chapter_to_box)) > 2 then auto_snap(3, line:styling.snap_chapter_to_box) else to_number(pull_comma_array(styling.chapter_number_coordinates, cell:2, end:true, default:(if two_boxes() then 658 else 730))) }
@@ -554,7 +583,7 @@ init script:
 	chapter5 := { if length(comma_count(styling.snap_chapter_to_box)) > 4 then auto_snap(5, line:styling.snap_chapter_to_box) else to_number(pull_comma_array(styling.chapter_number_coordinates, cell:4, end:true, default:1200)) }
 	chapter6 := { if length(comma_count(styling.snap_chapter_to_box)) > 5 then auto_snap(6, line:styling.snap_chapter_to_box) else to_number(pull_comma_array(styling.chapter_number_coordinates, cell:5, end:true, default:1200)) }
 	
-	backchapter0 := { if styling.back_reminder_coordinate != "" then max(120,min(to_number(styling.back_reminder_coordinate),876)) else 310}
+	backchapter0 := { if styling.back_reminder_coordinate != "" then max(120,min(to_number(styling.back_reminder_coordinate),876)) else 310 + (if back_is_saga_creature() then -95 else 0) }
 	backchapter1 := { if length(comma_count(styling.back_snap_chapter_to_box)) > 0 then auto_snap(1, line:styling.back_snap_chapter_to_box, bump:4) else to_number(pull_comma_array(styling.back_chapter_number_coordinates, cell:0, end:true, default:(if backtwo_boxes() then 366 else 374))) }
 	backchapter2 := { if length(comma_count(styling.back_snap_chapter_to_box)) > 1 then auto_snap(2, line:styling.back_snap_chapter_to_box, bump:4) else to_number(pull_comma_array(styling.back_chapter_number_coordinates, cell:1, end:true, default:(if backtwo_boxes() then 446 else 562))) }
 	backchapter3 := { if length(comma_count(styling.back_snap_chapter_to_box)) > 2 then auto_snap(3, line:styling.back_snap_chapter_to_box, bump:4) else to_number(pull_comma_array(styling.back_chapter_number_coordinates, cell:2, end:true, default:(if backtwo_boxes() then 658 else 730))) }
@@ -639,6 +668,8 @@ init script:
 	back_plw_awaken := { back_is_plw() and chosen(extra_card.corner2, choice:"aetherprint") }
 	back_use_phyrexian_font := { chosen(styling.back_frames, choice:"use phyrexian font") }
 
+	
+
 	back_is_ub := { chosen(styling.back_frames, choice:"universe beyond") }
 
 
@@ -651,7 +682,7 @@ init script:
 
 	######################img_set################################# 84,28,937,688--90°-->28,(1050-84),937,688
 	img_set := { 
-		if is_saga() then "376,118,317,763"
+		if is_saga() then if is_saga_creature() then "376,218,316,574" else "376,118,317,763"
 		else if is_extend() then "0,85,750,567"
 		else if is_devoid() then "30,30,691,939"
 		else if is_mutate() then "47,117,681,674"
@@ -671,7 +702,7 @@ init script:
 	### ### ### ### ### ###
 	
 	back_img_set := { 
-		if back_is_saga() then "376,118,317,763"
+		if back_is_saga() then if back_is_saga_creature() then "376,218,316,574" else "376,118,317,763"
 		else if back_is_extend() then "0,85,750,567"
 		else if back_is_devoid() then "30,30,691,939"
 		else if back_is_map() then "30,114,691,477"
@@ -908,6 +939,15 @@ styling field:
 ### 通用2 ###
 include file: /magic-all-style.mse-include/style2
 
+styling field:
+	type: choice
+	name: center text 2
+	description: When to center text (short text only means only on one-line cards with no flavor text)
+	choice: always
+	choice: short text only
+	choice: never
+	initial: never
+
 styling style:
 	use guild mana symbols:
 		choice images:
@@ -920,6 +960,12 @@ styling style:
 			old:        /magic-mana-large.mse-symbol-font/mana_t_old.png
 			diagonal T: /magic-mana-large.mse-symbol-font/mana_t_older.png
 	center text:
+		render style: both
+		choice images:
+			always:          /magic.mse-game/icons/center-all-text.png
+			short text only: /magic.mse-game/icons/center-short-text.png
+			never:           /magic.mse-game/icons/center-no-text.png
+	center text 2:
 		render style: both
 		choice images:
 			always:          /magic.mse-game/icons/center-all-text.png
@@ -949,8 +995,8 @@ card style:
 		popup style: in place
 		image: 
 			script:
-				if is_ub() then ubfront_background()
-				else if is_saga() then saga_background()
+				if is_saga() then if is_saga_creature() then saga_creature_background() else saga_background()
+				else if is_ub() then ubfront_background()
 				else if chosen(styling.frames, choice:"bot") then if is_legend() then "front/bot/lcard.png" else "front/bot/card.png"
 				else if is_extend() then extendfront_background()
 				else if is_showcase() then showcasefront_background()
@@ -968,8 +1014,8 @@ card style:
 							if (is_rare() and styling.use_holofoil_stamps) then "mythic_mask_rare_" else "mythic_mask_" 
 						  else "" ) + 
 						 "frame_mask.png")
+				else if is_saga() then if is_saga_creature() then "sagacreature/frame_mask.png" else "front/saga/frame_mask.png"
 				else if is_ub() then  "ub/frame_mask.png"
-				else if is_saga() then "front/saga/frame_mask.png"
 				else if chosen(styling.frames, choice:"bot") then "front/bot/frame_mask.png"
 				else if is_extend() then ("front/extend/frame_mask" + (if is_legend() then "_l" else "") + ".png")
 				else if (is_showcase() and not is_showcase_black()) then ("front/showcase/frame_mask" + (if is_legend() then "_l" else "") + ".png")
@@ -989,8 +1035,8 @@ card style:
 		popup style: in place
 		image: 
 			script:
-				if back_is_ub() then ubback_background()
-				else if back_is_saga() then backsaga_background()
+				if back_is_saga() then if back_is_saga_creature() then backsaga_creature_background() else backsaga_background()
+				else if back_is_ub() then ubback_background()
 				else if chosen(styling.back_frames, choice:"bot") then if back_is_legend() then "back/bot/lcard.png" else "back/bot/card.png"
 				else if back_is_extend() then extendback_background()
 				else if back_is_showcase() then showcaseback_background()
@@ -1006,8 +1052,8 @@ card style:
 						 (if back_has_four_abilities() then "tall/" else "") + 
 						 (if back_is_plw_fullart() then "mythic_mask_" else "" ) + 
 						 "frame_mask.png")
+				else if back_is_saga() then if back_is_saga_creature() then "sagacreature/frame_mask.png" else "back/saga/frame_mask.png"
 				else if back_is_ub() then  "ub/frame_mask.png"
-				else if back_is_saga() then "back/saga/frame_mask.png"
 				else if chosen(styling.back_frames, choice:"bot") then "back/bot/frame_mask.png"
 				else if back_is_extend() then ("back/extend/frame_mask" + (if back_is_legend() then "_l" else "") + ".png")
 				else if (back_is_showcase() and not back_is_showcase_black()) then ("back/showcase/frame_mask" + (if back_is_legend() then "_l" else "") + ".png")
@@ -1030,7 +1076,7 @@ card style:
 		font:
 			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
 			size: { if set.card_language != "简体中文" then 32 - shrink_name() else 34 - shrink_name()}
-			color: {if chosen(styling.frames, choice:"bot") then "white" else "black"}
+			color: {if chosen(styling.frames, choice:"bot") or is_showcase() then "white" else "black"}
 	casting cost:
 		right: {if is_battle() then 44 else 692 }
 		top: {if is_battle() then 77 else (57 + (if is_plw() then -15 else 0))}
@@ -1063,7 +1109,7 @@ card style:
 		alignment: middle center
 
 	name 2:
-		left: {(if back_is_ub() then 64 else if chosen(styling.back_frames, choice:"bot") then 64 else 118)+backside_left_fix()}
+		left: {(if back_is_ub() or back_is_saga_creature() then 64 else if chosen(styling.back_frames, choice:"bot") then 64 else 118)+backside_left_fix()}
 		top: { if set.card_language != "简体中文" then 59 else 57 + (if back_is_map() then -8 else 0) + (if back_is_plw() then -17 else 0) + (if back_use_phyrexian_font() then shrink_name()/2 else 0)}
 		right:  { if back_is_map() then (backside_left_fix() +632) else (682 + backside_left_fix() - max(0, card_style.casting_cost_2.content_width)) }
 		height: {46 - 0.5*shrink_name()}
@@ -1131,7 +1177,7 @@ card style:
 	############################# Card type
 	indicator:
 		left: {if is_battle() then 446.5 else 62 }
-		top: {if is_battle() then 917 else 604 + (if is_plw() then if has_four_abilities() then -75 else -3) + (if is_saga() then 296 else 0)}
+		top: {if is_battle() then 917 else 604 + (if is_plw() then if has_four_abilities() then -75 else -3) + (if is_saga() then if is_saga_creature() then 210 else 296 else 0)}
 		width: 34
 		height: 34
 		z index: 1
@@ -1141,7 +1187,7 @@ card style:
 		image: { card_identity() }
 	type:
 		left: { if is_battle() then (if chosen(styling.frames, choice:"tallart battle") then 440+88 else 440 ) + shrink_type()/2 else if has_identity() then 102 else 62 }
-		top: { if is_battle() then (if has_identity() then 875 else 915) else (shrink_type()/2 + (if is_plw() then if has_four_abilities() then 523 else 595 else if is_saga() then 894 else 598))}
+		top: { if is_battle() then (if has_identity() then 875 else 915) else (shrink_type()/2 + (if is_plw() then if has_four_abilities() then 523 else 595 else if is_saga() then if is_saga_creature() then 806 else 894 else 598))}
 		width: { (if has_identity() then 580 else 610 ) - max(44,card_style.rarity.content_width) + if is_battle() then 210 else 0 }
 		height: { 40 - shrink_type() }
 		alignment: top shrink-overflow
@@ -1155,7 +1201,7 @@ card style:
 			separator color: red
 	rarity:
 		right: {if is_battle() then (if chosen(styling.frames, choice:"tallart battle") then 441+88 else 441 ) else 688+rarity_shift()}
-		top: {if is_battle() then 79+rarity_shift() else (if is_plw() and has_four_abilities() then 526 else if is_saga() then 894+2 else 598)}
+		top: {if is_battle() then 79+rarity_shift() else (if is_plw() and has_four_abilities() then 526 else if is_saga() then if is_saga_creature() then 806 else 896 else 598)}
 		width: 88
 		height: 44
 		z index: 2
@@ -1198,7 +1244,7 @@ card style:
 
 	indicator 2:
 		left: {62 + backside_left_fix()}
-		top: {604 + (if back_is_plw() then if back_has_four_abilities() then -75 else -3) + (if back_is_saga() then 296 else 0)}
+		top: {604 + (if back_is_plw() then if back_has_four_abilities() then -75 else -3) + (if back_is_saga() then if back_is_saga_creature() then 210 else 296 else 0)}
 		width: 34
 		height: 34
 		z index: 1
@@ -1207,7 +1253,7 @@ card style:
 		image: { card_identity_2() }
 	type 2:
 		left: { (if back_has_identity() then 102 else 62) + backside_left_fix()}
-		top: {shrink_type()/2 + (if back_is_plw() then if back_has_four_abilities() then 523 else 595 else if back_is_saga() then 894 else 598)}
+		top: {shrink_type()/2 + (if back_is_plw() then if back_has_four_abilities() then 523 else 595 else if back_is_saga() then if back_is_saga_creature() then 806 else 894 else 598)}
 		width: { if back_is_map() then (750-124) else ((if back_has_identity() then "580" else "610") - max(44,card_style.rarity_2.content_width)) }
 		height: { 40 - shrink_type() }
 		alignment: 
@@ -1224,7 +1270,7 @@ card style:
 			separator color: red
 	rarity 2:
 		right: {(if back_is_map() then 397 else 688+rarity_shift()) + backside_left_fix() + (if styling.map_rarity_shift!="" then to_number(styling.map_rarity_shift) else 0)}
-		top: { (if back_is_map() then 96 else 598) + (if back_is_plw() then if back_has_four_abilities() then -72 else 0) + (if back_is_saga() then 296+2 else 0)}
+		top: { (if back_is_map() then 96 else 598) + (if back_is_plw() then if back_has_four_abilities() then -72 else 0) + (if back_is_saga() then if back_is_saga_creature() then 208 else 298 else 0)}
 		width: {if chosen(styling.back_frames, choice:"no rarity") then 0 else 88}
 		height: 44
 		z index: 2
@@ -1271,7 +1317,7 @@ card style:
 	# mutate
 	level 1 text:
 		left: {if is_saga() then if un_marked() then 60 else 90 else 58}
-		top: {(if is_mutate() then 658 else 0) + (if is_saga() then if un_marked() then 120 else backchapter0() else 0)}
+		top: {(if is_mutate() then 658 else 0) + (if is_saga() then if un_marked() then 120 else chapter0() else 0)}
 		width: {(if is_mutate() then 636 else 0) + (if is_saga() then if un_marked() then 306 else 276 else 0)}
 		bottom: {(if is_mutate() then 790 else 0) + (if is_saga() then if split_12() == "" then 498 else split_12() else 0)}
 		visible: {is_mutate() or is_saga()}
@@ -1306,7 +1352,7 @@ card style:
 
 	level 5 text:
 		left: {(if back_is_saga() then if back_un_marked() then 60 else 90 else 58) + backside_left_fix()}
-		top: {(if back_is_mutate() then 658 else 0) + (if back_is_saga() then if back_un_marked() then 120 else chapter0() else 0)}
+		top: {(if back_is_mutate() then 658 else 0) + (if back_is_saga() then if back_un_marked() then 120 else backchapter0() else 0)}
 		width: {(if back_is_mutate() then 636 else 0) + (if back_is_saga() then if back_un_marked() then 306 else 276 else 0)}
 		bottom: {(if back_is_mutate() then 790 else 0) + (if back_is_saga() then if backsplit_12() == "" then 498 else backsplit_12() else 0)}
 		visible: {back_is_mutate() or back_is_saga()}
@@ -1332,7 +1378,7 @@ card style:
 				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
 		z index: 3
 		padding left:   6
-		padding right:  {4 + chop_right()}
+		padding right:  {4 + back_chop_right()}
 		line height hard: 1.1
 		line height line: { if chinese_new_font() then 1.6 else 1.5 }
 		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
@@ -1342,9 +1388,9 @@ card style:
 	
 	
 	text:
-		left: {if is_battle() then (if chosen(styling.frames, choice:"tallart battle") then 588 else 500 ) + chop_top() else (if is_plw() then 96 else 58) }
-		top: {if is_battle() then 918+4 else (if is_plw() then if has_four_abilities() then (590 + chop_top()) else (658 + chop_top()) else if is_mutate() then 791+chop_top() else 654+chop_top()) }
-		width: {if is_battle() then 840+4 else (636 + (if is_plw() then -36 else 0) + (if is_saga() then -636 else 0)) }
+		left: {if is_battle() then (if chosen(styling.frames, choice:"tallart battle") then 588 else 500 ) + chop_top() else (58+(if is_plw() then 38 else 0) + (if is_saga_creature() then -2 else 0)) }
+		top: {if is_battle() then 922 else (if is_plw() then if has_four_abilities() then 590 else 658 else if is_mutate() then 791 else if is_saga_creature() then 868 else 654) + chop_top() }
+		width: {if is_battle() then 844 else (636 + (if is_plw() then -36 else 0) + (if is_saga() then if is_saga_creature() then 2 else -636 else 0)) }
 		bottom: {if is_battle() then (if chosen(styling.frames, choice:"tallart battle") then 706+88 else 706 ) - chop_bot() else 960-chop_bot() }
 		font:
 			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin" else ch_font() }
@@ -1358,7 +1404,8 @@ card style:
 			scale down to: 6
 		alignment:
 			script:
-				if (styling.center_text == "short text only" and
+				if is_saga_creature() then "middle center"
+				else if (styling.center_text == "short text only" and
 				   not contains(match:"\n", card.rule_text) and
 				   card.flavor_text == "<i-flavor></i-flavor>" and
 				   card_style.text.content_lines <= 2) or
@@ -1381,9 +1428,9 @@ card style:
 	
 	
 	text 2:
-		left: {58+backside_left_fix() + (if back_is_map() then 20 else 0) + (if back_is_plw() then 38 else 0)}
-		top: {if back_is_plw() then if back_has_four_abilities() then (590 + back_chop_top()) else (658 + back_chop_top()) else if back_is_mutate() then 791+back_chop_top() else 654+back_chop_top() }
-		width: {636 + (if back_is_map() then -40 else 0) + (if back_is_plw() then -36 else 0) + (if back_is_saga() then -636 else 0)}
+		left: {58+backside_left_fix() + (if back_is_map() then 20 else 0) + (if back_is_plw() then 38 else 0) + (if back_is_saga_creature() then -2 else 0)}
+		top: {(if back_is_plw() then if back_has_four_abilities() then 590 else 658 else if back_is_mutate() then 791 else if back_is_saga_creature() then 868 else 654) + back_chop_top()}
+		width: {636 + (if back_is_map() then -40 else 0) + (if back_is_plw() then -36 else 0) + (if back_is_saga() then if back_is_saga_creature() then 2 else -636 else 0)}
 		bottom: {960-back_chop_bot()}
 		font:
 			name: { if back_use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin" else ch_font() }
@@ -1397,11 +1444,12 @@ card style:
 			scale down to: 6
 		alignment:
 			script:
-				if (styling.center_text == "short text only" and
+				if back_is_saga_creature() then "middle center"
+				else if (styling.center_text_2 == "short text only" and
 				   not contains(match:"\n", card.rule_text_2) and
 				   card.flavor_text == "<i-flavor></i-flavor>" and
 				   card_style.text_2.content_lines <= 2) or
-				   styling.center_text == "always"
+				   styling.center_text_2 == "always"
 				then "middle center"
 				else "middle left"
 				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
@@ -1419,7 +1467,7 @@ card style:
 		left: {if is_battle() then (if chosen(styling.frames, choice:"tallart battle") then 591 else 503 ) else if is_saga() then (if styling.wider_watermarks then 58 else 90) else 50}
 		top: {if is_battle() then 925+4 else if is_saga() then 120 else 676-8}
 		width: {if is_battle() then 855+4 else if is_saga() then (if styling.wider_watermarks then 314 else 271) else 650}
-		height: {if is_battle() then (if chosen(styling.frames, choice:"tallart battle") then 207-88 else 207 ) else if is_saga() then 756 else 278}
+		height: {if is_battle() then (if chosen(styling.frames, choice:"tallart battle") then 207-88 else 207 ) else if is_saga() then if is_saga_creature() then 680 else 756 else 278}
 		z index: 1
 		angle: {if is_battle() then 90 else 0}
 		render style: image
@@ -1430,7 +1478,7 @@ card style:
 		left: {(if back_is_saga() then (if styling.wider_watermarks then 58 else 90) else 50) + backside_left_fix()}
 		top: {if back_is_saga() then 120 else 676-8}
 		width: {if back_is_saga() then (if styling.back_wider_watermarks then 314 else 271) else 650}
-		height: {if back_is_saga() then 756 else 278}
+		height: {if back_is_saga() then if back_is_saga_creature() then 680 else 756 else 278}
 		z index: 1
 		render style: image
 		popup style: in place
@@ -1441,7 +1489,7 @@ card style:
 	chapter text:
 		left: {if is_saga() then 60 else 0}
 		top: 120
-		width: {if is_saga() then if un_marked() then 0 else 306 else 0}
+		width: {if is_saga() then if un_marked() then 0 else if is_saga_creature() then 632 else 306 else 0}
 		bottom: {if un_marked() then 120 else chapter0()}
 		z index: 3
 		font:
@@ -1463,10 +1511,10 @@ card style:
 				then "middle center"
 				else "middle left"
 				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
-		mask: {if is_saga() then if un_marked() then "" else crop(to_image("front/saga/textmask.png"), height:chapter0()-220, width:153, offset_x:0, offset_y:0) else ""}
+		mask: {if is_saga() then if un_marked() then "" else crop(to_image("front/saga/textmask.png"), height:(if (chapter0()-220)>0 then (chapter0()-220) else 90), width:153, offset_x:0, offset_y:0) else ""}
 		z index: 5
 		padding left:   3
-		padding right:  1
+		padding right:  4
 		line height hard: 1.1
 		line height line: { if chinese_new_font() then 1.6 else 1.5 }
 		line height soft: { if chinese_new_font() then 0.95 else 0.85 }
@@ -1510,7 +1558,7 @@ card style:
 		left: {if un_marked() then 60 else 90}
 		top: { if split_23() == "" then 686 else split_23() }
 		width: { if is_saga() then if un_marked() then 306 else 276 else 0 }
-		bottom: {if split_34() == "" then 834 else split_34() }
+		bottom: {if split_34() == "" then textbox_bottom() else split_34() }
 		font:
 			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
@@ -1542,9 +1590,9 @@ card style:
 		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
 	level 4 text:
 		left: {if un_marked() then 60 else 90}
-		top: {if split_34() == "" then 834 else split_34() }
+		top: {if split_34() == "" then textbox_bottom() else split_34() }
 		width: { if is_saga() then if un_marked() then 306 else 276 else 0 }
-		bottom: {if card.pt_2 != "" then 834 else 874}
+		bottom: {if is_saga_creature() then textbox_bottom() else if card.pt_2 != "" then textbox_bottom() else 874}
 		font:
 			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
@@ -1575,14 +1623,13 @@ card style:
 		line height hard max: 1.2
 		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
 		
+
 	######back saga
-	
 	chapter text 2:
 		left: {backside_left_fix() + (if back_is_saga() then 60 else 0)}
 		top: 120
-		width: {if back_is_saga() then if back_un_marked() then 0 else 306 else 0}
+		width: {if back_is_saga() then if back_un_marked() then 0 else if back_is_saga_creature() then 632 else 306 else 0}
 		bottom: {if back_un_marked() then 120 else backchapter0()}
-		z index: 3
 		font:
 			name: { if back_use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: { if back_use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
@@ -1602,15 +1649,16 @@ card style:
 				then "middle center"
 				else "middle left"
 				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
-		mask: {if back_is_saga() then if un_marked() then "" else crop(to_image("back/saga/textmask.png"), height:backchapter0()-220, width:153, offset_x:0, offset_y:0) else ""}
+		mask: {if back_is_saga() then if un_marked() then "" else crop(to_image("back/saga/textmask.png"), height:(if (backchapter0()-220)>0 then (backchapter0()-220) else 90), width:153, offset_x:0, offset_y:0) else ""}
 		z index: 5
 		padding left:   3
-		padding right:  1
+		padding right:  4
 		line height hard: 1.1
 		line height line: { if chinese_new_font() then 1.6 else 1.5 }
 		line height soft: { if chinese_new_font() then 0.95 else 0.85 }
 		line height hard max: 1.2
 		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
+
 	level 6 text:
 		left: {backside_left_fix() + (if back_un_marked() then 60 else 90)}
 		top: { if backsplit_12() == "" then 498 else backsplit_12() }
@@ -1649,7 +1697,7 @@ card style:
 		left: {backside_left_fix() + (if back_un_marked() then 60 else 90) }
 		top: { if backsplit_23() == "" then 686 else backsplit_23() }
 		width: { if back_is_saga() then if back_un_marked() then 306 else 276 else 0 }
-		bottom: {if backsplit_34() == "" then 874 else backsplit_34() }
+		bottom: {if backsplit_34() == "" then back_textbox_bottom() else backsplit_34() }
 		font:
 			name: { if back_use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: { if back_use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
@@ -1681,9 +1729,9 @@ card style:
 		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
 	level 8 text:
 		left: {backside_left_fix() + (if back_un_marked() then 60 else 90) }
-		top: {if backsplit_34() == "" then 874 else backsplit_34() }
+		top: {if backsplit_34() == "" then back_textbox_bottom() else backsplit_34() }
 		width: { if back_is_saga() then if back_un_marked() then 306 else 276 else 0 }
-		bottom: {874}
+		bottom: {back_textbox_bottom()}
 		font:
 			name: { if back_use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: { if back_use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
@@ -2891,15 +2939,14 @@ extra card style:
 	pt 2 copy:
 		z index: 4
 		angle: {if is_battle() then 90 else 0}
-		right: {if is_battle() then 612 else if is_saga() then 100 else 694}
-		top:  { if is_battle() then 82 else if is_saga() then 838 else 892}
+		right: {if is_battle() then 612 else if (is_saga() and not is_saga_creature()) then 100 else 694}
+		top:  { if is_battle() then 82 else if  (is_saga() and not is_saga_creature()) then 838 else 891}
 		width: 60
 		height:	24
 		alignment: bottom right
 		font:
-			name: ModMatrix
-			size: 24
-			weight: bold
+			name: Beleren Bold
+			size: 22
 			color: {if is_fullart() then rgb(190,190,190) else rgb(110,110,110)}
 			separator color: red
 
@@ -3026,21 +3073,19 @@ extra card style:
 		image: {if back_is_ub() then if back_is_vehicle() then "ub/pt/back/vpt.png" else ubback_pt_background() else if chosen(styling.back_frames, choice:"bot") then "front/bot/pt.png" else if back_is_newpt() then new_pt_background() else if back_is_vehicle() then "vpt.png" else card_ptbox2() }
 		
 	stamp:
-		left:	{if is_ub() then 319 else if is_plw() then 331 else if is_saga() or is_battle() then 330 else 327}
-		top:	{if is_ub() then 945 else if is_plw() then 946 else if is_saga() then 956 else if is_battle() then 950 else 948}
-		width:	{if is_ub() then 112 else if is_plw() then 88 else if is_saga() or is_battle() then 93 else 96}
-		height:	{if is_ub() then 54 else if is_plw() then 46 else if is_saga() or is_battle() then 39 else 49}
+		left:	{if is_ub() then 319 else if is_plw() then 331 else if (is_saga() or is_battle()) and not is_saga_creature() then 330 else 327}
+		top:	{if is_ub() then 945 else if is_plw() then 946 else if (is_saga() and not is_saga_creature()) then 956 else if is_battle() then 950 else 948}
+		width:	{if is_ub() then 112 else if is_plw() then 88 else if (is_saga() or is_battle()) and not is_saga_creature() then 93 else 96}
+		height:	{if is_ub() then 54 else if is_plw() then 46 else if (is_saga() or is_battle()) and not is_saga_creature() then 39 else 49}
 		z index: 5
 		visible: { (is_ub() or is_rare()) and styling.use_holofoil_stamps and not chosen(styling.frames, choice:"bot")}
 		render style: image
 		image:
 			script:
-				if is_ub() then
-					if is_vehicle() then "ub/pt/back/vpt.png"
-					else ubstamp_background()
-				else if is_devoid() then "stamp/wstamp.png"
-				else if is_saga() or is_battle() then "stamp/saga/stamp.png"
+				if is_ub() then ubstamp_background()
 				else if is_plw() then plw_stamp()
+				else if is_devoid() then "stamp/wstamp.png"
+				else if (is_saga() or is_battle()) and not is_saga_creature() then "stamp/saga/stamp.png"
 				else card_stamp()
 		mask: {if is_plw() then ((if is_plw_fullart() then "stamp/planeswalker/mythic" else "stamp/planeswalker/") + "stamp_mask.png") else ""}
 	
@@ -3130,6 +3175,7 @@ extra card style:
 
 		z index: 3
 		visible: { (is_legend() or has_alias()) and not (is_plw() or chosen(styling.frames, choice:"bot"))}
+		mask:{if is_saga_creature() then "crown/sgcreature_mask.png" else ""}
 	innercrown:
 		left: 0
 		top: 0
@@ -3153,10 +3199,12 @@ extra card style:
 					if back_is_showcase() or back_is_extend() then showcasealiascrown_background2()
 					else aliascrown_background2()
 				else if back_is_showcase() or back_is_extend() then showcasecrown_background()
+				else if back_is_saga_creature() then back_crown_background()
 				else crown_background()
 
 		z index: 3
 		visible: { (back_is_legend() or has_alias()) and not (back_is_map() or back_is_plw() or chosen(styling.back_frames, choice:"bot"))}
+		mask:{if back_is_saga_creature() then (if back_is_ub() then "sagacreature" else "crown")+"/sgcreature_mask.png" else ""}
 	innercrown 2:
 		left: {backside_left_fix()}
 		top: 0
@@ -3198,7 +3246,7 @@ extra card style:
 		render style: image
 		image: {nyx_background()}
 		z index: 1
-		visible: {is_nyx() and not is_devoid()}
+		visible: {is_nyx() and not (is_devoid() or is_saga_creature())}
 	nyx overlay 2:
 		left: { backside_left_fix() }
 		top: 0
@@ -3207,7 +3255,7 @@ extra card style:
 		render style: image
 		image: {backnyx_background()}
 		z index: 1
-		visible: {back_is_nyx() and not back_is_devoid() and not back_is_map() }
+		visible: {back_is_nyx() and not (back_is_devoid() or back_is_map() or back_is_saga_creature()) }
 	
 	miracle overlay:
 		left: 0
@@ -3334,7 +3382,7 @@ extra card style:
 			sparker colors colorless: icons/ccorner.png
 
 	corner2:
-		left: { (if back_is_ub() then 646 else 40) + backside_left_fix() +(if chosen(styling.back_frames, choice:"bot") then 606 else 0) +(if back_is_map() then 1000 else 0) }
+		left: { (if back_is_ub() or back_is_saga_creature() then 646 else 40) + backside_left_fix() +(if chosen(styling.back_frames, choice:"bot") then 606 else 0) +(if back_is_map() then 1000 else 0) }
 		top: { if back_is_plw() then 36 else 49 }
 		height: { 63 }
 		width: { 64 }
@@ -4042,21 +4090,21 @@ extra card style:
 		image: {alt_chapters("6")}
 		visible: {is_saga() and not un_marked()}
 	bookmark:
-		left: 32.5
-		top: 114.5
-		width: 52
-		height: 760
+		left:  {if is_saga_creature() then 32.4627 else 32.5}
+		top:   {if is_saga_creature() then 104.5 else 114.5}
+		width: {if is_saga_creature() then 51.4925 else 52}
+		height:{if is_saga_creature() then 661.5671 else 760}
 		render style: image
-		image: {bookmark_background()}
+		image: {if is_saga_creature() then creature_bookmark_background() else bookmark_background()}
 		z index: 2
 		visible: {is_saga() and not un_marked()}
 	stripe:
-		left: 32.5
-		top: 114.5
-		width: 52
-		height: 760
+		left:  {if is_saga_creature() then 32.4627 else 32.5}
+		top:   {if is_saga_creature() then 104.5 else 114.5}
+		width: {if is_saga_creature() then 51.4925 else 52}
+		height:{if is_saga_creature() then 661.5671 else 760}
 		render style: image
-		image: front/saga/mark/stripe.png
+		image: {if is_saga_creature() then "sagacreature/bookmark/stripe.png" else "front/saga/mark/stripe.png"}
 		z index: 3
 		visible: {length(write_wubrg(card.card_color))==2 and is_saga() and not un_marked()}
 	saga paper:
@@ -4067,7 +4115,7 @@ extra card style:
 		render style: image
 		image: {sagapaper_background()}
 		z index: -1
-		visible: {is_saga()}
+		visible: {is_saga() and not is_saga_creature()}
 ############back saga#######
 	back linebreak 1:
 		left: {60 + backside_left_fix()}
@@ -4188,21 +4236,21 @@ extra card style:
 		image: {alt_chapters("6")}
 		visible: {back_is_saga() and not back_un_marked()}
 	back bookmark:
-		left: { 32.5 + backside_left_fix()}
-		top: 114.5
-		width: 52
-		height: 760
+		left: {(if back_is_saga_creature() then 32.4627 else 32.5)+ backside_left_fix()}
+		top:   {if back_is_saga_creature() then 104.5 else 114.5}
+		width: {if back_is_saga_creature() then 51.4925 else 52}
+		height:{if back_is_saga_creature() then 661.5671 else 760}
 		render style: image
-		image: {backbookmark_background()}
+		image: {if back_is_saga_creature() then creature_bookmark_background() else backbookmark_background()}
 		z index: 2
 		visible: {back_is_saga() and not back_un_marked()}
 	back stripe:
-		left: {32.5 + backside_left_fix()}
-		top: 114.5
-		width: 52
-		height: 760
+		left: {(if back_is_saga_creature() then 32.4627 else 32.5)+ backside_left_fix()}
+		top:   {if back_is_saga_creature() then 104.5 else 114.5}
+		width: {if back_is_saga_creature() then 51.4925 else 52}
+		height:{if back_is_saga_creature() then 661.5671 else 760}
 		render style: image
-		image: back/saga/mark/stripe.png
+		image: {if back_is_saga_creature() then "sagacreature/bookmark/stripe.png" else "back/saga/mark/stripe.png"}
 		z index: 3
 		visible: {length(write_wubrg(card.card_color_2))==2 and back_is_saga() and not back_un_marked()}
 	back saga paper:
@@ -4213,7 +4261,7 @@ extra card style:
 		render style: image
 		image: {backsagapaper_background()}
 		z index: -1
-		visible: {back_is_saga()}
+		visible: {back_is_saga() and not back_is_saga_creature()}
 
 	copyright2:
 		right: 699
