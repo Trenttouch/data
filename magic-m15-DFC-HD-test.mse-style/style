@@ -53,6 +53,9 @@ init script:
 	
 	template_prefix := [
 	card: "front/normal/" card2: "back/normal/" map: "back/map/"
+
+	tcard: "front/transform/"
+
 	snow:"front/snow/" snow2:"back/snow/"
 	nyx: "nyx/"
 	miracle:"miracle/"
@@ -77,6 +80,8 @@ init script:
 	nyx: "nyx.png"
 	miracle:"miracle.png"
 	aliascrown:"aliascrown.png" aliascrown2:"aliascrown.png" crown:"crown.png" innercrown:"crown.png"
+
+	tcard: "card.png"
 	
 	plw: "card.png" plwtall: "card.png" plwstamp: "stamp.png"
 	backplw: "card.png" backplwtall: "card.png"
@@ -121,7 +126,8 @@ init script:
 	plwtall_background := { color_background(type:"plwtall",     base_hybrid:card_hybrid) }
 	plw_stamp := { color_background(type:"plwstamp",     base_hybrid:stamp_hybrid) }
 	
-	
+	transmodel_background := { color_background(type:"tcard",     base_hybrid:card_hybrid) }
+
 	crown_follow := {
 		if input == "crown" then if (is_legend() or back_is_legend()) then "l" else ""
 		else if input == "aliascrown" then if is_legend() then "l" else ""
@@ -158,6 +164,7 @@ init script:
 	is_mutate := { chosen(styling.frames, choice:"mutate") }
 	is_devoid := { chosen(styling.frames, choice:"devoid") }
 	is_fullart := { chosen(styling.frames, choice:"fullart") }
+	is_transform := { chosen(styling.frames, choice:"transform") }
 	is_vehicle := {contains(card.sub_type, match:"Vehicle") or contains(card.sub_type, match:"载具")}
 	is_extend := { chosen(styling.frames, choice:"extend") }
 	has_alias := { styling.use_alias }
@@ -426,7 +433,7 @@ init script:
 		out := 0
 		abil_array := saga_lore_count(snap_array)																	###chapters in each box
 		ch_count := abil_array[abil-1]																				###chapters in this box
-		self_index := saga_ch_placement(snap_array)[input-1]														###input's index
+		self_index := saga_ch_placement(snap_array)[input-1]														###inputs index
 		box_deets := coords_map[abil]()																				###[top, height]
 		remain := box_deets[1] - 60*ch_count																		###remaining space after chapter hexes
 		excess := remain - 20*(ch_count-1)																			###remaining after 10px gaps
@@ -618,9 +625,15 @@ styling field:
 	choice: devoid
 	choice: fullart
 	choice: mutate
+	choice: transform
 	choice: extend
 	# choice: miracle
 	choice: snow
+	choice: second copyright(for two sides)
+styling field:
+	type: text
+	name: shrink ubcopyright text
+	description: Shrinks ub copyright X pixels
 styling field:
 	type: text
 	name: shift loyalty costs
@@ -703,6 +716,7 @@ styling field:
 	choice: snow
 	choice: map
 	choice: eldrazi melds
+	choice: no rarity
 styling field:
 	type: text
 	name: back shift loyalty costs
@@ -773,6 +787,7 @@ card style:
 		image: 
 			script:
 				if is_saga() then saga_background()
+				else if is_transform() then transmodel_background()
 				else if is_devoid() and not is_fullart() then "front/vcard.png" 
 				else if is_snow() then snow_background() 
 				else if is_plw() then if has_four_abilities() then plwtall_background() else plw_background()
@@ -1003,7 +1018,7 @@ card style:
 	type 2:
 		left: { (if back_has_identity() then 102 else 62) + backside_left_fix()}
 		top: {shrink_type() + 598 + (if back_is_plw() then if back_has_four_abilities() then -75 else -3) }
-		width: { if back_is_map() then (750-124) else ((if back_has_identity() then "580" else "610") - max(44,card_style.rarity_2.content_width)) }
+		width: { if back_is_map() then (750-124) else ((if back_has_identity() then "580" else "610") - max(44,card_style.rarity_2.content_width)) + (if chosen(styling.back_frames, choice:"no rarity") then 66 else 0)}
 		height: { 40 - shrink_type() }
 		alignment: 
 			script:
@@ -1020,7 +1035,7 @@ card style:
 	rarity 2:
 		right: {(if back_is_map() then 397 else 688 + rarity_shift()) + backside_left_fix() + (if styling.map_rarity_shift!="" then to_number(styling.map_rarity_shift) else 0)}
 		top: { (if back_is_map() then 96 else 598) + (if back_is_plw() then if back_has_four_abilities() then -72 else 0)}
-		width: 88
+		width: {if chosen(styling.back_frames, choice:"no rarity") then 0 else 88}
 		height: 44
 		z index: 2
 		render style: image
@@ -1609,7 +1624,7 @@ card style:
 			color: white
 	copyright:
 		right: 699
-		top: { if card.pt != "" or (is_plw() or card.loyalty != "") then 998 else 981 }
+		top: { if card.pt != "" or (is_plw() or card.loyalty != "") or chosen(styling.frames, choice:"second copyright(for two sides)") then 998 else 981 }
 		width: 252
 		height: 20
 		z index: 2
@@ -1632,7 +1647,7 @@ card style:
 			color: white
 	copyright 2:
 		right: {699+ backside_left_fix()}
-		top: { if card.pt_2 != "" or (back_is_plw() or card.loyalty_2 != "") then 998 else 981 }
+		top: { if card.pt_2 != "" or (back_is_plw() or card.loyalty_2 != "") or chosen(styling.frames, choice:"second copyright(for two sides)") then 998 else 981 }
 		width: 252
 		height: 20
 		z index: 2
@@ -1737,6 +1752,19 @@ extra card field:
 	script: set.copyright
 	save value: false
 	editable: false
+	show statistics: false
+
+extra card field:
+	type: text
+	name: copyright2
+	save value: true
+	editable: true
+	show statistics: false
+extra card field:
+	type: text
+	name: copyright2back
+	save value: true
+	editable: true
 	show statistics: false
 
 extra card field:
@@ -2304,7 +2332,7 @@ extra card field:
 extra card field:
 	type: text
 	name: back type hint
-	script: if front_modal_hint().0 != "" then front_modal_hint().0 else value
+	script: if front_modal_hint().0 != "" and not is_transform() then front_modal_hint().0 else value
 	save value: true
 	editable: true
 extra card field:
@@ -2316,7 +2344,7 @@ extra card field:
 extra card field:
 	type: text
 	name: front type hint
-	script: if back_modal_hint().0 != "" then back_modal_hint().0 else value
+	script: if back_modal_hint().0 != "" and not is_transform() then back_modal_hint().0 else value
 	save value: true
 	editable: true
 extra card field:
@@ -2462,7 +2490,7 @@ extra card style:
 	
 	auto copyright:
 		right: 699
-		top: { if card.pt != "" or (is_plw() or card.loyalty != "") then 998 else 981 }
+		top: { if card.pt != "" or (is_plw() or card.loyalty != "") or chosen(styling.frames, choice:"second copyright(for two sides)") then 998 else 981 }
 		width: 252
 		height: 20
 		z index: 2
@@ -2475,7 +2503,7 @@ extra card style:
 
 	auto copyright 2:
 		right: {699 + backside_left_fix()}
-		top: { if card.pt_2 != "" or (back_is_plw() or card.loyalty_2 != "") then 998 else 981 }
+		top: { if card.pt_2 != "" or (back_is_plw() or card.loyalty_2 != "") or chosen(styling.frames, choice:"second copyright(for two sides)") then 998 else 981 }
 		width: 252
 		height: 20
 		z index: 2
@@ -3363,6 +3391,7 @@ extra card style:
 		z index: 8
 		font:
 			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			italic name: Beleren Bold
 			size: { if set.card_language != "简体中文" then 20 else 22 }
 			color: white
 	back color hint:
@@ -3405,3 +3434,35 @@ extra card style:
 			size: 20
 			scale down to: 12
 		alignment: right middle
+
+	copyright2:
+		right: 699
+		top: { if chosen(styling.frames, choice:"second copyright(for two sides)") then 981 else 1111 }
+		width: 252
+		height: 20
+		z index: 2
+		alignment: 
+			script:
+				if card.pt != "" then "middle left shrink-overflow"
+				else "middle right shrink-overflow"
+		visible: {chosen(styling.frames, choice:"second copyright(for two sides)")}
+		font:
+			name: mplantin
+			size: {13 - (if styling.shrink_ubcopyright_text != "" then to_number(styling.shrink_ubcopyright_text) else 0)}
+			color: white
+	
+	copyright2back:
+		right: { 699 + backside_left_fix() }
+		top: { if chosen(styling.frames, choice:"second copyright(for two sides)") then 981 else 1111 }
+		width: 252
+		height: 20
+		z index: 2
+		alignment: 
+			script:
+				if card.pt_2 != "" then "middle left shrink-overflow"
+				else "middle right shrink-overflow"
+		visible: {chosen(styling.frames, choice:"second copyright(for two sides)")}
+		font:
+			name: mplantin
+			size: {13 - (if styling.shrink_ubcopyright_text != "" then to_number(styling.shrink_ubcopyright_text) else 0)}
+			color: white

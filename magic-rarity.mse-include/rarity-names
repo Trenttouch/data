@@ -3,6 +3,7 @@
 # Edit by Heavenford 2017.1.14
 
 choice:
+	choice: none
 	choice: basic land
 	choice: common
 	choice: uncommon
@@ -10,6 +11,22 @@ choice:
 	choice: mythic rare
 	choice: special
 	choice: masterpiece
+	line below: true
+
+choice:
+	name: TLA
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	choice: Basic Land
+	choice:
+		name:TLE
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Basic Land
 	line below: true
 
 choice:
@@ -38,6 +55,13 @@ choice:
 	choice: Uncommon
 	choice: Common
 	choice: Basic Land
+	choice:
+		name:EOS
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Basic Land
 	line below: true
 	
 choice:
@@ -161,63 +185,64 @@ choice:
 		choice: Common
 	line below: true
 
-choice:
-	name: MOM
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	choice:
-		name: MUL
-		choice: Mythic
-		choice: Rare
-		choice: Uncommon
-		choice: Common
-	choice:
-		name: MAT
-		choice: Mythic
-		choice: Rare
-		choice: Uncommon
-		choice: Common
-	line below: true
-choice:
-	name: ONE
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	line below: true
-choice:
-	name: BRO
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	choice:
-		name: BRR
-		choice: Mythic
-		choice: Rare
-		choice: Uncommon
-		choice: Common
-	choice:
-		name: BOT
-		choice: Mythic
-		choice: Rare
-		choice: Uncommon
-		choice: Common
-	line below: true
-choice:
-	name: DMU
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	line below: true
+
 
 ######################################################### 摩登
 
 choice:
 	name: Modern
+	choice:
+		name: MOM
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice:
+			name: MUL
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+		choice:
+			name: MAT
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+		line below: true
+	choice:
+		name: ONE
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+	choice:
+		name: BRO
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice:
+			name: BRR
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+		choice:
+			name: BOT
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+		line below: true
+	choice:
+		name: DMU
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
 	choice:
 		name: SNC
 		choice: Mythic

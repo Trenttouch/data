@@ -59,6 +59,12 @@ choice images:
 	clan symbol The Mardu Horde (RWB):    	script: if set.blend_with_colors then spotlight_watermark_clan_blend("/magic-watermarks.mse-include/watermark_mardu.png,900,514") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/watermark_mardu.png"))
 	clan symbol The Temur Frontier (GUR):  	script: if set.blend_with_colors then spotlight_watermark_clan_blend("/magic-watermarks.mse-include/watermark_temur.png,886,940") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/watermark_temur.png"))
 	
+	bend symbol Airbend:    	script: if set.blend_with_colors then spotlight_watermark_blend("/magic-watermarks.mse-include/air.png,929,900") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/air.png"))
+	bend symbol Waterbend:  	script: if set.blend_with_colors then spotlight_watermark_blend("/magic-watermarks.mse-include/water.png,899,900") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/water.png"))
+	bend symbol Firebend:    	script: if set.blend_with_colors then spotlight_watermark_blend("/magic-watermarks.mse-include/fire.png,766,900") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/fire.png"))
+	bend symbol Earthbend:   	script: if set.blend_with_colors then spotlight_watermark_blend("/magic-watermarks.mse-include/earth.png,903,900") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/earth.png"))
+	
+
 	brood symbol Dromoka's Brood (GW):    	script: if set.blend_with_colors then spotlight_watermark_clan_blend("/magic-watermarks.mse-include/watermark_dromoka.png") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/watermark_dromoka.png"))
 	brood symbol Ojutai's Brood (WU):    	script: if set.blend_with_colors then spotlight_watermark_clan_blend("/magic-watermarks.mse-include/watermark_ojutai.png") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/watermark_ojutai.png"))
 	brood symbol Silumgar's Brood (UB):    	script: if set.blend_with_colors then spotlight_watermark_clan_blend("/magic-watermarks.mse-include/watermark_silumgar.png") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/watermark_silumgar.png"))

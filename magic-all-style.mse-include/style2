@@ -22,7 +22,7 @@ styling field:
 	type: boolean
 	name: ancestral mana symbols
 	description: Enables ancestral’s modified generic mana.
-	initial: no
+	initial: yes
 styling field:
 	type: boolean
 	name: colored multicolor land name

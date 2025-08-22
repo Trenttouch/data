@@ -1,0 +1,748 @@
+﻿mse version: 2.0.0
+game: magic
+short name: HD预知未来框
+full name: HD future frame
+icon: card-sample.png
+installer group: magic/m15 style/normal cards
+position hint: 002
+
+version: 2021-02-16
+depends on:
+	package: magic.mse-game
+	version: 2014-06-25
+depends on:
+	package: magic-default-image.mse-include
+	version: 2007-09-23
+depends on:
+	package: magic-watermarks.mse-include
+	version: 2016-03-13
+depends on:
+	package: magic-identity-new.mse-include
+	version: 2012-01-22
+depends on:
+	package: magic-mana-large.mse-symbol-font
+	version: 2007-09-23
+depends on:
+	package: magic-mana-small.mse-symbol-font
+	version: 2007-09-23
+depends on:
+	package: magic-mainframe-extras.mse-include
+	version: 2007-09-23
+depends on: 
+	package: magic-rarity.mse-include
+	version: 2013-08-21
+depends on: 
+	package: magic-all-style.mse-include
+	version: 2024-06-30
+
+card width: 750
+card height: 1050
+card dpi: 600
+
+############################################################## Extra scripts
+init script:
+	# Load scripts for image box
+	include file: /magic-default-image.mse-include/scripts
+	include file: /magic-all-style.mse-include/script
+
+	# Should hybrids have a grey name?
+	mask_hybrid_with_land := { styling.grey_hybrid_name }
+	
+	#Should multicolor lands with basic land types have a colored name?
+	mask_multi_land_with_color := { styling.colored_multicolor_land_name }
+	
+	template_prefix := [
+		card:"normal/" textbox:"text box back/"
+
+		crown:"crown/"
+		creaturecrown:"crown/"
+
+		identity: "/magic-identity-new.mse-include/"]
+
+	template_suffix_normal := [
+		card: ".png" textbox:".png"
+
+		crown:".png"
+		creaturecrown:"c.png"
+
+		identity: "identity.png"]
+	
+	template_suffix := {
+		template_suffix_normal 
+	}
+	
+	template      := { template_prefix[type] + input + template_suffix()[type] }
+	land_template := { template_prefix[type] + (if input == "a" then "c" else input) + (if hasland(type) then "l" else "") + template_suffix()[type] }
+	
+	hasland := {
+		if input == "card" 
+		then true 
+		else false
+	}
+	
+	# Use land templates for previews because they show more contrast
+	hybrid_previews := "land,hybrid"
+	
+	crown_background := { color_background(type:"crown",     base_hybrid:card_hybrid) }
+	creature_crown_background := { color_background(type:"creaturecrown",     base_hybrid:card_hybrid) }
+
+	text_box_back_background := { color_background(type:"textbox",     base_hybrid:card_hybrid) }
+	
+	crown_follow := {
+		if input == "crown" or input == "aliascrown" then if is_legend() then "l" else ""
+		else ""
+	}
+	
+	# Use the normal tap symbol
+	mana_t := {
+		if      styling.tap_symbol == "old"        then "old"
+		else if styling.tap_symbol == "diagonal T" then "older"
+		else                                            "new"
+	}
+
+	is_color_cost :={
+		if input == "W" or input == "U" or input == "B" or input == "R" or input == "G" then true else false
+	}
+
+	colorless_color := {
+		if contains(card.card_color, match:"hybrid") or contains(card.card_color, match:"multicolor") then "C"
+		else if card.card_color=="white" then "W"
+		else if card.card_color=="blue" then "U"
+		else if card.card_color=="black" then "B"
+		else if card.card_color=="red" then "R"
+		else if card.card_color=="green" then "G"
+		else "C"
+	}
+
+	mana_number_cricle_color :={
+		if contains(card.card_color, match:"artifact") or is_fullart_colorless() then "C"
+		else if length(card.casting_cost) == 1 then
+			colorless_color()
+		else if card.card_color=="multicolor" then "M"
+		else if length(card.casting_cost) >= 2 then
+			if is_color_cost(card.casting_cost.1) then card.casting_cost.1
+			else if length(card.casting_cost) >= 3 then
+				if is_color_cost(card.casting_cost.2) then card.casting_cost.2
+				else if length(card.casting_cost) >= 4 then
+					if is_color_cost(card.casting_cost.3) then card.casting_cost.3
+					else if length(card.casting_cost) >= 5 then
+						if is_color_cost(card.casting_cost.4) then card.casting_cost.4
+						else if length(card.casting_cost) >= 6 then
+							if is_color_cost(card.casting_cost.5) then card.casting_cost.5
+							else if length(card.casting_cost) >= 7 then
+								if is_color_cost(card.casting_cost.6) then card.casting_cost.6
+								else colorless_color()
+							else colorless_color()
+						else colorless_color()
+					else colorless_color()
+				else colorless_color()
+			else colorless_color()
+		else colorless_color()
+	}
+
+
+
+	
+	# Use guild mana symbols?
+	guild_mana := { styling.use_guild_mana_symbols }
+	
+	# Is the card a promo card?
+	is_promo := { styling.promo }
+	is_legend := {set.auto_legends and (contains(card.super_type, match:"Legendary") or contains(card.super_type, match:"传奇") or contains(card.type, match:"Mewk")) }
+	
+	is_serialized := { chosen(styling.frames, choice:"serialized") }
+	is_fullart_colorless :={ chosen(styling.frames, choice:"colorless") }
+
+
+	mana_sort := {
+		if styling.unsorted_casting_cost then
+			input
+		else
+			sort_text@(order: "XYZI[0123456789]HSCA(WUBRG)")()
+	}
+	ancestral_mana := { styling.ancestral_mana_symbols }
+	has_identity := { styling.color_indicator_dot }
+	is_unsorted := {styling.remove_from_autocount}
+
+	shrink_adventure_name := {if styling.shrink_adventure_name_text != "" then to_number(styling.shrink_adventure_name_text) else 0}
+
+	use_main_rarity := { contains(set.mainframe_rarity_name, match: ".png")}
+	un_png := replace@(match:".png", replace: "")
+
+	extra_chop_top := {to_number(pull_comma_array(styling.extra_text_chops, cell:0, end:false))}
+	extra_chop_bot := {to_number(pull_comma_array(styling.extra_text_chops, cell:1, end:false))}
+	extra_chop_right := {to_number(pull_comma_array(styling.extra_text_chops, cell:2, end:false))}
+
+
+	# d20
+	is_d20 := {styling.d20_dividers != "off"}
+	is_all_break := {contains(styling.d20_dividers, match:"all breaks")}
+	d20string := "^(<b>)?(((</sym>)?[-0-9 ,+>\<](<sym>)?)+|[Ee]lse|[Oo]ther) ?(</b>)?[|]"
+	d20_array := 
+		filter_text@(match:"(\n|"+d20string+")")
+		+split_text@(match:d20string)
+	number_of_rolls := {if is_all_break() then 1+length(filter_text(card.rule_text, match:"\n"))-rolls_start(card.text) else length(d20_array(input))-1}
+	rolls_start := {
+		if styling.d20_dividers == "all breaks +3" then 4
+		else if styling.d20_dividers == "all breaks +2" then 3
+		else if styling.d20_dividers == "all breaks +1" then 2
+		else if styling.d20_dividers == "all breaks" then 0
+		else if is_d20() then length(d20_array(input).0)
+		else 0
+	}
+	d20_filter := replace@(match:"^([Ee]lse ?|[Oo]ther ?|((</sym>)?[-0-9 ,+>\<](<sym>)?)+)[|]", replace:"<b>\\1</b>|")
+	
+	top_of_para := {
+		input := input + no_roll(card.text)
+		if card_style.text.layout.paragraphs[input].top or else 0 > 0 then
+			card_style.text.top + card_style.text.layout.paragraphs[input].top - 0.5*(card_style.text.layout.paragraphs[input].top-card_style.text.layout.paragraphs[input-1].bottom)
+		else 0
+	}
+	height_of_para := {
+		input := input + no_roll(card.text)
+		if card_style.text.layout.paragraphs[input].bottom or else 0 > 0 then
+			card_style.text.layout.paragraphs[input].bottom + 1.3*(card_style.text.layout.paragraphs[input].top-card_style.text.layout.paragraphs[input-1].bottom) - card_style.text.layout.paragraphs[input].top
+		else 0
+	}
+	no_roll := {if styling.d20_dividers == "all breaks" then 1 else if rolls_start(input) == 0 then 1 else 0}
+	text_filter := text_filter + d20_filter + {input}
+	overlay1 := {if is_d20() then "d20slice.png" else slice_crop(background_slide(), height: lv_2_height(), width:630, distance:(152-lv_2_coordinate()))}
+	overlay2 := {if is_d20() then "d20slice.png" else slice_crop(background_slide_2(), height: lv_3_height(), width:630, distance:lv_3_height())}
+	overlay3 := {if is_d20() then "d20slice.png" else slice_crop(background_slide_3(), height: lv_4_height(), width:630, distance:lv_4_height())}
+
+
+	typesymbol_color:= {
+		if is_fullart_colorless() then "black"
+		else if contains(card.card_color, match:"artifact") then "black"
+		else if contains(card.card_color, match:"land") and contains(card.card_color, match:"multicolor") then "white"
+		else if contains(card.card_color, match:"multicolor") and not contains(card.card_color, match:"land") then (
+			if card.card_color=="multicolor" then "black"
+			else "white"
+		)
+		else if contains(card.card_color, match:"land") then (
+			if contains(card.card_color, match:"green") then "white"
+			else if contains(card.card_color, match:"red") then "white"
+			else if contains(card.card_color, match:"black") and not contains(card.card_color, match:"white") then "white"
+			else if contains(card.card_color, match:"blue") and not contains(card.card_color, match:"white") then "white"
+			else "black"
+		)
+		else if card.card_color == "white" or card.card_color == "colorless" then "black"
+		else "white"
+	}
+
+	name_type_pt_color:= {
+		if is_fullart_colorless() then "black"
+		else if contains(card.card_color, match:"hybrid") then (
+			"black"
+		)
+		else if contains(card.card_color, match:"artifact") then(
+			if card.card_color == "artifact" then "black"
+			else if contains(card.card_color, match:"blue") then "white"
+			else if contains(card.card_color, match:"black") then "white"
+			else if contains(card.card_color, match:"red") then "white"
+			else if contains(card.card_color, match:"green") then "white"
+			else "black"
+		)
+		else if contains(card.card_color, match:"land") then (
+			if contains(card.card_color, match:"multicolor") then "white"
+			else if card.card_color =="blue, land" then "white"
+			else if card.card_color =="black, land" then "white"
+			else if card.card_color =="red, land" then "white"
+			else if card.card_color =="green, land" then "white"
+			else "black"
+		)
+		else if card.card_color == "white" or card.card_color == "colorless" then "black"
+		else "white"
+	}
+
+	text_color:={
+		if is_fullart_colorless() then "black"
+		else if is_land(card.type) and not (card.pt!= "" or is_creature(card.type)) then (
+			if card.card_color == "land" then "black"
+			else if not contains(card.card_color, match:"white") then "white"
+			else "black"
+		)
+		else "black"
+	}
+
+	illustrator_cardcode_artistarrow_color:= {
+		if is_fullart_colorless() then "black"
+		else if contains(card.card_color, match:"artifact") then "black"
+		else if contains(card.card_color, match:"land") then "white"
+		else if contains(card.card_color, match:"hybrid") then (
+			if contains(card.card_color, match:"black") then "white"
+			else if contains(card.card_color, match:"white") then "black"
+			else "white"
+		)
+		else if card.card_color == "white" then "black"
+		else "white"
+	}
+	
+############################################################## Set info fields
+set info style:
+	symbol:
+		variation:
+			name: invertedcommon
+			border radius: 0.10
+			fill type: solid
+			fill color:   rgb(255,255,255)
+			border color: rgb(0,0,0)
+############################################################## Extra style options
+### 通用1 ###
+include file: /magic-all-style.mse-include/style1
+
+styling field:
+	type: multiple choice
+	name: frames
+	description: 使用边框，高优先级边框可能覆盖低优先级边框。
+	choice: colorless
+	choice: serialized
+styling field:
+	type: text
+	name: shrink ubcopyright text
+	description: Shrinks ub copyright X pixels
+styling field:
+	type: choice
+	name: d20 dividers
+	choice: d20 mode
+	choice: off
+	choice: all breaks
+	choice: all breaks +1
+	choice: all breaks +2
+	choice: all breaks +3
+	description: 正常地d20分隔，关闭，每一段隔断，在除第一段以外每一段隔断，等等。
+styling field:
+	type: text
+	name: shrink adventure name text
+	description: 历险牌牌名字体大小
+styling field:
+	type: text
+	name: extra text chops
+	description: Format as "X,Y,Z". For textbox of adventure.
+styling field:
+	type: text
+	name: font cap extra
+	description: 额外文本框的字体大小。（试作大小默认为22.25，历险默认为26，合变默认为28）
+styling field:
+	type: boolean
+	name: use holofoil stamps
+	description: Change to no to disable rare holofoil stamps
+styling field:
+	type: boolean
+	name: is foil
+	description: 是否为闪卡？
+	initial: no
+
+### 通用2 ###
+include file: /magic-all-style.mse-include/style2
+
+styling style:
+	use guild mana symbols:
+		choice images:
+			yes: /magic-mana-small.mse-symbol-font/mana_guild_rg.png
+			no:  /magic-mana-small.mse-symbol-font/mana_rg.png
+	tap symbol:
+		render style: both
+		choice images:
+			modern:     /magic-mana-large.mse-symbol-font/mana_t.png
+			old:        /magic-mana-large.mse-symbol-font/mana_t_old.png
+			diagonal T: /magic-mana-large.mse-symbol-font/mana_t_older.png
+	center text:
+		render style: both
+		choice images:
+			always:          /magic.mse-game/icons/center-all-text.png
+			short text only: /magic.mse-game/icons/center-short-text.png
+			never:           /magic.mse-game/icons/center-no-text.png
+	inverted common symbol:
+		choice images:
+			no:  { symbol_variation(symbol: set.symbol, variation: "common") }
+			yes: { symbol_variation(symbol: set.symbol, variation: "invertedcommon") }
+	frames:
+		render style: checklist
+		direction: vertical
+
+############################################################## Card fields
+card style:
+	############################# Background stuff
+	card color:
+		left:	0
+		top:	0
+		width:	750
+		height:	1050
+		z index: -1
+		render style: image
+		popup style: in place
+		image: { if is_fullart_colorless() then "normal/colorless.png" else card_background() }
+		mask:{"normal/frame_mask.png"}
+	############################# Name line
+	name:
+		left: 132
+		top: {if set.card_language != "简体中文" then 62 else 65 }
+		right:  { 682 }
+		height: {46 - 0.5*shrink_name()}
+		alignment: { "bottom shrink-overflow"}
+		padding bottom: 0
+		z index: 4
+		font:
+			name: { if set.card_language != "简体中文" then "ModMatrix" else "方正大标宋_GBK" }
+			size: { if set.card_language != "简体中文" then 36.5 - shrink_name() else 32 - shrink_name()}
+			color:{ name_type_pt_color() }
+	casting cost:
+		left: 38
+		top: 128
+		width: 140
+		height: 458
+		alignment: top left
+		direction: vertical
+		font:
+			name: MPlantin
+			size: 30
+		symbol font:
+			name: magic-mana-future
+			size: 44
+			scale down to: 44
+			alignment: bottom right
+		always symbol: true
+		z index: 5
+		padding top: 0
+		mask: cost_mask.png
+
+	type symbol:
+		left: 43
+		top: 43
+		width: 44
+		height: 44
+		z index: 3
+		render style: image
+		choice images:
+			artifact:		{ "symbol/artifact_" + typesymbol_color(value) + ".png" }
+			creature:		{ "symbol/creature_" + typesymbol_color(value) + ".png" }
+			enchantment:	{ "symbol/enchantment_" + typesymbol_color(value) + ".png" }
+			instant:		{ "symbol/instant_" + typesymbol_color(value) + ".png"}
+			land:			{ "symbol/land_" + typesymbol_color(value) + ".png" }
+			multitype:		{ "symbol/multitype_" + typesymbol_color(value) + ".png" }
+			sorcery:		{ "symbol/sorcery_" + typesymbol_color(value) + ".png" }
+			planeswalker:	{ "symbol/planeswalker_" + typesymbol_color(value) + ".png" }
+	############################# Image
+	image:
+		left: {if is_fullart_colorless() then 31 else if card.card_color == "land" then 40 else 65 }
+		top: {if is_fullart_colorless() then 31 else 88}
+		right: 719
+		height:	{if is_fullart_colorless() then 988 else 647}
+		z index: -2
+		default: {default_image(card.card_color)}
+	############################# Card type
+	indicator:
+		left: 92
+		top: { 604 }
+		width: 34
+		height: 34
+		z index: 1
+		render style: image
+		visible: { has_identity() }
+		image: { card_identity() }
+	type:
+		left: { if has_identity() then "132" else "92" }
+		top: { (if set.card_language != "简体中文" then 599 else 598) + shrink_type()/2 }
+		width: { (if has_identity() then "528" else "568")}
+		height: { 40 - shrink_type() }
+		alignment: top shrink-overflow
+		z index: 5
+		padding top: 2
+		font:
+			name: { if set.card_language != "简体中文" then "ModMatrix" else "Magic华文楷体" }
+			size: { if set.card_language != "简体中文" then 29 - shrink_type() else 28 - shrink_type() }
+			color: { name_type_pt_color() }
+			separator color: red
+	rarity:
+		right: {705.5 + rarity_shift()}
+		top: { 602 }
+		width: 44
+		height: 44
+		z index: 2
+		render style: image
+		alignment: middle right
+		include file: /magic-rarity.mse-include/rarity
+		choice images:
+			# Images based on the set symbol
+			basic land:
+				script:
+					if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "c.png"
+					else if styling.inverted_common_symbol then symbol_variation(symbol: set.symbol, variation: "invertedcommon")
+					else symbol_variation(symbol: set.symbol, variation: "common")
+			common:
+				script:
+					if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "c.png"
+					else if styling.inverted_common_symbol then symbol_variation(symbol: set.symbol, variation: "invertedcommon")
+					else symbol_variation(symbol: set.symbol, variation: "common")
+			uncommon:
+				script:
+					if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "u.png"
+					else symbol_variation(symbol: set.symbol, variation: "uncommon")
+			rare:
+				script:
+					if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "r.png"
+					else symbol_variation(symbol: set.symbol, variation: "rare")
+			mythic rare:
+				script:
+					if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "m.png"
+					else symbol_variation(symbol: set.symbol, variation: "mythic rare")
+			special:
+				script:
+					if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "s.png"
+					else symbol_variation(symbol: set.symbol, variation: "special")
+			masterpiece:
+				script:
+					if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "mp.png"
+					else symbol_variation(symbol: set.masterpiece_symbol, variation: "mythic rare")
+	############################# Text box
+	text:
+		left: 	{ 68 }
+		top: 	{ 654+chop_top() }
+		width:  { if set.card_language != "简体中文" then 632 else 618 }
+		bottom: { 934-chop_bot() }
+		mask:{if set.card_language != "简体中文" then "text box back/text_mask.png" else ""}
+		font:
+			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: { if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
+			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 28 }
+			scale down to: 6
+			color: { text_color() }
+		symbol font:
+			name: { styling.text_box_mana_symbols }
+			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 28 }
+			scale down to: 6
+		alignment:
+			script:
+				if (styling.center_text == "short text only" and
+				   not contains(match:"\n", card.rule_text) and
+				   card.flavor_text == "<i-flavor></i-flavor>" and
+				   card_style.text.content_lines <= 2) or
+				   styling.center_text == "always"
+				then "middle center"
+				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
+		z index: 5
+		padding left:   6
+		padding right:  {4 + chop_right()}
+		line height hard: 1.1
+		line height line: { if chinese_new_font() then 1.3 else 1.2 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: 1.2
+		line height line max: { if chinese_new_font() then 1.4 else 1.3 }
+
+	watermark:
+		left: 50
+		top: { (676)-8}
+		width: 650
+		bottom: { 676 + 278 -8}
+		z index: 1
+		render style: image
+		popup style: in place
+		alignment: middle center
+		include file: /magic-watermarks.mse-include/watermarks
+	############################# PT
+	pt:
+		z index: 3
+		left: 573
+		top: 940
+		width: 120
+		height:	56
+		alignment: center middle shrink-overflow
+		font:
+			name:  { "ModMatrix" }
+			size: {33 - (if styling.shrink_power_text != "" then to_number(styling.shrink_power_text) else 0)}
+			color:{ name_type_pt_color() }
+			separator color: red
+
+	############################# Copyright stuff
+	illustrator:
+		right: { if card.pt!= "" then 556 else 678 }
+		top: 950
+		width: {max(20, card_style.illustrator.content_width)*0.965}
+		height: 30
+		z index: 4
+		alignment: bottom right stretch-overflow
+		font:
+			name: ModMatrix
+			size: 25
+			color: { illustrator_cardcode_artistarrow_color() }
+	copyright:
+		right: { if card.pt!= "" then 556 else 678 }
+		top: { if not set.automatic_copyright then 981 else 1500}
+		width: {330}
+		height: 20
+		z index: 4
+		alignment: middle right
+		visible: {not set.automatic_copyright}
+		font:
+			name: mplantin
+			size: 13
+			color: { illustrator_cardcode_artistarrow_color() }
+############################################################## Extra card fields
+extra card field:
+	type: text
+	name: card code
+	save value: false
+	script:
+		forward_editor(prefix: set.copyright +" "+ card_number(), field: card.card_code_text)
+
+	script:
+		if set.automatic_card_numbers and not styling.remove_from_autocount then
+			forward_editor(prefix: set.copyright +" "+ card_number(), field: card.card_code_text)
+		else
+			combined_editor(field1: card.card_code_text, separator: "" + set.copyright +" " , field2: card.custom_card_number)
+
+extra card field:
+	type: choice
+	name: artist arrow
+	editable: false
+	save value: false
+	choice: white
+
+extra card field:
+	type: choice
+	name: crown
+	script: card.card_color
+	editable: false
+
+extra card field:
+	type: choice
+	name: text box back
+	script: card.card_color
+	editable: false
+
+extra card field:
+	type: choice
+	name: serialized
+	choice: bar
+	editable: false
+	save value: false
+	show statistics: false
+extra card field:
+	type: text
+	name: serialized number 1
+	editable: true
+	show statistics: false
+	save value: true
+
+extra card field:
+	type: choice
+	name: level 2 overlay
+	script: card.card_color
+	choice: mask
+	editable: false
+	show statistics: false
+extra card field:
+	type: choice
+	name: level 3 overlay
+	script: card.card_color
+	choice: mask
+	editable: false
+	show statistics: false
+extra card field:
+	type: choice
+	name: level 4 overlay
+	script: card.card_color
+	choice: mask
+	editable: false
+	show statistics: false
+
+extra card style:
+
+	card code:
+		right: { if card.pt!= "" then 556 else 678 }
+		top: { 981 }
+		width: {330}
+		height: 20
+		z index: 4
+		alignment: middle right
+		font:
+			name: mplantin
+			size: 13
+			color: { illustrator_cardcode_artistarrow_color() }
+
+	artist arrow:
+		right: { card_style.illustrator.right - card_style.illustrator.content_width +2 }
+		top: 950
+		width: {400*0.16}
+		height: {160*0.16}
+		z index: 4
+		render style: image
+		image: { "paintbrush_" + illustrator_cardcode_artistarrow_color() + ".png" }
+
+	#在预知框里当twins使用
+	crown:
+		left: 0
+		top: 0
+		width:	750
+		height:	1050
+		render style: image
+		image:
+			script:
+				if is_fullart_colorless() then 
+					if card.pt != "" then "crown/colorlessc.png" else "crown/colorless.png"
+				else
+					if card.pt != "" then creature_crown_background() else crown_background()
+		z index: 1
+
+	text box back:
+		left: 0
+		top: 0
+		width:	750
+		height:	1050
+		render style: image
+		image: {if is_land(card.type) and not (card.pt!= "" or is_creature(card.type)) then text_box_back_background() else "text box back/normal.png"}
+		z index: 0
+
+	serialized:
+		left:	47
+		top:	{ 516 }
+		width:	178
+		height:	55
+		z index: 5
+		visible: { is_serialized() }
+		render style: image
+		image: { "Serialized.png" }
+
+	serialized number 1:
+		left: {if is_serialized() then (47+5) else 0 }
+		top: {if is_serialized() then (516 +5) else 0 }
+		width: {if is_serialized() then (178-10) else 0 }
+		height: {if is_serialized() then (55-10) else 0 }
+		z index: 6
+		alignment: middle center
+		font:
+			name: {"Magic Gotham Medium"}
+			size: {23}
+			color: white
+			weight: {"bold"}
+		visible: {is_serialized()}
+
+	level 2 overlay:
+		left: 58
+		top: { if is_d20() then top_of_para(rolls_start(card.text)) else 0}
+		height: { if is_d20() then height_of_para(rolls_start(card.text)) else 0}
+		width: 630
+		z index: 0
+		render style: image
+		image: {overlay1()}
+		visible: {(is_d20() and number_of_rolls(card.text) > 0)}
+	level 3 overlay:
+		left: 58
+		top: { if is_d20() then top_of_para(rolls_start(card.text)+2) else 0}
+		height: { if is_d20() then height_of_para(rolls_start(card.text)+2) else 0}
+		width: 630
+		z index: 0
+		render style: image
+		image: {overlay2()}
+		visible: {(is_d20() and number_of_rolls(card.text)-no_roll(card.text) > 2)}
+	level 4 overlay:
+		left: 58
+		top: { if is_d20() then top_of_para(rolls_start(card.text)+4) else 0}
+		height: { if is_d20() then height_of_para(rolls_start(card.text)+4) else 0}
+		width: 630
+		z index: 0
+		render style: image
+		image: {overlay3()}
+		visible: {(is_d20() and number_of_rolls(card.text)-no_roll(card.text) > 4) }

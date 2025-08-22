@@ -943,7 +943,7 @@ card style:
 	############################# Card type
 	indicator:
 		left: 62
-		top: 604
+		top: {if is_saga_creature() then 810 else if (is_ub() and not is_fullart_saga()) then 895 else 899}
 		width: 34
 		height: 34
 		z index: 1

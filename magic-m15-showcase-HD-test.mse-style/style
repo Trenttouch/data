@@ -130,6 +130,8 @@ init script:
 	guild_mana := { styling.use_guild_mana_symbols }
 	
 	# Is the card a promo card?
+	no_frames := {chosen(styling.frames, choice:"remove all")}
+	black_text := {chosen(styling.frames, choice:"black text")}
 	is_promo := { styling.promo }
 	is_legend := {set.auto_legends and (contains(card.super_type, match:"Legendary") or contains(card.super_type, match:"传奇") or contains(card.type, match:"Mewk")) }
 	
@@ -252,7 +254,10 @@ styling field:
 	type: multiple choice
 	name: frames
 	description: 使用边框，高优先级边框可能覆盖低优先级边框。
+	choice: remove all
+	choice: black text
 	choice: full art frame
+	choice: ↑ new full art fading
 	choice: universe beyond
 	choice: adventure
 	choice: omen
@@ -343,7 +348,7 @@ card style:
 		z index: 0
 		render style: image
 		popup style: in place
-		image: { if is_short() then short_background() else if is_tallart() then tallart_background() else card_background() }
+		image: {if no_frames() then "" else if is_short() then short_background() else if is_tallart() then tallart_background() else card_background() }
 		
 		mask: { card_mask() }
 	card color 2:
@@ -353,7 +358,7 @@ card style:
 		height: { if is_omen() then 311.5671 else if is_adventure() then 315 else  0 }
 		render style: image
 		popup style: in place
-		image: {if is_omen() then omen_leftpage_background() else leftpage_background()}
+		image: {if no_frames() then "" else if is_omen() then omen_leftpage_background() else leftpage_background()}
 		z index: 3
 		visible: {is_adventure() or is_omen()}
 	############################# Name line
@@ -368,7 +373,7 @@ card style:
 		font:
 			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
 			size: { if set.card_language != "简体中文" then 32 - shrink_name() else 34 - shrink_name()}
-			color: white
+			color: {if black_text() then "black" else "white"}
 			#影子实现
 			shadow color: script: if (has_shadow()) then rgba(0,0,0,255) else rgba(0,0,0,0)
 			shadow displacement x: 2.5
@@ -468,7 +473,7 @@ card style:
 		font:
 			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
 			size: { if set.card_language != "简体中文" then 26 - shrink_type() else 32 - shrink_type() }
-			color: white
+			color: {if black_text() then "black" else "white"}
 			separator color: red
 			#影子实现
 			shadow color: script: if (has_shadow()) then rgba(0,0,0,255) else rgba(0,0,0,0)
@@ -493,7 +498,7 @@ card style:
 		font:
 			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
 			size: { (if is_omen() and set.card_language != "简体中文" then 23 else 26) - shrink_type() }
-			color: white
+			color: {if black_text() then "black" else "white"}
 			separator color: red
 
 	rarity:
@@ -548,7 +553,7 @@ card style:
 			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 28 }
 			scale down to: 6
-			color: {if is_adventure() or is_omen() then "black" else "white"}
+			color: {if is_adventure() or is_omen() or black_text() then "black" else "white"}
 			#影子实现
 			shadow color: script: if (has_shadow()) then rgba(0,0,0,255) else rgba(0,0,0,0)
 			shadow displacement x: 2.5
@@ -632,7 +637,7 @@ card style:
 		font:
 			name:  { if use_phyrexian_font() then "GeishaHolidayW00-Regular" else "Beleren Bold" }
 			size: {32 - (if styling.shrink_power_text != "" then to_number(styling.shrink_power_text) else 0)}
-			color: white
+			color: {if black_text() then "black" else "white"}
 			separator color: red
 	############################# Card sorting / numbering
 	set code:
@@ -939,6 +944,14 @@ extra card field:
 	save value: false
 	show statistics: false
 
+extra card field:
+	type: choice
+	name: foil layer
+	choice: bar
+	editable: false
+	save value: false
+	show statistics: false
+
 extra card style:
 	dot:
 		left: {48.5 + card_style.set_code.content_width}
@@ -1007,7 +1020,7 @@ extra card style:
 		width:	{if is_omen() then 0 else 96}
 		height:	{if is_omen() then 0 else 48}
 		z index: 5
-		visible: {not is_omen() and (is_rare() and styling.use_holofoil_stamps and not is_ub()) or use_acorn_stamp()}
+		visible: {if no_frames() then "" else (not is_omen() and (is_rare() and styling.use_holofoil_stamps and not is_ub()) or use_acorn_stamp())}
 		render style: image
 		image: { card_stamp() }
 		mask: {if is_fullart() then "stamp/stamp_fa_frame_mask.png" else ""}
@@ -1018,7 +1031,7 @@ extra card style:
 		width:	{if is_omen() then 96  else 0}
 		height:	{if is_omen() then 48  else 0}
 		z index: 2
-		visible: {is_omen() and (is_rare() and styling.use_holofoil_stamps and not is_ub()) or use_acorn_stamp()}
+		visible: {if no_frames() then "" else (is_omen() and (is_rare() and styling.use_holofoil_stamps and not is_ub()) or use_acorn_stamp())}
 		render style: image
 		image: { card_stamp() }
 		mask: {if is_fullart() then "stamp/stamp_fa_frame_mask.png" else ""}
@@ -1031,7 +1044,7 @@ extra card style:
 		z index: 5
 		visible: { is_ub() and styling.use_holofoil_stamps }
 		render style: image
-		image: { ubstamp_background() }
+		image: { if no_frames() then "" else ubstamp_background() }
 		mask: {if is_fullart() then "stamp/ub/stamp_fa_frame_mask.png" else ""}
 		
 	auto copyright:
@@ -1089,7 +1102,7 @@ extra card style:
 		width:	750
 		height:	1050
 		render style: image
-		image: {if has_alias() then aliascrown_background() else crown_background()}
+		image: {if no_frames() then "" else if has_alias() then aliascrown_background() else crown_background()}
 		mask: { if is_nickname() or (blackframe() and not colored_crown()) then "nn_crown_mask.png" else "" }
 		z index: 0
 	innercrown:
@@ -1098,7 +1111,7 @@ extra card style:
 		width:	750
 		height:	1050
 		render style: image
-		image: {innercrown_background()}
+		image: {if no_frames() then "" else innercrown_background()}
 		z index: 2
 		visible: {is_legend() and styling.inner_crown_style != "common" }
 	nicknameoverlay:
@@ -1107,7 +1120,7 @@ extra card style:
 		width:	750
 		height:	1050
 		render style: image
-		image: {(if is_short() then "short/" else if is_tallart() then "tallart/" else "normal/") + "nickname.png"}
+		image: {if no_frames() then "" else ((if is_short() then "short/" else if is_tallart() then "tallart/" else "normal/") + "nickname.png")}
 		z index: 0
 		visible: { is_nickname() or blackframe() }
 		mask:
@@ -1165,7 +1178,7 @@ extra card style:
 		width: {if is_omen() then 317.5373 else 341}
 		height:{if is_omen() then 311.9402 else 314}
 		render style: image
-		image: { if is_omen() then omen_rightpage_background() else rightpage_background() }
+		image: { if no_frames() then "" else if is_omen() then omen_rightpage_background() else rightpage_background() }
 		z index: 1
 		visible: {is_adventure() or is_omen()}
 		mask: { if is_omen() and is_fullart() and ((is_rare() and styling.use_holofoil_stamps) or use_acorn_stamp()) then "omen/rightpage/fullart_mask.png" else "" }
@@ -1175,7 +1188,7 @@ extra card style:
 		width: 750
 		height: 16
 		render style: image
-		image: { mix_background() }
+		image: { if no_frames() then "" else mix_background() }
 		z index: 0
 		visible: {is_adventure()}
 
@@ -1210,5 +1223,14 @@ extra card style:
 		height: 1050
 		z index: -1
 		render style: image
-		image: { "fading_black.png" }
+		image: {if no_frames() then "" else if chosen(styling.frames, choice:"↑ new full art fading") then if (is_rare() and styling.use_holofoil_stamps) then "fading_black_2_r.png" else "fading_black_2.png" else "fading_black.png" }
 		visible: { is_fullart() }
+
+	foil layer:
+		left: 0
+		top : 0
+		width: 750
+		height: 1050
+		z index: 9
+		render style: image
+		image: {if styling.overlay == "" then nil else styling.overlay + "/overlay.png"}
