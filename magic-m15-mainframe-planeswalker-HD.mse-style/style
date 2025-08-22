@@ -93,6 +93,7 @@ init script:
 	card_shape := {"planeswalker"}
 	
 	# Is the card a promo card?
+	no_frames := {chosen(styling.other_options, choice:"remove all")}
 	is_promo := { styling.promo }
 	# Does the card have four abilities?
 	has_four_abilities := { max_level() > 3 or force_tall()}
@@ -174,7 +175,8 @@ init script:
 	]
 
 	mainframe_walker_text_script := {
-		if max_level() == 1 or (max_level() == 2 and card.level_2_text == "") or force_level() == "two" then 
+		if no_frames() then ""
+		else if max_level() == 1 or (max_level() == 2 and card.level_2_text == "") or force_level() == "two" then 
 			combined_editor(field1: card.level_1_text, separator1: "<line>\n</line>", field2: card.level_2_text)
 			
 		else if max_level() == 2 or force_level() == "three" then 
@@ -207,23 +209,23 @@ init script:
 		if styling.justify_text == "yes" or styling.justify_text == "force justify" then
 		(
 			if input == "lv1" then (if card.loyalty_cost_1 == "" and unindent() then 0 else 280)
-			else if input == "lv2" then (if card.loyalty_cost_2 == "" and unindent() then 0 else 280)
-			else if input == "lv3" then (if card.loyalty_cost_3 == "" and unindent() then 0 else 280)
-			else if input == "lv4" then (if card.loyalty_cost_4 == "" and unindent() then 0 else 280)
-			else if input == "lv5" then (if card.loyalty_cost_5 == "" and unindent() then 0 else 280)
-			else if input == "lv6" then (if card.loyalty_cost_6 == "" and unindent() then 0 else 280)
+			else if input == "lv2" then (if card.loyalty_cost_2 == "" and (unindent() and not no_frames()) then 0 else 280)
+			else if input == "lv3" then (if card.loyalty_cost_3 == "" and (unindent() and not no_frames()) then 0 else 280)
+			else if input == "lv4" then (if card.loyalty_cost_4 == "" and (unindent() and not no_frames()) then 0 else 280)
+			else if input == "lv5" then (if card.loyalty_cost_5 == "" and (unindent() and not no_frames()) then 0 else 280)
+			else if input == "lv6" then (if card.loyalty_cost_6 == "" and (unindent() and not no_frames()) then 0 else 280)
 			else 0
 		)
 		else 0
 	}
 
 	margin_left := {
-		if input == "lv1" then (if card.loyalty_cost_1 == "" and unindent() then 0 else 280)
-		else if input == "lv2" then (if card.loyalty_cost_2 == "" and unindent() then 0 else 280)
-		else if input == "lv3" then (if card.loyalty_cost_3 == "" and unindent() then 0 else 280)
-		else if input == "lv4" then (if card.loyalty_cost_4 == "" and unindent() then 0 else 280)
-		else if input == "lv5" then (if card.loyalty_cost_5 == "" and unindent() then 0 else 280)
-		else if input == "lv6" then (if card.loyalty_cost_6 == "" and unindent() then 0 else 280)
+		if input == "lv1" then (if no_frames() then (if unindent() then 0 else 280) else if card.loyalty_cost_1 == "" and unindent() then 0 else 280)
+		else if input == "lv2" then (if card.loyalty_cost_2 == "" and (unindent() and not no_frames()) then 0 else 280)
+		else if input == "lv3" then (if card.loyalty_cost_3 == "" and (unindent() and not no_frames()) then 0 else 280)
+		else if input == "lv4" then (if card.loyalty_cost_4 == "" and (unindent() and not no_frames()) then 0 else 280)
+		else if input == "lv5" then (if card.loyalty_cost_5 == "" and (unindent() and not no_frames()) then 0 else 280)
+		else if input == "lv6" then (if card.loyalty_cost_6 == "" and (unindent() and not no_frames()) then 0 else 280)
 		else 0
 	}
 
@@ -290,6 +292,14 @@ init script:
 		+ ( if (not use_full_art() and chosen(choice: "colorless", card.card_color) and is_stamped()) then "_r" else "")
 		+ ".png"
 	}
+
+	manually_text1_top	  := { to_int(pull_comma_array(styling.manually_set_textbox_top_bottom, cell:0, end:0, default: (top_of_textbox()) ))}
+	manually_text2_top	  := { to_int(pull_comma_array(styling.manually_set_textbox_top_bottom, cell:1, end:0, default:700))}
+	manually_text3_top	  := { to_int(pull_comma_array(styling.manually_set_textbox_top_bottom, cell:2, end:0, default:800))}
+	manually_text4_top    := { to_int(pull_comma_array(styling.manually_set_textbox_top_bottom, cell:3, end:0, default: manually_text4_bottom () ))}
+	manually_text4_bottom := { to_int(pull_comma_array(styling.manually_set_textbox_top_bottom, cell:4, end:0, default: (964-global_chop_bot()-(if is_stamped() then 4 else 0)) ))}
+
+
 
 ############################################################## Set info fields
 set info style:
@@ -443,6 +453,7 @@ styling field:
 	type: multiple choice
 	name: other options
 	# choice: clear frame
+	choice: remove all
 	choice: bigger image size
 	choice: use taller frame
 	choice: use compleat frame
@@ -464,6 +475,10 @@ styling field:
 	type: text
 	name: custom mask
 	description: Uses a custom mask from data/magic-mainframe-extras.mse-include
+styling field:
+	type: text
+	name: manually set textbox top bottom
+	description: manually set textbox placement, Formatted "X,Y,Z", shrinks the top X pixels, shrinks bottom Y pixels toward center, shrinks Z pixels from right.
 styling field:
 	type: boolean
 	name: holofoil stamped rares
@@ -589,7 +604,7 @@ card style:
 		z index: 0
 		render style: image
 		popup style: in place
-		image: { frame_choose() }
+		image: { if no_frames() then "" else frame_choose() }
 		mask: { mask_choose() }
 	############################# Name line
 	name:
@@ -714,7 +729,7 @@ card style:
 	############################# Text box
 	text:
 		left: 96
-		top: { top_of_textbox() }
+		top: { top_of_textbox() + (if no_frames() then 1000 else 0)}
 		width: {600 - global_chop_right()}
 		bottom: {964-global_chop_bot()-(if is_stamped() then 4 else 0)}
 		font:
@@ -741,19 +756,154 @@ card style:
 		padding left:   6
 		padding top: 4
 		padding right:  {4 + global_chop_right() }
-		#line height hard: 1.1
-		#line height line: { if chinese_new_font() then 1.2 else 1.2 }
-		#line height soft: { if chinese_new_font() then 1.0 else 0.9 }
-		#line height hard max: 1.2
-		#line height line max: { if chinese_new_font() then 1.7 else 1.6 }
-		
-		#padding right:  4
 		line height hard: 1.2
 		line height line: 1.2
 		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
 		line height hard max: 0.5
 		line height line max: 2.2
-	
+
+
+##############################################################################################################
+# 手动控制时候的text
+
+	level 1 text:
+		left: 96
+		top: { manually_text1_top() + (if no_frames() then 0 else 1000)}
+		width: {600 - global_chop_right()}
+		bottom: {manually_text2_top()}
+		font:
+			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
+			size: { if styling.font_size != "" then styling.font_size else if has_four_abilities() then 27.6 else 28 }
+			scale down to: 6
+			color: { if contains(styling.other_options, match:"alias white text") then "white" else "black"}
+		symbol font:
+			name: { styling.text_box_mana_symbols }
+			size: { if styling.font_size != "" then styling.font_size else if has_four_abilities() then 27.6 else 28 }
+		alignment:
+			script:
+				if (styling.center_text == "short text only" and
+				   not contains(match:"\n", card.rule_text) and
+				   card.flavor_text == "<i-flavor></i-flavor>" and
+				   card_style.text.content_lines <= 2) or
+				   styling.center_text == "always"
+				then "middle center"
+				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
+		z index: 6
+		padding left: {if unindent() then 6 else 10}
+		padding top: 4
+		padding right:  {4 + global_chop_right() }
+		line height hard: 1.2
+		line height line: 1.2
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: 0.5
+		line height line max: 2.2
+
+	level 2 text:
+		left: 96
+		top: { manually_text2_top() + (if no_frames() then 0 else 1000)}
+		width: {600 - global_chop_right()}
+		bottom: {manually_text3_top()}
+		font:
+			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
+			size: { if styling.font_size != "" then styling.font_size else if has_four_abilities() then 27.6 else 28 }
+			scale down to: 6
+			color: { if contains(styling.other_options, match:"alias white text") then "white" else "black"}
+		symbol font:
+			name: { styling.text_box_mana_symbols }
+			size: { if styling.font_size != "" then styling.font_size else if has_four_abilities() then 27.6 else 28 }
+		alignment:
+			script:
+				if (styling.center_text == "short text only" and
+				   not contains(match:"\n", card.rule_text) and
+				   card.flavor_text == "<i-flavor></i-flavor>" and
+				   card_style.text.content_lines <= 2) or
+				   styling.center_text == "always"
+				then "middle center"
+				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
+		z index: 6
+		padding left: 10
+		padding top: 4
+		padding right:  {4 + global_chop_right() }
+		line height hard: 1.2
+		line height line: 1.2
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: 0.5
+		line height line max: 2.2
+
+	level 3 text:
+		left: 96
+		top: {manually_text3_top() + (if no_frames() then 0 else 1000)}
+		width: {600 - global_chop_right()}
+		bottom: {manually_text4_top()}
+		font:
+			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
+			size: { if styling.font_size != "" then styling.font_size else if has_four_abilities() then 27.6 else 28 }
+			scale down to: 6
+			color: { if contains(styling.other_options, match:"alias white text") then "white" else "black"}
+		symbol font:
+			name: { styling.text_box_mana_symbols }
+			size: { if styling.font_size != "" then styling.font_size else if has_four_abilities() then 27.6 else 28 }
+		alignment:
+			script:
+				if (styling.center_text == "short text only" and
+				   not contains(match:"\n", card.rule_text) and
+				   card.flavor_text == "<i-flavor></i-flavor>" and
+				   card_style.text.content_lines <= 2) or
+				   styling.center_text == "always"
+				then "middle center"
+				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
+		z index: 6
+		padding left: 10
+		padding top: 4
+		padding right:  {4 + global_chop_right() }
+		line height hard: 1.2
+		line height line: 1.2
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: 0.5
+		line height line max: 2.2
+
+	level 4 text:
+		left: 96
+		top: {manually_text4_top() + (if no_frames() then 0 else 1000)}
+		width: {600 - global_chop_right()}
+		bottom: {manually_text4_bottom()}
+		font:
+			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else  if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
+			size: { if styling.font_size != "" then styling.font_size else if has_four_abilities() then 27.6 else 28 }
+			scale down to: 6
+			color: { if contains(styling.other_options, match:"alias white text") then "white" else "black"}
+		symbol font:
+			name: { styling.text_box_mana_symbols }
+			size: { if styling.font_size != "" then styling.font_size else if has_four_abilities() then 27.6 else 28 }
+		alignment:
+			script:
+				if (styling.center_text == "short text only" and
+				   not contains(match:"\n", card.rule_text) and
+				   card.flavor_text == "<i-flavor></i-flavor>" and
+				   card_style.text.content_lines <= 2) or
+				   styling.center_text == "always"
+				then "middle center"
+				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
+		z index: 6
+		padding left: 10
+		padding top: 4
+		padding right:  {4 + global_chop_right() }
+		line height hard: 1.2
+		line height line: 1.2
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: 0.5
+		line height line max: 2.2
+
+##############################################################################################################
+
 	watermark:
 		left: 38
 		top: {( if has_four_abilities() then 628 else 662 )-8}
@@ -1180,7 +1330,7 @@ extra card style:
 		height: 80
 		z index: 6
 		render style: image
-		# visible: { card.loyalty != "" }
+		visible: { not no_frames() }
 		choice images:
 			loyalty: loyalty/loyalty.png
 			
@@ -1191,7 +1341,7 @@ extra card style:
 		width: {if contains(styling.other_options, match:"use compleat frame") then 88 else 91}
 		height: {if contains(styling.other_options, match:"use compleat frame") then 50 else 53.5}
 		z index: 6
-		visible: { is_stamped() and not is_clear() }
+		visible: { is_stamped() and not (is_clear() or no_frames()) }
 		render style: image
 		image: { if contains(styling.other_options, match:"use compleat frame") then compleat_stamp() else card_stamp() }
 		mask: { if contains(styling.other_options, match:"use compleat frame") then "" else if(not use_full_art() and chosen(choice: "colorless", card.card_color)) then "clstamp_mask.png" else if use_full_art() then "mythicstamp_mask.png" else "" }
@@ -1204,7 +1354,7 @@ extra card style:
 		z index: -1
 		render style: image
 		image: { "fading_black.png" }
-		visible: { use_full_art() }
+		visible: { use_full_art() and not no_frames()}
 
 ####################################################################################		
 	loyalty cost box 1:
@@ -1292,7 +1442,7 @@ extra card style:
 			scale down to: 30
 			color: black
 		alignment: middle center
-		visible: { card.loyalty_cost_1 != "" }
+		visible: { card.loyalty_cost_1 != "" and not no_frames()}
 	colon 2:
 		left: 118
 		top: { abil_center(1) - 14.6 - loyal_move2() }
@@ -1305,7 +1455,7 @@ extra card style:
 			scale down to: 30
 			color: black
 		alignment: middle center
-		visible: { card.loyalty_cost_2 != "" }
+		visible: { card.loyalty_cost_2 != "" and not no_frames()}
 	colon 3:
 		left: 118
 		top: { abil_center(2) - 14.6 - loyal_move3() }
@@ -1318,7 +1468,7 @@ extra card style:
 			scale down to: 30
 			color: black
 		alignment: middle center
-		visible: { card.loyalty_cost_3 != "" }
+		visible: { card.loyalty_cost_3 != "" and not no_frames()}
 	colon 4:
 		left: 118
 		top: { abil_center(3) - 14.6 - loyal_move4() }
@@ -1331,7 +1481,7 @@ extra card style:
 			scale down to: 30
 			color: black
 		alignment: middle center
-		visible: { card.loyalty_cost_4 != "" }
+		visible: { card.loyalty_cost_4 != "" and not no_frames()}
 	colon 5:
 		left: 118
 		top: { abil_center(4) - 14.6 - loyal_move5() }
@@ -1357,7 +1507,7 @@ extra card style:
 			scale down to: 30
 			color: black
 		alignment: middle center
-		visible: { card.loyalty_cost_6 != "" }
+		visible: { card.loyalty_cost_6 != "" and not no_frames()}
 
 
 #########################################################################################################
@@ -1371,6 +1521,7 @@ extra card style:
 		height: {25/2}
 		z index: -1
 		mask: masks/mask_top.png
+		visible: { not no_frames() }
 ###Block of first textbox
 	stripe color:
 		left: { 179/2 }
@@ -1379,6 +1530,7 @@ extra card style:
 		bottom: { max(if force_level() == "one" then 930 else to_int(stripe01()-6), (if has_four_abilities() then 622 else 690))}
 		z index: -1
 		mask: masks/stripe_mask.png
+		visible: { not no_frames() }
 ###Bottom of first textbox
 	bottom first:
 		left: { 179/2 }
@@ -1389,7 +1541,7 @@ extra card style:
 		render style: image
 		z index: -1
 		mask: masks/stripe_mask.png
-		visible: { force_level() != "one" }
+		visible: { force_level() != "one" and not no_frames()}
 
 
 
@@ -1403,7 +1555,7 @@ extra card style:
 		render style: image
 		z index: -1
 		mask: masks/stripe_mask.png
-		visible: { card.level_3_text != ""}
+		visible: { card.level_3_text != "" and not no_frames()}
 ###Block of third textbox
 	stripe color 2:
 		left: { 179/2 }
@@ -1412,7 +1564,7 @@ extra card style:
 		bottom: { if max_level() == 3 then 930 else to_int(min(930, stripe23()-6)) }
 		z index: -1
 		mask: masks/stripe_mask.png
-		visible: { card.level_3_text != ""}
+		visible: { card.level_3_text != "" and not no_frames() }
 ###Bottom of third textbox
 	bottom third:
 		left: { 179/2 }
@@ -1423,7 +1575,7 @@ extra card style:
 		render style: image
 		z index: -1
 		mask: masks/stripe_mask.png
-		visible: { max_level() > 3}
+		visible: { max_level() > 3 and not no_frames()}
 
 
 
@@ -1437,7 +1589,7 @@ extra card style:
 		render style: image
 		z index: -1
 		mask: masks/stripe_mask.png
-		visible: { max_level() > 4}
+		visible: { max_level() > 4 and not no_frames()}
 ###Block of fifth textbox
 	stripe color 3:
 		left: { 179/2 }
@@ -1446,7 +1598,7 @@ extra card style:
 		bottom: { if max_level() == 5 then 930 else to_int(min(930, stripe45()-4)) }
 		z index: -1
 		mask: masks/stripe_mask.png
-		visible: { max_level() > 4 and to_int(stripe34()+20) <= 930 }
+		visible: { max_level() > 4 and to_int(stripe34()+20) <= 930 and not no_frames()}
 ###Bottom of fifth textbox
 	bottom fifth:
 		left: { 179/2 }
@@ -1457,7 +1609,7 @@ extra card style:
 		render style: image
 		z index: -1
 		mask: masks/stripe_mask.png
-		visible: { max_level() == 6}
+		visible: { max_level() == 6 and not no_frames()}
 
 ###Curve of bottom textbox
 	bottom color:
@@ -1467,7 +1619,7 @@ extra card style:
 		height: 31
 		z index: -1
 		mask: {(if is_stamped() then "masks/rare_" else "masks/") + "mask_bot.png"}
-		visible: { force_level() == "one" or max_level() == 3 or max_level() == 5}
+		visible: { (force_level() == "one" or max_level() == 3 or max_level() == 5) and not no_frames() }
 
 ##########################################################################################################################
 

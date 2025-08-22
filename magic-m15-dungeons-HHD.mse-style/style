@@ -253,7 +253,7 @@ init script:
 		else if long_box(x:x, y:y+1)
 			then "none"  ## Oubliette room
 		else if dead_box(x:x, y:y)
-			then "none" # this is a dead end, don't show an arrow
+			then "none" # this is a dead end, dont show an arrow
 		else if dead_box(x:x, y:y+1)
 			then "updown" # the next room is a dead end, allow back out
 		else "down"
@@ -460,7 +460,7 @@ init script:
 	use_fast := {styling.advanced_scripts == "no"}
 	walls_image := {if use_fast() then walls_image_fast(input) else walls_image_slow(input)}
 	walls_image_split := {
-		## for loop doesn't work or images :(
+		## for loop doesnt work or images :(
 		ml := max_level()
 		folder := if input == "shadow/" then "shadow/" else ""
 		walls := black

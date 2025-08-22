@@ -14,7 +14,7 @@ menu:
 	save set as directory:		将每张卡图导出到...
 	export:			导出
 	export html:		HTML文件
-	export image:		导出卡牌图像
+	export image:		导出卡牌图像	Ctrl+Alt+1
 	export images:		导出全部卡牌图像
 	export apprentice:	导出到Apprentice
 	export mws:		导出到Magic Workstation...

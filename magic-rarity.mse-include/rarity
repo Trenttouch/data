@@ -2,6 +2,18 @@
 # Edit by Heavenford 2017.1.14
 
 choice images:
+	TLA Mythic: 	/magic-rarity.mse-include/TLA_M.png
+	TLA Rare: 		/magic-rarity.mse-include/TLA_R.png
+	TLA Uncommon: 	/magic-rarity.mse-include/TLA_U.png
+	TLA Common: 	/magic-rarity.mse-include/TLA_C.png
+	TLA Basic Land: /magic-rarity.mse-include/TLA_C.png
+	TLA TLE Mythic: 	/magic-rarity.mse-include/TLE_M.png
+	TLA TLE Rare: 		/magic-rarity.mse-include/TLE_R.png
+	TLA TLE Uncommon: 	/magic-rarity.mse-include/TLE_U.png
+	TLA TLE Common: 	/magic-rarity.mse-include/TLE_C.png
+	TLA TLE Basic Land: /magic-rarity.mse-include/TLE_C.png
+
+
 	SPM Mythic: 	/magic-rarity.mse-include/SPM_M.png
 	SPM Rare: 		/magic-rarity.mse-include/SPM_R.png
 	SPM Uncommon: 	/magic-rarity.mse-include/SPM_U.png
@@ -19,6 +31,11 @@ choice images:
 	EOE Uncommon: 	/magic-rarity.mse-include/EOE_U.png
 	EOE Common: 	/magic-rarity.mse-include/EOE_C.png
 	EOE Basic Land: /magic-rarity.mse-include/EOE_C.png
+	EOE EOS Mythic: 	/magic-rarity.mse-include/EOS_M.png
+	EOE EOS Rare: 		/magic-rarity.mse-include/EOS_R.png
+	EOE EOS Uncommon: 	/magic-rarity.mse-include/EOS_U.png
+	EOE EOS Common: 	/magic-rarity.mse-include/EOS_C.png
+	EOE EOS Basic Land: /magic-rarity.mse-include/EOS_C.png
 
 	FIN Mythic: 	/magic-rarity.mse-include/FIN_M.png
 	FIN Rare: 		/magic-rarity.mse-include/FIN_R.png
@@ -98,41 +115,41 @@ choice images:
 	WOE WOT Uncommon: 	/magic-rarity.mse-include/WOT_U.png
 	WOE WOT Common: 	/magic-rarity.mse-include/WOT_C.png
 
-	MOM Mythic: 	/magic-rarity.mse-include/MOM_M.png
-	MOM Rare: 		/magic-rarity.mse-include/MOM_R.png
-	MOM Uncommon: 	/magic-rarity.mse-include/MOM_U.png
-	MOM Common: 	/magic-rarity.mse-include/MOM_C.png
-	MOM MUL Mythic: 	/magic-rarity.mse-include/MUL_M.png
-	MOM MUL Rare: 		/magic-rarity.mse-include/MUL_R.png
-	MOM MUL Uncommon: 	/magic-rarity.mse-include/MUL_U.png
-	MOM MUL Common: 	/magic-rarity.mse-include/MUL_C.png
-	MOM MAT Mythic: 	/magic-rarity.mse-include/MAT_M.png
-	MOM MAT Rare: 		/magic-rarity.mse-include/MAT_R.png
-	MOM MAT Uncommon: 	/magic-rarity.mse-include/MAT_U.png
-	MOM MAT Common: 	/magic-rarity.mse-include/MAT_C.png
+	Modern MOM Mythic: 	/magic-rarity.mse-include/MOM_M.png
+	Modern MOM Rare: 		/magic-rarity.mse-include/MOM_R.png
+	Modern MOM Uncommon: 	/magic-rarity.mse-include/MOM_U.png
+	Modern MOM Common: 	/magic-rarity.mse-include/MOM_C.png
+	Modern MOM MUL Mythic: 	/magic-rarity.mse-include/MUL_M.png
+	Modern MOM MUL Rare: 		/magic-rarity.mse-include/MUL_R.png
+	Modern MOM MUL Uncommon: 	/magic-rarity.mse-include/MUL_U.png
+	Modern MOM MUL Common: 	/magic-rarity.mse-include/MUL_C.png
+	Modern MOM MAT Mythic: 	/magic-rarity.mse-include/MAT_M.png
+	Modern MOM MAT Rare: 		/magic-rarity.mse-include/MAT_R.png
+	Modern MOM MAT Uncommon: 	/magic-rarity.mse-include/MAT_U.png
+	Modern MOM MAT Common: 	/magic-rarity.mse-include/MAT_C.png
 
-	ONE Mythic: 	/magic-rarity.mse-include/ONE_M.png
-	ONE Rare: 		/magic-rarity.mse-include/ONE_R.png
-	ONE Uncommon: 	/magic-rarity.mse-include/ONE_U.png
-	ONE Common: 	/magic-rarity.mse-include/ONE_C.png
+	Modern ONE Mythic: 	/magic-rarity.mse-include/ONE_M.png
+	Modern ONE Rare: 		/magic-rarity.mse-include/ONE_R.png
+	Modern ONE Uncommon: 	/magic-rarity.mse-include/ONE_U.png
+	Modern ONE Common: 	/magic-rarity.mse-include/ONE_C.png
 
-	BRO Mythic: 	/magic-rarity.mse-include/BRO_M.png
-	BRO Rare: 		/magic-rarity.mse-include/BRO_R.png
-	BRO Uncommon: 	/magic-rarity.mse-include/BRO_U.png
-	BRO Common: 	/magic-rarity.mse-include/BRO_C.png
-	BRO BRR Mythic: 	/magic-rarity.mse-include/BRR_M.png
-	BRO BRR Rare: 		/magic-rarity.mse-include/BRR_R.png
-	BRO BRR Uncommon: 	/magic-rarity.mse-include/BRR_U.png
-	BRO BRR Common: 	/magic-rarity.mse-include/BRR_C.png
-	BRO BOT Mythic: 	/magic-rarity.mse-include/BOT_M.png
-	BRO BOT Rare: 		/magic-rarity.mse-include/BOT_R.png
-	BRO BOT Uncommon: 	/magic-rarity.mse-include/BOT_U.png
-	BRO BOT Common: 	/magic-rarity.mse-include/BOT_C.png
+	Modern BRO Mythic: 	/magic-rarity.mse-include/BRO_M.png
+	Modern BRO Rare: 		/magic-rarity.mse-include/BRO_R.png
+	Modern BRO Uncommon: 	/magic-rarity.mse-include/BRO_U.png
+	Modern BRO Common: 	/magic-rarity.mse-include/BRO_C.png
+	Modern BRO BRR Mythic: 	/magic-rarity.mse-include/BRR_M.png
+	Modern BRO BRR Rare: 		/magic-rarity.mse-include/BRR_R.png
+	Modern BRO BRR Uncommon: 	/magic-rarity.mse-include/BRR_U.png
+	Modern BRO BRR Common: 	/magic-rarity.mse-include/BRR_C.png
+	Modern BRO BOT Mythic: 	/magic-rarity.mse-include/BOT_M.png
+	Modern BRO BOT Rare: 		/magic-rarity.mse-include/BOT_R.png
+	Modern BRO BOT Uncommon: 	/magic-rarity.mse-include/BOT_U.png
+	Modern BRO BOT Common: 	/magic-rarity.mse-include/BOT_C.png
 	
-	DMU Mythic: 	/magic-rarity.mse-include/DMU_M.png
-	DMU Rare: 		/magic-rarity.mse-include/DMU_R.png
-	DMU Uncommon: 	/magic-rarity.mse-include/DMU_U.png
-	DMU Common: 	/magic-rarity.mse-include/DMU_C.png
+	Modern DMU Mythic: 	/magic-rarity.mse-include/DMU_M.png
+	Modern DMU Rare: 		/magic-rarity.mse-include/DMU_R.png
+	Modern DMU Uncommon: 	/magic-rarity.mse-include/DMU_U.png
+	Modern DMU Common: 	/magic-rarity.mse-include/DMU_C.png
 
 	Modern SNC Mythic: 	/magic-rarity.mse-include/SNC_M.png
 	Modern SNC Rare: 		/magic-rarity.mse-include/SNC_R.png

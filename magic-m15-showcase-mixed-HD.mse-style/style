@@ -198,6 +198,9 @@ init script:
 
 	draconic:"draconic/" draconicpt:"draconic/pt/" draconicstamp:"draconic/stamp/"
 
+	stellar:"stellarsights/" stellarpt:"stellarsights/pt/"
+	stellarpost:"stellarsights/poster/"
+
 	unstable:"unstable/"
 	unfinityland:"unfinityland/"
 	zdktll:"tll/zdk/" instll:"tll/ins/" thstll:"tll/ths/"
@@ -270,6 +273,9 @@ init script:
 	jpshowcasestamp:".png"
 
 	draconic:".png" draconicpt:".png" draconicstamp:".png"
+
+	stellar:".png" stellarpt:".png"
+	stellarpost:".png"
 
 	unstable:"card.png"
 	unfinityland:"card.png"
@@ -527,6 +533,10 @@ init script:
 	draconic_stamp_background := { color_background(type:"draconicstamp",     base_hybrid:stamp_hybrid) }
 	draconic_pt_background := { color_background(type:"draconicpt",     base_hybrid:card_hybrid) }
 
+	stellar_background := { color_background(type:"stellar",     base_hybrid:special_card_hybrid) }
+	stellar_pt_background := { color_background(type:"stellarpt",     base_hybrid:special_card_hybrid) }
+	stellarpost_background := { color_background(type:"stellarpost",     base_hybrid:special_card_hybrid) }
+
 	# texless_background := { color_background(type:"texless",     base_hybrid:card_hybrid) }
 
 	zdktll_background := { color_background(type:"zdktll",     base_hybrid:card_hybrid) }
@@ -589,6 +599,8 @@ init script:
 		else if styling.frames=="jpshowcase" then jpshowcase_background()
 		else if styling.frames=="ghostfire" then if card.pt != "" then "ghostfire/cardpt.png" else "ghostfire/card.png"
 		else if styling.frames=="draconic" then draconic_background()
+		else if styling.frames=="stellarsights" then stellar_background()
+		else if styling.frames=="stellarsightsposter" then stellarpost_background()
 
 		else if styling.frames=="neon" and is_vehicle() and chosen(choice:"colorless", card.card_color) then "neon/voverlay.png"
 		else if styling.frames=="neon" then if (is_rare() and styling.use_holofoil_stamps) then neon_background() else neon_background2()
@@ -646,6 +658,8 @@ init script:
 		else if styling.frames=="jpshowcase" then "jpshowcase/frame_mask.png"
 		else if styling.frames=="ghostfire" then "ghostfire/frame_mask.png"
 		else if styling.frames=="draconic" then "draconic/frame_mask.png"
+		else if styling.frames=="stellarsights" then "stellarsights/frame_mask.png"
+		else if styling.frames=="stellarsightsposter" then "stellarsights/poster/frame_mask.png"
 		else "frame_mask.png"
 	}
 	
@@ -685,6 +699,7 @@ init script:
 		else if styling.frames=="imaginecritters" then ""
 		else if styling.frames=="ghostfire" then ""
 		else if styling.frames=="draconic" then draconic_pt_background()
+		else if styling.frames=="stellarsights" then stellar_pt_background()
 		else card_ptbox()
 	}
 	
@@ -733,6 +748,8 @@ init script:
 		else if styling.frames=="jpshowcase" then "0,0,750,969"
 		else if styling.frames=="ghostfire" then "36,42.5,678,897.5"
 		else if styling.frames=="draconic" then "25,120,698,469"
+		else if styling.frames=="stellarsights" then "0,0,750,969"
+		else if styling.frames=="stellarsightsposter" then "0,0,750,974"
 		else "56,117,638,468"
 	}
 	
@@ -768,6 +785,7 @@ init script:
 		else if styling.frames=="paranormal" then paranormal_stamp_background()
 		else if styling.frames=="jpshowcase" then jpshowcase_stamp_background()
 		else if styling.frames=="draconic" then draconic_stamp_background()
+		else if styling.frames=="stellarsights" or styling.frames=="stellarsightsposter" then "stellarsights/stamp.png"
 		else "foil_stamp.png"
 	}
 	stamp_img_set := {
@@ -795,6 +813,7 @@ init script:
 		else if styling.frames=="jpshowcase" then "327.5,948,95,47.5"
 		else if styling.frames=="ghostfire" then "327,942,96,49"
 		else if styling.frames=="draconic" then "295.5223,939.1791,158.9552,68.6567"
+		else if styling.frames=="stellarsights" or styling.frames=="stellarsightsposter" then "339.5, 958.5, 74, 40.5"
 		else "327,947,96,49"
 	}
 	stamp_img_left := {to_number(pull_comma_array(stamp_img_set(), cell:0, end:false))}
@@ -975,6 +994,9 @@ styling field:
 
 	choice: ghostfire
 	choice: draconic
+
+	choice: stellarsights
+	choice: stellarsightsposter
 
 	choice: textless land(zendikar)
 	choice: textless land(innistrad)
@@ -1158,6 +1180,8 @@ card style:
 				if styling.frames=="breakingnews" then if set.card_language != "简体中文" then (375 - max(100,card_style.name.content_width)*0.5) else (375 - max(100,card_style.name.content_width)*0.446)
 				else if styling.frames=="equinox" then 74
 				else if styling.frames=="memory corridor" then if set.card_language != "简体中文" then 57 else 56
+				else if styling.frames=="stellarsights" then 51
+				else if  styling.frames=="stellarsightsposter" then 60
 				else 64
 		top: 
 			script:
@@ -1179,6 +1203,8 @@ card style:
 				else if styling.frames=="imaginecritters" then 52
 				else if styling.frames=="paranormal" then 44
 				else if styling.frames=="ghostfire" then 60
+				else if styling.frames=="stellarsights" then if set.card_language != "简体中文" then 641 else 640
+				else if styling.frames=="stellarsightsposter" then if set.card_language != "简体中文" then 642.5 else 641.5
 				else 57
 		right:
 			script:
@@ -1204,6 +1230,7 @@ card style:
 					else if (styling.frames=="pipboy") then if set.card_language != "简体中文" then "OCR1SSK" else "DFPHeiW7-GB"
 					else if (styling.frames=="breakingnews") then if set.card_language != "简体中文" then "Saloon Girl" else "华康标题宋 Std W9"
 					else if styling.frames=="memory corridor" then if set.card_language != "简体中文" then "DINNextW01-Bold" else "DFHei-GB Otf"
+					else if styling.frames=="stellarsights" then if set.card_language != "简体中文" then "Magic-Fomalhaut" else "字小魂芯科幻体(商用需授权)"
 					else if set.card_language != "简体中文" then "Beleren Bold"
 					else "华康魏碑 Std W7"
 			size:
@@ -1211,12 +1238,14 @@ card style:
 					(if styling.frames=="pipboy" and set.card_language != "简体中文" then 23
 					else if styling.frames=="breakingnews" then if set.card_language != "简体中文" then 49 else 33
 					else if styling.frames=="memory corridor" then if set.card_language != "简体中文" then 25 else 26.2
+					else if styling.frames=="stellarsights" then if set.card_language != "简体中文" then 30 else 32
+					else if styling.frames=="stellarsightsposter" then if set.card_language != "简体中文" then 30 else 32
 					else if set.card_language != "简体中文" then 32 else 34)
 					- shrink_name()
 			color:
 				script:
 					if styling.frames=="breakingnews" then rgb(52, 46, 48)
-					else if styling.frames=="magnified" or styling.frames=="ghostfire" or styling.frames=="jpshowcase" or styling.frames=="paranormal" or styling.frames=="bot" or styling.frames=="textless land(unfinity)" or styling.frames=="imaginecritters" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="skyscraper" or styling.frames=="artdeco" or styling.frames=="magicfest" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="textless land(innistrad)" or styling.frames=="textless land(unstable)" or styling.frames=="etched" then "white"
+					else if styling.frames=="stellarsights" or styling.frames=="stellarsightsposter" or styling.frames=="magnified" or styling.frames=="ghostfire" or styling.frames=="jpshowcase" or styling.frames=="paranormal" or styling.frames=="bot" or styling.frames=="textless land(unfinity)" or styling.frames=="imaginecritters" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="skyscraper" or styling.frames=="artdeco" or styling.frames=="magicfest" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="textless land(innistrad)" or styling.frames=="textless land(unstable)" or styling.frames=="etched" then "white"
 					else "black"
 			#影子实现
 			shadow color: script: if (has_shadow()) then rgba(0,0,0,255) else rgba(0,0,0,0)
@@ -1252,6 +1281,8 @@ card style:
 				else if styling.frames=="imaginecritters" then 52
 				else if styling.frames=="paranormal" then 44
 				else if styling.frames=="ghostfire" then 60
+				else if styling.frames=="stellarsights" then 641
+				else if styling.frames=="stellarsightsposter" then 642.5 
 				else 57
 		width: { max(60, card_style.casting_cost.content_width) + 10 }
 		height: 46
@@ -1353,7 +1384,7 @@ card style:
 			script:
 				(if has_identity() then 102 else 64)+
 
-				(if styling.frames=="equinox" then 74
+				(if styling.frames=="equinox" then 10
 				else if styling.frames=="memory corridor" then if set.card_language != "简体中文" then -11 else -12
 				else if is_tll() and styling.frames!="textless land(theros)" then 1000
 				else 0)
@@ -1377,6 +1408,8 @@ card style:
 				else if styling.frames=="memory corridor" then if set.card_language != "简体中文" then 600 else 598
 				else if styling.frames=="jpshowcase" then 650
 				else if styling.frames=="ghostfire" then 547
+				else if styling.frames=="stellarsights" then 704
+				else if styling.frames=="stellarsightsposter" then 684
 				else 597) +
 				if chosen(styling.others, choice:"hide type and rarity") then 1000 else 0
 		width:
@@ -1408,12 +1441,13 @@ card style:
 					(if styling.frames=="pipboy" then if set.card_language != "简体中文" then 21.5 else 30
 					else if styling.frames=="breakingnews" then if set.card_language != "简体中文" then 34.5 else 26.5
 					else if styling.frames=="memory corridor" then if set.card_language != "简体中文" then 20.2 else 23.8
+					else if styling.frames=="stellarsights" or styling.frames=="stellarsightsposter" then if set.card_language != "简体中文" then 25.2 else 28
 					else if set.card_language != "简体中文" then 26 else 32)
 					- shrink_type()
 			color:
 				script:
 					if styling.frames=="breakingnews" then rgb(52, 46, 48)
-					else if styling.frames=="magnified" or styling.frames=="ghostfire" or styling.frames=="jpshowcase" or styling.frames=="paranormal" or styling.frames=="bot" or styling.frames=="imaginecritters" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="artdeco" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="textless land(innistrad)" or styling.frames=="textless land(unstable)"  or styling.frames=="etched" or styling.frames=="memory corridor" then "white"
+					else if styling.frames=="stellarsights" or styling.frames=="stellarsightsposter" or styling.frames=="magnified" or styling.frames=="ghostfire" or styling.frames=="jpshowcase" or styling.frames=="paranormal" or styling.frames=="bot" or styling.frames=="imaginecritters" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="artdeco" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="textless land(innistrad)" or styling.frames=="textless land(unstable)"  or styling.frames=="etched" or styling.frames=="memory corridor" then "white"
 					else "black"
 			separator color: red
 			#影子实现
@@ -1492,6 +1526,8 @@ card style:
 				else if styling.frames=="memory corridor" then 592
 				else if styling.frames=="jpshowcase" then 650
 				else if styling.frames=="ghostfire" then 547
+				else if styling.frames=="stellarsights" then 704
+				else if styling.frames=="stellarsightsposter" then 684
 				else 597
 		width: 88
 		height: 44
@@ -1552,6 +1588,8 @@ card style:
 				else if styling.frames=="memory corridor" then 644
 				else if styling.frames=="jpshowcase" then 710
 				else if styling.frames=="ghostfire" then 610
+				else if styling.frames=="stellarsights" then 755
+				else if styling.frames=="stellarsightsposter" then if set.card_language != "简体中文" then 722 else 727
 				else 660 )
 				+ chop_top()
 		width: 
@@ -1571,6 +1609,7 @@ card style:
 				else if styling.frames=="breakingnews" then 950
 				else if styling.frames=="memory corridor" then 960
 				else if styling.frames=="ghostfire" then 920
+				else if styling.frames=="stellarsightsposter" then 965
 				else 970 )
 				- chop_bot()
 		font:
@@ -1587,7 +1626,7 @@ card style:
 					else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font()
 			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 27 }
 			scale down to: 6
-			color: {if styling.frames=="magnified" or styling.frames=="ghostfire" or styling.frames=="jpshowcase" or styling.frames=="paranormal" or styling.frames=="bot" or styling.frames=="imaginecritters" or styling.frames=="tale" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="tarkir" or styling.frames=="ixalan" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="etched" or styling.frames=="textless land(unstable)" then "white" else "black"}
+			color: {if styling.frames=="stellarsights" or styling.frames=="stellarsightsposter" or styling.frames=="magnified" or styling.frames=="ghostfire" or styling.frames=="jpshowcase" or styling.frames=="paranormal" or styling.frames=="bot" or styling.frames=="imaginecritters" or styling.frames=="tale" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="tarkir" or styling.frames=="ixalan" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="etched" or styling.frames=="textless land(unstable)" then "white" else "black"}
 			#影子实现
 			shadow color: script: if (has_shadow()) then rgba(0,0,0,255) else rgba(0,0,0,0)
 			shadow displacement x: 2.5
@@ -1666,6 +1705,8 @@ card style:
 				else if styling.frames=="breakingnews" then 692
 				else if styling.frames=="jpshowcase" then 726
 				else if styling.frames=="ghostfire" then 626
+				else if styling.frames=="stellarsights" then 765
+				else if styling.frames=="stellarsightsposter" then 732
 				else 676)
 				 - (if styling.frames=="textless land(zendikar)" or styling.frames=="textless land(innistrad)" then 0
 				 else 8)
@@ -1678,6 +1719,8 @@ card style:
 				else if is_tll() then 118
 				else if styling.frames=="breakingnews" then 263
 				else if styling.frames=="jpshowcase" then 229
+				else if styling.frames=="stellarsights" then 212
+				else if styling.frames=="stellarsightsposter" then 245
 				else 278
 		z index: 2
 		render style: image
@@ -1764,7 +1807,7 @@ card style:
 					else 32)
 					- (if styling.shrink_power_text != "" then to_number(styling.shrink_power_text) else 0)
 
-			color: {if styling.frames=="ghostfire" or styling.frames=="jpshowcase" or styling.frames=="paranormal" or styling.frames=="bot" or styling.frames=="imaginecritters" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="artdeco" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="etched" or styling.frames=="memory corridor" then "white" else "black"}
+			color: {if styling.frames=="stellarsights" or styling.frames=="ghostfire" or styling.frames=="jpshowcase" or styling.frames=="paranormal" or styling.frames=="bot" or styling.frames=="imaginecritters" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="artdeco" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="etched" or styling.frames=="memory corridor" then "white" else "black"}
 			separator color: red
 	############################# Card sorting / numbering
 	set code:
@@ -2001,6 +2044,14 @@ extra card field:
 	editable: true
 	show statistics: false
 	save value: true
+
+extra card field:
+	type: choice
+	name: foil layer
+	choice: bar
+	editable: false
+	save value: false
+	show statistics: false
 
 extra card style:
 	dot:
@@ -2248,4 +2299,12 @@ extra card style:
 			color: white
 			weight: {"bold"}
 		visible: {is_serialized()}
-	
+
+	foil layer:
+		left: 0
+		top : 0
+		width: 750
+		height: 1050
+		z index: 9
+		render style: image
+		image: {if styling.overlay == "" then nil else styling.overlay + "/overlay.png"}

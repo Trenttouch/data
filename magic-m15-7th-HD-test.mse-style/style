@@ -484,6 +484,13 @@ extra card field:
 	show statistics: false
 	save value: true
 	
+extra card field:
+	type: choice
+	name: foil layer
+	choice: bar
+	editable: false
+	save value: false
+	show statistics: false
 	
 extra card style:
 	card code:
@@ -581,3 +588,12 @@ extra card style:
 			color: white
 			weight: {"bold"}
 		visible: {is_serialized()}
+
+	foil layer:
+		left: 0
+		top : 0
+		width: 750
+		height: 1050
+		z index: 9
+		render style: image
+		image: {if styling.overlay == "" then nil else styling.overlay + "/overlay.png"}
