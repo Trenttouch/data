@@ -1,0 +1,1076 @@
+mse version: 2.0.0
+game: magic
+short name: HD太空船测试
+full name: HD Spacecraft test
+installer group: magic/m15 style/normal cards
+icon: card-sample.png
+position hint: 001
+
+version: 2021-02-16
+depends on:
+	package: magic.mse-game
+	version: 2014-06-25
+depends on:
+	package: magic-default-image.mse-include
+	version: 2007-09-23
+depends on:
+	package: magic-watermarks.mse-include
+	version: 2007-09-23
+depends on:
+	package: magic-identity-new.mse-include
+	version: 2012-01-22
+depends on:
+	package: magic-mana-large.mse-symbol-font
+	version: 2007-09-23
+depends on:
+	package: magic-mana-small.mse-symbol-font
+	version: 2007-09-23
+depends on:
+	package: magic-mainframe-extras.mse-include
+	version: 2007-09-23
+depends on: 
+	package: magic-rarity.mse-include
+	version: 2013-08-21
+depends on: 
+	package: magic-all-style.mse-include
+	version: 2024-06-30
+
+card width: 750
+card height: 1050
+card dpi: 600
+############################################################## Extra scripts
+init script:
+	# Load scripts for image box
+	include file: /magic-default-image.mse-include/scripts
+	include file: /magic-all-style.mse-include/script
+	
+	# Should hybrids have a grey name?
+	mask_hybrid_with_land := { styling.grey_hybrid_name }
+	
+	#Should multicolor lands with basic land types have a colored name?
+	mask_multi_land_with_color := { styling.colored_multicolor_land_name }
+
+	template_prefix := [
+	card: "normal/"
+	level1: "level/"
+	level2: "level/"
+	crown:"crown/"
+	aliascrown:"alias/"
+	innercrown:"innercrown/"
+	circle:"circle/"
+	pt: "pt/" 
+	stamp: "stamp/" 
+	identity: "/magic-identity-new.mse-include/"
+	]
+
+	template_suffix := [
+	card: "card.png"
+	level1: "1.png"
+	level2: "2.png"
+	crown:"crown.png" 
+	aliascrown:"aliascrown.png"
+	innercrown:"crown.png"
+	circle:".png"
+	pt: ".png"
+	stamp: "stamp.png" 
+	identity: "identity.png"
+	]
+
+	crown_follow := {
+		if input == "crown" or input == "aliascrown" then if is_legend() then "l" else ""
+		else ""
+	}
+	innercrown_follow := {
+		if input != "innercrown" then ""
+		else if styling.inner_crown_style == "companion"
+			then "com"
+		else if styling.inner_crown_style == "nyx" or ( is_nyx() )
+			then "nyx"
+		else ""
+	}
+
+
+	
+	template      := { template_prefix[type] + input + crown_follow(type) + innercrown_follow(type) + template_suffix[type] }
+	land_template := { template_prefix[type] + (if input == "a" then "c" else input) + crown_follow(type) + innercrown_follow(type) + template_suffix[type] }
+	#(if landless(type) then "" else "l")
+
+	# Use land templates for previews because they show more contrast
+	hybrid_previews := "land,hybrid"
+
+	crown_background := { color_background(type:"crown",     base_hybrid:card_hybrid) }
+	innercrown_background := { color_background(type:"innercrown",     base_hybrid:card_hybrid) }
+	aliascrown_background := { color_background(type:"aliascrown",     base_hybrid:card_hybrid) }
+	level1_background := { color_background(type:"level1",     base_hybrid:card_hybrid) }
+	level2_background := { color_background(type:"level2",     base_hybrid:card_hybrid) }
+	circle_background := { color_background(type:"circle",     base_hybrid:card_hybrid) }
+
+	# Use the normal tap symbol
+	mana_t := {
+		if      styling.tap_symbol == "old"        then "old"
+		else if styling.tap_symbol == "diagonal T" then "older"
+		else                                            "new"
+	}
+	
+	# Use guild mana symbols?
+	guild_mana := { styling.use_guild_mana_symbols }
+	
+	# Is the card a promo card?
+	card_shape := {"normal"}
+
+	is_promo := { styling.promo }
+	is_legend := {set.auto_legends and (contains(card.super_type, match:"Legendary") or contains(card.super_type, match:"传奇") or contains(card.type, match:"Mewk")) }
+	is_nyx := { chosen(styling.frames, choice:"nyx") and (contains(card.super_type, match:"Enchantment") or contains(card.super_type, match:"结界")) }
+
+	is_serialized := { chosen(styling.frames, choice:"serialized") }
+	use_phyrexian_font := { chosen(styling.frames, choice:"use phyrexian font") }
+	use_acorn_stamp := { styling.use_acorn_stamp }
+
+	has_alias := { styling.use_alias }
+	mana_sort := {
+		if styling.unsorted_casting_cost then
+			input
+		else
+			sort_text@(order: "XYZI[0123456789]HSCA(WUBRG)")()
+	}
+	ancestral_mana := { styling.ancestral_mana_symbols }
+	has_identity := { styling.color_indicator_dot }
+	is_unsorted := {styling.remove_from_autocount}
+
+	use_main_rarity := { contains(set.mainframe_rarity_name, match: ".png")}
+	un_png := replace@(match:".png", replace: "")
+
+	#############################################################################################################
+	nametype_font_choose :={
+		if styling.nametype_font != "" then styling.nametype_font else 
+		if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0"
+		else if set.card_language == "日本語" then "MotoyaF4Aporo W5 KP"
+		else if set.card_language != "简体中文" then "Beleren Bold"
+		else "华康魏碑 Std W7" 
+	}
+
+	nametop_shift := {
+		if set.card_language == "日本語" then 56
+		else if set.card_language != "简体中文" then 59
+		else 57 + (if use_phyrexian_font() then shrink_name()/2 else 0)
+		+
+		if styling.name_top_shift != "" then to_number(styling.name_top_shift) else 0
+	}
+
+	typetop_shift := {
+		shrink_type()/2 + 598 
+		+
+		if styling.type_top_shift != "" then to_number(styling.type_top_shift) else 0
+	}
+	###################################################################################################################
+
+	two_boxes := {styling.station_textboxes == "one" }
+	three_boxes := {styling.station_textboxes == "two" }
+
+	lv_1_height := { split_12() - textbox_top() }
+	lv_2_height := { (if two_boxes() then textbox_bottom_fix() else split_23()) - split_12() }
+	lv_3_height := { textbox_bottom() - (if two_boxes() then textbox_bottom_fix() else split_23()) }
+
+	l1_center := {textbox_top() + 0.5*lv_1_height()}
+	l2_center := {textbox_top() + lv_1_height() + 0.5*lv_2_height()}
+	l3_center := {textbox_top() + lv_1_height() + lv_2_height() + 0.5*lv_3_height()}
+
+	textbox_top:={ 658 + chop_top() }
+	textbox_bottom:={ 968 - chop_bot() }
+	textbox_bottom_fix:={ 968 }
+	split_12:={ (if three_boxes() then 761 else 813) + to_number( pull_comma_array(styling.level_offset, cell:0, end:true) ) }
+	split_23:={ (if three_boxes() then 864 else textbox_bottom()) + to_number( pull_comma_array(styling.level_offset, cell:1, end:true) ) }
+
+	special_text := { 
+			card.level_1_text + (if card.pt != "" then " [" + card.pt + "]" else "") + "\n"
+			+ (if card.level_1 != "" then "[" + card.level_1 + "] " else "") + card.level_2_text + (if card.pt_2 != "" then " [" + card.pt_2 + "]" else "") + (if card.level_3_text != "" then "\n" else "")
+			+ (if card.level_2 != "" then "[" + card.level_2 + "] " else "") + card.level_3_text + (if card.pt_3 != "" then " [" + card.pt_3 + "]" else "")
+
+
+			#(if card.level_0 != "" then "[" + level_label(0) + " " + card.level_0 + "] " else "") + 
+			#(if card.level_4_text != "" then "\n" else "")
+			#+ (if card.level_3 != "" then "[" + level_label(3) + " " + card.level_3 + "] " else "") + card.level_4_text + (if card.pt_7 != "" then " [" + card.pt_7 + "]" else "")
+	}
+
+############################################################## Set info fields
+set info style:
+	symbol:
+		variation:
+			name: invertedcommon
+			border radius: 0.10
+			fill type: solid
+			fill color:   rgb(255,255,255)
+			border color: rgb(0,0,0)
+############################################################## Extra style options
+styling field:
+	type: choice
+	name: station textboxes
+	description: How many textboxes does this Saga have?
+	choice: one
+	choice: two
+styling field:
+	type: text
+	name: level offset
+	description: Formatted as 1,2,. Move the level boxes down X pixels. Use negative to move up.
+
+### 通用1 ###
+include file: /magic-all-style.mse-include/style1
+
+styling field:
+	type: choice
+	name: inner crown style
+	description: 传奇里边框
+	choice: common
+	choice: nyx
+	choice: companion
+	initial: common
+styling field:
+	type: text
+	name: nametype font
+	description: 牌名字体
+styling field:
+	type: text
+	name: name top shift
+	description: 牌名字体上边距
+styling field:
+	type: text
+	name: type top shift
+	description: 类别字体上边距
+styling field:
+	type: boolean
+	name: use alias
+	description: 启用假名栏
+	initial: no
+styling field:
+	type: multiple choice
+	name: frames
+	description: 使用边框，高优先级边框可能覆盖低优先级边框。
+	choice: nyx
+	choice: use phyrexian font
+	choice: serialized
+	choice: second copyright
+styling field:
+	type: text
+	name: shrink ubcopyright text
+	description: Shrinks ub copyright X pixels
+styling field:
+	type: boolean
+	name: use holofoil stamps
+	description: Change to no to disable rare holofoil stamps
+styling field:
+	type: boolean
+	name: is foil
+	description: 是否为闪卡？
+	initial: no
+	
+styling field:
+	type: boolean
+	name: use acorn stamp
+	description: use acorn stamp if its is Un- card
+	initial: no
+
+### 通用2 ###
+include file: /magic-all-style.mse-include/style2
+
+styling style:
+	use guild mana symbols:
+		choice images:
+			yes: /magic-mana-small.mse-symbol-font/mana_guild_rg.png
+			no:  /magic-mana-small.mse-symbol-font/mana_rg.png
+	tap symbol:
+		render style: both
+		choice images:
+			modern:     /magic-mana-large.mse-symbol-font/mana_t.png
+			old:        /magic-mana-large.mse-symbol-font/mana_t_old.png
+			diagonal T: /magic-mana-large.mse-symbol-font/mana_t_older.png
+	center text:
+		render style: both
+		choice images:
+			always:          /magic.mse-game/icons/center-all-text.png
+			short text only: /magic.mse-game/icons/center-short-text.png
+			never:           /magic.mse-game/icons/center-no-text.png
+	inverted common symbol:
+		choice images:
+			no:  { symbol_variation(symbol: set.symbol, variation: "common") }
+			yes: { symbol_variation(symbol: set.symbol, variation: "invertedcommon") }
+	frames:
+		render style: checklist
+		direction: vertical
+############################################################## Card fields
+card style:
+	############################# Background stuff
+	border color:
+		left:	0
+		top:	0
+		width:	750
+		height:	1050
+		z index: 2
+		mask: {"silverborder"+(if is_legend() then "_crown" else "") + ".png" }
+		visible: {card.border_color != rgb(0,0,0)}
+
+	card color:
+		left:	0
+		top:	0
+		width:	750
+		height:	1050
+		z index: 0
+		render style: image
+		popup style: in place
+		image:{ card_background() }
+		mask: { "normal/frame_mask.png" }
+
+	############################# Name line
+	name:
+		left: { 64 }
+		top: { nametop_shift() }
+		right:  { 682 - max(0, card_style.casting_cost.content_width) }
+		height: {46 - 0.5*shrink_name()}
+		alignment: { if use_phyrexian_font() then "top shrink-overflow" else "bottom shrink-overflow"}
+		padding bottom: 0
+		z index: 5
+		font:
+			name: {nametype_font_choose()}
+			size: { if set.card_language == "日本語" then 26 - shrink_name() else if set.card_language != "简体中文" then 32 - shrink_name() else 34 - shrink_name()}
+			color: black
+	casting cost:
+		right: 692
+		top: 57
+		width: { max(60, card_style.casting_cost.content_width) + 10 }
+		height: 46
+		alignment: middle right
+		font:
+			name: MPlantin
+			size: 30
+		symbol font:
+			name: magic-mana-large
+			size: 30
+			alignment: middle right
+		always symbol: true
+		z index: 5
+		padding top: 0
+	alias:
+		left: 108
+		top: 116
+		width: 536
+		height: 30
+		z index: 5
+		visible: { has_alias() }
+		font:
+			name: { if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font()  }
+			size: 20
+			scale down to: 6
+			color: white
+		alignment: middle center
+	############################# Image
+	image:
+		left:	{ 29 }
+		top:	{ 30 }
+		width:	{ 692 }
+		height:	{ 939 }
+		z index: -1
+		default: {default_image(card.card_color)}
+	############################# Card type   # - (if use_phyrexian_font() then shrink_type()/2 else 0)
+	indicator:
+		left: 62
+		top: 604
+		width: 34
+		height: 34
+		z index: 1
+		render style: image
+		visible: { has_identity() }
+		image: { card_identity() }
+	type:
+		left: { if has_identity() then "102" else "62" }
+		top: { typetop_shift() }
+		width: { (if has_identity() then "580" else "610") - max(44,card_style.rarity.content_width) }
+		height: { 40 - shrink_type() }
+		alignment: {if set.card_language == "日本語" then "middle shrink-overflow" else "top shrink-overflow"}
+		z index: 5
+		padding top: 2
+		font:
+			name: { nametype_font_choose() }
+			size: { if set.card_language == "日本語" then 20 - shrink_name() else if set.card_language != "简体中文" then 26 - shrink_type() else 32 - shrink_type() }
+			color: { "black" }
+			separator color: red
+	rarity:
+		right: {688 + rarity_shift()}
+		top: 598
+		width: 88
+		height: 44
+		z index: 5
+		render style: image
+		alignment: middle right
+		include file: /magic-rarity.mse-include/rarity
+		choice images:
+			# Images based on the set symbol
+			basic land:
+				script:
+					if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "c.png"
+					else if styling.inverted_common_symbol then symbol_variation(symbol: set.symbol, variation: "invertedcommon")
+					else symbol_variation(symbol: set.symbol, variation: "common")
+			common:
+				script:
+					if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "c.png"
+					else if styling.inverted_common_symbol then symbol_variation(symbol: set.symbol, variation: "invertedcommon")
+					else symbol_variation(symbol: set.symbol, variation: "common")
+			uncommon:
+				script:
+					if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "u.png"
+					else symbol_variation(symbol: set.symbol, variation: "uncommon")
+			rare:
+				script:
+					if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "r.png"
+					else symbol_variation(symbol: set.symbol, variation: "rare")
+			mythic rare:
+				script:
+					if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "m.png"
+					else symbol_variation(symbol: set.symbol, variation: "mythic rare")
+			special:
+				script:
+					if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "s.png"
+					else symbol_variation(symbol: set.symbol, variation: "special")
+			masterpiece:
+				script:
+					if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "mp.png"
+					else symbol_variation(symbol: set.masterpiece_symbol, variation: "mythic rare")
+	############################# Text box
+	level 1: #第一圆圈文字
+		z index: 7
+		left: 19
+		top: {l2_center() - 29.5 }
+		width: 59
+		height:	59
+		alignment: center middle
+		font:
+			name: Beleren Bold
+			size: {21}
+			weight: bold
+			color: {"white"}
+		symbol font:
+			name: { styling.text_box_mana_symbols }
+			size: {21}
+	
+	level 2: #第二圆圈文字
+		z index: 7
+		left: 19
+		top: {if three_boxes() then l3_center() - 29.5 else 1200 }
+		width: 59
+		height:	59
+		alignment: center middle
+		font:
+			name: Beleren Bold
+			size: {21}
+			weight: bold
+			color: {"white"}
+		symbol font:
+			name: { styling.text_box_mana_symbols }
+			size: {21}
+
+	level 1 text: #第一描述（蓄势）
+		left: { 58 }
+		top:  { textbox_top() }
+		width: { 636 }
+		bottom: { split_12() }
+		font:
+			name: {if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language == "日本語" then "DFGMaruGothic-Lt" else if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: {if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language == "日本語" then "DFGKyoKaSho-W4" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
+			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 28 }
+			scale down to: 6
+			color: { "black" }
+		symbol font:
+			name: { styling.text_box_mana_symbols }
+			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 28 }
+			scale down to: 6
+		alignment:
+			script:
+				if (styling.center_text == "short text only" and
+				   not contains(match:"\n", card.rule_text) and
+				   card.flavor_text == "<i-flavor></i-flavor>" and
+				   card_style.text.content_lines <= 2) or
+				   styling.center_text == "always"
+				then "middle center"
+				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
+		z index: 5
+		padding left:   6
+		padding right:  {4 + chop_right() + (if card.pt!="" then 96 else 0)}
+		padding bottom: 8
+		line height hard: 1.1
+		line height line: { if chinese_new_font() then 1.6 else 1.5 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: 1.2
+		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
+
+	level 2 text: #第二描述（升级1）
+		left: { 58 }
+		top:  { split_12() }
+		width: { 636 }
+		bottom: { if two_boxes() then textbox_bottom() else split_23() }
+		font:
+			name: {if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language == "日本語" then "DFGMaruGothic-Lt" else if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: {if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language == "日本語" then "DFGKyoKaSho-W4" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
+			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 28 }
+			scale down to: 6
+			color: { "black" }
+		symbol font:
+			name: { styling.text_box_mana_symbols }
+			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 28 }
+			scale down to: 6
+		alignment:
+			script:
+				if (styling.center_text == "short text only" and
+				   not contains(match:"\n", card.rule_text) and
+				   card.flavor_text == "<i-flavor></i-flavor>" and
+				   card_style.text.content_lines <= 2) or
+				   styling.center_text == "always"
+				then "middle center"
+				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
+		z index: 5
+		padding left:   {if card.level_1 != "" then 22 else 6}
+		padding right:  {4 + chop_right() + (if card.pt_2 !="" then 96 else 0)}
+		padding top: 8
+		padding bottom: 8
+		line height hard: 1.1
+		line height line: { if chinese_new_font() then 1.6 else 1.5 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: 1.2
+		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
+
+	level 3 text: #第三描述（异能2）
+		left: { 58 }
+		top:  { if two_boxes() then textbox_bottom() else split_23() }
+		width: { 636 }
+		bottom: { textbox_bottom() }
+		font:
+			name: {if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language == "日本語" then "DFGMaruGothic-Lt" else if set.card_language != "简体中文" then "MPlantin" else ch_font() }
+			italic name: {if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language == "日本語" then "DFGKyoKaSho-W4" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
+			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 28 }
+			scale down to: 6
+			color: { "black" }
+		symbol font:
+			name: { styling.text_box_mana_symbols }
+			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 28 }
+			scale down to: 6
+		alignment:
+			script:
+				if (styling.center_text == "short text only" and
+				   not contains(match:"\n", card.rule_text) and
+				   card.flavor_text == "<i-flavor></i-flavor>" and
+				   card_style.text.content_lines <= 2) or
+				   styling.center_text == "always"
+				then "middle center"
+				else "middle left"
+				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
+		z index: 5
+		padding left:   {if card.level_2 != "" then 22 else 6}
+		padding right:  {4 + chop_right() + (if card.pt_3 !="" then 96 else 0)}
+		padding top: 8
+		padding bottom: 8
+		line height hard: 1.1
+		line height line: { if chinese_new_font() then 1.6 else 1.5 }
+		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
+		line height hard max: 1.2
+		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
+
+	watermark:
+		left: 50
+		top: {676-8}
+		width: 650
+		bottom: { 676 + 278 -8}
+		z index: 1
+		render style: image
+		popup style: in place
+		alignment: middle center
+		include file: /magic-watermarks.mse-include/watermarks
+	############################# PT
+	pt:
+		z index: 5
+		left: 598
+		top: {l1_center()-25}
+		width: 112
+		height:	50
+		alignment: center middle shrink-overflow
+		font:
+			name:  { if use_phyrexian_font() then "GeishaHolidayW00-Regular" else "Beleren Bold" }
+			size: {28 - (if styling.shrink_power_text != "" then to_number(styling.shrink_power_text) else 0)}
+			color: {"white"}
+			separator color: red
+	pt 2:
+		z index: 5
+		left: 598
+		top: {l2_center()-25}
+		width: 112
+		height:	50
+		visible: {two_boxes() or three_boxes()}
+		alignment: center middle shrink-overflow
+		font:
+			name:  { if use_phyrexian_font() then "GeishaHolidayW00-Regular" else "Beleren Bold" }
+			size: {28 - (if styling.shrink_power_text != "" then to_number(styling.shrink_power_text) else 0)}
+			color: {"white"}
+			separator color: red
+	pt 3:
+		z index: 5
+		left: 598
+		top: {if three_boxes() then l3_center()-25 else 1200 }
+		width: 112
+		height:	50
+		visible: {three_boxes()}
+		alignment: center middle shrink-overflow
+		font:
+			name:  { if use_phyrexian_font() then "GeishaHolidayW00-Regular" else "Beleren Bold" }
+			size: {28 - (if styling.shrink_power_text != "" then to_number(styling.shrink_power_text) else 0)}
+			color: {"white"}
+			separator color: red
+	############################# Card sorting / numbering
+	set code:
+		left: 48.5
+		top: 998
+		width: 80
+		height: 20
+		z index: 1
+		alignment: middle left
+		font:
+			name: Magic Gotham Medium
+			size: {13-shrink_setcode()}
+			color: white
+
+	language code:
+		left: 106
+		top: 998
+		width: 10
+		height: 20
+		z index: 1
+		alignment: middle left
+		font:
+			name: Magic Gotham Medium
+			size: {13-shrink_setcode()}
+			color: white
+
+	############################# Copyright stuff
+	illustrator:
+		left: { 166 }
+		top: 997
+		width: 400
+		height: 20
+		z index: 1
+		font:
+			name: Beleren Small Caps Bold
+			size: 14
+			color: white
+	copyright:
+		right: 699
+		top: { if chosen(styling.frames, choice:"second copyright") then 998 else 981 }
+		width: 252
+		height: 20
+		z index: 2
+		alignment: middle right shrink-overflow
+		visible: {not set.automatic_copyright}
+		font:
+			name: mplantin
+			size: 13
+			color: white
+
+
+############################################################## Extra card fields
+extra card field:
+	type: text
+	name: dot
+	script: if styling.is_foil then "★" else "•"
+	save value: false
+	editable: false
+	show statistics: false
+extra card field:
+	type: text
+	name: card code
+	save value: false
+	editable: false
+	script: rarity_code()
+extra card field:
+	type: text
+	name: card number
+	save value: false
+	script:
+		if set.automatic_card_numbers and not styling.remove_from_autocount then
+			forward_editor(prefix: card_number_m15(), field: card.card_code_text) 
+		else
+			forward_editor(prefix: "", field: card.custom_card_number)
+extra card field:
+	type: text
+	name: card extra text
+	save value: true
+	editable: true
+	show statistics: false
+
+extra card field:
+	type: choice
+	name: artist arrow
+	editable: false
+	save value: false
+	choice: white
+extra card field:
+	type: multiple choice
+	name: stamp
+	empty choice: colorless
+	choice: white
+	choice: blue
+	choice: black
+	choice: red
+	choice:
+		name: green
+		line below: true
+	choice: artifact
+	choice: land
+	choice: multicolor
+	choice:
+		name: hybrid
+		line below: true
+	choice:
+		name: horizontal
+		type: radio
+	choice:
+		name: vertical
+		type: radio
+	choice:
+		name: radial
+		type: radio
+	choice:
+		name: diagonal
+		type: radio
+	choice:
+		name: overlay
+		type: radio
+	choice:
+		name: reversed
+	script: card_color_filter(value)
+	default: card_color(casting_cost: card.casting_cost, rules_text: card.rule_text, type: card.super_type, watermark: card.watermark, card_name: card.name)
+extra card field:
+	type: choice
+	name: acorn stamp
+	choice: bar
+	editable: false
+	save value: false
+	show statistics: false
+
+extra card field:
+	type: text
+	name: auto copyright
+	script: set.copyright
+	save value: false
+	editable: false
+	show statistics: false
+extra card field:
+	type: text
+	name: copyright2
+	save value: true
+	editable: true
+	show statistics: false
+
+extra card field:
+	type: choice
+	name: crown
+	script: card.card_color
+	editable: false
+extra card field:
+	type: choice
+	name: innercrown
+	script: card.card_color
+	editable: false
+
+extra card field:
+	type: choice
+	name: serialized
+	choice: bar
+	editable: false
+	save value: false
+	show statistics: false
+extra card field:
+	type: text
+	name: serialized number 1
+	editable: true
+	show statistics: false
+	save value: true
+
+extra card field:
+	type: choice
+	name: foil layer
+	choice: bar
+	editable: false
+	save value: false
+	show statistics: false
+
+extra card field:
+	type: text
+	name: filler text
+	editable: true
+	save value: true
+	show statistics: false
+	multi line: true
+	script:
+		forward_editor(field: card.special_text)
+		special_text()
+
+extra card field:
+	type: choice
+	name: level 2 overlay
+	script: card.card_color
+	choice: mask
+	editable: false
+	show statistics: false
+extra card field:
+	type: choice
+	name: level 3 overlay
+	script: card.card_color
+	choice: mask
+	editable: false
+	show statistics: false
+
+extra card field:
+	type: choice
+	name: level 2 circle
+	save value: false
+	editable: false
+	script: card.card_color
+extra card field:
+	type: choice
+	name: level 3 circle
+	save value: false
+	editable: false
+	script: card.card_color
+
+extra card field:
+	type: choice
+	name: pt box 1
+	script: card.card_color
+	editable: false
+	save value: false
+extra card field:
+	type: choice
+	name: pt box 2
+	script: card.card_color
+	editable: false
+	save value: false
+extra card field:
+	type: choice
+	name: pt box 3
+	script: card.card_color
+	editable: false
+	save value: false
+
+
+extra card style:
+	dot:
+		left: {48.5 + card_style.set_code.content_width}
+		right: {card_style.language_code.left}
+		top: 998
+		#width: 10
+		height: 20
+		z index: 1
+		alignment: middle center
+		font:
+			name: Magic Gotham Medium
+			size: {13-shrink_setcode()}
+			color: white
+	card code:
+		left: 48.5
+		top: 979
+		width: 20
+		height: 20
+		z index: 1
+		font:
+			name: Magic Gotham Medium
+			size: 13
+			color: white
+	card number:
+		left: 69
+		top: 979
+		width: 72.5
+		height: 20
+		z index: 1
+		font:
+			name: Magic Gotham Medium
+			size: 13
+			color: white
+	card extra text:
+		left: 141.5
+		top: 979
+		width: 185
+		height: 20
+		z index: 1
+		font:
+			name: Magic Gotham Medium
+			size: 13
+			color: white
+	artist arrow:
+		left: { 143 }
+		top: 1002
+		width: {24*0.9}
+		height: {15*0.9}
+		z index: 1
+		render style: image
+		image: artist_arrow.png
+
+	stamp:
+		left:	{327}
+		top:	{948}
+		width:	{96}
+		height:	{49}
+		z index: 5
+		visible: {( is_rare() and styling.use_holofoil_stamps ) or use_acorn_stamp()}
+		render style: image
+		image:  { card_stamp() }
+		mask: {""}
+	acorn stamp:
+		left: 0
+		top: 0
+		width:	750
+		height:	1050
+		render style: image
+		image: {"acorn_stamp.png"}
+		z index: 5
+		visible: {use_acorn_stamp()}
+
+	auto copyright:
+		right: 699
+		top: { if chosen(styling.frames, choice:"second copyright") then 998 else 981 }
+		width: 252
+		height: 20
+		z index: 2
+		alignment: middle right shrink-overflow
+		visible: {set.automatic_copyright}
+		font:
+			name: mplantin
+			size: 13
+			color: white
+	copyright2:
+		right: 699
+		top: { if chosen(styling.frames, choice:"second copyright") then 981 else 1111 }
+		width: 252
+		height: 20
+		z index: 2
+		alignment: middle right shrink-overflow
+		visible: { chosen(styling.frames, choice:"second copyright") }
+		font:
+			name: mplantin
+			size:{13 - (if styling.shrink_ubcopyright_text != "" then to_number(styling.shrink_ubcopyright_text) else 0)}
+
+	crown:
+		left: 0
+		top: 0
+		width:	750
+		height:	1050
+		render style: image
+		image:
+			script:
+				if has_alias() then aliascrown_background()
+				else crown_background()
+		z index: 1
+		visible: { is_legend() or has_alias() }
+		mask: {""}
+	innercrown:
+		left: 0
+		top: 0
+		width:	750
+		height:	1050
+		render style: image
+		image: {if styling.inner_crown_style == "common" and not is_nyx() then "" else innercrown_background() }
+		z index: 3
+		visible: { is_legend() }
+		mask: {""}
+
+	serialized:
+		left:	67
+		top:	516
+		width:	178
+		height:	55
+		z index: 5
+		visible: { is_serialized() }
+		render style: image
+		image: { "Serialized.png" }
+
+	serialized number 1:
+		left: {if is_serialized() then (67+5) else 0 }
+		top: {if is_serialized() then (516+5) else 0 }
+		width: {if is_serialized() then (178-10) else 0 }
+		height: {if is_serialized() then (55-10) else 0 }
+		z index: 6
+		alignment: middle center
+		font:
+			name: {"Magic Gotham Medium"}
+			size: {23}
+			color: white
+			weight: {"bold"}
+		visible: {is_serialized()}
+
+	foil layer:
+		left: 0
+		top : 0
+		width: 750
+		height: 1050
+		z index: 9
+		render style: image
+		image: {if styling.overlay == "" then nil else styling.overlay + "/overlay.png"}
+
+	level 2 overlay:
+		left: 0
+		top:  { split_12() }
+		bottom: { if two_boxes() then 968 else split_23() }
+		width: 750
+		z index: 1
+		render style: image
+		image: {level1_background()}
+		visible: {two_boxes() or three_boxes()}
+	level 3 overlay:
+		left: 0
+		top:  { if two_boxes() then 968 else split_23() }
+		bottom: { 968 }
+		width: 750
+		z index: 1
+		render style: image
+		image: {level2_background()}
+		visible: {three_boxes()}
+	level 2 circle:
+		z index: 3
+		left: 19
+		top: { l2_center() - 29.5 }
+		width: 59
+		height:	59
+		render style: image
+		image: {circle_background()}
+		visible: {(two_boxes() or three_boxes()) and card.level_1!=""}
+	level 3 circle:
+		z index: 3
+		left: 19
+		top: {if three_boxes() then l3_center() - 29.5 else 1200 }
+		width: 59
+		height:	59
+		render style: image
+		image: {circle_background()}
+		visible: {three_boxes() and card.level_2!=""}
+	pt box 1:
+		left: 596
+		top: {l1_center()-214/8}
+		width:	{450/4}
+		height:	{214/4}
+		z index: 3
+		visible: { card.pt != ""}
+		render style: image
+		image: {card_ptbox()}
+	pt box 2:
+		left: 596
+		top: {l2_center()-214/8}
+		width:	{450/4}
+		height:	{214/4}
+		z index: 3
+		visible: { card.pt_2 != ""}
+		render style: image
+		image: {card_ptbox()}
+	pt box 3:
+		left: 596
+		top: {if three_boxes() then l3_center()-214/8 else 1200 }
+		width:	{450/4}
+		height:	{214/4}
+		z index: 3
+		visible: { card.pt_3 != ""}
+		render style: image
+		image: {card_ptbox()}

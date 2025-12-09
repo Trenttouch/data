@@ -66,6 +66,10 @@ init script:
 
 	omenlp:"omen/leftpage/" omenrp:"omen/rightpage/" 
 
+	lesson: "lesson/"
+	lessoncrown: "lesson/crown/"
+	lessonaliascrown:"lesson/crown/alias/"
+
 	nyx: "nyx/" 
 	miracle:"miracle/" 
 	aliascrown:"alias/"  innercrown:"innercrown/" 
@@ -84,6 +88,10 @@ init script:
 	ub:"card.png" circuit:"card.png" ubpt: "pt.png"
 
 	omenrp:".png"
+
+	lesson: "card.png"
+	lessoncrown: "crown.png"
+	lessonaliascrown: "aliascrown.png"
 
 	snow:"card.png"
 	spree:"card.png"
@@ -139,7 +147,9 @@ init script:
 		input == "devoid" or 
 		input == "nyx" or 
 		input == "crown" or 
-		input == "aliascrown" or 
+		input == "aliascrown" or
+		input == "lessoncrown" or 
+		input == "lessonaliascrown" or 
 		input == "innercrown" or 
 		input == "pt" or 
 		input == "pt2" or 
@@ -189,9 +199,13 @@ init script:
 	
 	omen_leftpage_background := { color_background(type:"omenlp",     base_hybrid:card_hybrid) }
 	omen_rightpage_background := { color_background(type:"omenrp",     base_hybrid:card_hybrid) }
+
+	lesson_background := { color_background(type:"lesson",     base_hybrid:card_hybrid) }
+	lesson_crown_background := { color_background(type:"lessoncrown",     base_hybrid:card_hybrid) }
+	lesson_aliascrown_background := { color_background(type:"lessonaliascrown",     base_hybrid:card_hybrid) }
 	
 	crown_follow := {
-		if input == "crown" or input == "aliascrown" then if is_legend() then "l" else ""
+		if input == "crown" or input == "aliascrown" or input == "lessoncrown" or input == "lessonaliascrown" then if is_legend() then "l" else ""
 		else ""
 	}
 	
@@ -236,6 +250,10 @@ init script:
 	is_level := { chosen(styling.frames, choice:"leveler") }
 	is_spree := { chosen(styling.frames, choice:"spree") }
 	is_omen := { chosen(styling.frames, choice:"omen") }
+
+	is_lesson := { chosen(styling.frames, choice:"lesson") }
+
+	is_white_border := { chosen(styling.frames, choice:"white border") }
 
 	is_serialized := { chosen(styling.frames, choice:"serialized") }
 	use_acorn_stamp := { styling.use_acorn_stamp }
@@ -379,6 +397,8 @@ styling field:
 	choice: snow
 	choice: spree
 	choice: omen
+	choice: lesson
+	choice: white border
 	choice: use phyrexian font
 	choice: serialized
 	choice: second copyright
@@ -485,7 +505,8 @@ card style:
 		popup style: in place
 		image: 
 			script:
-				if is_spree() then spree_background()
+				if is_lesson() then if is_colorless() and not is_fullart() then "lesson/vcard.png" else lesson_background()
+				else if is_spree() then spree_background()
 				else if is_devoid() then devoid_background()
 				else if is_colorless() and not is_fullart() then "vcard.png"
 				else if is_ub() then ub_background()
@@ -505,7 +526,7 @@ card style:
 		visible: {is_adventure() or is_prototype() or is_omen() }
 	############################# Name line
 	name:
-		left: { 64 }
+		left: { if is_lesson() then 118 else 64 }
 		top: { nametop_shift() }
 		right:  { 682 - max(0, card_style.casting_cost.content_width) }
 		height: {46 - 0.5*shrink_name()}
@@ -1008,24 +1029,24 @@ card style:
 		top: 998
 		width: 80
 		height: 20
-		z index: 1
+		z index: 9
 		alignment: middle left
 		font:
 			name: Magic Gotham Medium
 			size: {13-shrink_setcode()}
-			color: white
+			color: {if is_white_border() then "black" else "white"}
 
 	language code:
 		left: 106
 		top: 998
 		width: 10
 		height: 20
-		z index: 1
+		z index: 9
 		alignment: middle left
 		font:
 			name: Magic Gotham Medium
 			size: {13-shrink_setcode()}
-			color: white
+			color: {if is_white_border() then "black" else "white"}
 
 	############################# Copyright stuff
 	illustrator:
@@ -1033,23 +1054,23 @@ card style:
 		top: 997
 		width: 400
 		height: 20
-		z index: 1
+		z index: 9
 		font:
 			name: Beleren Small Caps Bold
 			size: 14
-			color: white
+			color: {if is_white_border() then "black" else "white"}
 	copyright:
 		right: 699
 		top: { if ((card.pt != "" or is_ub() or chosen(styling.frames, choice:"second copyright"))and not is_level()) then 998 else 981 }
 		width: 252
 		height: 20
-		z index: 2
+		z index: 9
 		alignment: middle right shrink-overflow
 		visible: {not set.automatic_copyright}
 		font:
 			name: mplantin
 			size: 13
-			color: white
+			color: {if is_white_border() then "black" else "white"}
 ############################################################## Extra card fields
 extra card field:
 	type: text
@@ -1372,7 +1393,68 @@ extra card field:
 	editable: false
 	save value: false
 	show statistics: false
-	
+
+extra card field:
+	type: choice
+	name: corner
+	choice: none
+	choice: lesson
+	choice: up
+	choice: down
+	choice: day
+	choice: night
+	choice: moon
+	choice: eldrazi
+	choice: compass
+	choice: artifact
+	choice: creature
+	choice: enchantment
+	choice: instant
+	choice: land
+	choice: multitype
+	choice: sorcery
+	choice: planeswalker
+	choice: structure
+	choice: aetherprint
+	choice: fanclose
+	choice: fanopen
+	choice: meld
+	choice:
+		name: sparker colors
+		choice: white
+		choice: blue
+		choice: black
+		choice: red
+		choice: green
+		choice: multicolor
+		choice: colorless
+	default: "day"
+	script: value
+	save value: true
+	editable: true
+
+extra card field:
+	type: choice
+	choice: bar
+	name: white layer
+	editable: false
+	save value: false
+	show statistics: false
+extra card field:
+	type: choice
+	choice: bar
+	name: white layer stamp
+	editable: false
+	save value: false
+	show statistics: false
+extra card field:
+	type: choice
+	choice: bar
+	name: white layer crown
+	editable: false
+	save value: false
+	show statistics: false
+
 extra card style:
 	dot:
 		left: {48.5 + card_style.set_code.content_width}
@@ -1380,51 +1462,51 @@ extra card style:
 		top: 998
 		#width: 10
 		height: 20
-		z index: 1
+		z index: 9
 		alignment: middle center
 		font:
 			name: Magic Gotham Medium
 			size: {13-shrink_setcode()}
-			color: white
+			color: {if is_white_border() then "black" else "white"}
 
 	card code:
 		left: 48.5
 		top: 979
 		width: 20
 		height: 20
-		z index: 1
+		z index: 9
 		font:
 			name: Magic Gotham Medium
 			size: 13
-			color: white
+			color: {if is_white_border() then "black" else "white"}
 	card number:
 		left: 69
 		top: 979
 		width: 72.5
 		height: 20
-		z index: 1
+		z index: 9
 		font:
 			name: Magic Gotham Medium
 			size: 13
-			color: white
+			color: {if is_white_border() then "black" else "white"}
 	card extra text:
 		left: 141.5
 		top: 979
 		width: 185
 		height: 20
-		z index: 1
+		z index: 9
 		font:
 			name: Magic Gotham Medium
 			size: 13
-			color: white
+			color: {if is_white_border() then "black" else "white"}
 	artist arrow:
 		left: { 143 }
 		top: 1002
 		width: {24*0.9}
 		height: {15*0.9}
-		z index: 1
+		z index: 9
 		render style: image
-		image: artist_arrow.png
+		image: {if is_white_border() then "artist_arrow_b.png" else "artist_arrow.png"}
 
 	pt box:
 		left:	0
@@ -1492,20 +1574,20 @@ extra card style:
 		top: { if ((card.pt != "" or is_ub() or chosen(styling.frames, choice:"second copyright"))and not is_level()) then 998 else 981 }
 		width: 252
 		height: 20
-		z index: 2
+		z index: 9
 		alignment: middle right shrink-overflow
 		visible: {set.automatic_copyright}
 		font:
 			name: mplantin
 			size: 13
-			color: white
+			color: {if is_white_border() then "black" else "white"}
 
 	copyright2:
 		right: 699
 		top: { if is_ub() or chosen(styling.frames, choice:"second copyright") then 981 else 1111 }
 		width: 252
 		height: 20
-		z index: 2
+		z index: 9
 		alignment: 
 			script:
 				if card.pt != "" then "middle left shrink-overflow"
@@ -1514,7 +1596,7 @@ extra card style:
 		font:
 			name: mplantin
 			size:{13 - (if styling.shrink_ubcopyright_text != "" then to_number(styling.shrink_ubcopyright_text) else 0)}
-			color: white
+			color: {if is_white_border() then "black" else "white"}
 
 	flavor bar:
 		left: {if is_omen() then 347.5 else if is_adventure() then 360 else 0}
@@ -1535,7 +1617,7 @@ extra card style:
 		image: bar.png
 		visible: { card.rule_text_2 != "" and remove_tags(card.flavor_text_2) != "" and set.use_flavor_bar }
 	mutate bar:
-		left: 0{if is_adventure() then 348 else 0}
+		left: {if is_adventure() then 348 else 0}
 		top: 790
 		width: {if is_adventure() then 385 else 750}
 		height: 3
@@ -1549,7 +1631,17 @@ extra card style:
 		width:	750
 		height:	1050
 		render style: image
-		image: {if has_alias() then aliascrown_background() else if is_devoid() then "crown/clcrown.png" else if is_colorless() then "crown/wlcrown.png" else crown_background()}
+		image:
+			script:
+				if has_alias() then
+					if is_lesson() then lesson_aliascrown_background()
+					else aliascrown_background()
+				else if is_devoid() then "crown/clcrown.png"
+				else if is_colorless() then
+					if is_lesson() then "lesson/crown/wlcrown.png"
+					else "crown/wlcrown.png"
+				else if is_lesson() then lesson_crown_background()
+				else crown_background()
 		z index: 2
 		visible: { is_legend() or has_alias() }
 		mask: {if is_miracle() and not is_colorless() then "miracle/lmask.png" else ""}
@@ -1746,3 +1838,73 @@ extra card style:
 		render style: image
 		image: {if styling.overlay == "" then nil else styling.overlay + "/overlay.png"}
 
+	white layer:
+		left: 0
+		top : 0
+		width: 750
+		height: 1050
+		z index: 1
+		render style: image
+		image:{"whiteborder/w.png"}
+		visible:{is_white_border()}
+	white layer stamp:
+		left:	{if ( is_ub() or is_circuit() ) then 319 else 327}
+		top:	{if is_white_border() then if ( is_ub() or is_circuit() ) then 945 else 948 else 2000}
+		width:	{if ( is_ub() or is_circuit() ) then 112 else 96 }
+		height:	{if ( is_ub() or is_circuit() ) then 54 else 49 }
+
+		z index: 5
+		render style: image
+		image:
+			script:
+				if (is_ub() or is_circuit()) then "whiteborder/wstampub.png"
+				else "whiteborder/wstamp.png"
+		visible:{is_white_border() and ((is_rare() and styling.use_holofoil_stamps) or ( (is_ub() or is_circuit()) and styling.use_holofoil_stamps) or use_acorn_stamp())}
+	white layer crown:
+		left: 0
+		top : 0
+		width: 750
+		height: 195
+		z index: 2
+		render style: image
+		image:{"whiteborder/wcrown.png"}
+		visible:{is_white_border() and is_legend()}
+
+	corner:
+		left: { if is_lesson() then if is_colorless() and not is_fullart() then 42 else 40 else 1000 }
+		top: { if is_colorless() and not is_fullart() then 48.5 else 49 }
+		height: { 63 }
+		width: { 64 }
+		angle:{ 0 }
+		z index: 5
+		render style: image
+		choice images:
+			lesson: icons/lesson.png
+			up: icons/up.png
+			down: icons/down.png
+			day: icons/sun_circle.png
+			night: icons/night_circle.png
+			eldrazi: icons/eldrazi.png
+			moon: icons/moon.png
+			compass: icons/compass.png
+			artifact: icons/artifact.png
+			creature: icons/creature.png
+			enchantment: icons/enchantment.png
+			instant: icons/instant.png
+			land: icons/land.png
+			multitype: icons/multitype.png
+			sorcery: icons/sorcery.png
+			planeswalker: icons/planeswalker.png
+			structure: icons/structure.png
+			compass: icons/compass.png
+			aetherprint: icons/aetherprint.png
+			fanclose: icons/fanclose.png
+			fanopen: icons/fanopen.png
+			meld: icons/meld.png
+			sparker colors white: icons/wcorner.png
+			sparker colors blue: icons/ucorner.png
+			sparker colors black: icons/bcorner.png
+			sparker colors red: icons/rcorner.png
+			sparker colors green: icons/gcorner.png
+			sparker colors multicolor: icons/mcorner.png
+			sparker colors colorless: icons/ccorner.png

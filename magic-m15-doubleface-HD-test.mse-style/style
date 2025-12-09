@@ -56,7 +56,7 @@ init script:
 	snow:"front/snow/" snow2:"back/snow/"
 	nyx: "nyx/" backnyx: "nyx/back/"
 	miracle:"miracle/"
-	aliascrown:"crown/alias/" aliascrown2:"crown/alias/" crown:"crown/" innercrown:"innercrown/" backcrown:"crown/newback/"
+	aliascrown:"crown/alias/" aliascrown2:"crown/alias/" crown:"crown/" innercrown:"innercrown/" 
 	
 	sac:"crown/showcase/alias/" sac2:"crown/showcase/alias/"
 
@@ -86,7 +86,8 @@ init script:
 	ubbackpt	:"ub/pt/back/"
 	ubstamp		:"ub/stamp/"
 
-
+	backnew:"back/new/"
+	backcrown:"crown/newback/"
 	
 	stamp: "stamp/" identity: "/magic-identity-new.mse-include/" identity2: "/magic-identity-new.mse-include/"
 	]
@@ -97,7 +98,7 @@ init script:
 	snow:"card.png" snow2:"card.png"
 	nyx: "nyx.png" backnyx: "nyx.png"
 	miracle:"miracle.png"
-	aliascrown:"aliascrown.png" aliascrown2:"aliascrown.png" crown:"crown.png" innercrown:"crown.png" backcrown:"lcrown.png"
+	aliascrown:"aliascrown.png" aliascrown2:"aliascrown.png" crown:"crown.png" innercrown:"crown.png" 
 
 	sac:"aliascrown.png" sac2:"aliascrown.png"
 	
@@ -125,6 +126,9 @@ init script:
 	ubbackcrown	:"lcrown.png"
 	ubfrontpt	:"pt.png"
 	ubbackpt	:"pt.png"
+
+	backnew:"card.png"
+	backcrown:"lcrown.png"
 	
 	stamp: "stamp.png" identity: "identity.png" identity2: "identity.png"
 	]
@@ -176,7 +180,6 @@ init script:
 		}
 	
 	crown_background := { color_background(type:"crown",     base_hybrid:card_hybrid) }
-	back_crown_background := { color_background(type:"backcrown",     base_hybrid:card_hybrid) }
 	nyx_background := { color_background(type:"nyx",     base_hybrid:card_hybrid) }
 	backnyx_background := { color_background(type:"backnyx",     base_hybrid:card_hybrid) }
 	miracle_background := { color_background(type:"miracle",     base_hybrid:card_hybrid) }
@@ -210,6 +213,9 @@ init script:
 	ubstamp_background	:= { color_background(type:"ubstamp",     base_hybrid:ubstamp_hybrid) }
 
 	new_pt_background := { color_background(type:"newpt",     base_hybrid:card_hybrid) }
+
+	back_crown_background := { color_background(type:"backcrown",     base_hybrid:card_hybrid) }
+	back_new_background := { color_background(type:"backnew",     base_hybrid:card_hybrid) }
 	
 	crown_follow := {
 		if input == "crown" then if (is_legend() or back_is_legend()) then "l" else ""
@@ -671,7 +677,7 @@ init script:
 	
 
 	back_is_ub := { chosen(styling.back_frames, choice:"universe beyond") }
-
+	back_is_new := { chosen(styling.back_frames, choice:"new back") }
 
 
 
@@ -864,6 +870,7 @@ styling field:
 	choice: saga
 	choice: remove bookmark
 	choice: ---------Dividing Line---------
+	choice: new back
 	choice: nyx
 	choice: devoid
 	choice: fullart
@@ -1035,7 +1042,8 @@ card style:
 		popup style: in place
 		image: 
 			script:
-				if back_is_saga() then if back_is_saga_creature() then backsaga_creature_background() else backsaga_background()
+				if back_is_new() then back_new_background()
+				else if back_is_saga() then if back_is_saga_creature() then backsaga_creature_background() else backsaga_background()
 				else if back_is_ub() then ubback_background()
 				else if chosen(styling.back_frames, choice:"bot") then if back_is_legend() then "back/bot/lcard.png" else "back/bot/card.png"
 				else if back_is_extend() then extendback_background()
@@ -1109,7 +1117,7 @@ card style:
 		alignment: middle center
 
 	name 2:
-		left: {(if back_is_ub() or back_is_saga_creature() then 64 else if chosen(styling.back_frames, choice:"bot") then 64 else 118)+backside_left_fix()}
+		left: {(if back_is_new() or back_is_ub() or back_is_saga_creature() then 64 else if chosen(styling.back_frames, choice:"bot") then 64 else 118)+backside_left_fix()}
 		top: { if set.card_language != "简体中文" then 59 else 57 + (if back_is_map() then -8 else 0) + (if back_is_plw() then -17 else 0) + (if back_use_phyrexian_font() then shrink_name()/2 else 0)}
 		right:  { if back_is_map() then (backside_left_fix() +632) else (682 + backside_left_fix() - max(0, card_style.casting_cost_2.content_width)) }
 		height: {46 - 0.5*shrink_name()}
@@ -3195,11 +3203,11 @@ extra card style:
 		image:
 			script:
 				if back_is_ub() then ubback_crown_background()
+				else if back_is_new() or back_is_saga_creature() then back_crown_background()
 				else if has_alias() then
 					if back_is_showcase() or back_is_extend() then showcasealiascrown_background2()
 					else aliascrown_background2()
 				else if back_is_showcase() or back_is_extend() then showcasecrown_background()
-				else if back_is_saga_creature() then back_crown_background()
 				else crown_background()
 
 		z index: 3
@@ -3382,7 +3390,7 @@ extra card style:
 			sparker colors colorless: icons/ccorner.png
 
 	corner2:
-		left: { (if back_is_ub() or back_is_saga_creature() then 646 else 40) + backside_left_fix() +(if chosen(styling.back_frames, choice:"bot") then 606 else 0) +(if back_is_map() then 1000 else 0) }
+		left: { (if back_is_new() or back_is_ub() or back_is_saga_creature() then 646 else 40) + backside_left_fix() +(if chosen(styling.back_frames, choice:"bot") then 606 else 0) +(if back_is_map() then 1000 else 0) }
 		top: { if back_is_plw() then 36 else 49 }
 		height: { 63 }
 		width: { 64 }

@@ -1030,7 +1030,7 @@ card style:
 		font:
 			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
 			size: { if set.card_language != "简体中文" then 26 - shrink_type() else 32 - shrink_type() }
-			color: { if back_is_devoid() or back_is_map() or back_is_extend() then "black" else "white" }
+			color: { if back_is_devoid() or back_is_map() then "black" else "white" }
 			separator color: red
 	rarity 2:
 		right: {(if back_is_map() then 397 else 688 + rarity_shift()) + backside_left_fix() + (if styling.map_rarity_shift!="" then to_number(styling.map_rarity_shift) else 0)}
@@ -2332,7 +2332,7 @@ extra card field:
 extra card field:
 	type: text
 	name: back type hint
-	script: if front_modal_hint().0 != "" and not is_transform() then front_modal_hint().0 else value
+	#script: if front_modal_hint().0 != "" and not is_transform() then front_modal_hint().0 else value
 	save value: true
 	editable: true
 extra card field:
@@ -2344,7 +2344,7 @@ extra card field:
 extra card field:
 	type: text
 	name: front type hint
-	script: if back_modal_hint().0 != "" and not is_transform() then back_modal_hint().0 else value
+	#script: if back_modal_hint().0 != "" and not is_transform() then back_modal_hint().0 else value
 	save value: true
 	editable: true
 extra card field:
@@ -3417,6 +3417,7 @@ extra card style:
 		z index: 8
 		font:
 			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			italic name: Beleren Bold
 			size: { if set.card_language != "简体中文" then 20 else 22 }
 			color: black
 	front color hint:

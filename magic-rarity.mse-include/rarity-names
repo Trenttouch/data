@@ -14,6 +14,31 @@ choice:
 	line below: true
 
 choice:
+	name: TMT
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	choice: Basic Land
+	choice:
+		name: PZA
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Basic Land
+	line below: true
+
+choice:
+	name: ECL
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	choice: Basic Land
+	line below: true
+
+choice:
 	name: TLA
 	choice: Mythic
 	choice: Rare
@@ -1216,6 +1241,20 @@ choice:
 choice:
 	name: Command
 	choice:
+		name: TMC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Basic Land
+	choice:
+		name: ECC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Basic Land
+	choice:
 		name: EOC
 		choice: Mythic
 		choice: Rare
@@ -1995,6 +2034,12 @@ choice:
 ######################################################### 其他
 choice:
 	name: Other
+	choice:
+		name: MB2
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
 	choice:
 		name: 30A
 		choice: Mythic

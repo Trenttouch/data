@@ -71,7 +71,8 @@ init script:
 		else if type == "card" then
 			if is_fullart_saga() then [card: "fullartsaga/"] else [card: "normal/"]
 		else if type == "crown" then
-			if is_fullart_saga() then if is_ub() then [crown:"crown/float/ub/"] else [crown:"crown/float/"]
+			if is_fullart_saga() then
+				if is_ub() then [crown:"crown/float/ub/"] else [crown:"crown/float/"]
 			else if is_ub() then [crown:"crown/ub/"] else [crown:"crown/"]
 		else if type == "creature" then
 			if is_ub() then [creature:"creature/ub/"] else [creature:"creature/"]
@@ -794,7 +795,7 @@ card style:
 						if is_legend() then "fullartsaga/creature/frame_mask_l.png"
 						else "fullartsaga/creature/frame_mask.png"
 					else "creature/frame_mask.png"
-				else if is_fullart_saga() then if is_legend() then "fullartsaga/creature/frame_mask_l.png" else "fullartsaga/frame_mask.png"
+				else if is_fullart_saga() then if is_legend() then "fullartsaga/frame_mask_l.png" else "fullartsaga/frame_mask.png"
 				else if is_class() or is_case() then "frame_mask_class.png"
 				else if is_ub() then "ub/frame_mask.png"
 				else "frame_mask.png"
@@ -2038,7 +2039,7 @@ extra card style:
 		render style: image
 		image: {nyx_background()}
 		z index: 0
-		visible: {is_nyx() and not is_saga_creature()}
+		visible: {is_nyx() and (not is_saga_creature()) and (not is_fullart_saga())}
 		mask: {"nyx/" + (if is_vehicle() or is_snow() then "v_") + "fullmask.png"}
 	snow overlay:
 		left: 0
@@ -2048,7 +2049,7 @@ extra card style:
 		render style: image
 		image: {snow_background()}
 		z index: 0
-		visible: {is_snow()}
+		visible: {is_snow() and (not is_fullart_saga())}
 		mask: {"snow/snow_mask.png"}
 	vehicle overlay:
 		left: 0
@@ -2059,7 +2060,7 @@ extra card style:
 		image: voverlay_full.png
 		mask: nyx/fullmask.png
 		z index: 0
-		visible: {is_vehicle()}
+		visible: {is_vehicle() and (not is_fullart_saga())}
 	bookmark:
 		left:  {if is_saga_creature() then 32.4627 else 32.5}
 		top:   {if is_saga_creature() then 104.5 else (114.5+(if is_read_ahead() then 54 else 0))}
@@ -2091,7 +2092,10 @@ extra card style:
 				if(card.card_color == "colorless") then
 					if has_alias() then if is_legend() then "alias/wlaliascrown.png"
 						else "alias/waliascrown.png"
-					else "crown/wlcrown.png"
+					else 
+						if is_fullart_saga() then
+							if is_ub() then "crown/float/ub/wlcrown.png" else "crown/float/wlcrown.png"
+						else "crown/wlcrown.png"
 				else if has_alias() then aliascrown_background()
 				else crown_background()
 		z index: 3
