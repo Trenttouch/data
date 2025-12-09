@@ -71,12 +71,6 @@ choice:
 	choice: The Mardu Horde (RWB)
 	choice: The Temur Frontier (GUR)
 choice:
-	name: bend symbol
-	choice: Airbend
-	choice: Waterbend
-	choice: Firebend
-	choice: Earthbend
-choice:
 	name: brood symbol
 	choice: Dromoka's Brood (GW)
 	choice: Ojutai's Brood (WU)
@@ -177,6 +171,12 @@ choice:
 	choice: Maestros
 	choice: Obscura
 	choice: Riveteers
+choice:
+	name: bend symbol
+	choice: Airbend
+	choice: Waterbend
+	choice: Firebend
+	choice: Earthbend
 choice:
 	name: custom watermark
 	choice: one

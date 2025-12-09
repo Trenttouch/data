@@ -201,9 +201,13 @@ init script:
 	stellar:"stellarsights/" stellarpt:"stellarsights/pt/"
 	stellarpost:"stellarsights/poster/"
 
+	elemental:"elemental/"
+	elementalpt:"elemental/pt/"
+
 	unstable:"unstable/"
 	unfinityland:"unfinityland/"
 	zdktll:"tll/zdk/" instll:"tll/ins/" thstll:"tll/ths/"
+	eoetll:"tll/eoe/"
 	colorback:"sourcebook/back/"
 	identity: "/magic-identity-new.mse-include/"
 	]
@@ -277,9 +281,12 @@ init script:
 	stellar:".png" stellarpt:".png"
 	stellarpost:".png"
 
+	elemental:".png"
+	elementalpt:".png"
+
 	unstable:"card.png"
 	unfinityland:"card.png"
-	zdktll:"card.png" instll:"card.png" thstll:"card.png" onetll:"card.png"
+	zdktll:"card.png" instll:"card.png" thstll:"card.png" onetll:"card.png" eoetll:"card.png"
 	colorback:".jpg"
 	crown:"crown.png" pt: "pt.png" identity: "identity.png"
 
@@ -364,7 +371,7 @@ init script:
 	template      := { template_prefix()[type] + input + template_suffix[type] }
 	land_template := { template_prefix()[type] + (if input == "a" then "c" else input) + (if hasland(type) then "l" else "") + template_suffix[type] }
 	
-	hasland := {if input == "magicfest" then true else false }
+	hasland := {if input == "magicfest" or input == "elemental" then true else false }
 	
 	# Use land templates for previews because they show more contrast
 	hybrid_previews := "land,hybrid"
@@ -537,12 +544,16 @@ init script:
 	stellar_pt_background := { color_background(type:"stellarpt",     base_hybrid:special_card_hybrid) }
 	stellarpost_background := { color_background(type:"stellarpost",     base_hybrid:special_card_hybrid) }
 
+	elemental_background := { color_background(type:"elemental",     base_hybrid:card_hybrid) }
+	elemental_pt_background := { color_background(type:"elementalpt",     base_hybrid:card_hybrid) }
+
 	# texless_background := { color_background(type:"texless",     base_hybrid:card_hybrid) }
 
 	zdktll_background := { color_background(type:"zdktll",     base_hybrid:card_hybrid) }
 	instll_background := { color_background(type:"instll",     base_hybrid:card_hybrid) }
 	thstll_background := { color_background(type:"thstll",     base_hybrid:card_hybrid) }
 	onetll_background := { color_background(type:"onetll",     base_hybrid:card_hybrid) }
+	eoetll_background := { color_background(type:"eoetll",     base_hybrid:card_hybrid) }
 	
 	unstable_background := { color_background(type:"unstable",     base_hybrid:card_hybrid) }
 	unfinityland_background := { color_background(type:"unfinityland",     base_hybrid:card_hybrid) }
@@ -565,6 +576,7 @@ init script:
 		else if styling.frames=="textless land(unstable)" then unstable_background()
 		else if styling.frames=="textless land(unfinity)" then unfinityland_background()
 		else if styling.frames=="textless land(All will be one)" then onetll_background()
+		else if styling.frames=="textless land(Edge of Eternities)" then eoetll_background()
 		else if styling.frames=="dnd sourcebook" then dndsb_background()
 		else if styling.frames=="sketch" then sketch_background()
 		else if styling.frames=="etched" then if card.card_color == "land" then "etched/clcard.png" else etched_background()
@@ -601,6 +613,7 @@ init script:
 		else if styling.frames=="draconic" then draconic_background()
 		else if styling.frames=="stellarsights" then stellar_background()
 		else if styling.frames=="stellarsightsposter" then stellarpost_background()
+		else if styling.frames=="elemental" then elemental_background()
 
 		else if styling.frames=="neon" and is_vehicle() and chosen(choice:"colorless", card.card_color) then "neon/voverlay.png"
 		else if styling.frames=="neon" then if (is_rare() and styling.use_holofoil_stamps) then neon_background() else neon_background2()
@@ -621,6 +634,7 @@ init script:
 		else if styling.frames=="textless land(theros)" then "tll/ths/frame_mask.png"
 		else if (styling.frames=="textless land(All will be one)" and is_ub()) then "tll/one/ub/frame_mask.png"
 		else if styling.frames=="textless land(All will be one)" then "tll/one/frame_mask.png"
+		else if styling.frames=="textless land(Edge of Eternities)" then "tll/eoe/frame_mask.png"
 		else if styling.frames=="dnd sourcebook" then "sourcebook/frame_mask.png"
 		else if styling.frames=="sketch" then "sketch/frame_mask.png"
 		else if styling.frames=="textless land(unstable)" then "unstable/frame_mask.png"
@@ -660,6 +674,7 @@ init script:
 		else if styling.frames=="draconic" then "draconic/frame_mask.png"
 		else if styling.frames=="stellarsights" then "stellarsights/frame_mask.png"
 		else if styling.frames=="stellarsightsposter" then "stellarsights/poster/frame_mask.png"
+		else if styling.frames=="elemental" then "elemental/frame_mask.png"
 		else "frame_mask.png"
 	}
 	
@@ -700,6 +715,7 @@ init script:
 		else if styling.frames=="ghostfire" then ""
 		else if styling.frames=="draconic" then draconic_pt_background()
 		else if styling.frames=="stellarsights" then stellar_pt_background()
+		else if styling.frames=="elemental" then if card.card_color == "colorless" then "elemental/pt/w.png" else elemental_pt_background()
 		else card_ptbox()
 	}
 	
@@ -720,6 +736,7 @@ init script:
 		else if styling.frames=="textless land(All will be one)" then "28,30,693,946"
 		else if styling.frames=="textless land(unstable)" then "0,0,750,975"
 		else if styling.frames=="textless land(unfinity)" then "0,0,750,975"
+		else if styling.frames=="textless land(Edge of Eternities)" then "0,0,750,975"
 		else if styling.frames=="artdeco" then "33,99,684,488"
 		else if styling.frames=="skyscraper" then "67,118,616,465"
 		else if styling.frames=="fang" then "59.5,117,631,464"
@@ -750,6 +767,7 @@ init script:
 		else if styling.frames=="draconic" then "25,120,698,469"
 		else if styling.frames=="stellarsights" then "0,0,750,969"
 		else if styling.frames=="stellarsightsposter" then "0,0,750,974"
+		else if styling.frames=="elemental" then if card.card_color == "colorless" then "0,0,750,914" else "0,0,750,585"
 		else "56,117,638,468"
 	}
 	
@@ -786,6 +804,7 @@ init script:
 		else if styling.frames=="jpshowcase" then jpshowcase_stamp_background()
 		else if styling.frames=="draconic" then draconic_stamp_background()
 		else if styling.frames=="stellarsights" or styling.frames=="stellarsightsposter" then "stellarsights/stamp.png"
+		else if styling.frames=="elemental" then "elemental/stamp.png"
 		else "foil_stamp.png"
 	}
 	stamp_img_set := {
@@ -814,6 +833,7 @@ init script:
 		else if styling.frames=="ghostfire" then "327,942,96,49"
 		else if styling.frames=="draconic" then "295.5223,939.1791,158.9552,68.6567"
 		else if styling.frames=="stellarsights" or styling.frames=="stellarsightsposter" then "339.5, 958.5, 74, 40.5"
+		else if styling.frames=="elemental" then "335.8209,951.4925,79.1045,41.4179"
 		else "327,947,96,49"
 	}
 	stamp_img_left := {to_number(pull_comma_array(stamp_img_set(), cell:0, end:false))}
@@ -998,12 +1018,15 @@ styling field:
 	choice: stellarsights
 	choice: stellarsightsposter
 
+	choice: elemental
+
 	choice: textless land(zendikar)
 	choice: textless land(innistrad)
 	choice: textless land(theros)
 	choice: textless land(unstable)
 	choice: textless land(All will be one)
 	choice: textless land(unfinity)
+	choice: textless land(Edge of Eternities)
 	initial: etched
 styling field:
 	type: text
@@ -1137,6 +1160,7 @@ styling style:
 			textless land(theros) : 		tll/ths/ucard.png
 			textless land(unstable) : 		unstable/ucard.png
 			textless land(All will be one): tll/one/ucard.png
+			textless land(Edge of Eternities): tll/eoe/ucard.png
 			textless land(unfinity) : 		unfinityland/ucard.png
 			imaginecritters: 				imaginecritters/card.png
 			paranormal:						paranormal/u.png
@@ -1144,6 +1168,7 @@ styling style:
 			ghostfire:						ghostfire/card.png
 			draconic:						draconic/u.png
 			sketch:							sketch/ucard.png
+			elemental:						elemental/u.png
 
 	others:
 		render style: checklist
@@ -1181,7 +1206,8 @@ card style:
 				else if styling.frames=="equinox" then 74
 				else if styling.frames=="memory corridor" then if set.card_language != "简体中文" then 57 else 56
 				else if styling.frames=="stellarsights" then 51
-				else if  styling.frames=="stellarsightsposter" then 60
+				else if styling.frames=="stellarsightsposter" then 60
+				else if styling.frames=="textless land(Edge of Eternities)" then 150
 				else 64
 		top: 
 			script:
@@ -1205,11 +1231,13 @@ card style:
 				else if styling.frames=="ghostfire" then 60
 				else if styling.frames=="stellarsights" then if set.card_language != "简体中文" then 641 else 640
 				else if styling.frames=="stellarsightsposter" then if set.card_language != "简体中文" then 642.5 else 641.5
+				else if styling.frames=="textless land(Edge of Eternities)" then 893
 				else 57
 		right:
 			script:
 				if styling.frames=="breakingnews" then if set.card_language != "简体中文" then (375 + max(100,card_style.name.content_width)*0.5) else (375 + max(100,card_style.name.content_width)*0.446)
 				else if (styling.frames=="textless land(unstable)" or styling.frames=="textless land(unfinity)") and styling.center_name then 686
+				else if styling.frames=="textless land(Edge of Eternities)" then 600
 				else (682 - max(0, card_style.casting_cost.content_width))
 		height: {if styling.frames=="breakingnews" then (70) else (46 - 0.5*shrink_name())}
 		alignment:
@@ -1217,7 +1245,7 @@ card style:
 				if chosen(styling.others, choice:"use phyrexian font") then "top shrink-overflow"
 				else if styling.frames=="pipboy" then "middle shrink-overflow"
 				else if styling.frames=="breakingnews" and set.card_language == "简体中文" then "middle stretch-overflow"
-				else if styling.center_name then "bottom center shrink-overflow"
+				else if styling.center_name or styling.frames=="textless land(Edge of Eternities)" then "bottom center shrink-overflow"
 				else "bottom shrink-overflow"
 		padding bottom: 0
 		z index: 4
@@ -1245,7 +1273,7 @@ card style:
 			color:
 				script:
 					if styling.frames=="breakingnews" then rgb(52, 46, 48)
-					else if styling.frames=="stellarsights" or styling.frames=="stellarsightsposter" or styling.frames=="magnified" or styling.frames=="ghostfire" or styling.frames=="jpshowcase" or styling.frames=="paranormal" or styling.frames=="bot" or styling.frames=="textless land(unfinity)" or styling.frames=="imaginecritters" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="skyscraper" or styling.frames=="artdeco" or styling.frames=="magicfest" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="textless land(innistrad)" or styling.frames=="textless land(unstable)" or styling.frames=="etched" then "white"
+					else if styling.frames=="elemental" or styling.frames=="textless land(Edge of Eternities)" or styling.frames=="stellarsights" or styling.frames=="stellarsightsposter" or styling.frames=="magnified" or styling.frames=="ghostfire" or styling.frames=="jpshowcase" or styling.frames=="paranormal" or styling.frames=="bot" or styling.frames=="textless land(unfinity)" or styling.frames=="imaginecritters" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="skyscraper" or styling.frames=="artdeco" or styling.frames=="magicfest" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="textless land(innistrad)" or styling.frames=="textless land(unstable)" or styling.frames=="etched" then "white"
 					else "black"
 			#影子实现
 			shadow color: script: if (has_shadow()) then rgba(0,0,0,255) else rgba(0,0,0,0)
@@ -1282,7 +1310,8 @@ card style:
 				else if styling.frames=="paranormal" then 44
 				else if styling.frames=="ghostfire" then 60
 				else if styling.frames=="stellarsights" then 641
-				else if styling.frames=="stellarsightsposter" then 642.5 
+				else if styling.frames=="stellarsightsposter" then 642.5
+				else if styling.frames=="elemental" then 60
 				else 57
 		width: { max(60, card_style.casting_cost.content_width) + 10 }
 		height: 46
@@ -1410,6 +1439,7 @@ card style:
 				else if styling.frames=="ghostfire" then 547
 				else if styling.frames=="stellarsights" then 704
 				else if styling.frames=="stellarsightsposter" then 684
+				else if styling.frames=="textless land(Edge of Eternities)" then 1100
 				else 597) +
 				if chosen(styling.others, choice:"hide type and rarity") then 1000 else 0
 		width:
@@ -1447,7 +1477,7 @@ card style:
 			color:
 				script:
 					if styling.frames=="breakingnews" then rgb(52, 46, 48)
-					else if styling.frames=="stellarsights" or styling.frames=="stellarsightsposter" or styling.frames=="magnified" or styling.frames=="ghostfire" or styling.frames=="jpshowcase" or styling.frames=="paranormal" or styling.frames=="bot" or styling.frames=="imaginecritters" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="artdeco" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="textless land(innistrad)" or styling.frames=="textless land(unstable)"  or styling.frames=="etched" or styling.frames=="memory corridor" then "white"
+					else if styling.frames=="elemental" or styling.frames=="stellarsights" or styling.frames=="stellarsightsposter" or styling.frames=="magnified" or styling.frames=="ghostfire" or styling.frames=="jpshowcase" or styling.frames=="paranormal" or styling.frames=="bot" or styling.frames=="imaginecritters" or styling.frames=="crystal" or styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or styling.frames=="artdeco" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="textless land(innistrad)" or styling.frames=="textless land(unstable)"  or styling.frames=="etched" or styling.frames=="memory corridor" then "white"
 					else "black"
 			separator color: red
 			#影子实现
@@ -1516,7 +1546,7 @@ card style:
 				if styling.frames=="equinox" then 598
 				else if styling.frames=="zendikar rising expeditions" or styling.frames=="zendikar expeditions" or is_tll() then 864 
 				else if chosen(styling.others, choice:"hide type and rarity") then 1200
-				else if styling.frames=="textless land(theros)" or styling.frames=="textless land(All will be one)" then 894
+				else if styling.frames=="textless land(theros)" or styling.frames=="textless land(All will be one)" or styling.frames=="textless land(Edge of Eternities)" then 894
 				else if styling.frames=="dnd sourcebook" then 603
 				else if styling.frames=="ravnica" or styling.frames=="storybook" or styling.frames=="storybook adventure" then 599
 				else if styling.frames=="tarkir" then 595
@@ -1577,7 +1607,7 @@ card style:
 				else if styling.frames=="phyrexian" then 63
 				else if styling.frames=="memory corridor" then 54
 				else 58)
-				+ (if is_tll() or styling.frames=="textless land(theros)" or styling.frames=="textless land(All will be one)" or styling.frames=="magicfest" then 1000
+				+ (if is_tll() or styling.frames=="textless land(theros)" or styling.frames=="textless land(All will be one)" or styling.frames=="textless land(Edge of Eternities)" or styling.frames=="magicfest" then 1000
 				else 0)
 		top: 
 			script:
@@ -1692,13 +1722,13 @@ card style:
 	watermark:
 		left: 
 			script:
-				if styling.frames=="textless land(All will be one)" then 36
+				if styling.frames=="textless land(All will be one)" or styling.frames=="textless land(Edge of Eternities)" then 36
 				else if is_tll() then 317
 				else if styling.frames=="textless land(theros)" or styling.frames=="magicfest" then 1000
 				else 50
 		top:
 			script:
-				(if styling.frames=="textless land(All will be one)" then 888
+				(if styling.frames=="textless land(All will be one)" or styling.frames=="textless land(Edge of Eternities)" then 888
 				else if styling.frames=="zendikar rising expeditions" then 605
 				else if styling.frames=="zendikar expeditions" then 630
 				else if is_tll() then 825
@@ -1710,10 +1740,10 @@ card style:
 				else 676)
 				 - (if styling.frames=="textless land(zendikar)" or styling.frames=="textless land(innistrad)" then 0
 				 else 8)
-		width: {if styling.frames=="textless land(All will be one)" then 75 else if is_tll() then 118 else 650}
+		width: {if styling.frames=="textless land(All will be one)" or styling.frames=="textless land(Edge of Eternities)" then 75 else if is_tll() then 118 else 650}
 		height: 
 			script:
-				if styling.frames=="textless land(All will be one)" then 75
+				if styling.frames=="textless land(All will be one)" or styling.frames=="textless land(Edge of Eternities)" then 75
 				else if styling.frames=="zendikar rising expeditions" then 245
 				else if styling.frames=="zendikar expeditions" then 220
 				else if is_tll() then 118
@@ -2053,6 +2083,26 @@ extra card field:
 	save value: false
 	show statistics: false
 
+extra card field:
+	type: choice
+	name: elemental icon
+	choice: none
+	choice: def
+	choice: air
+	choice: water
+	choice: fire
+	choice: earth
+	choice: spirit
+	choice: white
+	choice: blue
+	choice: black
+	choice: red
+	choice: green
+	default: "def"
+	script: value
+	save value: true
+	editable: true
+
 extra card style:
 	dot:
 		left: {48.5 + card_style.set_code.content_width}
@@ -2308,3 +2358,23 @@ extra card style:
 		z index: 9
 		render style: image
 		image: {if styling.overlay == "" then nil else styling.overlay + "/overlay.png"}
+
+	elemental icon:
+		left: { if styling.frames=="elemental" then 25.746 else -200 }
+		top: { if styling.frames=="elemental" then 512.687 else -200 }
+		height: { 72.761 }
+		width: { 73.134 }
+		z index: 5
+		render style: image
+		choice images:
+			def: 	elemental/icon/def.png
+			air: 	elemental/icon/air.png
+			water: 	elemental/icon/water.png
+			fire: 	elemental/icon/fire.png
+			earth: 	elemental/icon/earth.png
+			spirit: elemental/icon/spirit.png
+			white: 	elemental/icon/white.png
+			blue: 	elemental/icon/blue.png
+			black: 	elemental/icon/black.png
+			red:    elemental/icon/red.png
+			green:  elemental/icon/green.png

@@ -58,12 +58,6 @@ choice images:
 	clan symbol The Sultai Brood (BGU):    	script: if set.blend_with_colors then spotlight_watermark_clan_blend("/magic-watermarks.mse-include/watermark_sultai.png,536,920") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/watermark_sultai.png"))
 	clan symbol The Mardu Horde (RWB):    	script: if set.blend_with_colors then spotlight_watermark_clan_blend("/magic-watermarks.mse-include/watermark_mardu.png,900,514") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/watermark_mardu.png"))
 	clan symbol The Temur Frontier (GUR):  	script: if set.blend_with_colors then spotlight_watermark_clan_blend("/magic-watermarks.mse-include/watermark_temur.png,886,940") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/watermark_temur.png"))
-	
-	bend symbol Airbend:    	script: if set.blend_with_colors then spotlight_watermark_blend("/magic-watermarks.mse-include/air.png,929,900") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/air.png"))
-	bend symbol Waterbend:  	script: if set.blend_with_colors then spotlight_watermark_blend("/magic-watermarks.mse-include/water.png,899,900") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/water.png"))
-	bend symbol Firebend:    	script: if set.blend_with_colors then spotlight_watermark_blend("/magic-watermarks.mse-include/fire.png,766,900") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/fire.png"))
-	bend symbol Earthbend:   	script: if set.blend_with_colors then spotlight_watermark_blend("/magic-watermarks.mse-include/earth.png,903,900") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/earth.png"))
-	
 
 	brood symbol Dromoka's Brood (GW):    	script: if set.blend_with_colors then spotlight_watermark_clan_blend("/magic-watermarks.mse-include/watermark_dromoka.png") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/watermark_dromoka.png"))
 	brood symbol Ojutai's Brood (WU):    	script: if set.blend_with_colors then spotlight_watermark_clan_blend("/magic-watermarks.mse-include/watermark_ojutai.png") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/watermark_ojutai.png"))
@@ -151,6 +145,11 @@ choice images:
 	capenna symbols Maestros:		script: spotlight_watermark_blend("/magic-watermarks.mse-include/Maestros.png")
 	capenna symbols Obscura:		script: spotlight_watermark_blend("/magic-watermarks.mse-include/Obscura.png")
 	capenna symbols Riveteers:		script: spotlight_watermark_blend("/magic-watermarks.mse-include/Riveteers.png")
+
+	bend symbol Airbend:    	script: if set.blend_with_colors then spotlight_watermark_blend("/magic-watermarks.mse-include/air.png,929,900") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/air.png"))
+	bend symbol Waterbend:  	script: if set.blend_with_colors then spotlight_watermark_blend("/magic-watermarks.mse-include/water.png,899,900") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/water.png"))
+	bend symbol Firebend:    	script: if set.blend_with_colors then spotlight_watermark_blend("/magic-watermarks.mse-include/fire.png,766,900") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/fire.png"))
+	bend symbol Earthbend:   	script: if set.blend_with_colors then spotlight_watermark_blend("/magic-watermarks.mse-include/earth.png,903,900") else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/earth.png"))
 
 	custom watermark one:    	script: if set.blend_with_colors then spotlight_watermark_blend(custom_watermark_1()) else set_combine(combine:"shadow", input:set_alpha(alpha: opacity_not_blend(), input:custom_watermark_1()))
 	custom watermark two:    	script: if set.blend_with_colors then spotlight_watermark_blend(custom_watermark_2()) else set_combine(combine:"shadow", input:set_alpha(alpha: opacity_not_blend(), input:custom_watermark_2()))

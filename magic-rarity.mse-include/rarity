@@ -2,6 +2,23 @@
 # Edit by Heavenford 2017.1.14
 
 choice images:
+	TMT Mythic: 	/magic-rarity.mse-include/TMT_M.png
+	TMT Rare: 		/magic-rarity.mse-include/TMT_R.png
+	TMT Uncommon: 	/magic-rarity.mse-include/TMT_U.png
+	TMT Common: 	/magic-rarity.mse-include/TMT_C.png
+	TMT Basic Land: /magic-rarity.mse-include/TMT_C.png
+	TMT PZA Mythic: 	/magic-rarity.mse-include/PZA_M.png
+	TMT PZA Rare: 		/magic-rarity.mse-include/PZA_R.png
+	TMT PZA Uncommon: 	/magic-rarity.mse-include/PZA_U.png
+	TMT PZA Common: 	/magic-rarity.mse-include/PZA_C.png
+	TMT PZA Basic Land: /magic-rarity.mse-include/PZA_C.png
+
+	ECL Mythic: 	/magic-rarity.mse-include/ECL_M.png
+	ECL Rare: 		/magic-rarity.mse-include/ECL_R.png
+	ECL Uncommon: 	/magic-rarity.mse-include/ECL_U.png
+	ECL Common: 	/magic-rarity.mse-include/ECL_C.png
+	ECL Basic Land: /magic-rarity.mse-include/ECL_C.png
+
 	TLA Mythic: 	/magic-rarity.mse-include/TLA_M.png
 	TLA Rare: 		/magic-rarity.mse-include/TLA_R.png
 	TLA Uncommon: 	/magic-rarity.mse-include/TLA_U.png
@@ -781,6 +798,18 @@ choice images:
 	Duel EVG Uncommon: /magic-rarity.mse-include/EVG_U.png
 	Duel EVG Common: /magic-rarity.mse-include/EVG_C.png
 
+	Command TMC Mythic: 	/magic-rarity.mse-include/TMC_M.png
+	Command TMC Rare: 		/magic-rarity.mse-include/TMC_R.png
+	Command TMC Uncommon: 	/magic-rarity.mse-include/TMC_U.png
+	Command TMC Common: 	/magic-rarity.mse-include/TMC_C.png
+	Command TMC Basic Land: /magic-rarity.mse-include/TMC_C.png
+		
+	Command ECC Mythic: 	/magic-rarity.mse-include/ECC_M.png
+	Command ECC Rare: 		/magic-rarity.mse-include/ECC_R.png
+	Command ECC Uncommon: 	/magic-rarity.mse-include/ECC_U.png
+	Command ECC Common: 	/magic-rarity.mse-include/ECC_C.png
+	Command ECC Basic Land: /magic-rarity.mse-include/ECC_C.png
+
 	Command EOC Mythic: 	/magic-rarity.mse-include/EOC_M.png
 	Command EOC Rare: 		/magic-rarity.mse-include/EOC_R.png
 	Command EOC Uncommon: 	/magic-rarity.mse-include/EOC_U.png
@@ -1341,6 +1370,11 @@ choice images:
 	Masters TD0 Uncommon: 	/magic-rarity.mse-include/TD0_U.png
 	Masters TD0 Common: 	/magic-rarity.mse-include/TD0_C.png
 	
+	Other MB2 Mythic: 		/magic-rarity.mse-include/MB2_M.png
+	Other MB2 Rare: 		/magic-rarity.mse-include/MB2_R.png
+	Other MB2 Uncommon: 	/magic-rarity.mse-include/MB2_U.png
+	Other MB2 Common: 		/magic-rarity.mse-include/MB2_C.png
+
 	Other 30A Mythic: 		/magic-rarity.mse-include/30A_M.png
 	Other 30A Rare: 		/magic-rarity.mse-include/30A_R.png
 	Other 30A Uncommon: 	/magic-rarity.mse-include/30A_U.png
