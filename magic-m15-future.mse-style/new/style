@@ -495,7 +495,7 @@ card style:
 		height:	34.63
 		alignment: center middle
 		font:
-			name: { if styling.beleren then "Beleren Bold" else "MatrixBoldSmallCaps" }
+			name: { if styling.beleren then "Beleren" else "MatrixBoldSmallCaps" }
 			size: { if styling.beleren then 14 else 16 }
 			weight: bold
 			color: rgb(255,255,255)
@@ -507,7 +507,7 @@ card style:
 		height:	34.63
 		alignment: center middle
 		font:
-			name: { if styling.beleren then "Beleren Bold" else "MPlantin" }
+			name: { if styling.beleren then "Beleren" else "MPlantin" }
 			size: { if styling.beleren then 12 else 11 }
 			weight: bold
 			color: rgb(255,255,255)
@@ -519,7 +519,7 @@ card style:
 		height:	34.63
 		alignment: center middle
 		font:
-			name: { if styling.beleren then "Beleren Bold" else "MPlantin" }
+			name: { if styling.beleren then "Beleren" else "MPlantin" }
 			size: { if styling.beleren then 12 else 11 }
 			weight: bold
 			color: rgb(255,255,255)
@@ -531,7 +531,7 @@ card style:
 		height:	34.63
 		alignment: center middle
 		font:
-			name: { if styling.beleren then "Beleren Bold" else "MPlantin" }
+			name: { if styling.beleren then "Beleren" else "MPlantin" }
 			size: { if styling.beleren then 12 else 11 }
 			weight: bold
 			color: rgb(255,255,255)
@@ -543,7 +543,7 @@ card style:
 		height: 10
 		z index: 4
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -698,7 +698,7 @@ extra card style:
 		height: 10
 		z index: 4
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold

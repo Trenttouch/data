@@ -55,6 +55,26 @@ set field:
 	name: shorten types for rarity
 	description: Makes the typeline not run into the rarity symbol. Disable if you don't use rarity symbols.
 
+set field:
+	type: info
+	name: Rarity links (Set images in magic-rarity.mse-include/ )
+
+set field:
+	type: text
+	name: custom Rarity M
+	description: Set this image in magic-rarity.mse-include as Custom Rarity M
+set field:
+	type: text
+	name: custom Rarity R
+	description: Set this image in magic-rarity.mse-include as Custom Rarity R
+set field:
+	type: text
+	name: custom Rarity U
+	description: Set this image in magic-rarity.mse-include as Custom Rarity U
+set field:
+	type: text
+	name: custom Rarity C
+	description: Set this image in magic-rarity.mse-include as Custom Rarity C & L
 
 set field:
 	type: info
@@ -186,6 +206,22 @@ set field:
 	type: color
 	name: border color
 	description: 默认的边框颜色
+	choice:
+		name: 黑色
+		color: rgb(0,0,0)
+	choice:
+		name: 白色
+		color: rgb(255,255,255)
+	choice:
+		name: 银色
+		color: rgb(166,176,186)
+	choice:
+		name: 金色
+		color: rgb(170,137,75)
+set field:
+	type: color
+	name: border color 2
+	description: 默认的边框颜色(背面)
 	choice:
 		name: 黑色
 		color: rgb(0,0,0)

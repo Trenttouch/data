@@ -270,7 +270,7 @@ card style:
 		padding bottom: 0
 		z index: 1
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then 15 else 16 }
 			color: black
 	name 2:
@@ -283,7 +283,7 @@ card style:
 		padding bottom: 0
 		z index: 1
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then 15 else 16 }
 			color: black
 	casting cost:
@@ -382,7 +382,7 @@ card style:
 		z index: 1
 		padding top: 0
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then 13 else 14 }
 			color: black
 			separator color: red
@@ -396,7 +396,7 @@ card style:
 		z index: 1
 		padding top: 0
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then 13 else 14 }
 			color: black
 			separator color: red
@@ -534,7 +534,7 @@ card style:
 		height:	21
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 14
 			color: black
 			separator color: red
@@ -547,7 +547,7 @@ card style:
 		alignment: center middle shrink-overflow
 		angle: 270
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 14
 			color: black
 			separator color: red
@@ -559,7 +559,7 @@ card style:
 		height: 10
 		z index: 1
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -571,7 +571,7 @@ card style:
 		height: 10
 		z index: 1
 		font:
-			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std W7"}
+			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std"}
 			size: 7.25
 			color: white
 	illustrator 2:
@@ -581,7 +581,7 @@ card style:
 		height: 10
 		z index: 1
 		font:
-			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std W7"}
+			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std"}
 			size: 7.25
 			color: white
 		visible: { contains(styling.other_options, match:"two illustrators") }
@@ -667,7 +667,7 @@ extra card style:
 		height: 10
 		z index: 1
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold

@@ -37,7 +37,7 @@ depends on:
 
 card width: 750
 card height: 1050
-card dpi: 600
+card dpi: 150
 ############################################################## Extra scripts
 init script:
 	# Load scripts for image box
@@ -145,8 +145,8 @@ init script:
 		if styling.nametype_font != "" then styling.nametype_font else 
 		if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0"
 		else if set.card_language == "日本語" then "MotoyaF4Aporo W5 KP"
-		else if set.card_language != "简体中文" then "Beleren Bold"
-		else "华康魏碑 Std W7" 
+		else if set.card_language != "简体中文" then "Beleren"
+		else "华康魏碑 Std" 
 	}
 
 	nametop_shift := {
@@ -442,7 +442,7 @@ card style:
 		height:	59
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {21}
 			weight: bold
 			color: {"white"}
@@ -458,7 +458,7 @@ card style:
 		height:	59
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {21}
 			weight: bold
 			color: {"white"}
@@ -592,7 +592,7 @@ card style:
 		height:	50
 		alignment: center middle shrink-overflow
 		font:
-			name:  { if use_phyrexian_font() then "GeishaHolidayW00-Regular" else "Beleren Bold" }
+			name:  { if use_phyrexian_font() then "GeishaHolidayW00-Regular" else "Beleren" }
 			size: {28 - (if styling.shrink_power_text != "" then to_number(styling.shrink_power_text) else 0)}
 			color: {"white"}
 			separator color: red
@@ -605,7 +605,7 @@ card style:
 		visible: {two_boxes() or three_boxes()}
 		alignment: center middle shrink-overflow
 		font:
-			name:  { if use_phyrexian_font() then "GeishaHolidayW00-Regular" else "Beleren Bold" }
+			name:  { if use_phyrexian_font() then "GeishaHolidayW00-Regular" else "Beleren" }
 			size: {28 - (if styling.shrink_power_text != "" then to_number(styling.shrink_power_text) else 0)}
 			color: {"white"}
 			separator color: red
@@ -618,7 +618,7 @@ card style:
 		visible: {three_boxes()}
 		alignment: center middle shrink-overflow
 		font:
-			name:  { if use_phyrexian_font() then "GeishaHolidayW00-Regular" else "Beleren Bold" }
+			name:  { if use_phyrexian_font() then "GeishaHolidayW00-Regular" else "Beleren" }
 			size: {28 - (if styling.shrink_power_text != "" then to_number(styling.shrink_power_text) else 0)}
 			color: {"white"}
 			separator color: red
@@ -650,13 +650,14 @@ card style:
 	############################# Copyright stuff
 	illustrator:
 		left: { 166 }
-		top: 997
+		top: 999.5
 		width: 400
 		height: 20
-		z index: 1
+		z index: 9
+		alignment: middle
 		font:
-			name: Beleren Small Caps Bold
-			size: 14
+			name: MSEMotoyaExAporo W55 W5 KP
+			size: {13-shrink_illustrator()}
 			color: white
 	copyright:
 		right: 699

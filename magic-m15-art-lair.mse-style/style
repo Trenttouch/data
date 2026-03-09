@@ -53,7 +53,7 @@ card style:
 		height: 10
 		z index: 1
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -65,7 +65,7 @@ card style:
 		height: 10
 		z index: 1
 		font:
-			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std W7"}
+			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std"}
 			size: 7.25
 			color: white
 	copyright:
@@ -118,7 +118,7 @@ extra card style:
 		height: 10
 		z index: 1
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold

@@ -386,7 +386,7 @@ card style:
 		padding bottom: 0
 		z index: 2
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {16 - shrink_name() }
 			color: black
 	alias: 
@@ -457,7 +457,7 @@ card style:
 		z index: 2
 		padding top: 2
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: { 13 - shrink_type() }
 			color: black
 			separator color: red
@@ -679,7 +679,7 @@ card style:
 		height:	34.63
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 14
 			color: white
 	loyalty cost 1:
@@ -690,7 +690,7 @@ card style:
 		height:	34.63
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 2:
@@ -701,7 +701,7 @@ card style:
 		height:	34.63
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 3:
@@ -712,7 +712,7 @@ card style:
 		height:	34.63
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 4:
@@ -723,7 +723,7 @@ card style:
 		height:	{ if has_four_abilities() then 34.63 else 0 }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	############################# Card sorting / numbering
@@ -734,7 +734,7 @@ card style:
 		height: 10
 		z index: 6
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -971,7 +971,7 @@ extra card style:
 		height: 10
 		z index: 6
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold

@@ -37,7 +37,7 @@ depends on:
 
 card width: 750
 card height: 1050
-card dpi: 600
+card dpi: 150
 
 ############################################################## Extra scripts
 init script:
@@ -51,7 +51,7 @@ init script:
 	#Should multicolor lands with basic land types have a colored name?
 	mask_multi_land_with_color := { styling.colored_multicolor_land_name }
 	
-	template_prefix := [
+	template_prefix_normal := [
 		card:"normal/" tallart:"tallart/" short:"short/"
 
 		mix:"adventure/" lp:"adventure/leftpage/" rp:"adventure/rightpage/"
@@ -60,19 +60,28 @@ init script:
 		innercrown:"innercrown/"
 		pt: "pt/" newpt: "pt/newpt/"
 		stamp: "stamp/" ubstamp:"stamp/ub/"
-		omenlp:"omen/leftpage/" omenrp:"omen/rightpage/" 
+		omenlp:"omen/leftpage/" omenrp:"omen/rightpage/"
+		innerglow:"innerglow/"
 		identity: "/magic-identity-new.mse-include/"]
 	template_suffix_normal := [
 		card: "card.png" tallart:"card.png" short:"card.png" 
 
 		mix:"card.png" lp:"lp.png" rp:"rp.png"
 		omenrp:".png"
+		innerglow:".png"
 		aliascrown:"aliascrown.png" crown:"crown.png" 
 		innercrown:"crown.png" 
 		pt: "pt.png" newpt: "pt.png" 
 		stamp: "stamp.png" 
 		identity: "identity.png"]
-	
+	template_prefix := {
+		if type == "innerglow" then
+			if is_tallart() then [innerglow:"innerglow/tallart/"]
+			else if is_short() then [innerglow:"innerglow/short/"]
+			else [innerglow:"innerglow/"]
+		else
+			template_prefix_normal
+	}
 	template_suffix := {
 		if type == "ubstamp" then
 			if is_rare() then [ubstamp:"stamp.png"] else [ubstamp:"ubstamp.png"]
@@ -82,8 +91,8 @@ init script:
 			template_suffix_normal 
 	}
 	
-	template      := { template_prefix[type] + input + crown_follow(type) + innercrown_follow(type) + template_suffix()[type] }
-	land_template := { template_prefix[type] + (if input == "a" then "c" else input) + crown_follow(type) + innercrown_follow(type) + template_suffix()[type] }
+	template      := { template_prefix()[type] + input + crown_follow(type) + innercrown_follow(type) + template_suffix()[type] }
+	land_template := { template_prefix()[type] + (if input == "a" then "c" else input) + crown_follow(type) + innercrown_follow(type) + template_suffix()[type] }
 	
 	
 	# Use land templates for previews because they show more contrast
@@ -104,6 +113,8 @@ init script:
 	omen_rightpage_background := { color_background(type:"omenrp",     base_hybrid:card_hybrid) }
 
 	mix_background := { color_background(type:"mix",     base_hybrid:card_hybrid) }
+
+	innerglow_background := { color_background(type:"innerglow",     base_hybrid:card_hybrid) }
 	
 	crown_follow := {
 		if input == "crown" or input == "aliascrown" then if is_legend() then "l" else ""
@@ -173,12 +184,14 @@ init script:
 		else
 		(if is_short() then "short/" else if is_tallart() then "tallart/" else "normal/")
 		+"mask/"
-		+ (if is_nickname() or blackframe() then "nickname_" else "")
+		+ (if is_nickname() or blackframe() then (if is_land(card.type) then "nickname_l_" else "nickname_") else "")
 		+ (if is_fullart() then
-			if ( is_ub() and styling.use_holofoil_stamps ) then "ubfa_" else
-				if ((is_rare() and styling.use_holofoil_stamps) or use_acorn_stamp()) then "rfa_"
+			(
+				if ( is_ub() and styling.use_holofoil_stamps ) then "ubfa_"
+				else if ((is_rare() and styling.use_holofoil_stamps) or use_acorn_stamp()) then "rfa_"
 				else "fa_"
-		  else "")
+			)
+		   else "")
 		+"frame_mask.png"
 	}
 
@@ -249,7 +262,18 @@ styling field:
 	choice: nyx
 	choice: companion
 	initial: common
-
+styling field:
+	type: text
+	name: nametype font
+	description: 牌名字体
+styling field:
+	type: text
+	name: name top shift
+	description: 牌名字体上边距
+styling field:
+	type: text
+	name: type top shift
+	description: 类别字体上边距
 styling field:
 	type: multiple choice
 	name: frames
@@ -268,6 +292,7 @@ styling field:
 	choice: use alias
 	choice: use black twins
 	choice: ↑ only type and oracle black
+	choice: ↑ land innerglowing
 	choice: use acorn stamp
 	choice: use phyrexian font
 	choice: use shadow
@@ -364,21 +389,21 @@ card style:
 	############################# Name line
 	name:
 		left: 64
-		top: {if set.card_language != "简体中文" then 59 else 57 + (if use_phyrexian_font() then shrink_name()/2 else 0)}
+		top: {if set.card_language != "简体中文" then 59 else 57 + (if use_phyrexian_font() then shrink_name()/2 else 0) + (if styling.name_top_shift != "" then to_number(styling.name_top_shift) else 0) }
 		right:  { 682 - max(0, card_style.casting_cost.content_width) }
 		height: {46 - 0.5*shrink_name()}
 		alignment: { if use_phyrexian_font() then "top shrink-overflow" else "bottom shrink-overflow"}
 		padding bottom: 0
 		z index: 4
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if styling.nametype_font != "" then styling.nametype_font else if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then 32 - shrink_name() else 34 - shrink_name()}
 			color: {if black_text() then "black" else "white"}
 			#影子实现
 			shadow color: script: if (has_shadow()) then rgba(0,0,0,255) else rgba(0,0,0,0)
-			shadow displacement x: 2.5
-			shadow displacement y: 2.5
-			shadow blur: 1
+			shadow displacement x: 1.25
+			shadow displacement y: 1.25
+			shadow blur: 0.5
 	casting cost:
 		right: 692
 		top: 57
@@ -397,7 +422,7 @@ card style:
 		padding top: 0
 	alias:
 		left: 108
-		top: 116
+		top: {116 + (if styling.name_top_shift != "" then to_number(styling.name_top_shift) else 0)}
 		width: 536
 		height: 30
 		z index: 5
@@ -418,12 +443,13 @@ card style:
 				else if is_adventure() then
 					if set.card_language != "简体中文" then 666 else 660
 				else 0
+				+ (if styling.name_top_shift != "" then to_number(styling.name_top_shift) else 0) 
 		right: { (if is_adventure() then 356 else if is_omen() then 355 else 0) - max(40, card_style.casting_cost_2.content_width) }
 		height: { if is_adventure() or is_omen() then (40 - 0.5*shrink_adventure_name()) else 0 }
 		alignment: { if use_phyrexian_font() then "middle shrink-overflow" else "bottom shrink-overflow"}
 		z index: 5
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: {(if is_omen() and set.card_language != "简体中文" then 23 else 26) - shrink_adventure_name() }
 			color: white
 		
@@ -464,22 +490,22 @@ card style:
 		image: { card_identity() }
 	type:
 		left: { if has_identity() then "102" else "62" }
-		top: { shrink_type()/2 + 598 + (if is_tallart() then 47 else 0 ) + (if is_short() then 142 else 0 )}
+		top: { shrink_type()/2 + 598 + (if is_tallart() then 47 else 0 ) + (if is_short() then 142 else 0 ) + (if styling.type_top_shift != "" then to_number(styling.type_top_shift) else 0) }
 		width: { (if has_identity() then "580" else "610") - max(44,card_style.rarity.content_width) }
 		height: { 40 - shrink_type() }
 		alignment: top shrink-overflow
 		z index: 5
 		padding top: 2
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if styling.nametype_font != "" then styling.nametype_font else if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then 26 - shrink_type() else 32 - shrink_type() }
 			color: {if black_text() then "black" else "white"}
 			separator color: red
 			#影子实现
 			shadow color: script: if (has_shadow()) then rgba(0,0,0,255) else rgba(0,0,0,0)
-			shadow displacement x: 2.5
-			shadow displacement y: 2.5
-			shadow blur: 1
+			shadow displacement x: 1.25
+			shadow displacement y: 1.25
+			shadow blur: 0.5
 
 	type 2:
 		left: {if is_adventure() or is_omen() then 64 else 0 }
@@ -496,7 +522,7 @@ card style:
 		z index: 5
 		padding top: 2
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { (if is_omen() and set.card_language != "简体中文" then 23 else 26) - shrink_type() }
 			color: {if black_text() then "black" else "white"}
 			separator color: red
@@ -556,9 +582,9 @@ card style:
 			color: {if is_adventure() or is_omen() or black_text() then "black" else "white"}
 			#影子实现
 			shadow color: script: if (has_shadow()) then rgba(0,0,0,255) else rgba(0,0,0,0)
-			shadow displacement x: 2.5
-			shadow displacement y: 2.5
-			shadow blur: 1
+			shadow displacement x: 1.25
+			shadow displacement y: 1.25
+			shadow blur: 0.5
 		symbol font:
 			name: { styling.text_box_mana_symbols }
 			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 28 }
@@ -635,7 +661,7 @@ card style:
 		height:	56
 		alignment: center middle shrink-overflow
 		font:
-			name:  { if use_phyrexian_font() then "GeishaHolidayW00-Regular" else "Beleren Bold" }
+			name:  { if use_phyrexian_font() then "GeishaHolidayW00-Regular" else "Beleren" }
 			size: {32 - (if styling.shrink_power_text != "" then to_number(styling.shrink_power_text) else 0)}
 			color: {if black_text() then "black" else "white"}
 			separator color: red
@@ -666,13 +692,14 @@ card style:
 	############################# Copyright stuff
 	illustrator:
 		left: { 166 }
-		top: 997
+		top: 999.5
 		width: 400
 		height: 20
-		z index: 1
+		z index: 9
+		alignment: middle
 		font:
-			name: Beleren Small Caps Bold
-			size: 14
+			name: MSEMotoyaExAporo W55 W5 KP
+			size: {13-shrink_illustrator()}
 			color: white
 	copyright:
 		right: 699
@@ -952,6 +979,14 @@ extra card field:
 	save value: false
 	show statistics: false
 
+extra card field:
+	type: choice
+	name: innerglowing
+	script: card.card_color
+	editable: false
+	save value: false
+	show statistics: false
+
 extra card style:
 	dot:
 		left: {48.5 + card_style.set_code.content_width}
@@ -1013,7 +1048,7 @@ extra card style:
 		z index: 4
 		visible: { card.pt != "" }
 		render style: image
-		image: { if contains(card.sub_type, match:"载具") then "pt/vpt.png" else if is_newpt() then new_pt_background() else card_ptbox() }
+		image: { if contains(card.sub_type, match:"载具") then if is_newpt() then "pt/newpt/vpt.png" else "pt/vpt.png" else if is_newpt() then new_pt_background() else card_ptbox() }
 	stamp:
 		left:	{if is_omen() then 0 else 327}
 		top:	{if is_omen() then 0 else 948.5}
@@ -1120,7 +1155,7 @@ extra card style:
 		width:	750
 		height:	1050
 		render style: image
-		image: {if no_frames() then "" else ((if is_short() then "short/" else if is_tallart() then "tallart/" else "normal/") + "nickname.png")}
+		image: {if no_frames() then "" else ((if is_short() then "short/" else if is_tallart() then "tallart/" else "normal/")+ (if is_land(card.type) then "l_" else "") + "nickname.png")}
 		z index: 0
 		visible: { is_nickname() or blackframe() }
 		mask:
@@ -1136,27 +1171,27 @@ extra card style:
 
 	level 2 overlay:
 		left: 58
-		top: { if is_d20() then top_of_para(rolls_start(card.text)) else 0}
+		top: { if is_d20() then top_of_para(rolls_start(card.text)) + (if styling.chinese_new_font then -2.5 else 0) else 0}
 		height: { if is_d20() then height_of_para(rolls_start(card.text)) else 0}
-		width: 630
+		width: 635
 		z index: 0
 		render style: image
 		image: {overlay1()}
 		visible: {(is_d20() and number_of_rolls(card.text) > 0)}
 	level 3 overlay:
 		left: 58
-		top: { if is_d20() then top_of_para(rolls_start(card.text)+2) else 0}
+		top: { if is_d20() then top_of_para(rolls_start(card.text)+2) + (if styling.chinese_new_font then -2.5 else 0) else 0}
 		height: { if is_d20() then height_of_para(rolls_start(card.text)+2) else 0}
-		width: 630
+		width: 635
 		z index: 0
 		render style: image
 		image: {overlay2()}
 		visible: {(is_d20() and number_of_rolls(card.text)-no_roll(card.text) > 2)}
 	level 4 overlay:
 		left: 58
-		top: { if is_d20() then top_of_para(rolls_start(card.text)+4) else 0}
+		top: { if is_d20() then top_of_para(rolls_start(card.text)+4) + (if styling.chinese_new_font then -2.5 else 0) else 0}
 		height: { if is_d20() then height_of_para(rolls_start(card.text)+4) else 0}
-		width: 630
+		width: 635
 		z index: 0
 		render style: image
 		image: {overlay3()}
@@ -1234,3 +1269,13 @@ extra card style:
 		z index: 9
 		render style: image
 		image: {if styling.overlay == "" then nil else styling.overlay + "/overlay.png"}
+
+	innerglowing:
+		left:	0
+		top:	0
+		width:	750
+		height:	1050
+		z index: 0
+		visible: { blackframe() and colored_crown() and chosen(styling.frames, choice:"↑ land innerglowing") }
+		render style: image
+		image: { innerglow_background() }

@@ -114,7 +114,7 @@ card style:
 		padding bottom: 0
 		z index: 2
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 19
 			color: black
 	############################# Image
@@ -135,7 +135,7 @@ card style:
 		padding bottom: 0
 		z index: 2
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 14
 			color: black
 	rarity:
@@ -226,7 +226,7 @@ card style:
 		height: 19
 		z index: 1
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -237,7 +237,7 @@ card style:
 		height: 19
 		z index: 1
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold

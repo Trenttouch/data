@@ -223,7 +223,7 @@ card style:
 		padding bottom: 0
 		z index: 7
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {title_font_size()}
 			color: {font_color()}
 	############################# Image

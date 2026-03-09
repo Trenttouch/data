@@ -80,7 +80,7 @@ symbol:
 	text margin top:    .10
 	text margin bottom: .10
 	text font:
-		name: Beleren Bold
+		name: Beleren
 		size: .55
 		color: white
 		max stretch: 0.5
@@ -95,7 +95,7 @@ symbol:
 	text margin top:    .10
 	text margin bottom: .10
 	text font:
-		name: Beleren Bold
+		name: Beleren
 		size: .55
 		color: white
 		max stretch: 0.5
@@ -110,7 +110,7 @@ symbol:
 	text margin top:    .10
 	text margin bottom: .10
 	text font:
-		name: Beleren Bold
+		name: Beleren
 		size: .55
 		color: white
 		max stretch: 0.5

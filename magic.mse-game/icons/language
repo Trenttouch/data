@@ -34,7 +34,7 @@ languages := [
 		is_planeswalker   : match@(match: "(?i)旅法师|鹏洛客")
 		is_plane		  : match@(match: "(?i)时空")
 		is_battle		  : match@(match: "(?i)战役")
-		word_list		  : "word_list_chs"
+		word_list		  : "word_list"
 	], 
 	"English (British)": [
 		code              : "en",

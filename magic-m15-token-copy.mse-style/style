@@ -182,7 +182,7 @@ card style:
 		padding top: 2
 		z index: 2
 		font:
-			name: { if styling.small_caps then "Beleren Small Caps Bold" else "Beleren Bold" }
+			name: { if styling.small_caps then "Beleren Small Caps Bold" else "Beleren" }
 			size: 18
 			color: rgb(255,239,128)
 		always symbol: true
@@ -227,7 +227,7 @@ card style:
 		padding bottom: 4
 		padding right: 2
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: { if is_clear() then 13 else 14 }
 			color: black
 			separator color: red
@@ -316,7 +316,7 @@ card style:
 		height:	28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 16
 			color: black
 			separator color: red
@@ -328,7 +328,7 @@ card style:
 		height: 10
 		z index: 1
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold			
@@ -405,7 +405,7 @@ extra card style:
 		height: 10
 		z index: 1
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold

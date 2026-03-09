@@ -132,7 +132,7 @@ symbol:
 	text margin top:    .21
 	text margin bottom: .05
 	text font:
-		name: Beleren Bold
+		name: Beleren
 		size: .70
 		color: white
 		max stretch: 0.5
@@ -148,7 +148,7 @@ symbol:
 	text margin top:    0.1
 	text margin bottom: .15
 	text font:
-		name: Beleren Bold
+		name: Beleren
 		size: .70
 		color: white
 		max stretch: 0.5
@@ -164,7 +164,7 @@ symbol:
 	text margin top:    .15
 	text margin bottom: .1
 	text font:
-		name: Beleren Bold
+		name: Beleren
 		size: .70
 		color: white
 		max stretch: 0.5
@@ -180,7 +180,7 @@ symbol:
 	text margin top:    .21
 	text margin bottom: .05
 	text font:
-		name: Beleren Bold
+		name: Beleren
 		size: .70
 		color: black
 		max stretch: 0.5
@@ -195,7 +195,7 @@ symbol:
 	text margin top:    0.1
 	text margin bottom: .15
 	text font:
-		name: Beleren Bold
+		name: Beleren
 		size: .70
 		color: black
 		max stretch: 0.5
@@ -210,7 +210,7 @@ symbol:
 	text margin top:    .15
 	text margin bottom: .1
 	text font:
-		name: Beleren Bold
+		name: Beleren
 		size: .70
 		color: black
 		max stretch: 0.5
@@ -461,43 +461,43 @@ symbol:
 ###################################################################################### Regular Hybrid Symbols
 symbol:
 	code: W/U
-	image: { masked_blend(dark: "mana_ww.png", light: "mana_uu.png", mask: "mask_hybrid.png") }
+	image: { if ancestral_mana() then "mana_wu.png" else masked_blend(dark: "mana_ww.png", light: "mana_uu.png", mask: "mask_hybrid.png") }
 	image font size: 145
 symbol:
 	code: U/B
-	image: { masked_blend(dark: "mana_uu.png", light: "mana_bb.png", mask: "mask_hybrid.png") }
+	image: { if ancestral_mana() then "mana_ub.png" else masked_blend(dark: "mana_uu.png", light: "mana_bb.png", mask: "mask_hybrid.png") }
 	image font size: 145
 symbol:
 	code: B/R
-	image: { masked_blend(dark: "mana_bb.png", light: "mana_rr.png", mask: "mask_hybrid.png") }
+	image: { if ancestral_mana() then "mana_br.png" else masked_blend(dark: "mana_bb.png", light: "mana_rr.png", mask: "mask_hybrid.png") }
 	image font size: 145
 symbol:
 	code: R/G
-	image: { masked_blend(dark: "mana_rr.png", light: "mana_gg.png", mask: "mask_hybrid.png") }
+	image: { if ancestral_mana() then "mana_rg.png" else masked_blend(dark: "mana_rr.png", light: "mana_gg.png", mask: "mask_hybrid.png") }
 	image font size: 145
 symbol:
 	code: G/W
-	image: { masked_blend(dark: "mana_gg.png", light: "mana_ww.png", mask: "mask_hybrid.png") }
+	image: { if ancestral_mana() then "mana_gw.png" else masked_blend(dark: "mana_gg.png", light: "mana_ww.png", mask: "mask_hybrid.png") }
 	image font size: 145
 symbol:
 	code: W/B
-	image: { masked_blend(dark: "mana_ww.png", light: "mana_bb.png", mask: "mask_hybrid.png") }
+	image: { if ancestral_mana() then "mana_wb.png" else masked_blend(dark: "mana_ww.png", light: "mana_bb.png", mask: "mask_hybrid.png") }
 	image font size: 145
 symbol:
 	code: U/R
-	image: { masked_blend(dark: "mana_uu.png", light: "mana_rr.png", mask: "mask_hybrid.png") }
+	image: { if ancestral_mana() then "mana_ur.png" else masked_blend(dark: "mana_uu.png", light: "mana_rr.png", mask: "mask_hybrid.png") }
 	image font size: 145
 symbol:
 	code: B/G
-	image: { masked_blend(dark: "mana_bb.png", light: "mana_gg.png", mask: "mask_hybrid.png") }
+	image: { if ancestral_mana() then "mana_bg.png" else masked_blend(dark: "mana_bb.png", light: "mana_gg.png", mask: "mask_hybrid.png") }
 	image font size: 145
 symbol:
 	code: R/W
-	image: { masked_blend(dark: "mana_rr.png", light: "mana_ww.png", mask: "mask_hybrid.png") }
+	image: { if ancestral_mana() then "mana_rw.png" else masked_blend(dark: "mana_rr.png", light: "mana_ww.png", mask: "mask_hybrid.png") }
 	image font size: 145
 symbol:
 	code: G/U
-	image: { masked_blend(dark: "mana_gg.png", light: "mana_uu.png", mask: "mask_hybrid.png") }
+	image: { if ancestral_mana() then "mana_gu.png" else masked_blend(dark: "mana_gg.png", light: "mana_uu.png", mask: "mask_hybrid.png") }
 	image font size: 145
 ###################################################################################### Colorless Hybrid Symbols
 symbol:
@@ -569,6 +569,35 @@ symbol:
 	code: D
 	image: mana_dc.png
 	image font size: 117
+
+symbol:
+	code: 1/2
+	image: mana_1_half.png
+symbol:
+	code: |1
+	image: mana_1_half.png
+symbol:
+	code: |C
+	image: mana_c_half.png
+symbol:
+	code: |W
+	image: mana_w_half.png
+symbol:
+	code: |U
+	image: mana_u_half.png
+symbol:
+	code: |B
+	image: mana_b_half.png
+symbol:
+	code: |R
+	image: mana_r_half.png
+symbol:
+	code: |G
+	image: mana_g_half.png
+symbol:
+	code: |S
+	image: mana_s_half.png
+
 symbol:
 	code: L/W
 	image: mana_loyal_w.png

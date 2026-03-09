@@ -37,7 +37,7 @@ depends on:
 
 card width: 750
 card height: 1050
-card dpi: 600
+card dpi: 150
  
 ############################################################## Extra scripts
 init script:
@@ -406,7 +406,7 @@ card style:
 		padding bottom: 0
 		z index: 4
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then 32 - shrink_name() else 34 - shrink_name()}
 			color: black
 	casting cost:
@@ -455,7 +455,7 @@ card style:
 		alignment: { if use_phyrexian_font() then "middle shrink-overflow" else "bottom shrink-overflow"}
 		z index: 5
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: {(if is_omen() and set.card_language != "简体中文" then 23 else 26) - shrink_adventure_name() }
 			color: white
 
@@ -500,7 +500,7 @@ card style:
 		z index: 5
 		padding top: 2
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then 26 - shrink_type() else 32 - shrink_type() }
 			color: white
 			separator color: red
@@ -519,7 +519,7 @@ card style:
 		z index: 5
 		padding top: 2
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { (if is_omen() and set.card_language != "简体中文" then 23 else 26) - shrink_type() }
 			color: white
 			separator color: red
@@ -612,7 +612,7 @@ card style:
 		visible: {is_level()}
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {24}
 			weight: bold
 			color: {"black"}
@@ -629,7 +629,7 @@ card style:
 		visible: {is_level()}
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {24}
 			weight: bold
 			color: {"black"}
@@ -834,7 +834,7 @@ card style:
 		height:	56
 		alignment: center middle shrink-overflow
 		font:
-			name:  { if use_phyrexian_font() then "GeishaHolidayW00-Regular" else "Beleren Bold" }
+			name:  { if use_phyrexian_font() then "GeishaHolidayW00-Regular" else "Beleren" }
 			size: {32 - (if styling.shrink_power_text != "" then to_number(styling.shrink_power_text) else 0)}
 			color: {if is_vehicle() then "white" else "black"}
 			separator color: red
@@ -847,7 +847,7 @@ card style:
 		visible: {is_level() or is_prototype()}
 		alignment: center middle shrink-overflow
 		font:
-			name:  { if use_phyrexian_font() then "GeishaHolidayW00-Regular" else "Beleren Bold" }
+			name:  { if use_phyrexian_font() then "GeishaHolidayW00-Regular" else "Beleren" }
 			size: {32 - (if styling.extra_shrink_power_text != "" then to_number(styling.extra_shrink_power_text) else 0)}
 			color: { if is_prototype() or is_vehicle() then "white" else "black" }
 			separator color: red
@@ -860,7 +860,7 @@ card style:
 		visible: {is_level()}
 		alignment: center middle shrink-overflow
 		font:
-			name:  { if use_phyrexian_font() then "GeishaHolidayW00-Regular" else "Beleren Bold" }
+			name:  { if use_phyrexian_font() then "GeishaHolidayW00-Regular" else "Beleren" }
 			size: {32 - (if styling.shrink_power_text != "" then to_number(styling.shrink_power_text) else 0)}
 			color: {if is_vehicle() then "white" else "black"}
 			separator color: red
@@ -891,13 +891,14 @@ card style:
 	############################# Copyright stuff
 	illustrator:
 		left: { 166 }
-		top: 997
+		top: 999.5
 		width: 400
 		height: 20
-		z index: 1
+		z index: 9
+		alignment: middle
 		font:
-			name: Beleren Small Caps Bold
-			size: 14
+			name: MSEMotoyaExAporo W55 W5 KP
+			size: {13-shrink_illustrator()}
 			color: white
 	copyright:
 		right: 699

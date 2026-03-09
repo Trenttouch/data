@@ -2,6 +2,29 @@
 # Edit by Heavenford 2017.1.14
 
 choice images:
+	DIY Mythic: 	script: custom_Rarity_M()
+	DIY Rare: 		script: custom_Rarity_R()
+	DIY Uncommon: 	script: custom_Rarity_U()
+	DIY Common: 	script: custom_Rarity_C()
+	DIY Basic Land: script: custom_Rarity_C()
+
+	MSH Mythic: 	/magic-rarity.mse-include/MSH_M.png
+	MSH Rare: 		/magic-rarity.mse-include/MSH_R.png
+	MSH Uncommon: 	/magic-rarity.mse-include/MSH_U.png
+	MSH Common: 	/magic-rarity.mse-include/MSH_C.png
+	MSH Basic Land: /magic-rarity.mse-include/MSH_C.png
+
+	SOS Mythic: 	/magic-rarity.mse-include/SOS_M.png
+	SOS Rare: 		/magic-rarity.mse-include/SOS_R.png
+	SOS Uncommon: 	/magic-rarity.mse-include/SOS_U.png
+	SOS Common: 	/magic-rarity.mse-include/SOS_C.png
+	SOS Basic Land: /magic-rarity.mse-include/SOS_C.png
+	SOS SOA Mythic: 	/magic-rarity.mse-include/SOA_M.png
+	SOS SOA Rare: 		/magic-rarity.mse-include/SOA_R.png
+	SOS SOA Uncommon: 	/magic-rarity.mse-include/SOA_U.png
+	SOS SOA Common: 	/magic-rarity.mse-include/SOA_C.png
+	SOS SOA Basic Land: /magic-rarity.mse-include/SOA_C.png
+
 	TMT Mythic: 	/magic-rarity.mse-include/TMT_M.png
 	TMT Rare: 		/magic-rarity.mse-include/TMT_R.png
 	TMT Uncommon: 	/magic-rarity.mse-include/TMT_U.png
@@ -797,6 +820,18 @@ choice images:
 	Duel EVG Rare: /magic-rarity.mse-include/EVG_R.png
 	Duel EVG Uncommon: /magic-rarity.mse-include/EVG_U.png
 	Duel EVG Common: /magic-rarity.mse-include/EVG_C.png
+
+	Command MSC Mythic: 	/magic-rarity.mse-include/MSC_M.png
+	Command MSC Rare: 		/magic-rarity.mse-include/MSC_R.png
+	Command MSC Uncommon: 	/magic-rarity.mse-include/MSC_U.png
+	Command MSC Common: 	/magic-rarity.mse-include/MSC_C.png
+	Command MSC Basic Land: /magic-rarity.mse-include/MSC_C.png
+
+	Command SOC Mythic: 	/magic-rarity.mse-include/SOC_M.png
+	Command SOC Rare: 		/magic-rarity.mse-include/SOC_R.png
+	Command SOC Uncommon: 	/magic-rarity.mse-include/SOC_U.png
+	Command SOC Common: 	/magic-rarity.mse-include/SOC_C.png
+	Command SOC Basic Land: /magic-rarity.mse-include/SOC_C.png
 
 	Command TMC Mythic: 	/magic-rarity.mse-include/TMC_M.png
 	Command TMC Rare: 		/magic-rarity.mse-include/TMC_R.png

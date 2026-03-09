@@ -29,7 +29,7 @@ symbol:
 	text margin top:    .21
 	text margin bottom: .05
 	text font:
-		name: Beleren Bold
+		name: Beleren
 		size: .70
 		color: white
 		max stretch: 0.5
@@ -44,7 +44,7 @@ symbol:
 	text margin top:    0.1
 	text margin bottom: .15
 	text font:
-		name: Beleren Bold
+		name: Beleren
 		size: .70
 		color: white
 		max stretch: 0.5
@@ -59,7 +59,7 @@ symbol:
 	text margin top:    .15
 	text margin bottom: .1
 	text font:
-		name: Beleren Bold
+		name: Beleren
 		size: .70
 		color: white
 		max stretch: 0.5

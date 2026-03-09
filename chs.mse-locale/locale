@@ -1,794 +1,1019 @@
-﻿mse version: 2.0.0
+﻿mse version: 2.6.0
 installer group: translations/Simplified Chinese
 full name: 简体中文 (Simplified Chinese)
-version: 2013-08-21
+version: 2026-03-30
 icon: cn.png
 
 ############################################################## Menu items
 menu:
-	file:			文件	Alt+&F
-	new set:		新建套牌...	Ctrl+N
-	open set:		打开套牌...	Ctrl+O
-	save set:		保存套牌	Ctrl+S
-	save set as:		套牌另存为...	F12		
-	save set as directory:		将每张卡图导出到...
-	export:			导出
-	export html:		HTML文件
-	export image:		导出卡牌图像	Ctrl+Alt+1
-	export images:		导出全部卡牌图像
-	export apprentice:	导出到Apprentice
-	export mws:		导出到Magic Workstation...
-	check updates:		检查更新
-	print preview:		打印预览...
-	print:		打印...		Ctrl+P
-	reload data:		重新载入数据	Ctrl+F5
-	show profiler:		显示分析参数	Ctrl+F6
-	exit:			退出 Alt+F4
+	## app menus
+	# file menu
+	file:								文件
+	new set:							新建套牌...	Ctrl+N
+	open set:							打开套牌...	Ctrl+O
+	save set:							保存套牌	Ctrl+S
+	save set as:						将牌组保存为目录...	F12
+	save set as directory:				将每张卡图导出到...
+	export:								导出
+	export html:						HTML文件...
+	export image:						卡牌图像...		Ctrl+Alt+1
+	export images:						全部卡牌图像...
+	export apprentice:					Apprentice...
+	export mws:							Magic Workstation...
+	check updates:						检查更新...
+	print preview:						打印预览...
+	print:								打印...	Ctrl+P
+	reload data:						重新载入数据	Ctrl+F5
+	show profiler:						显示分析器	Ctrl+F6
+	exit:								退出	Alt+F4
  
-	edit:			编辑	Alt+&E
-	undo:			撤销%s	Ctrl+Z
-	redo:			重做%s	Ctrl+Y
-	cut:			剪切	Ctrl+X
-	cut card:		剪切卡牌	Ctrl+X
-	cut keyword:	剪切关键词	Ctrl+X
-	copy:			复制	Ctrl+C
-	copy card:		复制卡牌	Ctrl+C
-	copy keyword:	复制关键词	Ctrl+C
-	paste:			粘贴	Ctrl+V
-	paste card:		粘贴卡牌	Ctrl+V
-	paste keyword:	粘贴关键词	Ctrl+V
-	select all:		全选	Ctrl+A
-	find:			查找	Ctrl+F
-	find next:		查找下一个	F3
-	replace:		替换	&H
-	auto replace:		自动替换...	&L
-	preferences:		参数设置...	&P			  
-	
-	cards:			卡牌	Alt+&D
-	previous card:		选择上一张卡牌	PgUp
-	next card:		选择下一张卡牌	PgDn	
-	search cards:	搜索卡牌	Ctrl+K	
-	add card:		添加卡牌	Ctrl+Enter
-	add cards:		批量添加卡牌...	
-	remove card:		删除所选卡牌	&D
-	orientation:		旋转	&O
-	rotate 0:		不旋转	&N
-	rotate 270:		顺时针旋转90°	&C
-	rotate 90:		逆时针旋转90	&O
-	rotate 180:		上下翻转180°	&U
-	card list columns:	卡牌列表栏...	&A
-	
-	keywords:		关键词	Alt+&K
-	previous keyword:	选择上一个关键词	PgUp
-	next keyword:		选择下一个关键词	PgDn
-	search keywords:	查找关键词	Ctrl+K	
-	add keyword:		添加关键词	Ctrl+Enter
-	remove keyword:		删除所选关键词	Del
-	
-	format:			字体格式	Alt+&O
-	bold:			粗体	Ctrl+B
-	italic:			斜体	Ctrl+I
-	symbols:		符号	Ctrl+M
-	underline:		下划线	&M
-	reminder text:		提示文本	&R
-	insert symbol:		插入符号	&N
-#_ADD	# spelling
-#_ADD	no spelling suggestions:	(no suggestions)
-	
-	graph:			图像	Alt+&G
-	pie:			饼形图	1	&P
-	bar:			条形图	2	&B
-	stack:			堆叠条形图	3	&S
-	scatter:		散点图	4	&C
-	scatter pie:	散饼图	5	&A
+	# edit menu
+	edit:								编辑		Alt+&E
+	undo:								撤销%s		Ctrl+Z
+	redo:								重做%s		Ctrl+Y
+	cut:								剪切		Ctrl+X
+	cut card:							剪切卡牌	Ctrl+X
+	cut keyword:						剪切关键词	Ctrl+X
+	copy:								复制		Ctrl+C
+	copy card:							复制卡牌	Ctrl+C
+	copy keyword:						复制关键词	Ctrl+C
+	paste:								粘贴		Ctrl+V
+	paste card:							粘贴卡牌	Ctrl+V
+	paste keyword:						粘贴关键词	Ctrl+V
+	select all:							全选		Ctrl+A
+	find:								查找		Ctrl+F
+	find next:							查找下一个	F3
+	replace:							替换		Ctrl+H
+	auto replace:						自动替换...	&L
+	preferences:						参数设置...	&P			  
 
-	console:			控制台
-	clear console:		清空控制台	Ctrl+L	
+	cards:								卡牌	Alt+&D
+	previous card:						选择上一张卡牌	PgUp
+	next card:							选择下一张卡牌	PgDn	
+	search cards:						搜索卡牌	Ctrl+K	
+	add card:							添加卡牌	Ctrl+Enter
+	add cards:							批量添加卡牌...	
+	remove card:						删除所选卡牌	&D
+	add card csv:						从 CSV or TSV 导入...
+	add card json:						从 Json 导入...
+	link card:							链接牌到目标牌...
+	copy card and links:				复制目标牌及其链接牌	Ctrl+Shift+C
+	bulk modify:						批量修改目标牌...
+	orientation:						旋转	&O
+	rotate 0:							不旋转	&N
+	rotate 270:							顺时针旋转90°	&C
+	rotate 90:							逆时针旋转90	&O
+	rotate 180:							上下翻转180°	&U
+	card list columns:					卡牌列表栏...	&A
 	
-	window:			窗口	Alt+&W 
-	new window:		新建窗口	&N
-	cards tab:		卡牌编辑	F5
-	style tab:		风格选择	F6
-	set info tab:	套牌信息	F7
-	keywords tab:	关键词	F8
-	stats tab:		统计结果	F9
-	random pack tab:	随机开包	F10
-	console tab:		控制台	F11
+	keywords:							关键词	Alt+&K
+	previous keyword:					选择上一个关键词	PgUp
+	next keyword:						选择下一个关键词	PgDn
+	search keywords:					查找关键词	Ctrl+K	
+	add keyword:						添加关键词	Ctrl+Enter
+	remove keyword:						删除所选关键词	Del
 	
-	help:			帮助	Alt+&H
-	index:			索引...	F1
-	website:		官方网站...	&W
-	about:			关于Magic Set Editor...	&A
+	format:								字体格式	Alt+&O
+	font:								字体	&F
+	bold:								粗体	Ctrl+B
+	italic:								斜体	Ctrl+I
+	underline:							下划线	&M
+	strikethrough:						删除线	&S
+	color text:							字体颜色	&C
+	bullet point:						序号点（没什么用）
+	symbols:							符号	Ctrl+M
+	reminder text:						提示文本	&R
+	insert symbol:						插入符号	&N
+	# spelling
+	no spelling suggestions:			（没有建议）
+	
+	graph:								图像	Alt+&G
+	pie:								饼形图	1	&P
+	bar:								条形图	2	&B
+	stack:								堆叠条形图	3	&S
+	scatter:							散点图	4	&C
+	scatter pie:						散饼图	5	&A
+
+	console:								控制台
+	clear console:							清空控制台	Ctrl+L	
+
+	window:								窗口	Alt+&W 
+	new window:							新建窗口	&N
+	cards tab:							卡牌编辑	F5
+	style tab:							风格选择	F6
+	set info tab:						套牌信息	F7
+	keywords tab:						关键词	F8
+	stats tab:							统计结果	F9
+	random pack tab:					随机开包	F10
+	console tab:						控制台	F11
+
+	# help menu
+	help:								帮助	Alt+&H
+	index:								索引...	F1
+	website:							官方网站...	&W
+	documentation:						文档
+	about:								关于Magic Set Editor...	&A
 	
 	# symbol editor
+	# file menu
+	new symbol:							新建...	&N
+	open symbol:						打开...	&O
+	save symbol:						保存	&S
+	save symbol as:						另存为...	F12
+	store symbol:						储存	Ctrl+Enter	&T
+	close symbol editor:				关闭	Alt+F4
 	
-	new symbol:		新建...	&N
-	open symbol:		打开...	&O
-	save symbol:		保存	&S
-	save symbol as:		另存为...	F12
-	store symbol:		储存	Ctrl+Enter	&T
-	close symbol editor:    关闭	Alt+F4
+	# edit menu
+	duplicate:							复制	&D
+	group:								分组	&G
+	ungroup:							取消分组	&U
 	
-	duplicate:		复制	&D
-	group:			分组	&G
-	ungroup:		取消分组	&U
-	
-	tool:			工具	Alt+&T
-	select:			选择	F5	&S
-	rotate:			旋转	F6	&R
-	points:			控制点	F7	&P
-	basic shapes:	基本形状	F8	&B
-	symmetry:		对称效果	F9	&Y
-	paint:			笔刷	F10	&A
+	# tool menu
+	tool:								工具	Alt+&T
+	select:								选择	F5	&S
+	rotate:								旋转	F6	&R
+	points:								控制点	F7	&P
+	basic shapes:						基本形状	F8	&B
+	symmetry:							对称效果	F9	&Y
+	paint:								笔刷	F10	&A
+
+
 
 ############################################################## Menu help texts
 help:
-	welcome:		欢迎使用 Magic Set Editor
-	
-	file:
-	new set:		创建新套牌
-	open set:		打开已有套牌
-	last opened set:	打开 '%s'
-	save set:		保存现有套牌
-	save set as:		使用新文件名保存套牌
-	save set as directory:		将每张卡牌分开保存
-	export:			导出套牌...
-	export html:		将套牌导出成网页格式
-	export image:		将所选卡牌导出成为一张图片
-	export images:		将所有卡牌导出成图片
-	export apprentice:	将套牌导出成为能在 Apprentice 中使用的格式
-	export mws:		将套牌导出成为能在 Magic Workstation 中使用的格式
-	check updates:		安装或升级文件包
-	print preview:		显示即将被打印的卡牌
-	print:			从本套牌中打印这张牌
-	reload data:		重新载入所有模板（游戏类型和样式）和套牌数据.
-	show profiler:		显示分析参数窗口, 包括各函数的运行用时。用于优化程序。
-	exit:			退出Magic Set Editor程序，请迅速保存你的套牌
-	
-	edit:
-	undo:			撤销上一个动作
-	redo:			重做上一个动作
-	cut:			将选中的文字剪切至剪切板
-	cut card:		将选中的卡牌剪切至剪切板
-	cut keyword:		将选中的关键词剪切至剪切板
-	copy:			将选中的文字复制至剪切板
-	copy card:		将选中的卡牌复制至剪切板
-	copy keyword:		将选中的关键词复制至剪切板
-	paste:			从剪切板插入文字
-	paste card:		从剪切板插入卡牌
-	paste keyword:		从剪切板插入关键词
-	select all:			全选
-	find:			搜索卡牌文字							 
-	find next:		查找下一个
-	replace:		替换卡牌文字
-	auto replace:		自动替换文字？
-	preferences:		修改Magic Set Editor的设置
-	
-	cards:
-	previous card:		选择列表中的上一张卡牌
-	next card:		选择列表中的下一张卡牌
-	search cards:		Filter the card list using search terms
-	add card:		添加一个新的空白卡牌到本套牌
-	add cards:		添加多张卡牌到本套牌
-	remove card:		从本套牌中删除所选卡牌
-	orientation:		调整所显示卡牌的方向
-	rotate card:		将所显示卡牌顺时针旋转90°
-	rotate 0:		将所显示卡牌还原为正常模式
-	rotate 270:		将所显示卡牌顺时针旋转
-	rotate 90:		将所显示卡牌逆时针旋转
-	rotate 180:		将所显示卡牌上下翻转
-	card list columns:	调整卡牌列表栏显示项目和显示顺序
-	
-	keywords:
-	previous keyword:	从列表中选择上一个关键词
-	next keyword:		从列表中选择下一个关键词
-	search keywords:	从列表中搜索下一个关键词
-	add keyword:		添加一个新关键词到本套牌中
-	remove keyword:		从本套牌中删除选中的关键词
-	
-	format:
-	bold:			将所选文字设为粗体
-	italic:			将所选文字设为斜体
-	symbols:		将所选文字改成符号
-	underline:		下划线
-	reminder text:		对选择的关键词显示提示文本
-#_ADD	# spelling
-	no spelling suggestions:	无拼写错误的修改建议
-	
-	graph:
-	pie:			饼状图，每一份的大小取决与卡牌数量
-	bar:			条形图，条形高度取决于卡牌数量
-	stack:			条形图，堆叠条形图
-	scatter:		散点图，每一个散点的大小取决与卡牌数量
-	scatter pie:		散饼图，每一个三点都是一个小型饼状图
 
-	#console:
-	clear console:		清空控制台
+	## app menus
+	welcome:							欢迎使用 Magic Set Editor(中文测试版)
 	
-	window:
-	new window:		创建一个额外窗口用来编辑同一套牌
-	cards tab:		编辑套牌中的卡牌
-	set info tab:		编辑套牌信息，例如创建者，其他
-	style tab:		改变卡牌样式
-	keywords tab:		定义本套牌额外的关键词
-	stats tab:		显示本套牌的统计情况
-	random pack tab:	通过生成随机包来测试套牌的实战效果。
-	console tab:		显示错误信息并允许执行脚本命令
+	# file menu
+	new set:							创建新套牌
+	open set:							打开已有套牌
+	last opened set:					打开 '%s'
+	save set:							保存现有套牌
+	save set as:						另存为...
+	save set as directory:				将每张卡牌分开保存为...
+	export:								导出套牌...
+	export html:						将套牌导出成网页格式
+	export image:						将所选卡牌导出成为一张图片
+	export images:						将所有卡牌导出成图片
+	export apprentice:					将套牌导出成为能在 Apprentice 中使用的格式
+	export mws:							将套牌导出成为能在 Magic Workstation 中使用的格式
+	add card csv:						从csv文件导入单张卡牌
+	add card json:						从Json文件导入单张卡牌
+	check updates:						安装或升级文件包
+	print preview:						显示即将被打印的卡牌
+	print:								从本套牌中打印这张牌
+	reload data:						重新载入所有模板（游戏类型和样式）和套牌数据.
+	show profiler:						显示分析参数窗口, 包括各函数的运行用时。用于优化程序。
+	exit:								退出Magic Set Editor程序，请迅速保存你的套牌
 	
-	help:		
-	index:			
-	website:			
-	about:				
+	# edit menu
+	undo:								撤销上一个动作
+	redo:								重做上一个动作
+	cut:								将选中的文字剪切至剪切板
+	cut card:							将选中的卡牌剪切至剪切板
+	cut keyword:						将选中的关键词剪切至剪切板
+	copy:								将选中的文字复制至剪切板
+	copy card:							将选中的卡牌复制至剪切板
+	copy keyword:						将选中的关键词复制至剪切板
+	paste:								从剪切板插入文字
+	paste card:							从剪切板插入卡牌
+	paste keyword:						从剪切板插入关键词
+	select all:							全选
+	find:								搜索卡牌文字							 
+	find next:							查找下一个
+	replace:							替换卡牌文字
+	auto replace:						自动替换文字？
+	preferences:						修改Magic Set Editor的设置
+	
+	# cards menu
+	previous card:						选择列表中的上一张卡牌
+	next card:							选择列表中的下一张卡牌
+	search cards:						使用搜索词过滤卡片列表
+	add card:							添加一个新的空白卡牌到本套牌
+	add cards:							添加多张卡牌到本套牌
+	remove card:						从本套牌中删除所选卡牌
+	link card:							链接牌到目标牌
+	copy card and links:				复制目标牌及其链接牌
+	bulk modify:						Modify a lot of cards at once
+	orientation:						调整所显示卡牌的方向
+	rotate card:						将所显示卡牌顺时针旋转90°
+	rotate 0:							将所显示卡牌还原为正常模式
+	rotate 270:							将所显示卡牌顺时针旋转
+	rotate 90:							将所显示卡牌逆时针旋转
+	rotate 180:							将所显示卡牌上下翻转
+	card list columns:					调整卡牌列表栏显示项目和显示顺序
+	
+	# keywords menu
+	previous keyword:					从列表中选择上一个关键词
+	next keyword:						从列表中选择下一个关键词
+	search keywords:					使用搜索词过滤关键字列表
+	add keyword:						添加一个新关键词到本套牌中
+	remove keyword:						从本套牌中删除选中的关键词
+	
+	# format menu
+	font:								为所选文字设置单独字体
+	bold:								将所选文字设为粗体
+	italic:								将所选文字设为斜体
+	underline:							为所选文字添加下划线
+	strikethrough:						为所选文字添加删除线
+	color text:							为所选文字设置单独颜色
+	bullet point:						添加一个序号符号（没什么用）
+	symbols:							将所选文字改成符号
+	reminder text:						对选择的关键词显示提示文本
 
-	# New Set Window
-	search game list control: Filter the game list. Use - to exclude games. Use field: to search in a specific field. Use quotes for literal search. Separate multiple queries with a space.
-	search stylesheet list control: Filter the stylesheet list. Use - to exclude styles. Use field: to search in a specific field. Use quotes for literal search. Separate multiple queries with a space.
+	# spelling
+	no spelling suggestions:			无拼写错误的修改建议
 	
-	# Cards panel
-	collapse notes:		隐藏卡牌信息栏
-	expand notes:		显示卡牌信息栏
-	search cards control: 筛选卡片列表。使用-来排除卡片。使用字段：在一个特定的字段中搜索。使用引号进行字面搜索。用空格分隔多个查询。
-	# Keywords panel
-	search keywords control: 筛选关键词列表。使用-来排除卡片。使用字段：在一个特定的字段中搜索。使用引号进行字面搜索。用空格分隔多个查询。												  
-	# Random pack panel
-	random seed:		每次产生不同的随机包。
-	fixed seed:			使用固定随机种子每次产生相同的“随机”包。
-	seed:				用于产生随机数的种子。相同的种子会产生相同的“随机”包。
-	edit pack type:		双击编辑随机包类型
-	number of packs:	生成%ss的数量
+	# graph menu
+	pie:								饼状图，每一份的大小取决与卡牌数量
+	bar:								条形图，条形高度取决于卡牌数量
+	stack:								条形图，堆叠条形图
+	scatter:							散点图，每一个散点的大小取决与卡牌数量
+	scatter pie:						散饼图，每一个三点都是一个小型饼状图
+
+	# console menu
+	clear console:						清空控制台
 	
-	# Preferences
+	# window menu
+	new window:							创建一个额外窗口用来编辑同一套牌
+	cards tab:							编辑套牌中的卡牌
+	set info tab:						编辑套牌信息，例如创建者，其他
+	style tab:							改变卡牌样式
+	keywords tab:						定义本套牌额外的关键词
+	stats tab:							显示本套牌的统计情况
+	random pack tab:					通过生成随机包来测试套牌的实战效果。
+	console tab:						显示错误信息并允许执行脚本命令
+	
+	# help menu
+	index:								索引
+	website:							网站
+	documentation:						文档
+	about:								关于				
+
+	# new set window
+	search game list control:			过滤游戏列表。 使用 - 排除游戏。 使用 field: 在特定字段中搜索。 使用 “” 进行字面搜索。 用空格分隔多个查询。
+	search stylesheet list control:		过滤模板列表。 使用 - 排除模板。 使用 field: 在特定字段中搜索。 使用 “” 进行字面搜索。 用空格分隔多个查询。
+	
+	# card select / image export
+	filename format:					（使用 {card.name} 作为卡片名称；文件类型由扩展名决定）
+
+	# cards panel
+	collapse notes:						隐藏卡牌信息栏
+	expand notes:						显示卡牌信息栏
+	search cards control: 				筛选卡片列表。使用-来排除卡片。使用字段：在一个特定的字段中搜索。使用引号进行字面搜索。用空格分隔多个查询。
+
+	# keywords panel
+	search keywords control:			筛选关键词列表。使用-来排除卡片。使用字段：在一个特定的字段中搜索。使用引号进行字面搜索。用空格分隔多个查询。												  
+
+	# random pack panel
+	random seed:						每次产生不同的随机包。
+	fixed seed:							使用固定随机种子每次产生相同的“随机”包。
+	seed:								用于产生随机数的种子。相同的种子会产生相同的“随机”包。
+	edit pack type:						双击编辑随机包类型
+	number of packs:					生成%ss的数量
+	
+	# preferences
 	app language:
-		注意: 你必须重新启动MSE才能使语言修改生效.
+		注意: 你必须重新启动MSE才能使语言修改生效。
 	zoom export:
-		（当关闭该项的时候，卡牌会按照以下规则导出:
-		 100%大小，不旋转）
+		（当关闭该项的时候，卡牌会按照以下规则导出:100%大小，不旋转）
 	
 	# apprentice export
-	set code:		套牌代码是一个双字节代码，它能被Apprentice识别成一幅套牌
+	set code:							套牌代码是一个双字节代码，它能被Apprentice识别成一幅套牌
 	
-	# Symbol editor
-	new symbol:		创建一个新的系列符号
-	open symbol:		打开一个系列符号
-	save symbol:		保存系列符号
-	save symbol as:		使用不同文件名保存系列符号
-	store symbol:		将系列符号储存进套牌
-	close symbol editor:    关闭系列符号编辑器
+	## symbol editor menus
+	# file menu
+	new symbol:							创建一个新的系列符号
+	open symbol:						打开一个系列符号
+	save symbol:						保存系列符号
+	save symbol as:						使用不同文件名保存系列符号
+	store symbol:						将系列符号储存进套牌
+	close symbol editor:				关闭系列符号编辑器
 	
-	duplicate:		复制所选图形
-	group:			所选图形分成一组
-	ungroup:		取消所选分组
+	# edit menu
+	duplicate:							复制所选图形
+	group:								所选图形分成一组
+	ungroup:							取消所选分组
 	
-	grid:			显示网格线
-	snap:			吸附形状和控制点到网格线
+	#tool:
+	select:								选择并移动形状
+	rotate:								旋转并修剪形状
+	points:								编辑形状控制点
+	basic shapes:						绘制基本形状，例如矩形和圆形
+	symmetry:							给系列符号添加对称效果
+	paint:								用笔刷在图形上绘制
 	
-	tool:
-	select:			选择并移动形状
-	rotate:			旋转并修剪形状
-	points:			编辑形状控制点
-	basic shapes:		绘制基本形状，例如矩形和圆形
-	symmetry:		给系列符号添加对称效果
-	paint:			用笔刷在图形上绘制
+	# toolbar
+	grid:								显示网格线
+	snap:								吸附形状和控制点到网格线
+	merge:								把这个图形融合到下面
+	subtract:							把这个图形从下面剪掉，仅保留不在这个图形，但是在下面图形的区域
+	intersect:							把这个图形和下面相交，仅保留图像共有区域
+	difference:							这个图形和下面不相交，仅仅保留不在其他图形的区域
+	overlap:							替换并且将边框覆盖到上面的图形
+	border:								把这个图形绘制为边框
 	
-	select editor:
-	merge:			把这个图形融合到下面
-	subtract:		把这个图形从下面剪掉，仅保留不在这个图形，但是在下面图形的区域
-	intersect:		把这个图形和下面相交，仅保留图像共有区域
-	difference:		这个图形和下面不相交，仅仅保留不在其他图形的区域
-	overlap:		替换并且将边框覆盖到上面的图形
-	border:			把这个图形绘制为边框
+	# shape manipulation
+	drag to shear:						拖拽，修改选定的 %s
+	drag to rotate:						拖拽，修改选定部分的旋转角度 %s；按住Ctrl，强制旋转15°
+	drag to resize:						拖拽，修改选定部分的大小 %s,；按住Ctrl，强制修改大小
+	click to select shape:				点击，选择图形；拖拽，移动图形；双击，编辑图形
 	
-	drag to shear:		拖拽，修改选定的 %s
-	drag to rotate:		拖拽，修改选定部分的旋转角度 %s；按住Ctrl，强制旋转15°
-	drag to resize:		拖拽，修改选定部分的大小 %s,；按住Ctrl，强制修改大小
-	click to select shape:	点击，选择图形；拖拽，移动图形；双击，编辑图形
+	ellipse:							绘制圆形及椭圆形
+	rectangle:							绘制正方形及矩形
+	polygon:							绘制多边形
+	star:								绘制星形
+	sides:								确定多边形或者星形的边数
+	drag to draw shape:					拖拽，调整图形大小，按住Ctrl，强制修改图形，按住Shift，图形居中
+	draw ellipse:						点击并且拖拽，绘制一个椭圆形，按住Ctrl，绘制圆形
+	draw rectangle:						点击并且拖拽，绘制一个矩形，按住Ctrl，绘制正方形
+	draw polygon:						点击并且拖拽，绘制一个多边形
+	draw star:							点击并且拖拽，绘制一个星形
 	
-	ellipse:		绘制圆形及椭圆形
-	rectangle:		绘制正方形及矩形
-	polygon:		绘制多边形
-	star:			绘制星形
-	sides:			确定多边形或者星形的边数
-	drag to draw shape:	拖拽，调整图形大小，按住Ctrl，强制修改图形，按住Shift，图形居中
-	draw ellipse:		点击并且拖拽，绘制一个椭圆形，按住Ctrl，绘制圆形
-	draw rectangle:		点击并且拖拽，绘制一个矩形，按住Ctrl，绘制正方形
-	draw polygon:		点击并且拖拽，绘制一个多边形
-	draw star:		点击并且拖拽，绘制一个星形
+	line segment:						将所选线段变成直线
+	curve segment:						将所选线段变成曲线
+	free point:							允许两个控制点自由移动
+	smooth point:						使被选择的点平滑，用两个控制点互相相反的方式替换
+	symmetric point:					将被选择的点做对称效果
+	drag to move curve:					拖拽来移动曲线
+	drag to move line:					按住Alt键并且拖拽，移动曲线；双击，在线上添加一个点
+	drag to move point:					点击并拖拽，移动控制点；双击，移除该点
 	
-	line segment:		将所选线段变成直线
-	curve segment:		将所选线段变成曲线
-	free point:		允许两个控制点自由移动
-	smooth point:		使被选择的点平滑，用两个控制点互相相反的方式替换
-	symmetric point:	将被选择的点做对称效果
-	drag to move curve:	拖拽来移动曲线
-	drag to move line:	按住Alt键并且拖拽，移动曲线；双击，在线上添加一个点
-	drag to move point:	点击并拖拽，移动控制点；双击，移除该点
-	
-	rotation:		旋转对称（环形效果）
-	reflection:		反转对称（镜像效果）
-	add symmetry:		所选部分添加对称效果
-	remove symmetry:	移除对称效果
-	copies:			输入反转数值（包含原始数值）
-	
-	# Card select
-	filename format:	（使用{card.name}作为卡片名称；文件类型由扩展名决定）
+	rotation:							旋转对称（环形效果）
+	reflection:							反转对称（镜像效果）
+	add symmetry:						所选部分添加对称效果
+	remove symmetry:					移除对称效果
+	copies:								输入反转数值（包含原始数值）
 
 ############################################################## Toolbar
 tool:
-	undo:			撤销
-	redo:			重做
+	## app toolbars
+	# tabs
+	cards tab:							卡牌编辑 F5
+	set info tab:						套牌信息 F7
+	style tab:							风格样式 F6
+	keywords tab:						关键词 F8
+	stats tab:							统计结果 F9
+	random pack tab:					随机开包 F10
+	console tab:						控制台 F11
 	
-	cards tab:		卡牌编辑 F5
-	set info tab:		套牌信息 F7
-	style tab:		风格样式 F6
-	keywords tab:		关键词 F8
-	stats tab:		统计结果 F9
-	random pack tab:	随机开包 F10
-	console tab:		控制台 F11
-	
-	# symbol editor
-	store symbol:		储存
+	# cards toolbar
+	#TODO: Localize
+	search cards:						搜索卡牌 (Ctrl+K)
+	#TODO: Localize
+	card counts 2:						选择%s张卡牌, 总计%s张卡牌
+	#TODO: Localize
+	card counts 3:						选择%s张卡牌，已过滤%s张卡牌, 总计%s张卡牌
 
-	grid:			网格
-	snap:			吸附
-	
-	select:			选择
-	rotate:			旋转
-	points:			控制点
-	basic shapes:		基本形状
-	symmetry:		对称效果
-	paint:			笔刷
-	
-	merge:			融合
-	subtract:		减去
-	intersect:		相交
-	difference:		不相交
-	overlap:		覆盖
-	border:			边框
-	
-	ellipse:		椭圆形
-	rectangle:		矩形
-	polygon:		多边形
-	star:			星形
-	
-	rotation:		旋转
-	reflection:		反转
-	add symmetry:		添加对称效果
-	remove symmetry:	移除对称效果
-	line segment:		直线
-	curve segment:		曲线
-	free point:		自由
-	smooth point:		平滑
-	symmetric point:	对称
-	clear console:		清空控制台
-	
+	# edit toolbar
+	undo:								撤销
+	redo:								重做
+
+	# console toolbar
+	clear console:						清空控制台
+
+	## symbol editor toolbars
+	store symbol:						储存
+
+	grid:								网格
+	snap:								吸附
+
+	select:								选择
+	rotate:								旋转
+	points:								控制点
+	basic shapes:						基本形状
+	symmetry:							对称效果
+	paint:								笔刷
+
+	merge:								融合
+	subtract:							减去
+	intersect:							相交
+	difference:							不相交
+	overlap:							覆盖
+	border:								边框
+
+	ellipse:							椭圆形
+	rectangle:							矩形
+	polygon:							多边形
+	star:								星形
+
+	rotation:							旋转
+	reflection:							反转
+	add symmetry:						添加对称效果
+	remove symmetry:					移除对称效果
+
+	line segment:						直线
+	curve segment:						曲线
+	free point:							自由
+	smooth point:						平滑
+	symmetric point:					对称
+
 ############################################################## Toolbar help text
 tooltip:
-	cards tab:		卡牌编辑	
-	set info tab:		套牌信息
-	style tab:		风格样式	
-	keywords tab:		关键词
-	stats tab:		统计结果
-	random pack tab:	随机开包
-	console tab:		控制台
-		
-	new set:		新建套牌
-	open set:		打开套牌
-	save set:		保存套牌
-	export:			导出
+	## app popup tooltips
+	# tabs
+	cards tab:							卡牌编辑	
+	set info tab:						套牌信息
+	style tab:							风格样式	
+	keywords tab:						关键词
+	stats tab:							统计结果
+	random pack tab:					随机开包
+	console tab:						控制台
+
+	# file toolbar
+	new set:							新建套牌
+	open set:							打开套牌
+	save set:							保存套牌
+	export:								导出
+
+	# edit toolbar
+	cut:								剪切
+	copy:								复制
+	paste:								粘贴
+	undo:								撤销%s
+	redo:								重做%s
+
+	# cards toolbar
+	add card:							添加卡牌
+	remove card:						移除选中卡牌
+	link card:							链接牌到目标牌
+	copy card and links:				复制目标牌及其链接牌
+	rotate card:						旋转卡牌
 	
-	cut:			剪切
-	copy:			复制
-	paste:			粘贴
-	undo:			撤销%s
-	redo:			重做%s
+	# keywords toolbar
+	add keyword:						添加关键词
+	remove keyword:						移除所选关键词
 	
-	add card:		添加卡牌
-	remove card:		移除选中卡牌
-	rotate card:		旋转卡牌
+	# format toolbar
+	font:								字体
+	bold:								粗体
+	italic:								斜体
+	underline:							下划线
+	strikethrough:						删除线
+	color text:							字体颜色
+	bullet point:						序号点（没什么用）
+	symbols:							系列符号
+	reminder text:						提示文本
 	
-	add keyword:		添加关键词
-	remove keyword:		移除所选关键词
+	# graph toolbar
+	pie:								饼形图
+	bar:								条形图
+	stack:								堆叠条形图
+	scatter:							散点图
+	scatter pie:						散饼图
 	
-	bold:			粗体
-	italic:			斜体
-	symbols:		系列符号
-	underline:		下划线
-	reminder text:		提示文本
-	
-	pie:			饼形图
-	bar:			条形图
-	stack:			堆叠条形图
-	scatter:		散点图
-	scatter pie:		散饼图
-	
-	# symbol editor
-	store symbol:		将系列符号保存到套牌
-	
-	grid:			显示网格
-	snap:			吸附网格
-	
-	select:			选择	F5
-	rotate:			旋转	F6
-	points:			控制点	F7
-	basic shapes:	基本形状	F8
-	symmetry:		对称效果	F9
-	paint:			笔刷	F10
-	
-	merge:			和下面的图形融合
-	subtract:		从下面的图形减去
-	intersect:		和下面的图形相交
-	difference:		和下面的图形不相交
-	overlap:		覆盖上面的其他图形
-	border:			绘制边框
-	
-	ellipse:		圆形 / 椭圆形
-	rectangle:		正方形 /矩形
-	polygon:		多边形
-	star:			星型
-	
-	rotation:		旋转对称（环形效果）
-	reflection:		反转对称（镜像效果）
-	add symmetry:		所选部分添加对称效果
-	remove symmetry:	移除对称效果
-	
-	line segment:		变成直线
-	curve segment:		变成曲线
-	free point:		解锁点
-	smooth point:		点平滑效果
-	symmetric point:	点对称效果
-	
-	clear console:		清空控制台						  
+	# console toolbar
+	clear console:						清空控制台
+
+	## symbol editor popup tooltips
+	store symbol:						将系列符号保存到套牌
+
+	grid:								显示网格
+	snap:								吸附网格
+
+	select:								选择	F5
+	rotate:								旋转	F6
+	points:								控制点	F7
+	basic shapes:						基本形状	F8
+	symmetry:							对称效果	F9
+	paint:								笔刷	F10
+
+	merge:								和下面的图形融合
+	subtract:							从下面的图形减去
+	intersect:							和下面的图形相交
+	difference:							和下面的图形不相交
+	overlap:							覆盖上面的其他图形
+	border:								绘制边框
+
+	ellipse:							圆形 / 椭圆形
+	rectangle:							正方形 /矩形
+	polygon:							多边形
+	star:								星型
+
+	rotation:							旋转对称（环形效果）
+	reflection:							反转对称（镜像效果）
+	add symmetry:						所选部分添加对称效果
+	remove symmetry:					移除对称效果
+
+	line segment:						变成直线
+	curve segment:						变成曲线
+	free point:							解锁点
+	smooth point:						点平滑效果
+	symmetric point:					点对称效果
+
 ############################################################## Labels in the GUI
 label:
-	# Cards tab								
-	card notes:		卡牌信息:
-	search cards:		搜索卡牌...
-	# Keywords tab
-	search keywords:	搜索关键字...
-	keyword:		关键词
-	match:			匹配
-	mode:			类型
-	uses:			使用次数
-	reminder:		提示文本
-	rules:			额外规则
+	## app window items labels
+	# cards panel
+	card notes:							卡牌信息:
+	search cards:						搜索卡牌...
+	# keywords panel				
+	search keywords:					搜索关键字 (Ctrl+K)
+	keyword:							关键词
+	match:								匹配
+	mode:								类型
+	uses:								使用次数
+	reminder:							提示文本
+	rules:								额外规则
 	standard keyword:
 		这是一个标准的 %s 关键词，你不需要编辑它。
 		如果你做了一个关键词的备份，那么你的备份将优先被使用
 	
-	# Style tab
-	styling options:	样式选项
+	# style panel
+	styling options:					样式选项
 
-
-	
-	# Random pack panel
-	pack selection:		选择随机包
-	pack totals:		随机包总数
-	pack name:			随机包名称
-	seed:				随机数种子
-	total cards:		总卡牌数
+	# random pack panel				
+	pack selection:						选择随机包
+	pack totals:						随机包总数
+	pack name:							随机包名称
+	seed:								随机数种子
+	total cards:						总卡牌数
 		
-	# Other set window dialogs
+	# link cards dialog
+	#TODO: Localize Section
+	custom link:						自定义...
+	custom link selected:				派衍生物的牌, 正面, 融合组件, etc...
+	custom link linked:					衍生物, 背面, 融合结果, etc...
+	custom link undefined:				未定义
+	linked cards relation:				选择链接牌与被链接牌的关系:
+	selected card:						选择牌:
+	linked cards:						链接牌:
+	select linked cards:				选择至多四张牌链接:
+
+	# bulk modification dialog
+	#TODO: Localize Section
+	bulk modify selection:				哪些牌需要被修改:
+	bulk modify all:					所有牌
+	bulk modify filtered:				当前过滤的牌
+	bulk modify selected:				当前选择的牌
+	bulk modify predicate:				符合以下条件的牌
+	bulk modify predicate description:	满足哪些条件的牌需要修改:
+	bulk modify predicate example:		例如 (tiny M:tG creatures):
+	bulk modify field:					哪些值需要修改:
+	bulk modify mod description:		需要改成何值:
+
+	# open dialogs
+	all files:							全部文件
+
+	# other set window dialogs
 	save changes:
 		套牌 '%s' 已经被修改。
 		
 		你想保存修改吗?
+
+	# new set dialog
+	game type:							游戏类型:	&G
+	style type:							风格样式:	&S
+	search game list:					过滤游戏
+	search stylesheet list:				过滤样式
 	
-	# New set window
-	game type:		游戏类型:	&G
-	style type:		风格样式:	&S
-	search stylesheet list: Filter Stylesheets
-	
+	# stylesheet not found dialog
 	stylesheet not found:
 		你要打开的套牌使用的是 "%s" 样式表
 		这个样式表在你的系统里没有找到，请选择其他方案
 	
-	# Preferences
-	language:		语言
-	windows:			打开套牌
-	app language:		程序界面语言
-	card display:		Card Display
-	storage: 			Storage
-	zoom:			&缩放
-	export: 			导出
-	scale: 				规模						
-	percent of normal:	 %显示
-	external programs:	外部程序
-	apprentice:		Apprentice:	&A
-	apprentice exe:		可执行Apprentice
-	check at startup:	程序运行时检查新版本
+	# preferences dialog
+	language:							语言
+	windows:							打开套牌
+	dark mode: 							夜间模式
+	dark mode system: 					跟随系统
+	dark mode no: 						关闭
+	dark mode yes: 						开启
+	app language:						程序界面语言
+	card display:						卡牌显示
+	storage: 							图像存储
+	zoom:								缩放
+
+	export:								导出:
+	scale:								规模	
+	export desc:						导出描述（）
+	import:								导入:
+	import desc:						导入描述（）
+	check what targets:					检查目标
+
+	use export scale:					采用导出规模
+	export around 300:					300 DPI 左右
+	export force 300:					强制 300 DPI
+	export force 150:					强制 150 DPI					
+	percent of normal:					% 显示
+	external programs:					外部程序
+	apprentice:							Apprentice:
+	apprentice exe:						可执行Apprentice
+	
 	internal scale desc:
-		Scale to internally store card images at.
-		Changing this may impact how Sharpening looks.
-		Does not retroactively apply to existing images.
-	check at startup:	Check for new versions at startup			
+		缩放以在内部存储的牌图。
+		更改此项可能会导致一定的锐化。
+		不适用于已导入的图像。
+		需重新导入以应用更改。
+	check at startup:					程序运行时检查新版本			
 	checking requires internet:
 		检查新版本需要接入互联网。
 		没有接入互联网的时候不检查更新。
-		
 		检查更新时不会搜集用户信息。
+		（由于是测试整合版，不建议使用此升级功能）
 	
-	# Column select
-	select columns:		选择你要显示的栏目
-	columns:		栏目:
+	# column select dialog
+	select columns:						选择你要显示的栏目
+	columns:							栏目:
 	
-	# Card select / images export
-	select cards:			要导出的卡牌
-	selected card count:	%s 此卡将被导出
-	select cards print:	选择需要打印的卡牌
-	filename format:	格式: 	&F
-	filename conflicts:	处理重复文件名:	&H
-	export filenames:	文件名
-#	cards to export:	导出卡牌
-	filename is ignored: 	（忽略文件名）
-	
-	# apprentice export
-	set code:		设置套牌代码:	&C
-	apprentice export cancelled: 导出到 Apprentice 的过程被取消
-	
-	# Html export
-	html template:		模板:
-	html export options:    导出选项
-	
-	# Image slicer
-	original:		原始:
-	result:			结果:
-	size:			大小
-	original size:			原始尺寸	&O
-	size to fit:			同比例缩放	&F
-	force to fit:			强制缩放	&R
-	custom size:			自定义尺寸	&C
-	selection:		选取
-	selection left:			左	&L
-	selection top:			上	&T
-	selection width:		宽	&W
-	selection height:		高	&H
-	zoom:			缩放
-	fix aspect ratio:		固定长宽比
-	zoom amount:			缩放度
-	zoom amount x:			缩放&X
-	zoom amount y:			缩放&Y
-	zoom %:					%
-	filter:			滤镜
-	sharpen filter:			锐化滤镜	&S
-	
-	# Auto replace
-	auto match:		匹配
-	auto replace:		替换
-	
-	# Symbol editor
-	sides:			侧
-	
-	# Packages window
-	package name:		文件包
-	package status:		状态
-	package action:		动作
-	package conflicts:	矛盾修改
-	package modified:	本地修改
-	package updates:	可用升级
-	package installed:	已安装
-	package installable:	未安装
-	install package:	安装
-	reinstall package:		重新安装
-	upgrade package:	升级
-	remove package:		移除
+	# card select / image export dialogs
+	select cards:						要导出的卡牌
 
-	installed version:		已安装的版本:
-	installable version:	可安装的最新版本:
-	installer size:			文件大小:
-	installer status:		安装状态:
-	no version:				无可用版本
- 
+	select cards print:					选择需要打印的卡牌
+	selected card count:				%s 此卡将被导出
+	filename format:					格式: 	&F
+	filename conflicts:					处理重复文件名:	&H
+	export filenames:					文件名
+	filename is ignored:				（忽略文件名）
+	
+	# apprentice export dialog
+	set code:							设置套牌代码:
+	apprentice export cancelled:		导出到 Apprentice 的过程被取消
+	
+	# html export dialog
+	html template:						模板:
+	html export options:				导出选项
+
+	# CSV import dialog
+	#TODO: Localize Section
+	add card csv sep:					分隔符:
+	add card csv tab:					Tab
+	add card csv comma:					逗号
+	add card csv semicolon:				分号
+	add card csv file:					CSV / TSV 路径:
+
+	# JSON import dialog
+	#TODO: Localize Section
+	add card json type:					JSON 文件类型:
+	add card json custom:				自定义 JSON 文件
+	add card json path:					Path of the card array within the file:
+	add card json file:					Path of the file:
+
+	# Image slicer
+	original:							原始:
+	result:								结果:
+	original with dimensions:			原来的 (%s x %s):
+	result with dimensions:				结果 (%s x %s):
+	size:								大小
+	original size:						原始尺寸	&O
+	size to fit:						同比例缩放	&F
+	force to fit:						强制缩放	&R
+	custom size:						自定义尺寸	&C
+	selection:							选取
+	selection left:						左	&L
+	selection top:						上	&T
+	selection width:					宽	&W
+	selection height:					高	&H
+	selection center:					中心
+	selection center vertically:		垂直居中
+	selection center horizontally:		水平居中
+	selection center both:				垂直水平居中
+	zoom:								缩放
+	fix aspect ratio:					固定长宽比
+	zoom amount:						缩放度
+	zoom amount x:						缩放&X
+	zoom amount y:						缩放&Y
+	zoom %:								%
+	filter:								滤镜
+	sharpen filter:						锐化滤镜	&S
+	#TODO: Localize Section
+	grid:								网格
+	grid halves:						二分
+	grid thirds:						三分
+	grid fourths:						四分
+	grid fifths:						五分
+	none:								无
+	
+	# auto replace dialog
+	auto match:							匹配
+	auto replace:						替换
+	
+	# packages dialog
+	package name:						文件包
+	package status:						状态
+	package action:						动作
+
+	package conflicts:					矛盾修改
+	package modified:					本地修改
+	package updates:					可用升级
+	package installed:					已安装
+	package installable:				未安装
+	install package:					安装
+	reinstall package:					重新安装
+	upgrade package:					升级
+	remove package:						移除
+
+	installed version:					已安装的版本:
+	installable version:				可安装的最新版本:
+	installer size:						文件大小:
+	installer status:					安装状态:
+	no version:							无可用版本
+
+	# print dialog
+	#TODO: Localize section
+	put space between cards:			卡牌间添加间隙?
+	spacing print:						牌张之间间隙（毫米）
+	cutter lines print:					添加切割线?
+	cutter lines all:					全部
+	cutter lines no intersect:			不与卡牌相交时
+	cutter lines none:					无
+	## symbol editor
+	sides:								侧
+
+	# image load
+	load image:							双击载入插图 或 粘贴插图(Ctrl+V)
+
 ############################################################## Buttons/checkboxes/choices in the GUI
 button:
-	# Editor
-	edit symbol:		编辑
-	symbol gallery:		画廊
+	#TODO: Localize
+	unlink:								解除链接
+	#TODO: Localize
+	link select:						选择
 	
 	# Style panel
-	use for all cards:	应用到全部卡牌	&A
-	use custom styling options: 本张卡牌使用特殊设置	&S
-	
-	# Keywords panel
-	insert parameter:	插入参数...
-	refer parameter:	提交参数...
-	
+	use for all cards:					应用到全部卡牌	&A
+	use custom styling options:			本张卡牌使用特殊设置	&S
+
+	# set info panel
+	edit symbol:						编辑
+	symbol gallery:						画廊
+
+	# keywords panel
+	insert parameter:					插入参数...
+	refer parameter:					提交参数...
+
 	# Random pack panel
-	generate pack:		生成随机包	&G
-	random seed:		随机数种子（随机性较差）	&R
-	fixed seed:			设定随机数种子	&F
-	add custom pack:	添加自定义随机包	&C
+	generate pack:						生成随机包	&G
+	random seed:						随机数种子（随机性较差）	&R
+	fixed seed:							设定随机数种子	&F
+	add custom pack:					添加自定义随机包	&C
 	
 	# Console panel
-	evaluate:			测试	Ctrl+F9
-	clear:				清空
+	evaluate:							测试	Ctrl+F9
+	clear:								清空
 	
-	# Welcome
-	new set:		新建套牌
-	open set:		打开套牌
-	check updates:		检查更新
-	last opened set:	上一次打开的套牌
+	# welcome
+	new set:							新建套牌
+	open set:							打开套牌
+	check updates:						检查更新
+	last opened set:					上一次打开的套牌
 	
-	# Preferences
-	open sets in new window:	在新窗口打开整个系列	&W
-	select:			&选择...
-	browse:			&浏览...
-	high quality: &高质量渲染效果
-	show lines: &各个编辑区域显示线
-	show editing hints: &卡牌编辑区显示虚线提示框
-	zoom export: &当导出时采用上面缩放和旋转设置
-	spellcheck enabled:  &检查卡牌拼写错误
-	check now:		立刻检查
-	always:			总是
-	if internet connection exists:	仅有网时
-	never:			从不
-	internal image extension: 以文件扩展名在内部存储图像
+	# preferences
+	open sets in new window:			在新窗口打开整个系列
+	select:								选择...
+	browse:								浏览...
+	high quality:						高质量渲染效果
+	show lines:							各个编辑区域显示线
+	show editing hints:					卡牌编辑区显示虚线提示框
+	zoom export:						当导出时采用上面缩放和旋转设置
+	rotation export:
+		使用当前旋转视角
+		导出时设置
+	spellcheck enabled:					检查卡牌拼写错误
+
+	bleed export:						出血导出
+	notes export:						注释导出
+	allow image download:				允许图片下载
+
+	every 5 startups:					每五次启动
+	every 10 startups:					每十次启动
+	check app:							检查软件
+	check games:						检查游戏
+	check everything:					检查所有
+
+	check now:							立刻检查
+	always:								总是
+	if internet connection exists:		仅在联网时
+	never:								从不
+	internal image extension:			以文件扩展名在内部存储图像
 	
 	# Column select
-	move up:		向上移动	&U
-	move down:		向下移动	&D
-	show:			显示	&S
-	hide:			隐藏	&H
+	move up:							向上移动	&U
+	move down:							向下移动	&D
+	show:								显示	&S
+	hide:								隐藏	&H
 	
 	# Card select
-	export entire set:				整个系列
-	export generated packs:			生成的随机包
-	export custom cards selection:	自定义选取范围
-	select cards:		选取卡牌...	&S
-	select all:		全选	&A
-	select none:		全不选	&N
-	overwrite:		覆盖旧文件
-	keep old:		保留旧文件
-	number:			文件名添加序号
-	number overwrite:	文件名添加序号，覆盖上次导出的结果
+	export entire set:					整个系列
+	export generated packs:				生成的随机包
+	export custom cards selection:		自定义选取范围
+	select cards:						选取卡牌...	&S
+	select all:							全选	&A
+	select none:						全不选	&N
+	overwrite:							覆盖旧文件
+	keep old:							保留旧文件
+	number:								文件名添加序号
+	number overwrite:					文件名添加序号，覆盖上次导出的结果
 	
 	# Auto replace
-	use auto replace:	使用自动替换
-	add item:		添加项	&A
-	remove item:		移除项	&R
-	defaults:		还原默认	&D
-	enabled:		开启
-	whole word:		匹配整个字符串
+	use auto replace:					使用自动替换
+	add item:							添加项	&A
+	remove item:						移除项	&R
+	defaults:							还原默认	&D
+	enabled:							开启
+	whole word:							匹配整个字符串
 	
 	# Old style update checker  (NOTE: this will be removed in a feature version)
 	close:			关闭
 	
 	# Packages window
-	keep package:		不修改	&D
-	don't install package:	不安装	&O
-	install package:	安装	&I
-	upgrade package:	升级	&U
-	reinstall package:		重新安装	&E
-	remove package:		移除	&R
-	install group:		全部安装	&I
-	upgrade group:		全部升级	&U
-	remove group:		全部移除	&M
+	keep package:						不修改	&D
+	don't install package:				不安装	&O
+	install package:					安装	&I
+	upgrade package:					升级	&U
+	reinstall package:					重新安装	&E
+	remove package:						移除	&R
+	install group:						全部安装	&I
+	upgrade group:						全部升级	&U
+	remove group:						全部移除	&M
 	
 ############################################################## Titles in the GUI
 title:
-	magic set editor:	Magic Set Editor
-	%s - magic set editor:	%s - Magic Set Editor
-	untitled:		无标题
-	about:			关于Magic Set Editor 由slimeking，彼方，慕容儒风汉化制作
-	symbol editor:		系列符号编辑器 由slimeking，彼方，慕容儒风汉化制作
+	warning:警告
+	magic set editor:					Magic Set Editor
+	%s - magic set editor:				%s - Magic Set Editor
+	untitled:							无标题
+	about:								关于Magic Set Editor 2016年由slimeking,彼方,慕容儒风，2023年由Trent Touch汉化
+	symbol editor:						系列符号编辑器 由slimeking，彼方，慕容儒风，Trent Touch汉化制作
 	# dialogs
-	new set:		新建套牌
-	open set:		打开套牌
-	save set:		套牌另存为
-	save set as directory:	保存为单独文件									 
-	save image:		保存图片
-	updates available:	可用更新
-	save changes:		保存修改？
-	select stylesheet:	选择样式表
+	new set:							新建套牌
+	open set:							打开套牌
+	save set:							套牌另存为
+	save set as directory:				保存为单独文件									 
+	save image:							保存图片
+	updates available:					可用更新
+	save changes:						保存修改？
+	select stylesheet:					选择样式表
+	#TODO: Localize
+	link cards:							链接牌到目标牌
+	#TODO: Localize
+	bulk modify:						批量修改卡牌
+	
 	#preferences
-	preferences:		设置
-	global:			全局
-	display:		显示
-	directories:		目录
-	internal:               内部							 
-	updates:		升级更新
-	update check:		检查更新
-	locate apprentice:	定位 Apprentice
+	preferences:						设置
+	global:								全局
+	display:							显示
+	transfers:							导入/出
+	directories:						目录
+	internal:							内部							 
+	updates:							升级更新
+	update check:						检查更新
+	locate apprentice:					定位 Apprentice
+
 	# select
-	select columns:		选择栏目
-	select cards:		选择卡牌
-	select cards export:    导出选中的卡牌
-	select cards print:	选择要打印的卡牌									   
+	select columns:						选择栏目
+	select cards:						选择卡牌
+	select cards export:				导出选中的卡牌
+	select cards print:					选择要打印的卡牌		
+
 	# slice
-	slice image:		图片切片
-	# pack
-	custom pack:		自定义随机包的类型
-	# print
-	print preview:		打印预览
+	slice image:						图片切片
+
+	# pack				
+	custom pack:						自定义随机包的类型
+
+	# print				
+	print preview:						打印预览
+
+	settings:							设置
+
 	# export
-	export images:		导出为图像
-	export cancelled:	取消导出
-	export html:		导出为HTML
-	save html:		保存为HTML
+	export images:						导出为图像
+	export cancelled:					取消导出
+	export html:						导出为HTML
+	save html:							保存为HTML
+
+	# import
+	#TODO: Localize Section
+	add card csv:						从csv/tsv文件导入卡牌
+	add card csv file:					打开csv/tsv文件
+	add card json:						从json文件导入卡牌
+	add card json file:					打开json文件
+
 	# auto replace
-	auto replaces:		自动替换
+	auto replaces:						自动替换
 	
 	# Package Update Window
-	packages window:	文件包管理器
-	installing updates:	安装更新
-	
-	cannot create file:	无法创建文件
+	packages window:					文件包管理器
+	installing updates:					安装更新
+	cannot create file:					无法创建文件
 
 ############################################################## Action (undo/redo) names
 action:
+	change style: 更换样式
+	change link: 更换链接卡牌
+	use custom style: 使用自定义样式
 	# List boxes
-	add item:		添加 %s
-	remove item:		移除 %s
+	add item:							添加 %s
+	remove item:						移除 %s
 	
 	# Text editor
-	typing:			键入
-	enter:			进入
-	soft line break:	软换行
-	insert symbol:		插入符号
-	backspace:		退格
-	delete:			删除
-	cut:			剪切
-	paste:			粘贴
-	auto replace:		自动替换
-	correct:			拼写修正
+	typing:								输入
+	enter:								回车
+	soft line break:					软换行
+	insert symbol:						插入符号
+	backspace:							退格
+	delete:								删除
+	cut:								剪切
+	paste:								粘贴
+	auto replace:						自动替换
+	correct:							拼写修正
+	bulk:								批量
 	# Choice/color editors
-	change:			修改 %s
+	change:								修改 %s
+
+	# Symbol Actions					
+	move:								移动 %s
+	rotate:								旋转 %s
+	shear:								修剪 %s
+	scale:								改变尺寸 %s
+	duplicate:							复制 %s
+	reorder parts:						再添加
+	change combine mode:				改变联合模式
+	change shape name:					改变图形名字
+	group parts:						分组
+	ungroup parts:						取消分组
 	
-	# Symbol Actions
-	move:			移动 %s
-	rotate:			旋转 %s
-	shear:			修剪 %s
-	scale:			改变尺寸 %s
-	duplicate:		复制 %s
-	reorder parts:		再添加
-	change combine mode:	改变联合模式
-	change shape name:	改变图形名字
-	group parts:		分组
-	ungroup parts:		取消分组
+	# symbol part actions
+	convert to line:					转换成直线
+	convert to curve:					转换成曲线
+	lock point:							锁定点
+	move handle:						移动手柄
+	move curve:							移动曲线
+	add control point:					添加控制点
+	delete point:						删除控制点
+	delete points:						删除多个控制点
 	
-	# Symbol Part Actions
-	convert to line:	转换成直线
-	convert to curve:	转换成曲线
-	lock point:		锁定点
-	move handle:		移动手柄
-	move curve:		移动曲线
-	add control point:	添加控制点
-	delete point:		删除控制点
-	delete points:		删除多个控制点
-	
-	# Symmetry
-	add symmetry:		添加对称效果
-	#remove symmetry:	移除对称效果
-	move symmetry center:	移动对称中心
-	move symmetry handle:	改变对称方向
-	change symmetry type:	改变对称类型
-	change symmetry copies:	反转角度
+	# symmetry
+	add symmetry:						添加对称效果
+	remove symmetry:					移除对称效果
+	move symmetry center:				移动对称中心
+	move symmetry handle:				改变对称方向
+	change symmetry type:				改变对称类型
+	change symmetry copies:				反转角度
 
 ############################################################## Error messages
 error:
+	cant link to self:					无法链接到自身
+	no cards selected:					没有选择卡牌
 	# File related
-	file not found:		没有找到文件: '%s' 在 '%s' 文件包中
+	file not found:						没有找到文件: '%s' 在 '%s' 文件包中
 	file not found package like:
 		没有找到文件:'%s' 在 '%s' 文件包中
 		如果你尝试从别的文件包中打开文件， 使用以下格式"/package/filename"
 	file parse error:
 		处理文件发生错误:'%s'
 		%s
-	package not found:		文件包没有找到: '%s'
-	package out of date:		文件包 '%s' （版本 %s） 过期，需要 %s 以上版本
-	package too new:		文件包 '%s' （版本 %s）与这个版本不兼容 %s，需要 '%s' 以上版本
-	unable to open output file:	保存时出错，无法打开输出文件
-	unable to store file:		保存时出错，无法储存文件
+	package not found:					文件包没有找到: '%s'
+	package out of date:				文件包 '%s' （版本 %s） 过期，需要 %s 以上版本
+	package too new:					文件包 '%s' （版本 %s）与这个版本不兼容 %s，需要 '%s' 以上版本
+	unable to open output file:			保存时出错，无法打开输出文件
+	unable to store file:				保存时出错，无法储存文件
 	dependency not given:
 		文件包 '%s' 所使用的文件来自于文件包 '%s' ，但是列表中并没有该附加项
 		要解决这个问题，添加:
 		  depends on: %s %s
-	
+
+	# image import
+	#TODO: Localize Section
+	import not found:					文件未找到: '%s'
+	can't import image without set:		导入文件前需要先保存或加载set文件: '%s'
+	can't create file stream:			无法创建文件流: '%s'
+	can't write image to set:			无法将图像写入set: '%s'
+	can't import image:					无法导入图像: '%s'
+
+	# card creation
+	#TODO: Localize Section
+	no field with name:					无法找到 %s 名为 '%s' 的区域
+	styling data not map:				给'%s_data'的值不是一个映射
+	styling data without stylesheet:	在设置样式表之前给'%s_data'的值
+	cant set value:						无法设置卡片值'%s'，类型不正确
+	cant set image value:				只能使用包内的相对文件名或import_image函数来设置图像值，在名为'%s'的字段中
+	cant set symbol value:				只能使用包内的相对文件名来设置符号值，在名为'%s'的字段中
+	add card csv file not found:		找不到或无法加载CSV或TSV文件
+	add card csv file malformed:		CSV或TSV文件格式错误，行'%s'的条目数与第一行不一致
+	add card json failed to parse:		解析JSON文件失败
+	add card json path not valid:		JSON文件内的路径无效
+	add card json empty array:			JSON文件中的卡片数组为空
+	add card json file not found:		找不到或无法加载JSON文件
+	json set without game:				没有游戏无法从JSON创建牌组
+	json set without stylesheet:		没有样式表无法从JSON创建牌组
+	json unknown type:					发现未知类型的JSON值
+	json unknown script type:			无法将脚本值转换为JSON
+	json cant parse:					解析JSON文件失败
+	json cant convert:					从JSON导入时输入必须是字符串
+	json cant concat:					无法将映射与数组合并
+	import empty file:					%s文件为空
+	import missing fields:				
+		%s文件包含以下无法导入的条目，因为找不到对应的卡片字段：%s
+
 	# Script stuff
-	has no member:			%s 没有成员 '%s'
-	can't convert:			无法将 %s 转换成 %s 
-	has no member value:		字符串 "%s" 没有成员 '%s'
-	can't convert value:		无法将 "%s" 从 %s 转化成 %s
-	unsupported format:		无效字符串格式:'%s'
+	has no member:						%s 没有成员 '%s'
+	can't convert:						无法将 %s 转换成 %s 
+	has no member value:				字符串 "%s" 没有成员 '%s'
+	can't convert value:				无法将 "%s" 从 %s 转化成 %s
+	unsupported format:					无效字符串格式:'%s'
 	in function:
 		%s
 		  在函数中 %s
@@ -799,34 +1024,52 @@ error:
 		  在提示文本里的关键词 '%s'
 	
 	# Image stuff
-	coordinates for blending overlap:			坐标混合重叠
+	coordinates for blending overlap:	坐标混合重叠
 	images used for blending must have the same size:	边框用图像必须使用相同大小
 	
 	# Error from files
-	no game specified:			没有为 %s 指定游戏类型
+	no game specified:					没有为 %s 指定游戏类型
 	no stylesheet specified for the set:	没有为套牌制定样式表
 	stylesheet and set refer to different game:
 		样式表文件有错误，样式表和套牌与该游戏类型不相关。
-	unsupported field type:		不支持的区域类型:'%s'
-	unsupported fill type:		不支持的填充类型: '%s'
-	unrecognized value:		无法识别的值:'%s'，默认值'%s'
-	expected key:			预期中的关键:'%s'
-	aborting parsing:		遇到致命错误，放弃读取
+	unsupported field type:				不支持的区域类型:'%s'
+	unsupported fill type:				不支持的填充类型: '%s'
+	unrecognized value:					无法识别的值:'%s'，默认值'%s'
+	expected key:						预期中的关键:'%s'
+	aborting parsing:					遇到致命错误，放弃读取
 	newer version:
 		%s
 		这个文件是由更高版本的 Magic Set Editor (%s) 制作的
 		当你打开它的时候，文件中的一些界面会丢失
-		推荐你升级到最新版本（由于是整合版，请勿使用此升级功能）
-		浏览官方网站 http:://magicseteditor.sourceforge.net/
-	word list type not found:	词语列表类型 %s 没有找到 （从<word-list> 标签中）
+		推荐你升级到最新版本（由于是测试整合版，不建议使用此升级功能）
+		浏览官方网站 https://magicseteditor.boards.net/page/downloads
+	word list type not found:			词语列表类型 %s 没有找到 （从<word-list> 标签中）
 	pack type not found:				未找到该类型的随机包 "%s" (在包类别中)
+
+	# printing
+	#TODO: Localize Section
+	h margin too small for cutter:		水平边距太小而无法插入剪切线
+	v margin too small for cutter:		垂直边距太小而无法插入剪切线
 	
 	# Update checking
-	checking updates failed:	检查更新失败。
-	no updates:			没有可用更新。
-	
+	checking updates failed:			检查更新失败。
+	no updates:							没有可用更新。
+
+	# card linking
+	#TODO: Localize Section
+	not enough free links:				卡牌没有链接余量，最多链接4张卡牌。
+	not enough free links for copy:		复制卡牌没有链接余量，最多链接4张卡牌。
+	could not link:						以下卡牌无法链接，因其已链接到4张牌的上限：
+
+	# bulk modification
+	#TODO: Localize Section
+	bulk modify script type unknown:	无法确定修改脚本的返回类型
+	bulk modify predicate is not bool:	条件未求值为布尔值
+	bulk modify mod is not string:		修改未求值为字符串
+	bulk modify no cards:				没有可修改的卡片
+
 	# Stats panel
-	dimension not found:		没有统计数据 '%s'
+	dimension not found:				没有统计数据 '%s'
 	
 	# Random packs
 	pack type duplicate name:
@@ -834,13 +1077,13 @@ error:
 		请重新命名。
 	
 	# Package update window
-##	checking updates:		检查更新
+	checking updates:					检查更新
 	can't download installer:
 		无法为文件包 %s 下载安装程序，从 %s
 		没有更新被安装
 	
-	downloading updates:		更新文件下载中 (%d of %d)
-	installing updates:		文件包升级中 (%d of %d)
+	downloading updates:				更新文件下载中 (%d of %d)
+	installing updates:					文件包升级中 (%d of %d)
 	
 	remove packages:
 		即将移除 %s 文件包，你想继续吗？
@@ -849,65 +1092,68 @@ error:
 		被移除的文件将无法恢复。
 		
 		你想继续吗？
-	install packages successful:	%s 文件包被成功安装
-	remove packages successful:	%s 文件包被成功移除.
-	change packages successful:	%s 文件包被成功修改
+	install packages successful:		%s 文件包被成功安装
+	remove packages successful:			%s 文件包被成功移除.
+	change packages successful:			%s 文件包被成功修改
 	
-	cannot create file:		无法创建文件 '%s' ，继续安装？
+	cannot create file:					无法创建文件 '%s' ，继续安装？
 
 ############################################################## Types used in scripts / shape names
 type:
-	function:		函数
-	collection:		收集
-	collection of:		收集 %ss
-	object:			目标
-	double:			实数
-	integer:		整数
-	string:			字符串
-	boolean:		逻辑型
-	color:			颜色
-	image:			图像
-	date:			日期
-	nil:			空
-	
-	# Object types
-	package:		文件包
-	locale:			翻译
-	game:			游戏
-	set:			套牌
-	stylesheet:		样式表
-	export template:	导出模板
-	symbol:			符号
-	card:			卡牌
-	cards:			多张卡牌
-	field:			区域
-	style:			样式
-	value:			值
-	keyword:		关键词
-	keywords:		关键词
-	pack:			随机包类别
+	function:							函数
+	collection:							收集
+	collection of:						收集 %ss
+	object:								目标
+	double:								实数
+	integer:							整数
+	string:								字符串
+	boolean:							逻辑型
+	color:								颜色
+	image:								图像
+	date:								日期
+	nil:								空
+
+	# Object types					
+	package:							文件包
+	locale:								翻译
+	game:								游戏
+	set:								套牌
+	stylesheet:							样式表
+	export template:					导出模板
+	symbol:								符号
+	card:								卡牌
+	cards:								多张卡牌
+	extra card:							额外卡牌
+	field:								区域
+	style:								样式
+	styling:							样式
+	value:								值
+	keyword:							关键词
+	keywords:							关键词
+	pack:								随机包类别
+	card region:						卡区
+	card regions:						卡区域
 	
 	# Symbol editor shapes
-	shape:			图形
-	shapes:			多个图形
-	circle:			圆形
-	ellipse:		椭圆形
-	square:			正方形
-	rectangle:		矩形
-	triangle:		三角形
-	rhombus:		菱形
-	pentagon:		五边形
-	hexagon:		六边形
-	polygon:		多边形
-	star:			星形
-	
-	rotation:		旋转
-	reflection:		反转
-	group:			分组
-	
-	point:			控制点
-	points:			多个控制点
-	
+	shape:								图形
+	shapes:								多个图形
+	circle:								圆形
+	ellipse:							椭圆形
+	square:								正方形
+	rectangle:							矩形
+	triangle:							三角形
+	rhombus:							菱形
+	pentagon:							五边形
+	hexagon:							六边形
+	polygon:							多边形
+	star:								星形
+
+	rotation:							旋转
+	reflection:							反转
+	group:								分组
+
+	point:								控制点
+	points:								多个控制点
 
 ############################################################## Magic
 package:
@@ -994,7 +1240,7 @@ package:
 		rule text 5:		规则叙述5
 		rule text 6:		规则叙述6
 		flavor text:		背景叙述
-#		flavor text 2:		背景叙述2
+		#flavor text 2:		背景叙述2
 		text:				叙述
 		text 2:				叙述2
 		watermark:			水印
@@ -1167,13 +1413,17 @@ package:
 		menu item 2/G:		二/绿 法术力	 2/G
 		menu item 2/C:		二/无 法术力	 2/C
 
+		use custom style: 使用自定义样式
+
 
 	magic-*.mse-include:
+		use custom style: 使用自定义样式
 		chinese new font: 中文新字体
 		justify text: 对齐规则文字(某些情况不使用)
 		CHNFlavorsize: 中文背景叙述字体大小
 		rarity shift: 稀有标志右偏移量
 		shrink setcode text: 缩小系列编码字体大小
+		shrink illustrator text: 缩小画师字体大小
 
 		text chops: 规则叙述与边框的上下右间距
 		chop top:	规则叙述与边框的上间距
@@ -1216,7 +1466,8 @@ package:
 		use acorn stamp: 使用橡果标(鸡飞牌)？
 
 	magic-*.mse-style:
-
+		use custom style: 使用自定义样式
+		
 		text chops: 规则叙述与边框的上下右间距
 		chop top:	规则叙述与边框的上间距
 		chop bottom:	规则叙述与边框的下间距
@@ -1386,6 +1637,7 @@ package:
 		CHNFlavorsize: 中文背景叙述字体大小
 		rarity shift: 稀有标志右偏移量
 		shrink setcode text: 缩小系列编码字体大小
+		shrink illustrator text: 缩小画师字体大小
 		override levels: 忠诚异能数量
 		oher options: 其它选项
 		

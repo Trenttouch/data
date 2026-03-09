@@ -43,7 +43,7 @@ init script:
 	archetype_formatter := {
 		out := replace(input
 			match:"^([^ ]+)[ ]([^\\\n]+)([ ][ ])"
-			replace:{"<sym>"+remove_tags(_1) + "</sym> <font:Gotham Pro Black>" + to_upper(remove_tags(_2)) + "</font> "}
+			replace:{"<sym>"+remove_tags(_1) + "</sym> <font:Gotham Pro>" + to_upper(remove_tags(_2)) + "</font> "}
 		)
 		out
 	}
@@ -277,7 +277,7 @@ card style:
 		padding top: 2
 		z index: 5
 		font:
-			name: { if is_archetype() then "Gotham Medium" else if is_copy() or mtgo_abil() then "Beleren Bold" else "Beleren Small Caps Bold" }
+			name: { if is_archetype() then "Gotham Medium" else if is_copy() or mtgo_abil() then "Beleren" else "Beleren Small Caps Bold" }
 			size: { if is_archetype() then 9 else (if is_copy() or mtgo_abil() then 18 else 19) - shrink_name()}
 			color: {if is_weird_token() then "white" else if is_m20() and card.card_color == "white" and not is_clear() then "black" else if is_m20() then "white" else rgb(255,239,128)}
 			weight: {if is_archetype() then "bold" else ""}
@@ -347,7 +347,7 @@ card style:
 		padding bottom: 4
 		padding right: 2
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: { 14 - shrink_type() }
 			color: { if mtgo_abil() then rgb(255,239,128) else "black"}
 			separator color: red
@@ -506,7 +506,7 @@ card style:
 		height:	28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 16
 			color: {if is_vehicle() then "white" else "black"}
 			separator color: red
@@ -518,7 +518,7 @@ card style:
 		height: 10
 		z index: 1
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold			
@@ -670,7 +670,7 @@ extra card style:
 		height: 10
 		z index: 1
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -797,7 +797,7 @@ extra card style:
 		z index: 3
 		alignment: middle right
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold

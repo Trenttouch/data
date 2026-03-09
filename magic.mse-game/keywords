@@ -1656,7 +1656,7 @@ keyword:
 # Torment
 keyword:
 	keyword: Madness
-	match: Madness <atom-param>cost</atom-param>
+	match: Madness 
 	mode: expert
 	reminder: If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.
 # Onslaught

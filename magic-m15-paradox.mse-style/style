@@ -229,7 +229,7 @@ card style:
 		padding bottom: 0
 		z index: 1
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: { 16 - shrink_name()}
 			color: white
 	casting cost:
@@ -284,7 +284,7 @@ card style:
 		z index: 1
 		padding top: 2
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {13 - shrink_type() }
 			color: white
 			separator color: red
@@ -379,7 +379,7 @@ card style:
 		height:	28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 16
 			color: white
 			separator color: red
@@ -391,7 +391,7 @@ card style:
 		height: 10
 		z index: 1
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -487,7 +487,7 @@ extra card style:
 		height: 10
 		z index: 1
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -565,7 +565,7 @@ extra card style:
 		z index: 3
 		alignment: middle right
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
