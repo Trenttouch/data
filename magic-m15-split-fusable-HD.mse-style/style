@@ -37,7 +37,7 @@ depends on:
 
 card width: 1050
 card height: 750
-card dpi: 600
+card dpi: 150
 ############################################################## Extra scripts
 init script:
 	# Load scripts for image box
@@ -369,7 +369,7 @@ card style:
 		padding bottom: 0
 		z index: 4
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then 32- shrink_name() else 34- shrink_name() }
 			color: {if is_bl_room() or is_bl_card() then "white" else "black"}
 
@@ -382,7 +382,7 @@ card style:
 		padding bottom: 0
 		z index: 4
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then 32- shrink_name() else 34- shrink_name() }
 			color: {if is_bl_room() or is_bl_card() then "white" else "black"}
 	
@@ -466,7 +466,7 @@ card style:
 		z index: 3
 		padding top: 2
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then 20 - shrink_type() else 22 - shrink_type() }
 			color: { if is_room() or is_bl_card() then "white" else "black" }
 			separator color: red
@@ -479,7 +479,7 @@ card style:
 		z index: 3
 		padding top: 2
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then 20 - shrink_type() else 22 - shrink_type() }
 			color: { if is_room() or is_bl_card() then "white" else "black" }
 			separator color: red
@@ -708,14 +708,15 @@ card style:
 	############################# Copyright stuff
 	illustrator:
 		left: {1050-997}
-		top: 166
+		top: 168.5
 		width: 400
 		height: 20
-		z index: 1
 		angle: 270
+		z index: 9
+		alignment: middle
 		font:
-			name: Beleren Small Caps Bold
-			size: 14
+			name: MSEMotoyaExAporo W55 W5 KP
+			size: {13-shrink_illustrator()}
 			color: white
 	copyright:
 		left: {if contains(styling.other_options, match:"ub room style") or contains(styling.other_options, match:"second copyright") then 52 else 69}

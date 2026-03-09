@@ -1,0 +1,319 @@
+﻿mse version: 2.5.0
+short name: TMNT Pixel Mana
+position hint: 205
+icon: u.png
+version: 2024-01-25
+
+
+
+image font size: 50
+horizontal space: 9
+
+
+#######################################
+symbol:
+	code: W/U
+	image: mana_wu.png
+
+symbol:
+	code: U/B
+	image: mana_ub.png
+
+symbol:
+	code: B/R
+	image: mana_br.png
+
+symbol:
+	code: R/G
+	image: mana_rg.png
+
+symbol:
+	code: G/W
+	image: mana_gw.png
+
+symbol:
+	code: W/B
+	image: mana_wb.png
+
+symbol:
+	code: U/R
+	image: mana_ur.png
+
+symbol:
+	code: B/G
+	image: mana_bg.png
+
+symbol:
+	code: R/W
+	image: mana_rw.png
+
+symbol:
+	code: G/U
+	image: mana_gu.png
+
+
+
+####################################### Phyrexian
+
+symbol:
+	code: H/W
+	image: Pw.png
+
+symbol:
+	code: H/U
+	image: Pu.png
+
+symbol:
+	code: H/B
+	image: Pb.png
+
+symbol:
+	code: H/R
+	image: Pr.png
+
+symbol:
+	code: H/G
+	image: Pg.png
+
+symbol:
+	code: H
+	image: Pc.png
+
+symbol:
+	code: 2/W
+	image: 2W.png
+
+symbol:
+	code: 2/U
+	image: 2U.png
+
+symbol:
+	code: 2/B
+	image: 2B.png
+
+symbol:
+	code: 2/R
+	image: 2R.png
+
+####################################### Misc
+
+symbol:
+	code: T
+	image: t.png
+
+symbol:
+	code: E
+	image: e.png
+
+symbol:
+	code: I
+	image: i.png
+
+symbol:
+	code: X
+	image: x.png
+
+symbol:
+	code: Y
+	image: y.png
+
+
+symbol:
+	code: Z
+	image: z.png
+
+symbol:
+	code: /
+	image: h.png
+
+
+####################################### Normal
+
+symbol:
+	code: W
+	image: w.png
+
+symbol:
+	code: U
+	image: u.png
+
+symbol:
+	code: B
+	image: b.png
+
+symbol:
+	code: R
+	image: r.png
+
+symbol:
+	code: G
+	image: g.png
+
+symbol:
+	code: C
+	image: c.png
+
+
+####################################### Generic
+symbol:
+	code: 20(?!/)
+	regex: yes
+	image: 20.png
+symbol:
+	code: 19(?!/)
+	regex: yes
+	image: 19.png
+symbol:
+	code: 18(?!/)
+	regex: yes
+	image: 18.png
+symbol:
+	code: 15(?!/)
+	regex: yes
+	image: 15.png
+symbol:
+	code: 16(?!/)
+	regex: yes
+	image: 16.png
+symbol:
+	code: 15(?!/)
+	regex: yes
+	image: 15.png
+symbol:
+	code: 14(?!/)
+	regex: yes
+	image: 14.png
+symbol:
+	code: 13(?!/)
+	regex: yes
+	image: 13.png
+symbol:
+	code: 12(?!/)
+	regex: yes
+	image: 12.png
+symbol:
+	code: 11(?!/)
+	regex: yes
+	image: 11.png
+symbol:
+	code: 10(?!/)
+	regex: yes
+	image: 10.png
+
+symbol:
+	code: 9
+	image: 9.png
+
+symbol:
+	code: 8
+	image: 8.png
+
+symbol:
+	code: 7
+	image: 7.png
+
+symbol:
+	code: 6
+	image: 6.png
+
+symbol:
+	code: 5
+	image: 5.png
+
+symbol:
+	code: 4
+	image: 4.png
+
+symbol:
+	code: 3
+	image: 3.png
+
+symbol:
+	code: 2
+	image: 2.png
+
+symbol:
+	code: 1
+	image: 1.png
+
+symbol:
+	code: 0
+	image: 0.png
+
+
+####################################### Insert Symbol Menu
+
+insert symbol menu:
+	item: T
+	item: E
+	item: I
+	item: X
+	item: Y
+	item: Z
+	item:
+		type: line
+	item: W
+	item: U
+	item: B
+	item: R
+	item: G
+	item: C
+	item:
+		type: line
+	item:
+		name: hybrid
+		item: W/U
+		item: U/B
+		item: B/R
+		item: R/G
+		item: G/W
+		item:
+			type: line
+		item: W/B
+		item: U/R
+		item: B/G
+		item: R/W
+		item: G/U
+	item:
+		name: number hybrids
+		item: 2/W
+		item: 2/U
+		item: 2/B
+		item: 2/R
+		item: 2/G
+		item: 2/C
+	item:
+		name: generic
+		item: 0
+		item: 1
+		item: 2
+		item: 3
+		item: 4
+		item: 5
+		item: 6
+		item: 7
+		item: 8
+		item: 9
+		item: 10
+		item: 10
+		item: 11
+		item: 12
+		item: 13
+		item: 14
+		item: 15
+		item: 16
+		item: 17
+		item: 18
+		item: 19
+		item: 20
+
+	item:
+		type: line
+	item:
+		name: phyrexian
+		item: H
+		item: H/W
+		item: H/U
+		item: H/B
+		item: H/R
+		item: H/G

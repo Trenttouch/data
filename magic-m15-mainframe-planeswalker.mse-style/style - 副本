@@ -446,7 +446,7 @@ card style:
 		padding bottom: 0
 		z index: 2
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {16 - shrink_name() }
 			color: black
 	alias: 
@@ -518,7 +518,7 @@ card style:
 		z index: 2
 		padding top: 2
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: { 13 - shrink_type() }
 			color: black
 			separator color: red
@@ -620,7 +620,7 @@ card style:
 		height:	34.63
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 14
 			color: white
 	loyalty cost 1:
@@ -631,7 +631,7 @@ card style:
 		height:	35
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 2:
@@ -642,7 +642,7 @@ card style:
 		height:	35
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 3:
@@ -653,7 +653,7 @@ card style:
 		height:	35
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 4:
@@ -664,7 +664,7 @@ card style:
 		height:	35
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 5:
@@ -675,7 +675,7 @@ card style:
 		height:	35
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 6:
@@ -686,7 +686,7 @@ card style:
 		height:	35
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	############################# Card sorting / numbering
@@ -697,7 +697,7 @@ card style:
 		height: 10
 		z index: 6
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -733,7 +733,7 @@ card style:
 		alignment: bottom shrink-overflow
 		z index: 4
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {12 - shrink_name2() }
 			color: white
 	casting cost 2:
@@ -758,7 +758,7 @@ card style:
 		z index: 4
 		padding top: 2
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {11-- shrink_type2()}
 			color: white
 			separator color: red
@@ -1073,7 +1073,7 @@ extra card style:
 		height: 10
 		z index: 6
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -1496,7 +1496,7 @@ extra card style:
 		z index: 3
 		alignment: middle right
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold

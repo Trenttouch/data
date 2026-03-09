@@ -206,7 +206,7 @@ card style:
 		padding bottom: 0
 		z index: 2
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: 16
 			color: black
 	casting cost:
@@ -260,7 +260,7 @@ card style:
 		z index: 3
 		padding top: 2
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: 13
 			color: black
 			separator color: red
@@ -338,7 +338,7 @@ card style:
 		height:	28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 16
 			color: black
 			separator color: red
@@ -350,7 +350,7 @@ card style:
 		height: 10
 		z index: 2
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -465,7 +465,7 @@ extra card style:
 		height: 10
 		z index: 2
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold

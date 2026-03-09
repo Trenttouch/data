@@ -40,11 +40,11 @@ card field:
 	show statistics: false
 	editable: false
 	card list visible: true
-	card list name: Name
+	card list name: Full Name
 	card list column: 1
 	card list width: 150
 	description: 卡牌全名
-	script: if has_two_names() then card.name + " // " + card.name_2 else card.name
+	script: card_full_name()
 ############################# Background stuff
 card field:
 	type: color
@@ -64,6 +64,26 @@ card field:
 		color: rgb(170,137,75)
 	show statistics: false
 	description: 牌边颜色，可为任意实色。
+
+card field:
+	type: color
+	name: border color 2
+	default: set.border_color_2
+	choice:
+		name: black
+		color: rgb(0,0,0)
+	choice:
+		name: white
+		color: rgb(255,255,255)
+	choice:
+		name: silver
+		color: rgb(166,176,186)
+	choice:
+		name: gold
+		color: rgb(170,137,75)
+	show statistics: false
+	description: 牌边颜色，可为任意实色。(背面)
+
 card field:
 	type: multiple choice
 	name: card color
@@ -304,6 +324,14 @@ card field:
 	icon: stats/watermark.png
 	position hint: 200
 	include file: /magic-watermarks.mse-include/watermark-names
+	description: 叙述栏水印，主要用于基本地的法术力标识，表明所属公会或势力。
+
+card field:
+	type: choice
+	name: ark watermark
+	icon: stats/watermark.png
+	position hint: 200
+	include file: /magic-ark-watermarks.mse-include/watermark-names
 	description: 叙述栏水印，主要用于基本地的法术力标识，表明所属公会或势力。
 ###############################Leveler textboxes
 card field:
@@ -582,7 +610,7 @@ card field:
 	default: set.artist
 	description: 卡牌原画作者，默认值可在“套牌信息”界面设置
 	show statistics: false
-	script: illustrator_language_check(card.illustrator)
+	#script: illustrator_language_check(card.illustrator)
 card field:
 	type: text
 	name: copyright
@@ -687,7 +715,7 @@ card field:
 	script: mana_filter(value)
 	card list alignment: right
 	card list width: 50
-	card list name: CC
+	card list name: CC 2
 	show statistics: false
 	description: 第二法术力费用
 card field:
@@ -1025,7 +1053,7 @@ card field:
 	default: set.artist
 	show statistics: false
 	description: The illustrator of the image
-	script: illustrator_language_check(card.illustrator_2)
+	#script: illustrator_language_check(card.illustrator_2)
 card field:
 	type: text
 	name: copyright 2
@@ -1049,7 +1077,7 @@ card field:
 	default: set.artist
 	show statistics: false
 	description: The illustrator of the image
-	script: illustrator_language_check(card.illustrator_3)
+	#script: illustrator_language_check(card.illustrator_3)
 card field:
 	type: text
 	name: copyright 3

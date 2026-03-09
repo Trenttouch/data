@@ -174,8 +174,6 @@ choice images:
 	custom watermark twentythree:    	script: if set.blend_with_colors then spotlight_watermark_blend(custom_watermark_23(), face:card.card_color_2) else set_combine(combine:"shadow", input:set_alpha(alpha: opacity_not_blend(), input:custom_watermark_23()))
 	custom watermark twentyfour:    	script: if set.blend_with_colors then spotlight_watermark_blend(custom_watermark_24(), face:card.card_color_2) else set_combine(combine:"shadow", input:set_alpha(alpha: opacity_not_blend(), input:custom_watermark_24()))
 	custom watermark twentyfive:    	script: if set.blend_with_colors then spotlight_watermark_blend(custom_watermark_25(), face:card.card_color_2) else set_combine(combine:"shadow", input:set_alpha(alpha: opacity_not_blend(), input:custom_watermark_25()))
-	
-	
 	custom watermark card:  	script: if set.blend_with_colors then spotlight_watermark_blend(custom_watermark_b(), face:card.card_color_2) else set_combine(combine:"shadow", input:set_alpha(alpha: opacity_not_blend(), input:custom_watermark_b()))
 	
 	set symbol:

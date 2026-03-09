@@ -583,7 +583,7 @@ card style:
 		padding bottom: 0
 		z index: 2
 		font:
-			name: { if set.card_language != "简体中文" then if is_map() then "Beleren Small Caps" else "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then if is_map() then "Beleren Small Caps" else "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then ((if is_map() then 14.8 else 16) - shrink_name()) else 17 - shrink_name()}
 			color: {if is_shifted() or is_fnm() or is_inverted() then "white" else "black"}
 			shadow color: {if is_shifted() or is_fnm() then rgb(0,0,0) else rgba(0,0,0,0)}
@@ -662,7 +662,7 @@ card style:
 		z index: 5
 		padding top: 2
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then ((if is_map() then 12 else 13) - shrink_type()) else 16 - shrink_type() }
 			color: { if is_full_art() or is_puma() or is_shifted() or is_fnm() or is_inverted() then "white" else "black"}
 			shadow color: {if is_full_art() or is_puma() or is_shifted() or is_fnm() then "black" else rgba(0,0,0,0)}
@@ -912,7 +912,7 @@ card style:
 		height:	22
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if loy_leveler() then 11 else 12 + if center_label(0) then 2 else 0}
 			weight: bold
 			color: {if loy_leveler() then "white" else "black"}
@@ -929,7 +929,7 @@ card style:
 		width: {if is_leveler() or card.level_1 != "" then (34 + (if box_leveler() then 30 else 0)) else 0}
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if loy_leveler() then 11 else 12 + if center_label(0) then 2 else 0}
 			weight: bold
 			color: {if loy_leveler() then "white" else "black"}
@@ -946,7 +946,7 @@ card style:
 		height:	22
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if loy_leveler() then 11 else 12 + if center_label(0) then 2 else 0}
 			weight: bold
 			color: {if loy_leveler() then "white" else "black"}
@@ -963,7 +963,7 @@ card style:
 		height:	{ if card_style.level_4_text.height < 10 and card.level_3 == "" then 0 else 22}
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if loy_leveler() then 11 else 12 + if center_label(0) then 2 else 0}
 			weight: bold
 			color: {if loy_leveler() then "white" else "black"}
@@ -981,7 +981,7 @@ card style:
 		height:	28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if is_map() then 14 else 16}
 			color: {if is_shifted() or is_fnm() or is_inverted() then "white" else if is_vehicle() and (not is_legend() or chosen(styling.other_options, choice:"brown legendary vehicle pt")) then "white" else "black"}
 			separator color: red
@@ -997,7 +997,7 @@ card style:
 		height: 28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if is_map() then 14 else 16}
 			color: {if is_shifted() or is_fnm() or is_inverted() then "white" else if is_vehicle() and (not is_legend() or chosen(styling.other_options, choice:"brown legendary vehicle pt")) then "white" else "black"}
 			separator color: red
@@ -1012,7 +1012,7 @@ card style:
 		height: 28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if is_map() then 14 else 16}
 			color: {if is_shifted() or is_fnm() or is_inverted() then "white" else if is_vehicle() and (not is_legend() or chosen(styling.other_options, choice:"brown legendary vehicle pt")) then "white" else "black"}
 			separator color: red
@@ -1027,7 +1027,7 @@ card style:
 		height: {if card_style.level_4_text.height < 10 and card.pt_7 == "" then 0 else 28}
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if is_map() then 14 else 16}
 			color: {if is_shifted() or is_fnm() then "white" else if is_vehicle() and (not is_legend() or chosen(styling.other_options, choice:"brown legendary vehicle pt")) then "white" else "black"}
 			separator color: red
@@ -1042,7 +1042,7 @@ card style:
 		height:	34.63
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 14
 			color: white
 	############################# Card sorting / numbering
@@ -1053,7 +1053,7 @@ card style:
 		height: 10
 		z index: 3
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -1065,7 +1065,7 @@ card style:
 		height: 10
 		z index: 3
 		font:
-			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std W7"}
+			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std"}
 			size: 7.25
 			color: white
 	copyright:
@@ -1460,7 +1460,7 @@ extra card style:
 		height: 10
 		z index: 3
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -1927,7 +1927,7 @@ extra card style:
 		z index: 3
 		alignment: middle right
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold

@@ -808,7 +808,7 @@ card style:
 		padding bottom: 0
 		z index: 3
 		font:
-			name: { if is_map() then "Beleren Small Caps" else "Beleren Bold"}
+			name: { if is_map() then "Beleren Small Caps" else "Beleren"}
 			size: { if is_map() then 14.8 - shrink_name() else 16 - shrink_name() }
 			color: black
 	name 2:
@@ -820,7 +820,7 @@ card style:
 		padding bottom: 0
 		z index: 3
 		font:
-			name: { if back_map() then "Beleren Small Caps" else "Beleren Bold"}
+			name: { if back_map() then "Beleren Small Caps" else "Beleren"}
 			size: { if back_map() then 14.8 - shrink_name2() else 16 - shrink_name2()}
 			color: { if chosen(styling.other_options, choice:"normal back face") or back_map() or back_clear() or back_saga() then "black" else "white" }
 	casting cost:
@@ -911,7 +911,7 @@ card style:
 		padding bottom: { if is_map() then 4 else 0}
 		padding right: { if is_map() then 2 else 0}
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: { if is_map() then 12 - shrink_type() else 13 - shrink_type()}
 			color: black
 			separator color: red
@@ -926,7 +926,7 @@ card style:
 		padding bottom: { if back_map() then 4 else 0}
 		padding right: { if back_map() then 2 else 0}
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: { if back_map() then 12 - shrink_type2() else 13 - shrink_type2()}
 			color: { if back_clear() or back_map() or back_saga() or chosen(styling.other_options, choice:"normal back face") then "black" else "white"}
 			separator color: red
@@ -1333,7 +1333,7 @@ card style:
 		height:	22
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if loy_leveler() then 11 else 12 + if center_label(0) then 2 else 0}
 			weight: bold
 			color: {if loy_leveler() then "white" else "black"}
@@ -1350,7 +1350,7 @@ card style:
 		width: {if is_leveler() or card.level_1 != "" then (34 + (if box_leveler() then 30 else 0)) else 0}
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if loy_leveler() then 11 else 12 + if center_label(0) then 2 else 0}
 			weight: bold
 			color: {if loy_leveler() then "white" else "black"}
@@ -1367,7 +1367,7 @@ card style:
 		height:	22
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if loy_leveler() then 11 else 12 + if center_label(0) then 2 else 0}
 			weight: bold
 			color: {if loy_leveler() then "white" else "black"}
@@ -1384,7 +1384,7 @@ card style:
 		height:	22
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if loy_leveler() then 11 else 12 + if center_label(0) then 2 else 0}
 			weight: bold
 			color: {if loy_leveler2() then "white" else "black"}
@@ -1401,7 +1401,7 @@ card style:
 		width: {if back_leveler() or card.level_6 != "" then (34 + (if box_leveler2() then 30 else 0)) else 0}
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if loy_leveler() then 11 else 12 + if center_label(0) then 2 else 0}
 			weight: bold
 			color: {if loy_leveler2() then "white" else "black"}
@@ -1418,7 +1418,7 @@ card style:
 		height:	22
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if loy_leveler() then 11 else 12 + if center_label(0) then 2 else 0}
 			weight: bold
 			color: {if loy_leveler2() then "white" else "black"}
@@ -1437,7 +1437,7 @@ card style:
 		height:	28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: { if is_map() then 14 else 16}
 			color: {if is_shifted() or is_vehicle() then "white" else "black"}
 			separator color: red
@@ -1452,7 +1452,7 @@ card style:
 		height:	28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: { if back_map() then 14 else 16}
 			color: {if is_leveler() and is_vehicle() then "white" else if is_leveler() or back_clear() then "black" else "white"}
 			separator color: red
@@ -1467,7 +1467,7 @@ card style:
 		height: 28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if is_map() then 14 else 16}
 			color: {if is_shifted() or is_vehicle() then "white" else "black"}
 			separator color: red
@@ -1482,7 +1482,7 @@ card style:
 		height:	28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if is_map() then 14 else 16}
 			color: {if back_shifted() or back_vehicle() then "white" else "black"}
 			separator color: red
@@ -1498,7 +1498,7 @@ card style:
 		height: 28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if is_map() then 14 else 16}
 			color: {if back_shifted() or back_vehicle() then "white" else "black"}
 			separator color: red
@@ -1513,7 +1513,7 @@ card style:
 		height: 28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if is_map() then 14 else 16}
 			color: {if back_shifted() or back_vehicle() then "white" else "black"}
 			separator color: red
@@ -1530,7 +1530,7 @@ card style:
 		height:	{ if card.loyalty != "" then 34.63 else if is_normal() then 0 else 34.63 }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 14
 			color: white
 	loyalty 2:
@@ -1541,7 +1541,7 @@ card style:
 		height:	{ if card.loyalty_2 != "" then 34.63 else if back_normal() then 0 else 34.63 }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 14
 			color: white
 	loyalty cost 1:
@@ -1552,7 +1552,7 @@ card style:
 		height:	{ if not is_normal() or card.loyalty_cost_1 != "" then 34.63 else 0 }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 2:
@@ -1563,7 +1563,7 @@ card style:
 		height:	{ if not is_normal() or card.loyalty_cost_2 != "" then 34.63 else 0 }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 3:
@@ -1574,7 +1574,7 @@ card style:
 		height:	34.63
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 4:
@@ -1585,7 +1585,7 @@ card style:
 		height:	34.63
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 5:
@@ -1596,7 +1596,7 @@ card style:
 		height:	{ if not back_normal() or card.loyalty_cost_5 != "" then 34.63 else 0 }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 6:
@@ -1607,7 +1607,7 @@ card style:
 		height:	{ if not back_normal() or card.loyalty_cost_6 != "" then 34.63 else 0 }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 7:
@@ -1618,7 +1618,7 @@ card style:
 		height:	34.63
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 8:
@@ -1629,7 +1629,7 @@ card style:
 		height:	{ if back_four_abilities() or card.loyalty_cost_8 != "" then 34.63 else 0 }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	############################# Card sorting / numbering
@@ -1640,7 +1640,7 @@ card style:
 		height: 10
 		z index: 6
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -1651,7 +1651,7 @@ card style:
 		height: 10
 		z index: 6
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -2625,7 +2625,7 @@ extra card style:
 		height: 10
 		z index: 6
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -2636,7 +2636,7 @@ extra card style:
 		height: 10
 		z index: 2
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold

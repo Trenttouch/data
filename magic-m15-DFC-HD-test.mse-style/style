@@ -37,7 +37,7 @@ depends on:
 
 card width: 1501
 card height: 1050
-card dpi: 600
+card dpi: 150
 
 ############################################################## Extra scripts
 init script:
@@ -845,7 +845,7 @@ card style:
 		padding bottom: 0
 		z index: 5
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then 32 - shrink_name() else 34 - shrink_name()}
 			color: black
 	casting cost:
@@ -891,7 +891,7 @@ card style:
 		padding bottom: 0
 		z index: 5
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then 32 - shrink_name() else 34 - shrink_name()}
 			color: { if back_is_devoid() or back_is_map() then "black" else "white" }
 	casting cost 2:
@@ -960,7 +960,7 @@ card style:
 		z index: 2
 		padding top: 2
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then 26 - shrink_type() else 32 - shrink_type() }
 			color: {if is_fullart() or is_extend() then "white" else "black" }
 			separator color: red
@@ -1028,7 +1028,7 @@ card style:
 		z index: 2
 		padding top: 2
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then 26 - shrink_type() else 32 - shrink_type() }
 			color: { if back_is_devoid() or back_is_map() then "black" else "white" }
 			separator color: red
@@ -1388,7 +1388,7 @@ card style:
 		height:	56
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {32 - (if styling.shrink_power_text != "" then to_number(styling.shrink_power_text) else 0)}
 			color: {if is_vehicle() then "white" else "black"}
 			separator color: red
@@ -1400,7 +1400,7 @@ card style:
 		height:	56
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {32 - (if styling.back_shrink_power_text != "" then to_number(styling.back_shrink_power_text) else 0)}
 			color: { if back_is_devoid() then "black" else "white" }
 			separator color: red
@@ -1414,7 +1414,7 @@ card style:
 		height:	69.26
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 28
 			color: white
 # 1-6忠诚异能位置
@@ -1426,7 +1426,7 @@ card style:
 		height:	70
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 22
 			color: white
 	loyalty cost 2:
@@ -1437,7 +1437,7 @@ card style:
 		height:	70
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 22
 			color: white
 	loyalty cost 3:
@@ -1448,7 +1448,7 @@ card style:
 		height:	70
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 22
 			color: white
 	loyalty cost 4:
@@ -1459,7 +1459,7 @@ card style:
 		height:	70
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 22
 			color: white
 	loyalty cost 5:
@@ -1470,7 +1470,7 @@ card style:
 		height:	70
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 22
 			color: white
 	loyalty cost 6:
@@ -1481,7 +1481,7 @@ card style:
 		height:	70
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 22
 			color: white
 	# 背面初始忠诚位置
@@ -1493,7 +1493,7 @@ card style:
 		height:	69.26
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 28
 			color: white
 # 背面1-6忠诚异能位置
@@ -1505,7 +1505,7 @@ card style:
 		height:	70
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 22
 			color: white
 	loyalty cost 8:
@@ -1516,7 +1516,7 @@ card style:
 		height:	70
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 22
 			color: white
 	loyalty cost 9:
@@ -1527,7 +1527,7 @@ card style:
 		height:	70
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 22
 			color: white
 	loyalty cost 10:
@@ -1538,7 +1538,7 @@ card style:
 		height:	70
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 22
 			color: white
 	loyalty cost 11:
@@ -1549,7 +1549,7 @@ card style:
 		height:	70
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 22
 			color: white
 	loyalty cost 12:
@@ -1560,7 +1560,7 @@ card style:
 		height:	70
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 22
 			color: white
 	############################# Card sorting / numbering
@@ -1614,13 +1614,14 @@ card style:
 	############################# Copyright stuff
 	illustrator:
 		left: { 166 }
-		top: 997
+		top: 999.5
 		width: 400
 		height: 20
-		z index: 1
+		z index: 9
+		alignment: middle
 		font:
-			name: Beleren Small Caps Bold
-			size: 14
+			name: MSEMotoyaExAporo W55 W5 KP
+			size: {13-shrink_illustrator()}
 			color: white
 	copyright:
 		right: 699
@@ -1637,13 +1638,14 @@ card style:
 
 	illustrator 2:
 		left: { 166 + backside_left_fix()}
-		top: 997
+		top: 999.5
 		width: 400
 		height: 20
-		z index: 1
+		z index: 9
+		alignment: middle
 		font:
-			name: Beleren Small Caps Bold
-			size: 14
+			name: MSEMotoyaExAporo W55 W5 KP
+			size: {13-shrink_illustrator()}
 			color: white
 	copyright 2:
 		right: {699+ backside_left_fix()}
@@ -3390,8 +3392,8 @@ extra card style:
 		height: { if set.card_language != "简体中文" then 24 else 28 }
 		z index: 8
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
-			italic name: Beleren Bold
+			name: { if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
+			italic name: Beleren
 			size: { if set.card_language != "简体中文" then 20 else 22 }
 			color: white
 	back color hint:
@@ -3416,8 +3418,8 @@ extra card style:
 		height: { if set.card_language != "简体中文" then 24 else 28 }
 		z index: 8
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
-			italic name: Beleren Bold
+			name: { if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
+			italic name: Beleren
 			size: { if set.card_language != "简体中文" then 20 else 22 }
 			color: black
 	front color hint:

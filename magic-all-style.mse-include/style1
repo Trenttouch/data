@@ -117,3 +117,7 @@ styling field:
 	type: text
 	name: shrink setcode text
 	description: Shrinks setcode X pixels
+styling field:
+	type: text
+	name: shrink illustrator text
+	description: Shrinks setcode X pixels

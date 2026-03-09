@@ -1190,7 +1190,7 @@ card style:
 		padding bottom: 0
 		z index: 3
 		font:
-			name: { if set.card_language != "简体中文" then if is_map() then "Beleren Small Caps" else "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then if is_map() then "Beleren Small Caps" else "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then ((if is_map() then 14.8 else 16) - shrink_name()) else 17 - shrink_name()}
 			color: black
 	name 2:
@@ -1202,7 +1202,7 @@ card style:
 		padding bottom: 0
 		z index: 3
 		font:
-			name: { if set.card_language != "简体中文" then if back_map() then "Beleren Small Caps" else "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then if back_map() then "Beleren Small Caps" else "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then ((if back_map() then 14.8 else 16) - shrink_name2()) else 17 - shrink_name2()}
 			color: { if chosen(styling.other_options, choice:"normal back face") or back_map() or back_clear() or back_saga() or back_class() then "black" else "white" }
 	casting cost:
@@ -1293,7 +1293,7 @@ card style:
 		padding bottom: { if is_map() then 4 else 0}
 		padding right: { if is_map() then 2 else 0}
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then ((if is_map() then 12 else 13) - shrink_type()) else 16 - shrink_type() }
 			color: black
 			separator color: red
@@ -1308,7 +1308,7 @@ card style:
 		padding bottom: { if back_map() then 4 else 0}
 		padding right: { if back_map() then 2 else 0}
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then ((if back_map() then 12 else 13) - shrink_type2()) else 16 - shrink_type2() }
 			color: { if back_clear() or back_map() or back_saga() or back_class() or chosen(styling.other_options, choice:"normal back face") then "black" else "white"}
 			separator color: red
@@ -1715,7 +1715,7 @@ card style:
 		height:	22
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if loy_leveler() then 11 else 12 + if center_label(0) then 2 else 0}
 			weight: bold
 			color: {if loy_leveler() then "white" else "black"}
@@ -1732,7 +1732,7 @@ card style:
 		width: {if is_leveler() or card.level_1 != "" then (34 + (if box_leveler() then 30 else 0)) else 0}
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if loy_leveler() then 11 else 12 + if center_label(0) then 2 else 0}
 			weight: bold
 			color: {if loy_leveler() then "white" else "black"}
@@ -1749,7 +1749,7 @@ card style:
 		height:	{if is_class() then 20 else 22}
 		alignment: {if is_class() then "center right" else "center middle shrink-overflow"}
 		font:
-			name: {if is_class() then if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" else "Beleren Bold"}
+			name: {if is_class() then if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" else "Beleren"}
 			size: {if loy_leveler() or is_class() then 11 else 12 + if center_label(0) then 2 else 0}
 			weight: bold
 			color: {if loy_leveler() then "white" else "black"}
@@ -1766,7 +1766,7 @@ card style:
 		height:	{if is_class() then 20 else 22}
 		alignment: {if is_class() then "center right" else "center middle shrink-overflow"}
 		font:
-			name: {if is_class() then if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" else "Beleren Bold"}
+			name: {if is_class() then if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" else "Beleren"}
 			size: {if loy_leveler() or is_class() then 11 else 12 + if center_label(0) then 2 else 0}
 			weight: bold
 			color: {if loy_leveler() then "white" else "black"}
@@ -1797,7 +1797,7 @@ card style:
 		height:	22
 		alignment: center middle shrink-overflow
 		font:
-			name: {if back_class() then if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" else "Beleren Bold"}
+			name: {if back_class() then if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" else "Beleren"}
 			size: {if loy_leveler() or back_class() then 11 else 12 + if center_label(0) then 2 else 0}
 			weight: bold
 			color: {if loy_leveler2() then "white" else "black"}
@@ -1814,7 +1814,7 @@ card style:
 		width: {if back_class() and card.level_6_text == "​" then 0 else if back_class() then 70 else if back_leveler() or card.level_6 != "" then (34 + (if box_leveler2() then 30 else 0)) else 0}
 		alignment: {if back_class() then "center right" else "center middle shrink-overflow"}
 		font:
-			name: {if back_class() then if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" else "Beleren Bold"}
+			name: {if back_class() then if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" else "Beleren"}
 			size: {if loy_leveler() or back_class() then 11 else 12 + if center_label(0) then 2 else 0}
 			weight: bold
 			color: {if loy_leveler2() then "white" else "black"}
@@ -1831,7 +1831,7 @@ card style:
 		height:	22
 		alignment: {if back_class() then "center right" else "center middle shrink-overflow"}
 		font:
-			name: {if back_class() then if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" else "Beleren Bold"}
+			name: {if back_class() then if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" else "Beleren"}
 			size: {if loy_leveler() or back_class() then 11 else 12 + if center_label(0) then 2 else 0}
 			weight: bold
 			color: {if loy_leveler2() then "white" else "black"}
@@ -1848,7 +1848,7 @@ card style:
 		height:	22
 		alignment: {if back_class() then "center right" else "center middle shrink-overflow"}
 		font:
-			name: {if back_class() then if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" else "Beleren Bold"}
+			name: {if back_class() then if set.card_language != "简体中文" then "MPlantin" else "方正细等线_GBK_FIX" else "Beleren"}
 			size: {if loy_leveler() or back_class() then 11 else 12 + if center_label(0) then 2 else 0}
 			weight: bold
 			color: {if loy_leveler2() then "white" else "black"}
@@ -1946,7 +1946,7 @@ card style:
 		height:	28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: { if is_map() then 14 else 16}
 			color: {if is_shifted() or is_vehicle() then "white" else "black"}
 			separator color: red
@@ -1961,7 +1961,7 @@ card style:
 		height:	28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: { if back_map() then 14 else 16}
 			color: {if is_leveler() and is_vehicle() then "white" else if is_leveler() or back_clear() then "black" else "white"}
 			separator color: red
@@ -1976,7 +1976,7 @@ card style:
 		height: 28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if is_map() then 14 else 16}
 			color: {if is_shifted() or is_vehicle() then "white" else "black"}
 			separator color: red
@@ -1991,7 +1991,7 @@ card style:
 		height: 28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if is_map() then 14 else 16}
 			color: {if is_shifted() or is_vehicle() then "white" else "black"}
 			separator color: red
@@ -2006,7 +2006,7 @@ card style:
 		height:	28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if is_map() then 14 else 16}
 			color: {if back_shifted() or back_vehicle() or (is_leveler() and not back_leveler()) then "white" else "black"}
 			separator color: red
@@ -2022,7 +2022,7 @@ card style:
 		height: 28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if is_map() then 14 else 16}
 			color: {if back_shifted() or back_vehicle() then "white" else "black"}
 			separator color: red
@@ -2037,7 +2037,7 @@ card style:
 		height: 28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if is_map() then 14 else 16}
 			color: {if back_shifted() or back_vehicle() then "white" else "black"}
 			separator color: red
@@ -2053,7 +2053,7 @@ card style:
 		height: 28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {if is_map() then 14 else 16}
 			color: {if back_shifted() or back_vehicle() then "white" else "black"}
 			separator color: red
@@ -2070,7 +2070,7 @@ card style:
 		height:	{ if card.loyalty != "" then 34.63 else if is_normal() then 0 else 34.63 }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 14
 			color: white
 	loyalty 2:
@@ -2081,7 +2081,7 @@ card style:
 		height:	{ if card.loyalty_2 != "" then 34.63 else if back_normal() then 0 else 34.63 }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 14
 			color: white
 	loyalty cost 1:
@@ -2092,7 +2092,7 @@ card style:
 		height:	{ if not is_normal() or card.loyalty_cost_1 != "" then 35 else 0 }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 2:
@@ -2103,7 +2103,7 @@ card style:
 		height:	{ if not is_normal() or card.loyalty_cost_2 != "" then 35 else 0 }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 3:
@@ -2114,7 +2114,7 @@ card style:
 		height:	35
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 4:
@@ -2125,7 +2125,7 @@ card style:
 		height:	35
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 5:
@@ -2136,7 +2136,7 @@ card style:
 		height:	{ if not back_normal() or card.loyalty_cost_5 != "" then 35 else 0 }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 6:
@@ -2147,7 +2147,7 @@ card style:
 		height:	{ if not back_normal() or card.loyalty_cost_6 != "" then 35 else 0 }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 7:
@@ -2158,7 +2158,7 @@ card style:
 		height:	35
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 8:
@@ -2169,7 +2169,7 @@ card style:
 		height:	{ if back_four_abilities() or card.loyalty_cost_8 != "" then 35 else 0 }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	############################# Card sorting / numbering
@@ -2180,7 +2180,7 @@ card style:
 		height: 10
 		z index: 6
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -2191,7 +2191,7 @@ card style:
 		height: 10
 		z index: 6
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -2203,7 +2203,7 @@ card style:
 		height: 10
 		z index: 2
 		font:
-			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std W7"}
+			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std"}
 			size: 7.25
 			color: white
 	copyright:
@@ -2225,7 +2225,7 @@ card style:
 		height: 10
 		z index: 2
 		font:
-			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std W7"}
+			name: { if is_pureEN(card.illustrator) then "Beleren Small Caps Bold" else "华康魏碑 Std"}
 			size: 7.25
 			color: white
 	copyright 2:
@@ -2250,7 +2250,7 @@ card style:
 		padding bottom: 0
 		z index: 3
 		font:
-			name: { if set.card_language != "简体中文" then if use_evobar() then "Matrix" else "MPlantin-Italic" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then if use_evobar() then "Matrix" else "MPlantin-Italic" else "华康魏碑 Std" }
 			size: {if use_evobar() then 10 else 9}
 			style: {if use_evobar() then "italic" else "bold"}
 			weight: {if use_evobar() then "italic" else "bold"}
@@ -2264,7 +2264,7 @@ card style:
 		padding bottom: 0
 		z index: 3
 		font:
-			name: { if set.card_language != "简体中文" then if use_evobar() then "Matrix" else "MPlantin-Italic" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then if use_evobar() then "Matrix" else "MPlantin-Italic" else "华康魏碑 Std" }
 			size: {if use_evobar() then 10 else 9}
 			style: {if use_evobar() then "italic" else "bold"}
 			weight: {if use_evobar() then "italic" else "bold"}
@@ -3303,7 +3303,7 @@ extra card style:
 		height: 10
 		z index: 6
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -3314,7 +3314,7 @@ extra card style:
 		height: 10
 		z index: 2
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -4041,7 +4041,7 @@ extra card style:
 		z index: 7
 		visible: {is_modal_dfc()}
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: 9
 			color: white
 	back color hint:
@@ -4077,7 +4077,7 @@ extra card style:
 		z index: 8
 		visible: {is_modal_dfc()}
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: 9
 			color: black
 	front color hint:
@@ -4740,7 +4740,7 @@ extra card style:
 		z index: 3
 		alignment: middle right
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -4752,7 +4752,7 @@ extra card style:
 		z index: 3
 		alignment: middle right
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold

@@ -14,6 +14,40 @@ choice:
 	line below: true
 
 choice:
+	name: DIY
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	choice: Basic Land
+	line below: true
+
+choice:
+	name: MSH
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	choice: Basic Land
+	line below: true
+
+choice:
+	name: SOS
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	choice: Basic Land
+	choice:
+		name: SOA
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Basic Land
+	line below: true
+
+choice:
 	name: TMT
 	choice: Mythic
 	choice: Rare
@@ -1240,6 +1274,20 @@ choice:
 ######################################################### 指挥官
 choice:
 	name: Command
+	choice:
+		name: MSC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Basic Land
+	choice:
+		name: SOC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Basic Land
 	choice:
 		name: TMC
 		choice: Mythic

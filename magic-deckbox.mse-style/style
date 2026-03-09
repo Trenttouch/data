@@ -207,7 +207,7 @@ extra card style:
 		visible: {styling.legendary_foils}
 		alignment: middle center
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 35
 			color: rgb(172, 130, 58) 
 	back color:

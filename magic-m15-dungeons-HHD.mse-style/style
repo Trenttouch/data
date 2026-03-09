@@ -53,12 +53,12 @@ init script:
 		if set.card_language != "简体中文" then
 		replace@(
 			match:"^([^\\\n]+)(\\\n|[ ][ ])"
-			replace:"<font:Beleren Bold>\\1</font>\\2"
+			replace:"<font:Beleren>\\1</font>\\2"
 		)
 		else
 		replace@(
 			match:"^([^\\\n]+)(\\\n|[ ][ ])"
-			replace:"<font:华康魏碑 Std W7><size:" + (font_size()-14) + ">\\1</size></font>\\2"
+			replace:"<font:华康魏碑 Std><size:" + (font_size()-14) + ">\\1</size></font>\\2"
 		)
 
 	# styling stuff
@@ -96,7 +96,7 @@ init script:
 		else if styling.tap_symbol == "diagonal T" then "older"
 		else                                            "new"
 	}
-	
+	shrink_illustrator := {if styling.shrink_illustrator_text != "" then to_number(styling.shrink_illustrator_text) else 0}
 	# Use guild mana symbols?
 	guild_mana := { styling.use_guild_mana_symbols }
 	transfer_levels := {false}
@@ -944,6 +944,10 @@ styling field:
 	choice:	18.33
 	choice:	18.67
 	choice:	19
+styling field:
+	type: text
+	name: shrink illustrator text
+	description: Shrinks setcode X pixels
 ############################################################## Card fields
 card style:
 	card color:
@@ -965,7 +969,7 @@ card style:
 		padding top: 3
 		z index: 5
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren Small Caps Bold" else "华康魏碑 Std W7" }
+			name: { if set.card_language != "简体中文" then "Beleren Small Caps Bold" else "华康魏碑 Std" }
 			size: { 34 - shrink_name()}
 			color: rgb(222,222,222)
 	############################# Image
@@ -1525,26 +1529,27 @@ card style:
 		line height line max: { if chinese_new_font() then 1.0 else 0.9 }
 	############################# Card sorting / numbering
 	set code:
-		left: 48
-		top: 996
+		left: 48.5
+		top: 998
 		width: 80
 		height: 20
-		z index: 1
+		z index: 9
+		alignment: middle left
 		font:
 			name: Magic Gotham Medium
-			size: 14
+			size: 13
 			color: white
-			weight: bold
 	############################# Copyright stuff
 	illustrator:
 		left: { 80 + card_style.set_code.content_width }
-		top: 995
+		top: 999.5
 		width: {if styling.custom_floor then 400 else 0}
 		height: 20
-		z index: 1
+		z index: 9
+		alignment: middle
 		font:
-			name: Beleren Small Caps Bold
-			size: 14.5
+			name: MSEMotoyaExAporo W55 W5 KP
+			size: {13-shrink_illustrator()}
 			color: white
 	copyright:
 		right: 700
@@ -1555,20 +1560,33 @@ card style:
 		visible: {not set.automatic_copyright}
 		alignment: middle right shrink-overflow
 		font:
-			name: Matrix
-			size: 14
+			name: mplantin
+			size: 13
 			color: white
-			weight: bold
 ############################################################## Extra card fields
+extra card field:
+	type: text
+	name: dot
+	script: if styling.is_foil then "★" else "•"
+	save value: false
+	editable: false
+	show statistics: false
 extra card field:
 	type: text
 	name: card code
 	save value: false
+	editable: false
+	script: rarity_code()
+extra card field:
+	type: text
+	name: card number
+	save value: false
 	script:
 		if set.automatic_card_numbers and not styling.remove_from_autocount then
-			forward_editor(prefix: rarity_code() + "<size:10>  </size>" + card_number_m15() + " ", field: card.card_code_text) 
+			forward_editor(prefix: card_number_m15(), field: card.card_code_text) 
 		else
-			combined_editor(field1: card.card_code_text, separator: "" + rarity_code() + "<size:10>  </size>", field2: card.custom_card_number)
+			forward_editor(prefix: "", field: card.custom_card_number)
+
 extra card field:
 	type: text
 	name: reminder
@@ -2608,17 +2626,40 @@ extra card field:
 	default: door_direction(y:7, x:4)
 
 extra card style:
-	card code:
-		left: 48
-		top: 976
-		width: 240
+	dot:
+		left: {48.5 + card_style.set_code.content_width}
+		right: {card_style.language_code.left}
+		top: 998
+		#width: 10
 		height: 20
-		z index: 1
+		z index: 9
+		alignment: middle center
 		font:
 			name: Magic Gotham Medium
-			size: 14
+			size: 13
 			color: white
-			weight: bold
+
+	card code:
+		left: 48.5
+		top: 979
+		width: 20
+		height: 20
+		z index: 9
+		font:
+			name: Magic Gotham Medium
+			size: 13
+			color: white
+	card number:
+		left: 69
+		top: 979
+		width: 72.5
+		height: 20
+		z index: 9
+		font:
+			name: Magic Gotham Medium
+			size: 13
+			color: white
+
 	reminder:
 		left: 48
 		top: 128
@@ -2660,9 +2701,8 @@ extra card style:
 		visible: {set.automatic_copyright}
 		font:
 			name: mplantin
-			size: 12
+			size: 13
 			color: white
-			weight: bold
 			
 
 

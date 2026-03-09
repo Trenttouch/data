@@ -308,7 +308,15 @@ card_color := {
 	else text_color
 };
 ##todo check nil
-has_two_names := {contains(card.shape, match:"split") or contains(card.shape, match:"adventure") or contains(card.shape, match:"flip") or contains(card.shape, match:"double faced") or contains(card.shape, match:"aftermath") or contains(card.shape, match:"battle")}
+has_two_names := {
+	contains(card.shape, match:"split") or 
+	contains(card.shape, match:"adventure") or 
+	contains(card.shape, match:"flip") or 
+	contains(card.shape, match:"double faced") or 
+	contains(card.shape, match:"aftermath") or 
+	contains(card.shape, match:"battle")
+	}
+card_full_name := { if has_two_names() then card.name + " // " + card.name_2 else card.name }
 # Number of colors in a card_color
 card_color_color_count := count_chosen@(choices: "white,blue,black,red,green,artifact")
 # Clean up color field
@@ -1184,7 +1192,7 @@ rarity_code := {
 	else if is_masterpiece() then "S"
 	else if contains(card.super_type, match:"基本") and contains(card.super_type, match:"地") then "L"				   
 	else if contains(card.rarity, match:"basic land") or contains(card.rarity, match:"Basic Land") then "L" 
-	else if contains(card.shape, match:"token") then "T"
+	else if contains(card.shape, match:"token") or contains(card.super_type, match:"衍生") then "T"
 	else if contains(card.shape, match:"emblem") then "E"
 	else if contains(card.rarity, match:"ncommon") then "U"
 	else if (contains(card.rarity, match:"ommon")) then "C"
@@ -1485,6 +1493,11 @@ a_saga := {false}
 saga_reminder := { "As this Saga enters and after your draw step, add a lore counter. Sacrifice after III." }
 b_saga := {false}
 saga_reminderb := { "As this Saga enters and after your draw step, add a lore counter. Sacrifice after III." }
+############################################################## Rarity Updates
+custom_Rarity_M := { if set.custom_Rarity_M != "" then "/magic-rarity.mse-include/" + set.custom_Rarity_M else "/magic-rarity.mse-include/MB2_M.png" }
+custom_Rarity_R := { if set.custom_Rarity_R != "" then "/magic-rarity.mse-include/" + set.custom_Rarity_R else "/magic-rarity.mse-include/MB2_R.png" }
+custom_Rarity_U := { if set.custom_Rarity_U != "" then "/magic-rarity.mse-include/" + set.custom_Rarity_U else "/magic-rarity.mse-include/MB2_U.png" }
+custom_Rarity_C := { if set.custom_Rarity_C != "" then "/magic-rarity.mse-include/" + set.custom_Rarity_C else "/magic-rarity.mse-include/MB2_C.png" }
 ############################################################## Watermark Updates
 card_spotlight := { "/magic-mainframe-watermarks.mse-include/spotlight/" + card_new_color() + "spotlight.png" }
 custom_watermark_1 := { if set.custom_watermark_1 != "" then "/magic-watermarks.mse-include/" + set.custom_watermark_1 else "/magic-watermarks.mse-include/planeswalker.png" }

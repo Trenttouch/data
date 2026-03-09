@@ -280,7 +280,7 @@ card style:
 		padding bottom: 0
 		z index: 1
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {15 - shrink_name()}
 			color: white
 	name 2:
@@ -292,7 +292,7 @@ card style:
 		padding bottom: 0
 		z index: 1
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {15 - shrink_name2()}
 			color: white
 	casting cost:
@@ -372,7 +372,7 @@ card style:
 		z index: 2
 		padding top: 2
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {13 - shrink_type()}
 			color: white
 			separator color: red
@@ -385,7 +385,7 @@ card style:
 		z index: 2
 		padding top: 2
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: {13 - shrink_type2()}
 			color: white
 			separator color: red
@@ -563,7 +563,7 @@ card style:
 		height:	28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 15
 			color: black
 			separator color: red
@@ -575,7 +575,7 @@ card style:
 		height:	28
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 15
 			color: black
 			separator color: red
@@ -587,7 +587,7 @@ card style:
 		height: 10
 		z index: 1
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -598,7 +598,7 @@ card style:
 		height: 10
 		z index: 1
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -905,7 +905,7 @@ extra card style:
 		height: 10
 		z index: 1
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -916,7 +916,7 @@ extra card style:
 		height: 10
 		z index: 1
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -1070,7 +1070,7 @@ extra card style:
 		z index: 3
 		visible: {is_modal_dfc()}
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 9
 			color: white
 	back color hint:
@@ -1106,7 +1106,7 @@ extra card style:
 		z index: 3
 		visible: {is_modal_dfc()}
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 9
 			color: black
 	front color hint:

@@ -33,7 +33,7 @@ depends on:
 	version: 2013-08-21
 card width: 635
 card height: 1005
-card dpi: 600
+card dpi: 150
 
 ############################################################## Extra scripts
 init script:
@@ -92,7 +92,7 @@ init script:
 	shrink_name := {if styling.shrink_name_text != "" then to_number(styling.shrink_name_text) else 0}
 	use_main_rarity := { contains(set.mainframe_rarity_name, match: ".png")}
 	un_png := replace@(match:".png", replace: "")
-	
+	shrink_illustrator := {if styling.shrink_illustrator_text != "" then to_number(styling.shrink_illustrator_text) else 0}
 ############################################################## Set info fields
 set info style:
 	symbol:
@@ -283,6 +283,10 @@ styling field:
 	choice:	33.33
 	choice:	33.67
 	choice:	34
+styling field:
+	type: text
+	name: shrink illustrator text
+	description: Shrinks setcode X pixels
 ############################################################## Card fields
 card style:
 	############################# Background stuff
@@ -306,7 +310,7 @@ card style:
 		padding bottom: 0
 		z index: 3
 		font:
-			name: { if set.card_language != "简体中文" then "MagicMedieval" else "华康黑体w9" }
+			name: { if set.card_language != "简体中文" then "MagicMedieval" else "华康黑体W9(P)" }
 			size: { if set.card_language != "简体中文" then 33 - shrink_name() else 32 - shrink_name()}
 	casting cost:
 		right: 580
@@ -462,13 +466,14 @@ card style:
 
 	illustrator:
 		left: { 23+34 }
-		top: 958
+		top: 960.5
 		width: 400
 		height: 20
-		z index: 1
+		z index: 9
+		alignment: middle
 		font:
-			name: Beleren Small Caps Bold
-			size: 14
+			name: MSEMotoyaExAporo W55 W5 KP
+			size: {13-shrink_illustrator()}
 			color: black
 
 ############################################################## Extra card fields

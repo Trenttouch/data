@@ -325,7 +325,7 @@ card style:
 		height: 10
 		z index: 4
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: { if styling.border_visible then "white" else "black" }
 			weight: bold
@@ -431,7 +431,7 @@ extra card style:
 		height: 10
 		z index: 4
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: { if styling.border_visible then "white" else "black" }
 			weight: bold

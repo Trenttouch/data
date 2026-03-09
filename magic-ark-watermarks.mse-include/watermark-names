@@ -1,0 +1,85 @@
+# The watermark choices
+# Included by a game file
+
+choice:
+	name: none
+	line below: true
+choice:
+	name: Arknights
+	choice: Leithania
+	choice: lungmen
+	choice: MINOS
+	choice: MountainDash-Logistic
+	choice: Penguin-Logistics
+	choice: PINUS-SYLVESTRI
+	choice: Prototype-SWEEP-re
+	choice: PRTS
+	choice: PRTS-Island
+	choice: raythean
+	choice: Reunion-Movement
+	choice: Rhine-Lab
+	choice: Rhodes-Island
+	choice: RHODES-ISLAND-ELITE-OP
+	choice: RHODES-ISLAND-ODA4
+	choice: RHODES-ISLAND-OPDA1
+	choice: RHODES-ISLAND-OPDA
+	choice: RIM-Billiton
+	choice: S SPRAWIEDLIWI KAZIMIERZ
+	choice: Sami
+	choice: Sargon
+	choice: Siesta
+	choice: Siracusa
+	choice: Sui
+	choice: Texas
+	choice: The-Infected-of-Ursus
+	choice: Ursus
+	choice: URSUS-student-self-government-group
+	choice: Victoria
+	choice: Yan
+	choice: AEGIR
+	choice: ALIVE-UNTIL-SUNSET
+	choice: Babel-re
+	choice: Black-Steel
+	choice: BOLIVAR
+	choice: Columbian-Union
+	choice: DOSSOLES
+	choice: DUBLINN
+	choice: EARTHA
+	choice: ERZ GENERAL CHAMBER OF COMMERCE
+	choice: Followers
+	choice: GLASGOW
+	choice: Higashi
+	choice: IBERIA
+	choice: KAZDEL
+	choice: Kazimierz
+	choice: Kjerag
+	choice: l Hunters
+	choice: Laterano
+	choice: Lee-s-Detective-Agency
+choice:
+	name: custom watermark
+	choice: one
+	choice: two
+	choice: three
+	choice: four
+	choice: five
+	choice: six
+	choice: seven
+	choice: eight
+	choice: nine
+	choice: ten
+	choice: eleven
+	choice: twelve
+	choice: thirteen
+	choice: fourteen
+	choice: fifteen
+	choice: sixteen
+	choice: seventeen
+	choice: eighteen
+	choice: nineteen
+	choice: twenty
+	choice: twentyone
+	choice: twentytwo
+	choice: twentythree
+	choice: twentyfour
+	choice: twentyfive

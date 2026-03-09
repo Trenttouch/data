@@ -12,6 +12,9 @@ depends on:
 depends on:
 	package: magic-watermarks.mse-include
 	version: 2007-09-23
+depends on:
+	package: magic-ark-watermarks.mse-include
+	version: 2007-09-23
 depends on: magic-rarity.mse-include 2013-08-21
 
 ############################################################## The script

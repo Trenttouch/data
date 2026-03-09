@@ -408,7 +408,7 @@ card style:
 		padding bottom: 0
 		z index: 4
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 16
 			color: black
 	name 2:
@@ -420,7 +420,7 @@ card style:
 		padding bottom: 0
 		z index: 4
 		font:
-			name: { if is_map() then "Beleren Small Caps" else "Beleren Bold" }
+			name: { if is_map() then "Beleren Small Caps" else "Beleren" }
 			size: { if is_map() then 14.8 else 16 }
 			color: { if back_clear() or is_map() then rgb(0,0,0) else rgb(255,255,255) }
 	casting cost:
@@ -497,7 +497,7 @@ card style:
 		z index: 4
 		padding top: 2
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 13
 			color: black
 			separator color: red
@@ -510,7 +510,7 @@ card style:
 		z index: 4
 		padding top: 2
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: { if is_map() then 12.5 else 13 }
 			color: { if back_clear() or is_map() then rgb(0,0,0) else rgb(255,255,255) }
 			separator color: red
@@ -690,7 +690,7 @@ card style:
 		z index: 5
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: { if is_map() then 14 else 16 }
 			color: { if (styling.dfc_mode == "sacrificer" and not (back_clear() or is_map())) or front_vec() then rgb(255,255,255) else rgb(0,0,0) }
 			separator color: red
@@ -704,7 +704,7 @@ card style:
 		visible: { if styling.dfc_mode != "sparker" then "yes" else "no" }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 14
 			color: white
 	loyalty 2:
@@ -716,7 +716,7 @@ card style:
 		visible: { if styling.dfc_mode != "sacrificer" then "yes" else "no" }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 14
 			color: white
 	loyalty cost 1:
@@ -728,7 +728,7 @@ card style:
 		visible:  { if styling.dfc_mode != "sparker" then "yes" else "no" }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 2:
@@ -740,7 +740,7 @@ card style:
 		visible:  { if styling.dfc_mode != "sparker" then "yes" else "no" }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 3:
@@ -752,7 +752,7 @@ card style:
 		visible:  { if styling.dfc_mode != "sparker" then "yes" else "no" }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 4:
@@ -764,7 +764,7 @@ card style:
 		visible: { if styling.dfc_mode != "sparker" and has_four_abilities() then "yes" else "no" }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 5:
@@ -776,7 +776,7 @@ card style:
 		visible: { if styling.dfc_mode != "sacrificer" then "yes" else "no" }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 6:
@@ -788,7 +788,7 @@ card style:
 		visible: { if styling.dfc_mode != "sacrificer" then "yes" else "no" }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 7:
@@ -800,7 +800,7 @@ card style:
 		visible: { if styling.dfc_mode != "sacrificer" then "yes" else "no" }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	loyalty cost 8:
@@ -812,7 +812,7 @@ card style:
 		visible: { if styling.dfc_mode != "sacrificer" and has_four_abilities2() then "yes" else "no" }
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 11
 			color: white
 	############################# Card sorting / numbering
@@ -823,7 +823,7 @@ card style:
 		height: 10
 		z index: 6
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -834,7 +834,7 @@ card style:
 		height: 10
 		z index: 6
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -1242,7 +1242,7 @@ extra card style:
 		height: 10
 		z index: 4
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -1253,7 +1253,7 @@ extra card style:
 		height: 10
 		z index: 4
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold	

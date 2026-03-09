@@ -37,7 +37,7 @@ depends on:
 
 card width: 750
 card height: 1050
-card dpi: 600
+card dpi: 150
 
 ############################################################## Extra scripts
 init script:
@@ -237,9 +237,9 @@ card style:
 			#影子实现
 			color: white
 			shadow color: rgb(0,0,0)
-			shadow displacement x: 2
-			shadow displacement y: 2
-			shadow blur: 1
+			shadow displacement x: 1
+			shadow displacement y: 1
+			shadow blur: 0.5
 	casting cost:
 		right: {690-2.5}
 		top: 49
@@ -299,9 +299,9 @@ card style:
 			color: white
 			separator color: red
 			shadow color: rgb(0,0,0)
-			shadow displacement x: 2
-			shadow displacement y: 2
-			shadow blur: 1
+			shadow displacement x: 1
+			shadow displacement y: 1
+			shadow blur: 0.5
 	rarity:
 		right: {687.5 + rarity_shift()}
 		top: { 580 }
@@ -402,9 +402,9 @@ card style:
 			color: white
 			separator color: red
 			shadow color: rgb(0,0,0)
-			shadow displacement x: 2
-			shadow displacement y: 2
-			shadow blur: 1
+			shadow displacement x: 1
+			shadow displacement y: 1
+			shadow blur: 0.5
 	############################# Copyright stuff
 
 
@@ -524,9 +524,9 @@ extra card style:
 			size: 22
 			color: white
 			shadow color: rgb(0,0,0)
-			shadow displacement x: 2
-			shadow displacement y: 2
-			shadow blur: 1
+			shadow displacement x: 1
+			shadow displacement y: 1
+			shadow blur: 0.5
 
 	level 2 overlay:
 		left: {58-2.5}

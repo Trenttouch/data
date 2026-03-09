@@ -34,7 +34,7 @@ depends on:
 
 card width: 750
 card height: 1050
-card dpi: 600
+card dpi: 150
 ########## new frames by silverback_ape
 ############################################################## Extra scripts
 init script:
@@ -134,6 +134,7 @@ init script:
 	rarity_shift := {if styling.rarity_shift != "" then to_number(styling.rarity_shift) else 0 }
 
 	shrink_setcode := {if styling.shrink_setcode_text != "" then to_number(styling.shrink_setcode_text) else 0}
+	shrink_illustrator := {if styling.shrink_illustrator_text != "" then to_number(styling.shrink_illustrator_text) else 0}
 
 	# text_size := { 14 -(if styling.font_size == "" then 0 else if contains(styling.font_size, match: ".5") then to_int(split_text(match:".5", styling.font_size).0) else styling.font_size) }
 	stripe01 := {if length(card_style.text.layout.separators) or else 0 > 0 then card_style.text.top + card_style.text.layout.separators[0] + stripe_adj(top:0, bot:1) else 0}
@@ -439,6 +440,10 @@ styling field:
 	name: shrink setcode text
 	description: Shrinks setcode X pixels
 styling field:
+	type: text
+	name: shrink illustrator text
+	description: Shrinks setcode X pixels
+styling field:
 	type: choice
 	name: override levels
 	choice: automatic
@@ -616,7 +621,7 @@ card style:
 		padding bottom: 0
 		z index: 4
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then 32 - shrink_name() else 34 - shrink_name()}
 			color: { if (contains(styling.other_options, match:"alias fullart frame") or contains(styling.other_options, match:"fullart black twins")) then "white" else "black"}
 	alias:
@@ -681,7 +686,7 @@ card style:
 		z index: 2
 		padding top: 2
 		font:
-			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren Bold" else "华康魏碑 Std W7" }
+			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then 26 - shrink_type() else 32 - shrink_type() }
 			color: { if (contains(styling.other_options, match:"alias fullart frame") or contains(styling.other_options, match:"fullart black twins")) then "white" else "black"}
 			separator color: red
@@ -924,7 +929,7 @@ card style:
 		height:	69.26
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 28
 			color: white
 	# 1-6忠诚异能位置
@@ -936,7 +941,7 @@ card style:
 		height:	70
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 22
 			color: white
 	loyalty cost 2:
@@ -947,7 +952,7 @@ card style:
 		height:	70
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 22
 			color: white
 	loyalty cost 3:
@@ -958,7 +963,7 @@ card style:
 		height:	70
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 22
 			color: white
 	loyalty cost 4:
@@ -969,7 +974,7 @@ card style:
 		height:	70
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 22
 			color: white
 	loyalty cost 5:
@@ -980,7 +985,7 @@ card style:
 		height:	70
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 22
 			color: white
 	loyalty cost 6:
@@ -991,7 +996,7 @@ card style:
 		height:	70
 		alignment: center middle
 		font:
-			name: Beleren Bold
+			name: Beleren
 			size: 22
 			color: white
 	############################# Card sorting / numbering
@@ -1021,13 +1026,14 @@ card style:
 	############################# Copyright stuff
 	illustrator:
 		left: { 166 }
-		top: 997
+		top: 999.5
 		width: 400
 		height: 20
-		z index: 1
+		z index: 9
+		alignment: middle
 		font:
-			name: Beleren Small Caps Bold
-			size: 14
+			name: MSEMotoyaExAporo W55 W5 KP
+			size: {13-shrink_illustrator()}
 			color: white
 	copyright:
 		right: 699

@@ -502,7 +502,7 @@ card style:
 		height: 10
 		z index: 4
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -626,7 +626,7 @@ extra card style:
 		height: 10
 		z index: 4
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
@@ -740,7 +740,7 @@ extra card style:
 		z index: 3
 		alignment: middle right
 		font:
-			name: Relay-Medium
+			name: Relay
 			size: 7
 			color: white
 			weight: bold
