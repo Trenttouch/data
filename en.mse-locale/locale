@@ -7,6 +7,12 @@ icon: usgb.png
 ############################################################## Menu items
 menu:
 	file:			&File
+	add card csv:						Import from CSV or TSV...
+	add card json:						Import from JSON...
+	link card:							Link card to target...
+	copy card and links:				Copy target and its linked cards	Ctrl+Shift+C
+	bulk modify:						Bulk modify target cards...
+
 	new set:			&New...	Ctrl+N
 	open set:			&Open...	Ctrl+O
 	save set:			&Save	Ctrl+S
@@ -66,14 +72,18 @@ menu:
 	remove keyword:		&Remove Select Keyword	 Del
 	
 	format:			F&ormat
+	font:				&Font
 	bold:				&Bold	Ctrl+B
 	italic:				&Italic	Ctrl+I
 	symbols:			&Symbols	Ctrl+M
 	underline:		&underline
+	strikethrough:	strikethrough	
 	reminder text:		&Reminder Text	Ctrl+R
 	insert symbol:		I&nsert Symbol
 	# spelling
 	no spelling suggestions:	(no suggestions)
+	color_text:							Font color	&C
+	bullet point:						bullet_point
 	
 	graph:			&Graph
 	pie:				&Pie	1
@@ -98,6 +108,7 @@ menu:
 	help:			&Help
 	index:				&Index...	F1
 	website:			&Website...
+	documentation:		documentation
 	about:				&About Magic Set Editor...
 	
 	# symbol editor
@@ -144,6 +155,11 @@ help:
 	reload data:		Reload all template files (game and style) as well as the set.
 	show profiler:		Show the profiler window, with timings of (script) functions. Used for optimization.
 	exit:				Quits Magic Set Editor; prompts to save the set
+	add card csv:						Import a single card from a CSV file
+	add card json:						Import a single card from a JSON file
+	link card:							Link card to a target card
+	copy card and links:				Copy target card and its linked cards
+	bulk modify:						Modify a lot of cards at once
 	
 	#edit:
 	undo:				Undoes the last action
@@ -187,13 +203,17 @@ help:
 	remove keyword:		Delete the selected keyword from this set
 	
 	#format:
+	font:				Set the selected text different font
 	bold:				Makes the selected text bold
 	italic:				Makes the selected text italic
 	symbols:			Draws the selected text with symbols
 	underline:			underline
+	strikethrough:	strikethrough
+	color_text:							Font color
 	reminder text:		Show reminder text for the selected keyword
 	# spelling
 	no spelling suggestions:	There are no suggestions for correcting this error
+	bullet point:						bullet_point
 	
 	#graph:
 	pie:				A pie graph, the size of the slice indicates the number of cards
@@ -217,7 +237,8 @@ help:
 	
 	#help:
 	index:				
-	website:			
+	website:
+	documentation:			
 	about:				
 	
 	# New Set Window
@@ -242,7 +263,9 @@ help:
 		Note: You must restart MSE for the changes to take effect.
 	zoom export:
 		(When off, the cards are exported at normal rotation)
-	
+	rotation export:
+		Use Current rotation
+		while export
 	# apprentice export
 	set code:			A set code is a two character code that is used by Apprentice to refer to a set.
 	
@@ -313,6 +336,9 @@ help:
 
 ############################################################## Toolbar
 tool:
+	search cards:						Search cards (Ctrl+K)
+	card counts 2:						Selected %s cards, total %s cards
+	card counts 3:						Selected %s cards, filtered %s cards, total %s cards
 	undo:				Undo
 	redo:				Redo
 	
@@ -364,6 +390,10 @@ tool:
 	
 ############################################################## Toolbar help text
 tooltip:
+	color_text:							Font color
+	bullet_point:						bullet_point
+	link card:							Link card to target
+	copy card and links:				Copy target and its linked cards
 	cards tab:			
 	set info tab:		Set information
 	style tab:			
@@ -390,11 +420,15 @@ tooltip:
 	add keyword:		Add keyword
 	remove keyword:		Remove selected keyword
 	
+	font:				Font
 	bold:				Bold
 	italic:				Italic
 	symbols:			Symbols
 	underline:			underline
+	strikethrough:	strikethrough
 	reminder text:		Reminder Text
+	color_text:							Font color
+	bullet point:						bullet_point
 	
 	pie:				Pie Graph
 	bar:				Bar Graph
@@ -442,6 +476,63 @@ tooltip:
 
 ############################################################## Labels in the GUI
 label:
+
+	# link cards dialog
+	custom link:						Custom...
+	custom link selected:				Token generating card, Front face, Meld component, etc...
+	custom link linked:					Token, Back face, Meld result, etc...
+	custom link undefined:				Undefined
+	linked cards relation:				Select relationship between linked and target cards:
+	selected card:						Selected card:
+	linked cards:						Linked cards:
+	select linked cards:				Select up to 4 cards to link:
+
+	# bulk modification dialog
+	bulk modify selection:				Which cards to modify:
+	bulk modify all:					All cards
+	bulk modify filtered:				Currently filtered cards
+	bulk modify selected:				Currently selected cards
+	bulk modify predicate:				Cards meeting these conditions
+	bulk modify predicate description:	Which conditions to meet for modification:
+	bulk modify predicate example:		Example (tiny M:tG creatures):
+	bulk modify field:					Which values to modify:
+	bulk modify mod description:		Change to what value:
+
+	# preferences dialog additions
+	dark mode: 							Dark mode
+	dark mode system: 					System default
+	dark mode no: 						Off
+	dark mode yes: 						On
+	check what targets:					Check targets
+	use export scale:					Use export scale
+	export around 300:					Around 300 DPI
+	export force 300:					Force 300 DPI
+	export force 150:					Force 150 DPI					
+
+	# CSV import dialog
+	add card csv sep:					Separator:
+	add card csv tab:					Tab
+	add card csv comma:					Comma
+	add card csv semicolon:				Semicolon
+	add card csv file:					CSV / TSV Path:
+
+	# JSON import dialog
+	add card json type:					JSON File Type:
+	add card json custom:				Custom JSON File
+	add card json path:					Path of the card array within the file:
+	add card json file:					Path of the file:
+
+	# print dialog additions
+	put space between cards:			Add spacing between cards?
+	spacing print:						Spacing between cards (mm)
+	cutter lines print:					Add cutter lines?
+	cutter lines all:					All
+	cutter lines no intersect:			When not intersecting with cards
+	cutter lines none:					None
+
+	# image load
+	load image:							Double-click to load illustration or Paste illustration (Ctrl+V)
+
 	# Cards tab
 	card notes:			Card notes:
 	search cards:		Search cards (Ctrl+K)
@@ -493,6 +584,9 @@ label:
 	zoom:				&Zoom:
 	export: 			&Export:
 	scale: 				&Internal Scale:
+	export desc:						export desc
+	import:								import:
+	import desc:						import desc
 	percent of normal:	% of normal size
 	external programs:	External programs
 	apprentice:			&Apprentice:
@@ -585,6 +679,17 @@ label:
 	no version:				-
 ############################################################## Buttons/checkboxes/choices in the GUI
 button:
+
+	unlink:								Unlink
+	link select:						Select
+	bleed export:						Bleed export
+	notes export:						Notes export
+	allow image download:				Allow image download
+	every 5 startups:					Every 5 startups
+	every 10 startups:					Every 10 startups
+	check app:							Check app
+	check games:						Check games
+	check everything:					Check everything
 	# Editor
 	edit symbol:		Edit
 	symbol gallery:		Gallery
@@ -621,6 +726,9 @@ button:
 	show lines:			Show &lines around fields
 	show editing hints:	Show boxes and hints for &editing
 	zoom export:		Use Viewer rotation settings when e&xporting
+	rotation export:
+		Use Current rotation
+		while export
 	spellcheck enabled:	Show &spelling errors on cards
 	check now:			Check &Now
 	always:							Always
@@ -670,6 +778,15 @@ button:
 
 ############################################################## Titles in the GUI
 title:
+
+	warning:							Warning
+	link cards:							Link cards to target card
+	bulk modify:						Bulk modify cards
+	add card csv:						Import cards from csv/tsv file
+	add card csv file:					Open csv/tsv file
+	add card json:						Import cards from json file
+	add card json file:					Open json file
+
 	magic set editor:	Magic Set Editor
 	%s - magic set editor:	%s - Magic Set Editor
 	untitled:			Untitled
@@ -688,6 +805,7 @@ title:
 	preferences:		Preferences
 	global:					Global
 	display:				Display
+	transfers:				Transfers
 	directories:			Directories
 	internal:               Internal
 	updates:				Updates
@@ -720,6 +838,13 @@ title:
 
 ############################################################## Action (undo/redo) names
 action:
+
+
+	change style: 						Change style
+	change link: 						Change linked card
+	use custom style: 					Use custom style
+	bulk:								Bulk
+
 	# List boxes
 	add item:			Add %s
 	remove item:		Remove %s
@@ -770,6 +895,37 @@ action:
 
 ############################################################## Error messages
 error:
+
+
+
+	cant link to self:					Cannot link to self
+	no cards selected:					No cards selected
+	import not found:					File not found: '%s'
+	can't import image without set:		Must save or load set file before importing: '%s'
+	can't create file stream:			Cannot create file stream: '%s'
+	can't write image to set:			Cannot write image to set: '%s'
+	can't import image:					Cannot import image: '%s'
+	no field with name:					Cannot find %s field named '%s'
+	styling data not map:				Value given to '%s_data' is not a map
+	styling data without stylesheet:	Value given to '%s_data' before setting stylesheet
+	cant set value:						Cannot set card value '%s', incorrect type
+	cant set image value:				Image values can only be set using relative filenames or import_image in field '%s'
+	cant set symbol value:				Symbol values can only be set using relative filenames in field '%s'
+	add card csv file not found:		Cannot find or load CSV or TSV file
+	add card csv file malformed:		CSV or TSV file malformed: row '%s' has a different entry count than the header
+	add card json failed to parse:		Failed to parse JSON file
+	add card json path not valid:		Path within the JSON file is invalid
+	add card json empty array:			Card array in JSON file is empty
+	add card json file not found:		Cannot find or load JSON file
+	json set without game:				Cannot create set from JSON without a game specified
+	json set without stylesheet:		Cannot create set from JSON without a stylesheet specified
+	import empty file:					%s file is empty
+	h margin too small for cutter:		Horizontal margin too small to insert cutter lines
+	v margin too small for cutter:		Vertical margin too small to insert cutter lines
+	not enough free links:				Card has no free links left, maximum 4 linked cards.
+	not enough free links for copy:		Copied card has no free links left, maximum 4 linked cards.
+	could not link:						The following cards could not be linked due to reaching the 4 card limit:
+
 	# File related
 	file not found:					File not found: '%s' in package '%s'
 	file not found package like:
