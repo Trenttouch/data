@@ -1272,7 +1272,7 @@ card style:
 
 	level 4 text:
 		left: {if un_marked() then if is_case() or is_class() then 376 else 60 else 90}
-		top: { (if split_34() == "" then textbox_bottom() else split_34()) + if card.level_4_text != "" then 50}
+		top: { (if split_34() == "" then textbox_bottom() else split_34()) + if is_class() and card.level_4_text != "​" then 50}
 		width: { if un_marked() then if is_case() or is_class() then 312 else 306 else 276}
 		bottom: { textbox_bottom() }
 		font:

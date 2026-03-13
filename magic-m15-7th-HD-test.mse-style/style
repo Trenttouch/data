@@ -91,7 +91,7 @@ init script:
 		if styling.unsorted_casting_cost then
 			input
 		else
-			sort_text@(order: "XYZI[0123456789]HSCA(WUBRG)")()
+			sort_text@(order: "XYZI[0123456789]HCA(WUBRG)S")()
 	}
 	
 	is_hybrid_cost := { contains(card.casting_cost, match: "W/") or contains(card.casting_cost, match: "U/") or contains(card.casting_cost, match: "B/") or contains(card.casting_cost, match: "R/") or contains(card.casting_cost, match: "G/") }
