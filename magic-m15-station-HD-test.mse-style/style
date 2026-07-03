@@ -495,10 +495,11 @@ card style:
 		padding left:   6
 		padding right:  {4 + chop_right() + (if card.pt!="" then 96 else 0)}
 		padding bottom: 8
-		line height hard: 1.1
+		line height hard: { adjust_line_height_hard() + 1.1}
+		line height hard max: { adjust_line_height_hard() + 1.2}
+
+		line height soft: { adjust_line_height_soft() + if chinese_new_font() then 1.0 else 0.9 }
 		line height line: { if chinese_new_font() then 1.6 else 1.5 }
-		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
-		line height hard max: 1.2
 		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
 
 	level 2 text: #第二描述（升级1）
@@ -531,10 +532,11 @@ card style:
 		padding right:  {4 + chop_right() + (if card.pt_2 !="" then 96 else 0)}
 		padding top: 8
 		padding bottom: 8
-		line height hard: 1.1
+		line height hard: { adjust_line_height_hard() + 1.1}
+		line height hard max: { adjust_line_height_hard() + 1.2}
+
+		line height soft: { adjust_line_height_soft() + if chinese_new_font() then 1.0 else 0.9 }
 		line height line: { if chinese_new_font() then 1.6 else 1.5 }
-		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
-		line height hard max: 1.2
 		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
 
 	level 3 text: #第三描述（异能2）
@@ -567,10 +569,11 @@ card style:
 		padding right:  {4 + chop_right() + (if card.pt_3 !="" then 96 else 0)}
 		padding top: 8
 		padding bottom: 8
-		line height hard: 1.1
+		line height hard: { adjust_line_height_hard() + 1.1}
+		line height hard max: { adjust_line_height_hard() + 1.2}
+
+		line height soft: { adjust_line_height_soft() + if chinese_new_font() then 1.0 else 0.9 }
 		line height line: { if chinese_new_font() then 1.6 else 1.5 }
-		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
-		line height hard max: 1.2
 		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
 
 	watermark:

@@ -410,12 +410,12 @@ init script:
 		text6: [margin_left("text6"), margin_right("text6"), margin_top("text6")],
 		unknown: [0,0,0]
 	]}
-	# margin_top := { if input == "lv2" or (input == "lv3" and card.level_3_text != "​") or (input == "lv4" and card.level_4_text != "") then 60 else 0 }
+	# margin_top := { if input == "lv2" or (input == "lv3" and card.level_3_text != "") or (input == "lv4" and card.level_4_text != "") then 60 else 0 }
 	margin_top := { 0 }
 	
 	###add blank spaces to inner levels so they still are clickable while "empty"
-	add_spacers := { if input == "" and (margin_code == "lv2" or margin_code == "lv3") then "​" else input}
-	#add_spacers := { if input == "" and (margin_code == "lv1" or margin_code == "lv2" or margin_code == "lv3") then "​" else input}
+	add_spacers := { if input == "" and (margin_code == "lv2" or margin_code == "lv3") then "" else input}
+	#add_spacers := { if input == "" and (margin_code == "lv1" or margin_code == "lv2" or margin_code == "lv3") then "" else input}
 	
 	read_ahead_fix := {54}
 	is_read_ahead := {contains(styling.other_options, match:"read ahead")}
@@ -890,8 +890,8 @@ card style:
 		alignment: middle center
 #############职业第一级别########################
 	level 9 text:
-		left: 380
-		width: {if is_class() and card.level_2_text == "​" then 0 else 160}
+		left: {if not is_class() then 1000 else 380}
+		width: {if is_class() and card.level_2_text == "" then 0 else 160}
 		top: {lev2()+8}
 		height: 40
 		z index: 7
@@ -904,8 +904,9 @@ card style:
 			size: 24
 		alignment: middle left
 	level 2:
-		left: 540
-		width: {if is_class() and card.level_2_text == "​" then 0 else 140}
+		left: {if not is_class() then 1000 else 540}
+		width: {if is_class() and card.level_2_text == "" then 0 else 140}
+		top: {lev2()+7}
 		height: 40
 		z index: 7
 		font:
@@ -919,8 +920,8 @@ card style:
 		alignment: middle right
 #############职业第二级别########################
 	level 10 text:
-		left: 380
-		width: {if is_class() and card.level_3_text == "​" then 0 else 160}
+		left: {if not is_class() then 1000 else 380}
+		width: {if is_class() and card.level_3_text == "" then 0 else 160}
 		top: {lev3()+8}
 		height: 40
 		z index: 7
@@ -933,8 +934,8 @@ card style:
 			size: 24
 		alignment: middle left
 	level 3:
-		left: 540
-		width: {if is_class() and card.level_3_text == "​" then 0 else 140}
+		left: {if not is_class() then 1000 else 540}
+		width: {if is_class() and card.level_3_text == "" then 0 else 140}
 		top: {lev3()+7}
 		height: 40
 		z index: 7
@@ -949,7 +950,7 @@ card style:
 		alignment: middle right
 #############职业第三级别########################
 	level 11 text:
-		left: 380
+		left: {if not is_class() then 1000 else 380}
 		width: {if is_class() and card.level_4_text == "" then 0 else 160}
 		top: {lev4()+8}
 		height: 40
@@ -963,7 +964,7 @@ card style:
 			size: 24
 		alignment: middle left
 	level 4:
-		left: 540
+		left: {if not is_class() then 1000 else 540}
 		width: {if is_class() and card.level_4_text == "" then 0 else 140}
 		top: {lev4()+8}
 		height: 40
@@ -1190,7 +1191,7 @@ card style:
 
 	level 2 text:
 		left: {if un_marked() then if is_case() or is_class() then 376 else 60 else 90}
-		top: { (if split_12() == "" then 498 else split_12()) + if is_class() and card.level_2_text != "​" then 50}
+		top: { (if split_12() == "" then 498 else split_12()) + if is_class() and card.level_2_text != "" then 50}
 		width: { if un_marked() then if is_case() or is_class() then 312 else 306 else 276}
 		bottom: { if split_23() == "" then 686 else split_23() }
 		font:
@@ -1231,7 +1232,7 @@ card style:
 
 	level 3 text:
 		left: {if un_marked() then if is_case() or is_class() then 376 else 60 else 90}
-		top: { (if split_23() == "" then 686 else split_23()) + if is_class() and card.level_3_text != "​" then 50}
+		top: { (if split_23() == "" then 686 else split_23()) + if is_class() and card.level_3_text != "" then 50}
 		width: { if un_marked() then if is_case() or is_class() then 312 else 306 else 276}
 		bottom: {if split_34() == "" then textbox_bottom() else split_34() }
 		font:
@@ -1272,7 +1273,7 @@ card style:
 
 	level 4 text:
 		left: {if un_marked() then if is_case() or is_class() then 376 else 60 else 90}
-		top: { (if split_34() == "" then textbox_bottom() else split_34()) + if is_class() and card.level_4_text != "​" then 50}
+		top: { (if split_34() == "" then textbox_bottom() else split_34()) + (if is_class() and card.level_4_text != "" then 50)}
 		width: { if un_marked() then if is_case() or is_class() then 312 else 306 else 276}
 		bottom: { textbox_bottom() }
 		font:
@@ -1976,7 +1977,7 @@ extra card style:
 	linebreak 2:
 		left: {60+ if is_class() or is_case() then 315 else if is_fullart_saga() then -30 else 0}
 		top: {if is_class() then lev2() else if split_12() == "" then 493 else split_12()-2 + if is_fullart_saga() then -3 else 0}
-		width: {if is_class() and card.level_2_text == "​" then 0 else if un_marked() then 315 else if is_fullart_saga() then 371.5 else 318}
+		width: {if is_class() and card.level_2_text == "" then 0 else if un_marked() then 315 else if is_fullart_saga() then 371.5 else 318}
 		height: {if is_class() then 51 else if is_case() or un_marked() then 4 else 6}
 		render style: image
 		z index: 2
@@ -1986,7 +1987,7 @@ extra card style:
 	linebreak 3:
 		left: {60+ if is_class() or is_case() then 315 else if is_fullart_saga() then -30 else 0}
 		top: {if is_class() then lev3() else if split_23() == "" then 684 else split_23()-2 + if is_fullart_saga() then -2 else 0}
-		width: {if is_class() and card.level_3_text == "​" then 0 else if un_marked() then 315 else if is_fullart_saga() then 371.5 else 318}
+		width: {if is_class() and card.level_3_text == "" then 0 else if un_marked() then 315 else if is_fullart_saga() then 371.5 else 318}
 		height: {if is_class() then 51 else if is_case() or un_marked() then 4 else 6}
 		render style: image
 		z index: 2
@@ -2032,7 +2033,7 @@ extra card style:
 ############################################################
 	default level 2:
 		left: 540
-		width: {if not is_class() or is_class() and card.level_2_text == "​" then 0 else 140}
+		width: {if not is_class() or (is_class() and card.level_2_text == "") then 0 else 140}
 		top: {lev2()+6}
 		height: 40
 		z index: 7
@@ -2047,7 +2048,7 @@ extra card style:
 		visible: {is_class() and card.level_2 == ""}
 	default level 3:
 		left: 540
-		width: {if not is_class() or is_class() and card.level_3_text == "​" then 0 else 140}
+		width: {if not is_class() or (is_class() and card.level_3_text == "") then 0 else 140}
 		top: {lev3()+6}
 		height: 40
 		z index: 7
@@ -2062,7 +2063,7 @@ extra card style:
 		visible: {is_class() and card.level_3 == ""}
 	default level 4:
 		left: 540
-		width: {if not is_class() or is_class() and card.level_4_text == "" then 0 else 140}
+		width: {if not is_class() or (is_class() and card.level_4_text == "") then 0 else 140}
 		top: {lev4()+6}
 		height: 40
 		z index: 7

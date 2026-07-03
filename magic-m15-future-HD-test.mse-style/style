@@ -525,11 +525,15 @@ card style:
 		z index: 5
 		padding left:   6
 		padding right:  {4 + chop_right()}
-		line height hard: 1.1
+		
+		line height hard: { adjust_line_height_hard() + 1.1}
+		line height hard max: { adjust_line_height_hard() + 1.2}
+
+		line height soft: { adjust_line_height_soft() + if chinese_new_font() then 1.0 else 0.9 }
 		line height line: { if chinese_new_font() then 1.3 else 1.2 }
-		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
-		line height hard max: 1.2
+
 		line height line max: { if chinese_new_font() then 1.4 else 1.3 }
+
 
 	watermark:
 		left: 50

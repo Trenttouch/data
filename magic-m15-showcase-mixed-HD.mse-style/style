@@ -56,6 +56,8 @@ init script:
 			masked_blend(mask: "pixel/pixel_blend.png", light: template(colors.0), dark: template(colors.1))
 		else if styling.frames=="fable" then
 			linear_blend( image1: template( colors[0] ), image2: template( colors[1] ), x1: 0.1,	y1: 0 x2: 0.9, y2: 0 )
+		else if styling.frames=="panel" then
+			linear_blend( image1: template( colors[0] ), image2: template( colors[1] ), x1: 0.47,	y1: 0 x2: 0.53, y2: 0 )
 		else
 			linear_blend( image1: template( colors[0] ), image2: template( colors[1] ), x1: 0.4,	y1: 0 x2: 0.6, y2: 0 )
 	}
@@ -124,9 +126,6 @@ init script:
 		overlay:	card_hybrid["overlay"]
 		vertical:	card_hybrid["vertical"]
 	]
-
-
-
 
 
 
@@ -218,6 +217,8 @@ init script:
 
 	pixel:"pixel/" pixelpt:"pixel/pt/"
 
+	panel:"panel/" panelpt:"panel/pt/" panelstamp:"panel/stamp/"
+
 	unstable:"unstable/"
 	unfinityland:"unfinityland/"
 	zdktll:"tll/zdk/" instll:"tll/ins/" thstll:"tll/ths/"
@@ -301,6 +302,8 @@ init script:
 	fable:".png" fablept:".png" fablestamp:".png"
 
 	pixel:".png" pixelpt:".png"
+
+	panel:".png" panelpt:".png" panelstamp:".png"
 
 	unstable:"card.png"
 	unfinityland:"card.png"
@@ -578,6 +581,10 @@ init script:
 	fable_background := { color_background(type:"fable",     base_hybrid:card_hybrid) }
 	fable_stamp_background := { color_background(type:"fablestamp",     base_hybrid:special_card_hybrid) }
 	fable_pt_background := { color_background(type:"fablept",     base_hybrid:card_hybrid) }
+	
+	panel_background := { color_background(type:"panel",     base_hybrid:special_card_hybrid) }
+	panel_stamp_background := { color_background(type:"panelstamp",     base_hybrid:card_hybrid) }
+	panel_pt_background := { color_background(type:"panelpt",     base_hybrid:card_hybrid) }
 
 	pixel_background := { color_background(type:"pixel",     base_hybrid:special_card_hybrid) }
 	pixel_pt_background := { color_background(type:"pixelpt",     base_hybrid:special_pt_hybrid) }
@@ -649,6 +656,7 @@ init script:
 		else if styling.frames=="fable" then fable_background()
 		else if styling.frames=="diyscroll" then "diy-scroll/"+(if (is_rare() and styling.use_holofoil_stamps) then "r_" else "")+"card.png"
 		else if styling.frames=="pixel" then pixel_background()
+		else if styling.frames=="panel" then panel_background()
 
 		else if styling.frames=="neon" and is_vehicle() and chosen(choice:"colorless", card.card_color) then "neon/voverlay.png"
 		else if styling.frames=="neon" then if (is_rare() and styling.use_holofoil_stamps) then neon_background() else neon_background2()
@@ -714,6 +722,7 @@ init script:
 		else if styling.frames=="diyscroll" then "diy-scroll/frame_mask.png"
 		else if styling.frames=="fable" then "fable/frame_mask.png"
 		else if styling.frames=="pixel" then (if card.pt != "" then "pixel/frame_mask_pt.png" else "pixel/frame_mask.png")
+		else if styling.frames=="panel" then "panel/frame_mask.png"
 		else "frame_mask.png"
 	}
 	
@@ -759,6 +768,7 @@ init script:
 		else if styling.frames=="diyscroll" then ""
 		else if styling.frames=="fable" then fable_pt_background()
 		else if styling.frames=="pixel" then pixel_pt_background()
+		else if styling.frames=="panel" then panel_pt_background()
 		else card_ptbox()
 	}
 	
@@ -816,6 +826,7 @@ init script:
 		else if styling.frames=="diyscroll" then "54,112,643,468"
 		else if styling.frames=="fable" then "0,0,750,588"
 		else if styling.frames=="pixel" then "0,0,750,975"
+		else if styling.frames=="panel" then "0,57.5,750,874"
 		else "56,117,638,468"
 	}
 	
@@ -856,6 +867,7 @@ init script:
 		else if styling.frames=="diyscroll" then ""
 		else if styling.frames=="fable" then fable_stamp_background()
 		else if styling.frames=="elemental" or styling.frames=="pixel" then "better_stamp.png"
+		else if styling.frames=="panel" then panel_stamp_background()
 		else "foil_stamp.png"
 	}
 	stamp_img_set := {
@@ -886,6 +898,7 @@ init script:
 		else if styling.frames=="stellarsights" or styling.frames=="stellarsightsposter" then "339.5, 958.5, 74, 40.5"
 		else if styling.frames=="fable" then "298.1343,940.2985,151.8657,55.2239"
 		else if styling.frames=="elemental" or styling.frames=="pixel" then "335.8209,951.4925,79.1045,41.4179"
+		else if styling.frames=="panel" then "302.9850,933.5820,144.0298,58.9552"
 		else "327,947,96,49"
 	}
 	stamp_img_left := {to_number(pull_comma_array(stamp_img_set(), cell:0, end:false))}
@@ -1083,6 +1096,8 @@ styling field:
 
 	choice: pixel
 
+	choice: panel
+
 	choice: textless land(zendikar)
 	choice: textless land(innistrad)
 	choice: textless land(theros)
@@ -1277,6 +1292,7 @@ card style:
 				else if styling.frames=="stellarsightsposter" then 60
 				else if styling.frames=="textless land(Edge of Eternities)" then 150
 				else if styling.frames=="pixel" then 62
+				else if styling.frames=="panel" then 47
 				else 64
 		top: 
 			script:
@@ -1302,6 +1318,7 @@ card style:
 				else if styling.frames=="stellarsightsposter" then if set.card_language != "简体中文" then 642.5 else 641.5
 				else if styling.frames=="textless land(Edge of Eternities)" then 893
 				else if styling.frames=="pixel" then if set.card_language != "简体中文" then 60 else 58
+				else if styling.frames=="panel" then if set.card_language != "简体中文" then 44 else 57
 				else 57)
 				+ if styling.name_top_shift != "" then to_number(styling.name_top_shift) else 0
 		right:
@@ -1320,7 +1337,7 @@ card style:
 				else if styling.center_name or styling.frames=="textless land(Edge of Eternities)" then "bottom center shrink-overflow"
 				else "bottom shrink-overflow"
 		padding bottom: 0
-		z index: 9
+		z index: 8
 		angle: {if styling.frames=="dossier" then -1 else 0}
 		font:
 			name: 
@@ -1332,6 +1349,7 @@ card style:
 					else if styling.frames=="memory corridor" then if set.card_language != "简体中文" then "DINNextW01-Bold" else "DFHei-GB Otf"
 					else if styling.frames=="stellarsights" then if set.card_language != "简体中文" then "Magic-Fomalhaut" else "字小魂芯科幻体(商用需授权)"
 					else if styling.frames=="pixel" then if set.card_language != "简体中文" then "Jogan Bold AllCaps" else "Zpix"
+					else if styling.frames=="panel" then if set.card_language != "简体中文" then "CCMeanwhile-Bold" else "方正粗圆简体"
 					else if set.card_language != "简体中文" then "Beleren"
 					else "华康魏碑 Std"
 			size:
@@ -1342,6 +1360,7 @@ card style:
 					else if styling.frames=="stellarsights" then if set.card_language != "简体中文" then 30 else 32
 					else if styling.frames=="stellarsightsposter" then if set.card_language != "简体中文" then 30 else 32
 					else if styling.frames=="pixel" then if set.card_language != "简体中文" then 27.5 else 33
+					else if styling.frames=="panel" then if set.card_language != "简体中文" then 21.5 else 30
 					else if set.card_language != "简体中文" then 32 else 34)
 					- shrink_name()
 			color:
@@ -1354,7 +1373,7 @@ card style:
 					styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or 
 					styling.frames=="skyscraper" or styling.frames=="artdeco" or styling.frames=="magicfest" or styling.frames=="goldenage" or 
 					styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="textless land(innistrad)" or 
-					styling.frames=="textless land(unstable)" or styling.frames=="etched" then "white"
+					styling.frames=="textless land(unstable)" or styling.frames=="etched" or styling.frames=="panel" then "white"
 					else "black"
 			#影子实现
 			shadow color: script: if (has_shadow()) then rgba(0,0,0,255) else rgba(0,0,0,0)
@@ -1372,6 +1391,7 @@ card style:
 				else if styling.frames=="breakingnews" then 710
 				else if styling.frames=="fable" then 682
 				else if styling.frames=="pixel" then 691
+				else if styling.frames=="panel" then 700
 				else 692
 		top: 
 			script:
@@ -1397,6 +1417,7 @@ card style:
 				else if styling.frames=="elemental" then 60
 				else if styling.frames=="fable" then 58
 				else if styling.frames=="pixel" then 63
+				else if styling.frames=="panel" then 54
 				else 57
 		width: { max(60, card_style.casting_cost.content_width) + 10 }
 		height: 46
@@ -1410,7 +1431,7 @@ card style:
 				script:
 					if styling.frames=="breakingnews" then "magic-mana-thunder-junction-breaking-news.mse-symbol-font"
 					else if styling.frames=="mystical archive" or styling.frames=="dossier" then "magic-mana-small-strixhaven"
-					else if styling.frames=="fullart mystical archive" then "magic-mana-small"
+					else if styling.frames=="fullart mystical archive" then "magic-mana-large"
 					else if styling.frames=="diyscroll" then "magic-mana-small-strixhaven-jp"
 					else if styling.frames=="pixel" then "magic-mana-pixel"
 					else "magic-mana-large"
@@ -1421,7 +1442,7 @@ card style:
 					else 30
 			alignment: middle right
 		always symbol: true
-		z index: 5
+		z index: 9
 		padding top: 0
 
 	alias:
@@ -1491,7 +1512,11 @@ card style:
 	############################# Card type
 	indicator:
 		left: { if styling.frames=="invention" then 64 else 62 }
-		top: { if styling.frames=="invention" then 603 else 604 }
+		top:
+			script:
+				if styling.frames=="invention" then 603
+				if styling.frames=="breakingnews" then 632
+				else 604
 		width: 34
 		height: 34
 		z index: 1
@@ -1509,6 +1534,7 @@ card style:
 				else if styling.frames=="memory corridor" then if set.card_language != "简体中文" then -11 else -12
 				else if styling.frames=="pixel" then -3
 				else if is_tll() and styling.frames!="textless land(theros)" then 1000
+				else if styling.frames=="panel" then -17
 				else 0)
 
 				+ (if styling.frames=="textless land(All will be one)" then 74 else 0)
@@ -1534,6 +1560,7 @@ card style:
 				else if styling.frames=="stellarsightsposter" then 684
 				else if styling.frames=="textless land(Edge of Eternities)" then 1100
 				else if styling.frames=="pixel" then if set.card_language != "简体中文" then 605 else 603
+				else if styling.frames=="panel" then if set.card_language != "简体中文" then 580 else 579
 				else 597)
 				+ if chosen(styling.others, choice:"hide type and rarity") then 1000 else 0
 				+ if styling.type_top_shift != "" then to_number(styling.type_top_shift) else 0
@@ -1561,6 +1588,7 @@ card style:
 					else if styling.frames=="breakingnews" then if set.card_language != "简体中文" then "Saloon Girl" else "华康标题宋 Std W9"
 					else if styling.frames=="memory corridor" then if set.card_language != "简体中文" then "DINNextW01-Regular" else "MSE华康黑体W5"
 					else if styling.frames=="pixel" then if set.card_language != "简体中文" then "Jogan Bold AllCaps" else "Zpix"
+					else if styling.frames=="panel" then if set.card_language != "简体中文" then "CCMeanwhile-Bold" else "方正粗圆简体"
 					else if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std"
 			size:
 				script:
@@ -1569,6 +1597,7 @@ card style:
 					else if styling.frames=="memory corridor" then if set.card_language != "简体中文" then 20.2 else 23.8
 					else if styling.frames=="stellarsights" or styling.frames=="stellarsightsposter" then if set.card_language != "简体中文" then 25.2 else 28
 					else if styling.frames=="pixel" then if set.card_language != "简体中文" then 19.75 else 26
+					else if styling.frames=="panel" then if set.card_language != "简体中文" then 21.5 else 30
 					else if set.card_language != "简体中文" then 26 else 32)
 					- shrink_type()
 			color:
@@ -1583,7 +1612,7 @@ card style:
 					styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or 
 					styling.frames=="samurai" or styling.frames=="textless land(innistrad)" or 
 					styling.frames=="textless land(unstable)"  or styling.frames=="etched" or 
-					styling.frames=="memory corridor" or styling.frames=="pixel" then "white"
+					styling.frames=="memory corridor" or styling.frames=="pixel" or styling.frames=="panel" then "white"
 					else "black"
 			separator color: red
 			#影子实现
@@ -1665,6 +1694,7 @@ card style:
 				else if styling.frames=="stellarsights" then 704
 				else if styling.frames=="stellarsightsposter" then 684
 				else if styling.frames=="pixel" then 601
+				else if styling.frames=="panel" then 579
 				else 597
 		width: 88
 		height: 44
@@ -1759,6 +1789,7 @@ card style:
 						 if styling.frames=="pipboy"  then if set.card_language != "简体中文" then "Neo Sans Pro"  else "华康圆体 - Kelvin"
 					else if styling.frames=="dossier" then if set.card_language != "简体中文" then "Special Elite" else "DFPKaiShu-GB5"
 					else if styling.frames=="pixel" then if set.card_language != "简体中文" then "JoganBold" else "Zpix"
+					else if styling.frames=="panel" then if set.card_language != "简体中文" then "CCMeanwhile-Regular" else "方正准圆简体"
 					else if chosen(styling.others, choice:"use phyrexian font") then "Phi_horizontal_gbrsh_3.0"
 					else if set.card_language != "简体中文" then "MPlantin" else ch_font()
 			italic name:
@@ -1766,11 +1797,13 @@ card style:
 					if styling.frames=="dossier" then if set.card_language != "简体中文" then "Special Elite" else ch_flavor_font()
 					else if chosen(styling.others, choice:"use phyrexian font") then "Phi_horizontal_gbrsh_3.0"
 					else if styling.frames=="pixel" then if set.card_language != "简体中文" then "JoganBold" else "Zpix"
+					else if styling.frames=="panel" then if set.card_language != "简体中文" then "CCMeanwhile-Italic" else "方正准圆简体"
 					else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font()
 			size: 
 				script:
 					if styling.font_cap != "" then to_number(styling.font_cap)
 					else if styling.frames=="pixel" then if set.card_language != "简体中文" then 21.5 else 24
+					else if styling.frames=="panel" then if set.card_language != "简体中文" then 18.5 else 22
 					else 27
 			scale down to: 6
 			color: 
@@ -1813,6 +1846,7 @@ card style:
 		padding right:  {4 + chop_right()}
 		line height hard: 
 			script:
+			 	adjust_line_height_hard() +
 				if styling.frames=="dossier" then 1.3 
 				else 1.1 
 		line height line: 
@@ -1822,10 +1856,11 @@ card style:
 				else (if chinese_new_font() then 1.6 else 1.5) 
 		line height soft: 
 			script:
+				adjust_line_height_soft() + 
 				if styling.frames=="dossier" then 1.1
 				else if styling.frames=="pixel" then if set.card_language != "简体中文" then 0.82 else 1.05
 				else (if chinese_new_font() then 1.0 else 0.9) 
-		line height hard max: 1.2
+		line height hard max: { adjust_line_height_hard() + 1.2}
 		line height line max:
 			script:
 				if styling.frames=="pixel" then if set.card_language != "简体中文" then 1.1 else 1.05
@@ -1858,10 +1893,11 @@ card style:
 		z index: 4
 		padding left:   6
 		padding right:  {4 + extra_chop_right()}
-		line height hard: 1.1
+		line height hard: { adjust_line_height_hard() + 1.1}
+		line height hard max: { adjust_line_height_hard() + 1.2}
+
+		line height soft: { adjust_line_height_soft() + if chinese_new_font() then 1.0 else 0.9 }
 		line height line: { if chinese_new_font() then 1.6 else 1.5 }
-		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
-		line height hard max: 1.2
 		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
 
 	watermark:
@@ -1906,7 +1942,7 @@ card style:
 
 	#祝愿
 	power:
-		z index: 5
+		z index: 9
 		left:	{if styling.frames=="invocation" then 646.5 else 1000}
 		top:	{if styling.frames=="invocation" then 861 else 2000}
 		width:	{if styling.frames=="invocation" then 46.5 else 0}
@@ -1929,7 +1965,7 @@ card style:
 			color: black
 
 	pt:
-		z index: 5
+		z index: 9
 		left:
 			script:
 				if styling.frames=="dossier" then 580
@@ -1946,6 +1982,7 @@ card style:
 				else if styling.frames=="bot" then 590
 				else if styling.frames=="paranormal" then 585
 				else if styling.frames=="pixel" then 606.5
+				else if styling.frames=="panel" then 597
 				else 586
 		top:
 			script:
@@ -1965,6 +2002,7 @@ card style:
 				else if styling.frames=="ghostfire" then 921
 				else if styling.frames=="diyscroll" then 917
 				else if styling.frames=="pixel" then 904
+				else if styling.frames=="panel" then 928
 				else 936
 		width: 120
 		height:	56
@@ -1977,6 +2015,7 @@ card style:
 					else if chosen(styling.others, choice:"use phyrexian font") then "GeishaHolidayW00-Regular"
 					else if styling.frames=="memory corridor" then "DINNextW10-Medium"
 					else if styling.frames=="pixel" then "JoganBold"
+					else if styling.frames=="panel" then "CCMeanwhile-Bold"
 					else "Beleren"
 			size:
 				script:
@@ -1984,6 +2023,7 @@ card style:
 					else if styling.frames=="ravnica" or styling.frames=="dossier" then 30
 					else if styling.frames=="phyrexian" then 31
 					else if styling.frames=="pixel" then 30
+					else if styling.frames=="panel" then 32
 					else 32)
 					- (if styling.shrink_power_text != "" then to_number(styling.shrink_power_text) else 0)
 
@@ -1995,7 +2035,7 @@ card style:
 					styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or 
 					styling.frames=="artdeco" or styling.frames=="goldenage" or styling.frames=="neon" or 
 					styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="etched" or 
-					styling.frames=="memory corridor" or styling.frames=="pixel" then "white" 
+					styling.frames=="memory corridor" or styling.frames=="pixel" or styling.frames=="panel" then "white" 
 					else "black"
 			separator color: red
 	############################# Card sorting / numbering

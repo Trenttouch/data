@@ -776,6 +776,32 @@ styling style:
 ############################################################## Card fields
 card style:
 	############################# Background stuff
+	border color:
+		left:	0
+		top:	0
+		width:	750
+		height:	1050
+		z index: 4
+		mask: 
+			script: 
+				if is_transform() then 
+					"silvermask/" + (if is_extend() then "extend/" else if is_saga() then "saga/") +"silverborder" +(if is_legend() and not is_plw() then "_crown" else "") +"_t.png"
+				else
+				"silvermask/" + (if is_extend() then "extend/" else if is_saga() then "saga/") +"silverborder" +(if is_legend() and not is_plw() then "_crown" else "") +".png"
+		visible: {card.border_color != rgb(0,0,0)}
+
+	border color 2:
+		left:	{0+backside_left_fix()}
+		top:	0
+		width:	750
+		height:	1050
+		z index: 4
+		mask: 
+			script: 
+				"silvermask/" + (if back_is_extend() then "extend/") +"silverborder" +(if back_is_legend() and not back_is_plw() then "_crown" else "") +".png"
+		visible: {card.border_color != rgb(0,0,0)}
+
+
 	card color:
 		left:	0
 		top:	0
@@ -1178,10 +1204,13 @@ card style:
 		z index: 2
 		padding left:   6
 		padding right:  {4 + chop_right()}
-		line height hard: 1.1
+		
+		line height hard: { adjust_line_height_hard() + 1.1}
+		line height hard max: { adjust_line_height_hard() + 1.2}
+
+		line height soft: { adjust_line_height_soft() + if chinese_new_font() then 1.0 else 0.9 }
 		line height line: { if chinese_new_font() then 1.6 else 1.5 }
-		line height soft: { if chinese_new_font() then 1.0 else 0.9 }
-		line height hard max: 1.2
+
 		line height line max: { if chinese_new_font() then 1.7 else 1.6 }
 	
 	

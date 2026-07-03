@@ -1,12 +1,28 @@
 # Rarities images
 # Edit by Heavenford 2017.1.14
 
+
 choice images:
 	DIY Mythic: 	script: custom_Rarity_M()
 	DIY Rare: 		script: custom_Rarity_R()
 	DIY Uncommon: 	script: custom_Rarity_U()
 	DIY Common: 	script: custom_Rarity_C()
 	DIY Basic Land: script: custom_Rarity_C()
+
+include file: /magic-rarity.mse-include/extra-rarity
+
+choice images:
+	FRA Mythic: 	/magic-rarity.mse-include/FRA_M.png
+	FRA Rare: 		/magic-rarity.mse-include/FRA_R.png
+	FRA Uncommon: 	/magic-rarity.mse-include/FRA_U.png
+	FRA Common: 	/magic-rarity.mse-include/FRA_C.png
+	FRA Basic Land: /magic-rarity.mse-include/FRA_C.png
+
+	HOB Mythic: 	/magic-rarity.mse-include/HOB_M.png
+	HOB Rare: 		/magic-rarity.mse-include/HOB_R.png
+	HOB Uncommon: 	/magic-rarity.mse-include/HOB_U.png
+	HOB Common: 	/magic-rarity.mse-include/HOB_C.png
+	HOB Basic Land: /magic-rarity.mse-include/HOB_C.png
 
 	MSH Mythic: 	/magic-rarity.mse-include/MSH_M.png
 	MSH Rare: 		/magic-rarity.mse-include/MSH_R.png
@@ -821,6 +837,12 @@ choice images:
 	Duel EVG Uncommon: /magic-rarity.mse-include/EVG_U.png
 	Duel EVG Common: /magic-rarity.mse-include/EVG_C.png
 
+	Command HOC Mythic: 	/magic-rarity.mse-include/HOC_M.png
+	Command HOC Rare: 		/magic-rarity.mse-include/HOC_R.png
+	Command HOC Uncommon: 	/magic-rarity.mse-include/HOC_U.png
+	Command HOC Common: 	/magic-rarity.mse-include/HOC_C.png
+	Command HOC Basic Land: /magic-rarity.mse-include/HOC_C.png
+
 	Command MSC Mythic: 	/magic-rarity.mse-include/MSC_M.png
 	Command MSC Rare: 		/magic-rarity.mse-include/MSC_R.png
 	Command MSC Uncommon: 	/magic-rarity.mse-include/MSC_U.png
@@ -1405,6 +1427,15 @@ choice images:
 	Masters TD0 Uncommon: 	/magic-rarity.mse-include/TD0_U.png
 	Masters TD0 Common: 	/magic-rarity.mse-include/TD0_C.png
 	
+	Other OM1 Mythic: 		/magic-rarity.mse-include/OM1_M.png
+	Other OM1 Rare: 		/magic-rarity.mse-include/OM1_R.png
+	Other OM1 Uncommon: 	/magic-rarity.mse-include/OM1_U.png
+	Other OM1 Common: 		/magic-rarity.mse-include/OM1_C.png
+	Other OM1 OMB Mythic: 		/magic-rarity.mse-include/OMB_M.png
+	Other OM1 OMB Rare: 		/magic-rarity.mse-include/OMB_R.png
+	Other OM1 OMB Uncommon: 	/magic-rarity.mse-include/OMB_U.png
+	Other OM1 OMB Common: 		/magic-rarity.mse-include/OMB_C.png
+
 	Other MB2 Mythic: 		/magic-rarity.mse-include/MB2_M.png
 	Other MB2 Rare: 		/magic-rarity.mse-include/MB2_R.png
 	Other MB2 Uncommon: 	/magic-rarity.mse-include/MB2_U.png

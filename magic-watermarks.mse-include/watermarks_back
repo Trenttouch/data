@@ -101,6 +101,12 @@ choice images:
 	future sight type symbols sorcery:			script: set_combine(combine:"shadow", input:"/magic-watermarks.mse-include/futsymbol_sorcery.png")
 	
 	other magic symbols desparked:    				script: if set.blend_with_colors then spotlight_watermark_blend("/magic-watermarks.mse-include/desparked.png,447,710", face:card.card_color_2) else set_combine(combine:"shadow", input:set_alpha(alpha: 0.35, input:"/magic-watermarks.mse-include/desparked.png"))
+	other magic symbols reality fracture:
+		script:
+			if is_planeswalker(card.type_2) or not set.blend_with_colors then
+				set_combine(combine:"shadow", input:set_alpha(alpha: 0.2, input:"/magic-watermarks.mse-include/reality_fracture.png"))
+			else
+				spotlight_watermark_blend("/magic-watermarks.mse-include/reality_fracture.png,585,585", face:card.card_color_2)
 	other magic symbols aetherprint:				script: set_combine(combine:"shadow", input:set_alpha(alpha: 0.3, input:"/magic-watermarks.mse-include/aetherprint.png"))
 	other magic symbols chaos symbol:				script: set_combine(combine:"shadow", input:set_alpha(alpha: 0.3, input:"/magic-watermarks.mse-include/chaos.png"))
 	other magic symbols color pie:					/magic-watermarks.mse-include/colorpie.png

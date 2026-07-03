@@ -5,19 +5,23 @@
 pack type:
 	name: 基本地
 	select: equal
-	filter: card.rarity == "basic land" and not is_token_card() and not is_masterpiece() # can be shifted
+	filter: (contains(card.rarity, match:"basic land") or contains(card.rarity, match:"Basic Land")) and not is_token_card() and not is_masterpiece() # can be shifted
+	
 pack type:
 	name: 普通
-	filter: card.rarity == "common" and not is_token_card() and not is_shifted_card() and not is_masterpiece() and not is_unsorted()
+	filter: contains(card.rarity, match:"Common") and not contains(card.rarity, match:"Uncommon") and not is_token_card() and not is_shifted_card() and not is_masterpiece() and not styling.is_foil
 pack type:
 	name: 非普通
-	filter: card.rarity == "uncommon" and not is_token_card() and not is_shifted_card() and not is_masterpiece() and not is_unsorted()
+	filter: contains(card.rarity, match:"Uncommon") and not is_token_card() and not is_shifted_card() and not is_masterpiece() and not styling.is_foil
 pack type:
 	name: 稀有
-	filter: card.rarity == "rare" and not is_token_card() and not is_shifted_card() and not is_masterpiece() and not is_unsorted()
+	filter: contains(card.rarity, match:"Rare") and not contains(card.rarity, match:"Mythic Rare") and not is_token_card() and not is_shifted_card() and not is_masterpiece() and styling.is_foil
 pack type:
 	name: 秘稀
-	filter: card.rarity == "mythic rare" and not is_masterpiece() and not is_token_card() and not is_shifted_card() and not is_unsorted()
+	filter: contains(card.rarity, match:"Mythic Rare") and not is_masterpiece() and not is_token_card() and not is_shifted_card() and styling.is_foil
+pack type:
+	name: 闪牌
+	filter: styling.is_foil
 pack type:
 	name: 特卡
 	filter: card.rarity == "special" and not is_token_card() # can be shifted
@@ -152,6 +156,8 @@ pack type:
 		amount: 30
 	item:
 		name: 衍生物 / 规则说明
+
+
 pack type:
 	name: 补充包
 	item:
@@ -170,6 +176,12 @@ pack type:
 	item:
 		name: 衍生物 / 规则说明
 		amount: 1
+	item:
+		name: 闪牌
+		amount: 1
+
+
+
 pack type:
 	name: 宝藏包（2稀有或秘稀+1闪牌）
 	item:

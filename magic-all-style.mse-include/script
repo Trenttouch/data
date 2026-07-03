@@ -13,6 +13,9 @@
 
 	shrink_illustrator := {if styling.shrink_illustrator_text != "" then to_number(styling.shrink_illustrator_text) else 0}
 
+	adjust_line_height_hard:={if styling.adjust_line_height_hard != "" then to_number(styling.adjust_line_height_hard) else 0}
+	adjust_line_height_soft:={if styling.adjust_line_height_soft != "" then to_number(styling.adjust_line_height_soft) else 0}
+	
 	chinese_new_font := { styling.chinese_new_font }
 	ch_font := { if chinese_new_font() then "MSE华康黑体W3(P)" else "方正细等线_GBK_FIX" }
 	ch_flavor_font := { if chinese_new_font() then "MSE华康楷体W5(P)" else "Magic华文楷体" }
