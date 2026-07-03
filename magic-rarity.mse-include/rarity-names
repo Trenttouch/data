@@ -2,6 +2,7 @@
 # Included by a game file
 # Edit by Heavenford 2017.1.14
 
+
 choice:
 	choice: none
 	choice: basic land
@@ -15,6 +16,26 @@ choice:
 
 choice:
 	name: DIY
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	choice: Basic Land
+	line below: true
+
+include file: /magic-rarity.mse-include/extra-rarity-name
+
+choice:
+	name: FRA
+	choice: Mythic
+	choice: Rare
+	choice: Uncommon
+	choice: Common
+	choice: Basic Land
+	line below: true
+
+choice:
+	name: HOB
 	choice: Mythic
 	choice: Rare
 	choice: Uncommon
@@ -1275,6 +1296,13 @@ choice:
 choice:
 	name: Command
 	choice:
+		name: HOC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Basic Land
+	choice:
 		name: MSC
 		choice: Mythic
 		choice: Rare
@@ -2082,6 +2110,18 @@ choice:
 ######################################################### 其他
 choice:
 	name: Other
+	choice:
+		name: OM1
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice:
+			name: OMB
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
 	choice:
 		name: MB2
 		choice: Mythic

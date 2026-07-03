@@ -121,3 +121,11 @@ styling field:
 	type: text
 	name: shrink illustrator text
 	description: Shrinks setcode X pixels
+styling field:
+	type: text
+	name: adjust line height hard
+	description: adjust line height hard(better -1~1)
+styling field:
+	type: text
+	name: adjust line height soft
+	description: adjust line height soft(better -1~1)

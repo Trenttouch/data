@@ -1,0 +1,12 @@
+# Rarities images
+# Included by a game file
+# Edit by Heavenford 2017.1.14
+
+#choice:
+#	name: SSSS
+#	choice: Mythic
+#	choice: Rare
+#	choice: Uncommon
+#	choice: Common
+#	choice: Basic Land
+#	line below: true

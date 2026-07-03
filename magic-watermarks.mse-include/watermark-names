@@ -121,6 +121,7 @@ choice:
 choice:
 	name: other magic symbols
 	choice: desparked
+	choice: reality fracture
 	choice: aetherprint
 	choice: chaos symbol
 	choice: color pie

@@ -733,6 +733,21 @@ extra card field:
 	name: EN sub type
 	script: forward_editor(field: card.sub_type)
 
+extra card field:
+	type: text
+	name: extra type 1
+	save value: true
+	editable: true
+	show statistics: false
+	default: "ARKNIGHTS"
+extra card field:
+	type: text
+	name: extra type 2
+	save value: true
+	editable: true
+	show statistics: false
+	default: "STAFF"
+
 extra card style:
 	dot:
 		left: {48.5 + card_style.set_code.content_width}
@@ -931,3 +946,27 @@ extra card style:
 			size: { 24.2 - shrink_subtype() }
 			color: { "white" }
 			separator color: red
+
+	extra type 1:
+		left: 116
+		top: { 610.5 }
+		width: 300
+		height: 20
+		z index: 9
+		alignment: middle left shrink-overflow
+		font:
+			name: {"Noto Sans S Chinese Bold Bold"}
+			size: 11
+			color: {"white"}
+
+	extra type 2:
+		left: 116
+		top: { 633 }
+		width: 300
+		height: 20
+		z index: 9
+		alignment: middle left shrink-overflow
+		font:
+			name: {"Noto Sans S Chinese Bold Bold"}
+			size: 11
+			color: {"white"}

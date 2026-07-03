@@ -54,8 +54,8 @@ init script:
 	#Should multicolor lands with basic land types have a colored name?
 	mask_multi_land_with_color := { styling.colored_multicolor_land_name }
 	
-	template_prefix := [
-	card: "card/" back:"back/" 
+	template_prefix_normal := [
+	card: "card/"
 	crown:"crown/"
 	
 	name1:"name/" name2:"name/" name3:"name/" 
@@ -64,8 +64,9 @@ init script:
 	
 	pt: "pt/" stamp: "" identity: "/magic-identity-new.mse-include/"
 	]
+
 	template_suffix := [
-	card: "card.png" back:"card.png" 
+	card: "card.png"
 	crown:"crown.png" 
 	
 	name1:"cap.png" name2:"name.png" name3:"cap.png" 
@@ -73,8 +74,21 @@ init script:
 	type1:"cap.png" type2:"type.png" type3:"cap.png" 
 	
 	pt: "pt.png" stamp: "stamp.png" identity: "identity.png"]
-	template      := { template_prefix[type] + input + template_suffix[type] }
-	land_template := { template_prefix[type] + (if input == "a" then "c" else input) + template_suffix[type] }
+
+	template_prefix := {
+		if type == "card" then
+			if (is_rare() and styling.use_holofoil_stamps) then
+				if styling.language != "Japanese" then [card: "card/en/rare/"]
+				else [card: "card/rare/"] 
+			else 
+				if styling.language != "Japanese" then [card: "card/en/"]
+				else [card: "card/"] 
+		else
+			template_prefix_normal 
+	}
+
+	template      := { template_prefix()[type] + input + template_suffix[type] }
+	land_template := { template_prefix()[type] + (if input == "a" then "c" else input) + template_suffix[type] }
 	
 	# Use land templates for previews because they show more contrast
 	
@@ -145,7 +159,7 @@ init script:
 		]
 		overlay: overlay_hybrid
 	]
-	### i have no idea why card_hybrid isn't working or why i need both of these
+	### i have no idea why card_hybrid isnt working or why i need both of these
 	slide_hybrid := [
 		radial: [
 			0: { template("c")       }
@@ -236,7 +250,6 @@ init script:
 	]
 
 	card_background := { color_background(type:"card",     base_hybrid:card_hybrid) }
-	card_background2 := { color_background(type:"back",     base_hybrid:card_hybrid) }
 	crown_background := { color_background(type:"crown",     base_hybrid:card_hybrid) }
 	
 	name1_background := { color_background(type:"name1",     base_hybrid:c1_hybrid) }
@@ -272,7 +285,11 @@ init script:
 
 	use_main_rarity := { contains(set.mainframe_rarity_name, match: ".png")}
 	un_png := replace@(match:".png", replace: "")
-	jp_name_length := {card_style.name.content_height * length(card.name) - 4 * (length(card.name)-2) }
+	jp_name_length := {card_style.name.content_height * length(name_checker_filter(card.name)) - 4 * (length(name_checker_filter(card.name))-2) }
+
+	name_checker_filter :=
+		replace@(match:"<[^>]+>", replace:"")+
+		replace@(match:"</[^>]+>", replace:"")
 
 ############################################################## Set info fields
 set info style:
@@ -293,6 +310,15 @@ styling field:
 
 ### 通用1 ###
 include file: /magic-all-style.mse-include/style1
+
+styling field:
+	type: text
+	name: name top shift
+	description: 牌名字体上边距
+styling field:
+	type: text
+	name: type top shift
+	description: 类别字体上边距
 
 styling field:
 	type: boolean
@@ -349,20 +375,25 @@ card style:
 		z index: 0
 		render style: image
 		popup style: in place
-		image: { if (is_rare() and styling.use_holofoil_stamps) then card_background2() else card_background() }
-		mask: {if card.pt != "" then "frame_mask_pt.png" else "frame_mask.png"}
+		image: { card_background() }
+		mask: 
+			script:
+				if styling.language != "Japanese" then 
+					if card.pt != "" then "frame_mask_pt_en.png" else "frame_mask_en.png"
+				else
+					if card.pt != "" then "frame_mask_pt.png" else "frame_mask.png"
 	############################# Name line
 	name:
-		left: 96
-		top: {if styling.language == "Japanese" then 550+550 else 42+42+10 }
-		width:  {max(74, card_style.name.content_width + 20)}
-		height: 44
-		alignment: top shrink-overflow
+		left: {if styling.language == "Japanese" then 96 else 64 }
+		top: {if styling.language == "Japanese" then 1100 else (50 + if styling.name_top_shift != "" then to_number(styling.name_top_shift) else 0) }
+		width:  {if styling.language == "Japanese" then max(74, card_style.name.content_width + 20) else (625 - max(0, card_style.casting_cost.content_width)) }
+		height: {if styling.language == "Japanese" then 44 else (46 - 0.5*shrink_name()) }
+		alignment: { if styling.language == "Japanese" then "top shrink-overflow" else "bottom shrink-overflow"}
 		padding bottom: 0
-		z index: 2
+		z index: 9
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
-			size: { if set.card_language != "简体中文" then 26 - shrink_name() else 30 - shrink_name() }
+			name: { if set.card_language != "简体中文" then "Beleren Proxy" else "华康魏碑 Std" }
+			size: { if styling.language == "Japanese" then (if set.card_language != "简体中文" then 26 - shrink_name() else 30 - shrink_name()) else (if set.card_language != "简体中文" then 32 - shrink_name() else 34 - shrink_name()) }
 			color: white
 		line height hard: {if is_modal(card.rule_text) then 0.9 else 1.2 }
 		line height line: 1.5
@@ -371,20 +402,20 @@ card style:
 		line height line max: 1.6
 	
 	casting cost:
-		right: 704
-		top: 55
+		right: {if styling.language == "Japanese" then 704 else 692 }
+		top: {if styling.language == "Japanese" then 55 else 50 }
 		width: { max(60, card_style.casting_cost.content_width) + 10 }
-		height: 54
+		height: {if styling.language == "Japanese" then 54 else 46 }
 		alignment: middle right
 		font:
 			name: MPlantin
 			size: 15
 		symbol font:
-			name: magic-mana-small-strixhaven-jp
-			size: 40
+			name: {if styling.language == "Japanese" then "magic-mana-small-strixhaven-jp" else "magic-mana-large" }
+			size: {if styling.language == "Japanese" then 40 else 30 }
 			alignment: middle right
 		always symbol: true
-		z index: 2
+		z index: 9
 		padding top: 0
 	############################# Image
 	image:
@@ -406,21 +437,21 @@ card style:
 		visible: { has_identity() }
 		image: { card_identity() }
 	type:
-		left: 64
-		top: {shrink_type() + 588 }
-		width: { max(210, card_style.type.content_width) }
-		height: { 38 - shrink_type() }
-		alignment: top center shrink-overflow
-		z index: 2
+		left: {if styling.language == "Japanese" then 64 else 62}
+		top: { 588 + shrink_type()/2 + (if styling.type_top_shift != "" then to_number(styling.type_top_shift) else 0) }
+		width: { if styling.language == "Japanese" then max(210, card_style.type.content_width) else (610 - max(44,card_style.rarity.content_width)) }
+		height: { (if styling.language == "Japanese" then 38 else 40) - shrink_type()}
+		alignment: {if styling.language == "Japanese" then "top center shrink-overflow" else "top shrink-overflow"}
+		z index: 9
 		padding top: 2
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
-			size: { if set.card_language != "简体中文" then 24 - shrink_type() else 30 - shrink_type() }
+			name: { if set.card_language != "简体中文" then "Beleren Proxy" else "华康魏碑 Std" }
+			size: { if set.card_language != "简体中文" then 25 - shrink_type() else 30 - shrink_type() }
 			color: black
 			separator color: red
 	rarity:
 		right: {688 + rarity_shift()}
-		top: {if styling.use_STAJP_rarity then 562 else 596}
+		top: {if styling.use_STAJP_rarity then 562 else (if styling.language == "Japanese" then 596 else 588) }
 		width: {if styling.use_STAJP_rarity then 90 else 88}
 		height: {if styling.use_STAJP_rarity then 90 else 44}
 		z index: 2
@@ -465,11 +496,7 @@ card style:
 		top: { 654 +chop_top()}
 		width: {628}
 		bottom: {960-chop_bot()}
-		
-		#left: 32
-		#top: {324 + chop_top()}
-		#width: 314
-		#bottom: {478 - chop_bot()}
+
 		font:
 			name: { if set.card_language != "简体中文" then "MPlantin" else ch_font() }
 			italic name: { if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
@@ -478,7 +505,7 @@ card style:
 			color: black
 		symbol font:
 			name: { styling.text_box_mana_symbols }
-			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 27 }
+			size: {if styling.font_cap != "" then to_number(styling.font_cap) else (if set.card_language != "简体中文" then 26.5 else 27) }
 			scale down to: 6
 		alignment:
 			script:
@@ -525,7 +552,7 @@ card style:
 		height:	56
 		alignment: center middle shrink-overflow
 		font:
-			name: Beleren
+			name: Beleren Proxy
 			size: {32 - (if styling.shrink_power_text != "" then to_number(styling.shrink_power_text) else 0)}
 			color: black
 			separator color: red
@@ -738,6 +765,7 @@ extra card style:
 		render style: image
 		image: {name1_background()}
 		angle: {if styling.language == "Japanese" then 0 else 90}
+		visible: { styling.language == "Japanese" }
 
 	name bar 2:
 		left: {if styling.language == "Japanese" then 58 else 100}
@@ -748,6 +776,7 @@ extra card style:
 		render style: image
 		image: {name2_background()}
 		angle: {if styling.language == "Japanese" then 0 else 90}
+		visible: { styling.language == "Japanese" }
 
 	name bar 3:
 		left: {if styling.language == "Japanese" then 58 else 100 + card_style.name.content_width - 3.4 }
@@ -758,6 +787,7 @@ extra card style:
 		render style: image
 		image: {flip_vertical(name3_background())}
 		angle: {if styling.language == "Japanese" then 0 else 90}
+		visible: { styling.language == "Japanese" }
 
 
 	type bar 1:
@@ -768,6 +798,7 @@ extra card style:
 		z index: 1
 		render style: image
 		image: {type1_background()}
+		visible: { styling.language == "Japanese" }
 
 	type bar 2:
 		left: 59
@@ -777,6 +808,7 @@ extra card style:
 		z index: 1
 		render style: image
 		image: {type2_background()}
+		visible: { styling.language == "Japanese" }
 
 	type bar 3:
 		left: {59 + max(223, card_style.type.content_width+13)-(if styling.Type_frame_fix then 0.5 else 0)}
@@ -786,6 +818,7 @@ extra card style:
 		z index: 1
 		render style: image
 		image: {flip_horizontal(type3_background())}
+		visible: { styling.language == "Japanese" }
 
 
 
@@ -815,7 +848,7 @@ extra card style:
 		visible: { card.rule_text != "" and remove_tags(card.flavor_text) != "" and set.use_flavor_bar }
 	jp name:
 		left: 75
-		top: { 88 }
+		top: { if styling.language == "Japanese" then 88 else 1100 }
 		width:  {if styling.language == "Japanese" then 74 else 0}
 		height: {max(40, jp_name_length())}
 		direction: vertical
@@ -823,7 +856,7 @@ extra card style:
 		padding bottom: 0
 		z index: 2
 		font:
-			name: { if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
+			name: { if set.card_language != "简体中文" then "Beleren Proxy" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then 26 - shrink_name() else 30 - shrink_name() }
 			color: white
 		line height hard: {if is_modal(card.rule_text) then 0.9 else 1.2 }
@@ -839,4 +872,4 @@ extra card style:
 		render style: image
 		z index: 6
 		image: {crown_background()}
-		visible: { is_legend() }
+		visible: { styling.language == "Japanese" and is_legend() }

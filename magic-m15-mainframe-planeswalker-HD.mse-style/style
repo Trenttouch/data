@@ -911,7 +911,7 @@ card style:
 
 	watermark:
 		left: 38
-		top: {( if has_four_abilities() then 628 else 662 )-8}
+		top: {( if has_four_abilities() then 615 else 667 )-8}
 		width: 674
 		height: 300
 		z index: 1
