@@ -195,6 +195,9 @@ help:
 	remove card:						从本套牌中删除所选卡牌
 	link card:							链接牌到目标牌
 	copy card and links:				复制目标牌及其链接牌
+
+	import mtgch:						从mtgch.com导入一张牌到系列中
+
 	bulk modify:						Modify a lot of cards at once
 	orientation:						调整所显示卡牌的方向
 	rotate card:						将所显示卡牌顺时针旋转90°
@@ -359,6 +362,7 @@ tool:
 	console tab:						控制台 F11
 	
 	# cards toolbar
+	import mtgch:						从mtgch.com导入牌张
 	#TODO: Localize
 	search cards:						搜索卡牌 (Ctrl+K)
 	#TODO: Localize
@@ -435,6 +439,7 @@ tooltip:
 	redo:								重做%s
 
 	# cards toolbar
+	import mtgch:						从mtgch.com导入牌张
 	add card:							添加卡牌
 	remove card:						移除选中卡牌
 	link card:							链接牌到目标牌
@@ -508,6 +513,18 @@ label:
 	# cards panel
 	card notes:							卡牌信息:
 	search cards:						搜索卡牌...
+
+	import mtgch name:						通过单张牌名进行搜索
+	import mtgch random:					随机导入一张牌
+	import mtgch file:						从.txt文件导入（每行一个牌名或MO牌表）
+	import mtgch progress idle:				准备就绪
+	import mtgch progress:					正在导入 %s/%s：%s
+	import mtgch rate limited:				触发限流，等待约30秒后重试...
+	import mtgch random done:			已随机导入：%s
+	import mtgch save first:			当前套牌尚未保存，将无法载入将导入的卡牌图片。是否先保存套牌再导入？
+
+
+
 	# keywords panel				
 	search keywords:					搜索关键字 (Ctrl+K)
 	keyword:							关键词
@@ -730,6 +747,8 @@ button:
 	unlink:								解除链接
 	#TODO: Localize
 	link select:						选择
+
+	import mtgch random:					随机导入一张牌
 	
 	# Style panel
 	use for all cards:					应用到全部卡牌	&A
@@ -771,6 +790,7 @@ button:
 		使用当前旋转视角
 		导出时设置
 	spellcheck enabled:					检查卡牌拼写错误
+	transparent export:					导出时保留透明背景
 
 	bleed export:						出血导出
 	notes export:						注释导出
@@ -845,6 +865,11 @@ title:
 	updates available:					可用更新
 	save changes:						保存修改？
 	select stylesheet:					选择样式表
+
+	import mtgch:						从mtgch.com导入牌张
+	import mtgch file:					选择一个带有牌名列表的.txt文件
+	import mtgch save first:			请先保存套牌
+
 	#TODO: Localize
 	link cards:							链接牌到目标牌
 	#TODO: Localize
@@ -1007,6 +1032,16 @@ error:
 	import empty file:					%s文件为空
 	import missing fields:				
 		%s文件包含以下无法导入的条目，因为找不到对应的卡片字段：%s
+
+	# mtgch.com import
+	import mtgch no names:				请输入一个牌名，或选择带有牌名列表的.txt文件。
+	import mtgch file not found:		无法打开所选文件。
+	import mtgch no result:				在mtgch.com上无法搜索到'%s'
+	import mtgch request failed:		对于'%s'，请求mtgch.com失败
+	import mtgch done:					导入完成：成功%s张，失败%s张
+	import mtgch failed:				未找到或导入失败：%s
+	import mtgch random failed:			随机导入失败：%s
+	import mtgch random done:			已随机导入：%s
 
 	# Script stuff
 	has no member:						%s 没有成员 '%s'

@@ -179,6 +179,8 @@ help:
 	replace:			Replace in the card texts
 	auto replace:		What text should automatically be replaced?
 	preferences:		Change the configuration of Magic Set Editor
+
+	import mtgch:		Search for a card on mtgch.com and add it to this set
 	
 	#cards:
 	previous card:		Selects the previous card in the list
@@ -336,6 +338,7 @@ help:
 
 ############################################################## Toolbar
 tool:
+	import mtgch:						Card import from web
 	search cards:						Search cards (Ctrl+K)
 	card counts 2:						Selected %s cards, total %s cards
 	card counts 3:						Selected %s cards, filtered %s cards, total %s cards
@@ -412,7 +415,7 @@ tooltip:
 	paste:				Paste
 	undo:				Undo%s
 	redo:				Redo%s
-	
+	import mtgch:							Card import from web
 	add card:			Add card
 	remove card:		Remove selected card
 	rotate card:		Rotate card
@@ -486,6 +489,14 @@ label:
 	selected card:						Selected card:
 	linked cards:						Linked cards:
 	select linked cards:				Select up to 4 cards to link:
+
+	import mtgch name:						Search card name
+	import mtgch file:						Import card name from .txt file (One name per line)
+	import mtgch progress idle:				Ready
+	import mtgch progress:					Importing %s/%s: %s
+	import mtgch rate limited:				Rate limited, waiting 30s to retry...
+	import mtgch random done:				randomly import: %s
+	import mtgch save first:			The set has not been saved yet. Card images cannot be written to an unsaved set file. Save the set first and continue?
 
 	# bulk modification dialog
 	bulk modify selection:				Which cards to modify:
@@ -694,6 +705,8 @@ button:
 	edit symbol:		Edit
 	symbol gallery:		Gallery
 	
+	import mtgch random:				Random import
+
 	# Style panel
 	use for all cards:	Use for &all cards
 	use custom styling options: Options &specific to this card
@@ -735,6 +748,9 @@ button:
 	if internet connection exists:	If internet connection exists
 	never:							Never
 	internal image extension: Store images internally with file extension
+	transparent export:
+		Export cards with a
+		transparent background.
 	
 	# Column select
 	move up:			Move &Up
@@ -786,6 +802,10 @@ title:
 	add card csv file:					Open csv/tsv file
 	add card json:						Import cards from json file
 	add card json file:					Open json file
+
+	import mtgch:							Card import from web
+	import mtgch file:						Select a Text File with Card Names
+	import mtgch save first:			Save Set First
 
 	magic set editor:	Magic Set Editor
 	%s - magic set editor:	%s - Magic Set Editor
@@ -896,6 +916,15 @@ action:
 ############################################################## Error messages
 error:
 
+	# mtgch.com import
+	import mtgch no names:				Enter a card name, or select a text file with card names.
+	import mtgch file not found:		Could not open the selected text file.
+	import mtgch no result:				No card found for '%s' on mtgch.com
+	import mtgch request failed:		Request to mtgch.com failed for '%s'
+	import mtgch done:					Import finished: %s card(s) imported, %s failed
+	import mtgch failed:				Not found or import failed: %s
+	import mtgch random failed:			Randomly import failed: %s
+	import mtgch random done:			Randomly import: %s
 
 
 	cant link to self:					Cannot link to self

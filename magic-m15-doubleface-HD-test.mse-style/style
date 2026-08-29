@@ -88,6 +88,8 @@ init script:
 
 	backnew:"back/new/"
 	backcrown:"crown/newback/"
+	showcasebacknew:"back/new/showcase/"
+	showcasecrownbacknew:"crown/newback/showcase/"
 	
 	stamp: "stamp/" identity: "/magic-identity-new.mse-include/" identity2: "/magic-identity-new.mse-include/"
 	]
@@ -129,6 +131,8 @@ init script:
 
 	backnew:"card.png"
 	backcrown:"lcrown.png"
+	showcasebacknew:".png"
+	showcasecrownbacknew:".png"
 	
 	stamp: "stamp.png" identity: "identity.png" identity2: "identity.png"
 	]
@@ -174,6 +178,7 @@ init script:
 		or input == "ubfrontcrown" or input == "ubbackcrown"
 		or input == "ubfrontpt" or input == "ubbackpt"
 		or input == "ubstamp"
+		or input == "showcasebacknew" or input == "showcasecrownbacknew"
 		then 
 			true 
 		else false
@@ -216,6 +221,8 @@ init script:
 
 	back_crown_background := { color_background(type:"backcrown",     base_hybrid:card_hybrid) }
 	back_new_background := { color_background(type:"backnew",     base_hybrid:card_hybrid) }
+	back_new_showcase_background := { color_background(type:"showcasebacknew",     base_hybrid:card_hybrid) }
+	back_showcasecrown_background := { color_background(type:"showcasecrownbacknew",     base_hybrid:card_hybrid) }
 	
 	crown_follow := {
 		if input == "crown" then if (is_legend() or back_is_legend()) then "l" else ""
@@ -1072,7 +1079,11 @@ card style:
 		image: 
 			script:
 				if back_is_diyscroll() then "diy-scroll/b_card.png"
-				else if back_is_new() then back_new_background()
+				else if back_is_new() then
+					(
+						if back_is_showcase() then back_new_showcase_background()
+						else back_new_background()
+					)
 				else if back_is_saga() then if back_is_saga_creature() then backsaga_creature_background() else backsaga_background()
 				else if back_is_ub() then ubback_background()
 				else if chosen(styling.back_frames, choice:"bot") then if back_is_legend() then "back/bot/lcard.png" else "back/bot/card.png"
@@ -1092,6 +1103,11 @@ card style:
 						 (if back_is_plw_fullart() then "mythic_mask_" else "" ) + 
 						 "frame_mask.png")
 				else if back_is_saga() then if back_is_saga_creature() then "sagacreature/frame_mask.png" else "back/saga/frame_mask.png"
+				else if back_is_new() and back_is_showcase() then 
+				(
+					if back_is_showcase_black() then ("back/new/showcase/black/frame_mask" + (if back_is_legend() then "_l" else "") + ".png")
+					else ("back/new/showcase/frame_mask" + (if back_is_legend() then "_l" else "") + ".png")
+				)
 				else if back_is_ub() then  "ub/frame_mask.png"
 				else if chosen(styling.back_frames, choice:"bot") then "back/bot/frame_mask.png"
 				else if back_is_extend() then ("back/extend/frame_mask" + (if back_is_legend() then "_l" else "") + ".png")
@@ -1116,7 +1132,12 @@ card style:
 		font:
 			name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "Beleren" else "华康魏碑 Std" }
 			size: { if set.card_language != "简体中文" then 32 - shrink_name() else 34 - shrink_name()}
-			color: {if chosen(styling.frames, choice:"bot") or is_showcase() then "white" else "black"}
+			color: 
+				script:
+					if chosen(styling.frames, choice:"bot") or (is_showcase() and is_showcase_black()) then "white" else "black"
+
+
+
 	casting cost:
 		right: {if is_battle() then 44 else 692 }
 		top: {if is_battle() then 77 else (57 + (if is_plw() then -15 else 0))}
@@ -3000,7 +3021,7 @@ extra card style:
 		font:
 			name: Beleren
 			size: 22
-			color: {if is_fullart() then rgb(190,190,190) else rgb(110,110,110)}
+			color: {if is_fullart() or is_showcase() then rgb(190,190,190) else rgb(110,110,110)}
 			separator color: red
 
 	dot:
@@ -3245,11 +3266,14 @@ extra card style:
 		width:	750
 		height:	1050
 		render style: image
-		# image: {if back_is_showcase() or back_is_extend() then showcasecrown_background() else if has_alias() then aliascrown_background2() else crown_background()}
 		image:
 			script:
 				if back_is_ub() then ubback_crown_background()
-				else if back_is_new() or back_is_saga_creature() then back_crown_background()
+				else if back_is_new() or back_is_saga_creature() then 
+				(
+					if back_is_showcase() or back_is_extend() then back_showcasecrown_background()
+					else back_crown_background()
+				)
 				else if has_alias() then
 					if back_is_showcase() or back_is_extend() then showcasealiascrown_background2()
 					else aliascrown_background2()
@@ -3436,7 +3460,16 @@ extra card style:
 			sparker colors colorless: icons/ccorner.png
 
 	corner2:
-		left: { (if back_is_diyscroll() then 638 else if back_is_new() or back_is_ub() or back_is_saga_creature() then 646 else 40) + backside_left_fix() +(if chosen(styling.back_frames, choice:"bot") then 606 else 0) +(if back_is_map() then 1000 else 0) }
+		left: 
+			script:
+				(if back_is_diyscroll() then 638
+					else if back_is_new() or back_is_ub() or back_is_saga_creature() then
+						if back_is_showcase() then 644
+					else 646
+				else 40)
+				+ backside_left_fix()
+				+ (if chosen(styling.back_frames, choice:"bot") then 606 else 0)
+				+ (if back_is_map() then 1000 else 0)
 		top: { if back_is_diyscroll() then 44.5 else if back_is_plw() then 36 else 49 }
 		height: { 63 }
 		width: { 64 }

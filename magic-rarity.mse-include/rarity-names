@@ -24,246 +24,262 @@ choice:
 	line below: true
 
 include file: /magic-rarity.mse-include/extra-rarity-name
-
 choice:
-	name: FRA
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	choice: Basic Land
-	line below: true
-
-choice:
-	name: HOB
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	choice: Basic Land
-	line below: true
-
-choice:
-	name: MSH
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	choice: Basic Land
-	line below: true
-
-choice:
-	name: SOS
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	choice: Basic Land
+	name: Standard
 	choice:
-		name: SOA
+		name: TRK
 		choice: Mythic
 		choice: Rare
 		choice: Uncommon
 		choice: Common
 		choice: Basic Land
-	line below: true
+		choice:
+			name: SDS
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+			choice: Basic Land
+		line below: true
 
-choice:
-	name: TMT
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	choice: Basic Land
 	choice:
-		name: PZA
+		name: FRA
 		choice: Mythic
 		choice: Rare
 		choice: Uncommon
 		choice: Common
 		choice: Basic Land
-	line below: true
+		line below: true
 
-choice:
-	name: ECL
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	choice: Basic Land
-	line below: true
-
-choice:
-	name: TLA
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	choice: Basic Land
 	choice:
-		name:TLE
+		name: HOB
 		choice: Mythic
 		choice: Rare
 		choice: Uncommon
 		choice: Common
 		choice: Basic Land
-	line below: true
+		line below: true
 
-choice:
-	name: SPM
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	choice: Basic Land
 	choice:
-		name:SPE
+		name: MSH
 		choice: Mythic
 		choice: Rare
 		choice: Uncommon
 		choice: Common
 		choice: Basic Land
-	choice:
-		name:MAR
-		choice: Mythic
-	line below: true
+		line below: true
 
-choice:
-	name: EOE
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	choice: Basic Land
 	choice:
-		name:EOS
+		name: SOS
 		choice: Mythic
 		choice: Rare
 		choice: Uncommon
 		choice: Common
 		choice: Basic Land
-	line below: true
-	
-choice:
-	name: FIN
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	choice: Basic Land
+		choice:
+			name: SOA
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+			choice: Basic Land
+		line below: true
+
 	choice:
-		name:FCA
+		name: TMT
 		choice: Mythic
 		choice: Rare
 		choice: Uncommon
 		choice: Common
 		choice: Basic Land
-	line below: true
+		choice:
+			name: PZA
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+			choice: Basic Land
+		line below: true
 
-choice:
-	name: TDM
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	choice: Basic Land
-	line below: true
-
-choice:
-	name: DFT
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	choice: Basic Land
-	line below: true
-
-choice:
-	name: FDN
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	line below: true
-
-
-choice:
-	name: DSK
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	line below: true
-
-choice:
-	name: BLB
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
-	line below: true
-
-choice:
-	name: OTJ
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
 	choice:
-		name: OTP
+		name: ECL
 		choice: Mythic
 		choice: Rare
 		choice: Uncommon
 		choice: Common
-	choice:
-		name: BIG
-		choice: Mythic
-		choice: Rare
-		choice: Uncommon
-		choice: Common
-	line below: true
+		choice: Basic Land
+		line below: true
 
-choice:
-	name: MKM
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
 	choice:
-		name: CLU
+		name: TLA
 		choice: Mythic
 		choice: Rare
 		choice: Uncommon
 		choice: Common
-	line below: true
+		choice: Basic Land
+		choice:
+			name:TLE
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+			choice: Basic Land
+		line below: true
 
-choice:
-	name: LCI
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
 	choice:
-		name: REX
+		name: SPM
 		choice: Mythic
 		choice: Rare
 		choice: Uncommon
 		choice: Common
-	line below: true
+		choice: Basic Land
+		choice:
+			name:SPE
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+			choice: Basic Land
+		choice:
+			name:MAR
+			choice: Mythic
+		line below: true
 
-choice:
-	name: WOE
-	choice: Mythic
-	choice: Rare
-	choice: Uncommon
-	choice: Common
 	choice:
-		name: WOT
+		name: EOE
 		choice: Mythic
 		choice: Rare
 		choice: Uncommon
 		choice: Common
-	line below: true
+		choice: Basic Land
+		choice:
+			name:EOS
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+			choice: Basic Land
+		line below: true
+		
+	choice:
+		name: FIN
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Basic Land
+		choice:
+			name:FCA
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+			choice: Basic Land
+		line below: true
+
+	choice:
+		name: TDM
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Basic Land
+		line below: true
+
+	choice:
+		name: DFT
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Basic Land
+		line below: true
+
+	choice:
+		name: FDN
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+
+	choice:
+		name: DSK
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+
+	choice:
+		name: BLB
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		line below: true
+
+	choice:
+		name: OTJ
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice:
+			name: OTP
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+		choice:
+			name: BIG
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+		line below: true
+
+	choice:
+		name: MKM
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice:
+			name: CLU
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+		line below: true
+
+	choice:
+		name: LCI
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice:
+			name: REX
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+		line below: true
+
+	choice:
+		name: WOE
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice:
+			name: WOT
+			choice: Mythic
+			choice: Rare
+			choice: Uncommon
+			choice: Common
+		line below: true
 
 
 
@@ -1295,6 +1311,27 @@ choice:
 ######################################################### 指挥官
 choice:
 	name: Command
+	choice:
+		name: TRC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Basic Land
+	choice:
+		name: FRC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Basic Land
+	choice:
+		name: MBC
+		choice: Mythic
+		choice: Rare
+		choice: Uncommon
+		choice: Common
+		choice: Basic Land
 	choice:
 		name: HOC
 		choice: Mythic

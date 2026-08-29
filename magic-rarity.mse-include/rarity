@@ -12,164 +12,175 @@ choice images:
 include file: /magic-rarity.mse-include/extra-rarity
 
 choice images:
-	FRA Mythic: 	/magic-rarity.mse-include/FRA_M.png
-	FRA Rare: 		/magic-rarity.mse-include/FRA_R.png
-	FRA Uncommon: 	/magic-rarity.mse-include/FRA_U.png
-	FRA Common: 	/magic-rarity.mse-include/FRA_C.png
-	FRA Basic Land: /magic-rarity.mse-include/FRA_C.png
 
-	HOB Mythic: 	/magic-rarity.mse-include/HOB_M.png
-	HOB Rare: 		/magic-rarity.mse-include/HOB_R.png
-	HOB Uncommon: 	/magic-rarity.mse-include/HOB_U.png
-	HOB Common: 	/magic-rarity.mse-include/HOB_C.png
-	HOB Basic Land: /magic-rarity.mse-include/HOB_C.png
+	Standard TRK Mythic: 	/magic-rarity.mse-include/TRK_M.png
+	Standard TRK Rare: 		/magic-rarity.mse-include/TRK_R.png
+	Standard TRK Uncommon: 	/magic-rarity.mse-include/TRK_U.png
+	Standard TRK Common: 	/magic-rarity.mse-include/TRK_C.png
+	Standard TRK Basic Land: /magic-rarity.mse-include/TRK_C.png
+	Standard TRK SDS Mythic: 	/magic-rarity.mse-include/SDS_M.png
+	Standard TRK SDS Rare: 		/magic-rarity.mse-include/SDS_R.png
+	Standard TRK SDS Uncommon: 	/magic-rarity.mse-include/SDS_U.png
+	Standard TRK SDS Common: 	/magic-rarity.mse-include/SDS_C.png
+	Standard TRK SDS Basic Land: /magic-rarity.mse-include/SDS_C.png
 
-	MSH Mythic: 	/magic-rarity.mse-include/MSH_M.png
-	MSH Rare: 		/magic-rarity.mse-include/MSH_R.png
-	MSH Uncommon: 	/magic-rarity.mse-include/MSH_U.png
-	MSH Common: 	/magic-rarity.mse-include/MSH_C.png
-	MSH Basic Land: /magic-rarity.mse-include/MSH_C.png
+	Standard FRA Mythic: 	/magic-rarity.mse-include/FRA_M.png
+	Standard FRA Rare: 		/magic-rarity.mse-include/FRA_R.png
+	Standard FRA Uncommon: 	/magic-rarity.mse-include/FRA_U.png
+	Standard FRA Common: 	/magic-rarity.mse-include/FRA_C.png
+	Standard FRA Basic Land: /magic-rarity.mse-include/FRA_C.png
 
-	SOS Mythic: 	/magic-rarity.mse-include/SOS_M.png
-	SOS Rare: 		/magic-rarity.mse-include/SOS_R.png
-	SOS Uncommon: 	/magic-rarity.mse-include/SOS_U.png
-	SOS Common: 	/magic-rarity.mse-include/SOS_C.png
-	SOS Basic Land: /magic-rarity.mse-include/SOS_C.png
-	SOS SOA Mythic: 	/magic-rarity.mse-include/SOA_M.png
-	SOS SOA Rare: 		/magic-rarity.mse-include/SOA_R.png
-	SOS SOA Uncommon: 	/magic-rarity.mse-include/SOA_U.png
-	SOS SOA Common: 	/magic-rarity.mse-include/SOA_C.png
-	SOS SOA Basic Land: /magic-rarity.mse-include/SOA_C.png
+	Standard HOB Mythic: 	/magic-rarity.mse-include/HOB_M.png
+	Standard HOB Rare: 		/magic-rarity.mse-include/HOB_R.png
+	Standard HOB Uncommon: 	/magic-rarity.mse-include/HOB_U.png
+	Standard HOB Common: 	/magic-rarity.mse-include/HOB_C.png
+	Standard HOB Basic Land: /magic-rarity.mse-include/HOB_C.png
 
-	TMT Mythic: 	/magic-rarity.mse-include/TMT_M.png
-	TMT Rare: 		/magic-rarity.mse-include/TMT_R.png
-	TMT Uncommon: 	/magic-rarity.mse-include/TMT_U.png
-	TMT Common: 	/magic-rarity.mse-include/TMT_C.png
-	TMT Basic Land: /magic-rarity.mse-include/TMT_C.png
-	TMT PZA Mythic: 	/magic-rarity.mse-include/PZA_M.png
-	TMT PZA Rare: 		/magic-rarity.mse-include/PZA_R.png
-	TMT PZA Uncommon: 	/magic-rarity.mse-include/PZA_U.png
-	TMT PZA Common: 	/magic-rarity.mse-include/PZA_C.png
-	TMT PZA Basic Land: /magic-rarity.mse-include/PZA_C.png
+	Standard MSH Mythic: 	/magic-rarity.mse-include/MSH_M.png
+	Standard MSH Rare: 		/magic-rarity.mse-include/MSH_R.png
+	Standard MSH Uncommon: 	/magic-rarity.mse-include/MSH_U.png
+	Standard MSH Common: 	/magic-rarity.mse-include/MSH_C.png
+	Standard MSH Basic Land: /magic-rarity.mse-include/MSH_C.png
 
-	ECL Mythic: 	/magic-rarity.mse-include/ECL_M.png
-	ECL Rare: 		/magic-rarity.mse-include/ECL_R.png
-	ECL Uncommon: 	/magic-rarity.mse-include/ECL_U.png
-	ECL Common: 	/magic-rarity.mse-include/ECL_C.png
-	ECL Basic Land: /magic-rarity.mse-include/ECL_C.png
+	Standard SOS Mythic: 	/magic-rarity.mse-include/SOS_M.png
+	Standard SOS Rare: 		/magic-rarity.mse-include/SOS_R.png
+	Standard SOS Uncommon: 	/magic-rarity.mse-include/SOS_U.png
+	Standard SOS Common: 	/magic-rarity.mse-include/SOS_C.png
+	Standard SOS Basic Land: /magic-rarity.mse-include/SOS_C.png
+	Standard SOS SOA Mythic: 	/magic-rarity.mse-include/SOA_M.png
+	Standard SOS SOA Rare: 		/magic-rarity.mse-include/SOA_R.png
+	Standard SOS SOA Uncommon: 	/magic-rarity.mse-include/SOA_U.png
+	Standard SOS SOA Common: 	/magic-rarity.mse-include/SOA_C.png
+	Standard SOS SOA Basic Land: /magic-rarity.mse-include/SOA_C.png
 
-	TLA Mythic: 	/magic-rarity.mse-include/TLA_M.png
-	TLA Rare: 		/magic-rarity.mse-include/TLA_R.png
-	TLA Uncommon: 	/magic-rarity.mse-include/TLA_U.png
-	TLA Common: 	/magic-rarity.mse-include/TLA_C.png
-	TLA Basic Land: /magic-rarity.mse-include/TLA_C.png
-	TLA TLE Mythic: 	/magic-rarity.mse-include/TLE_M.png
-	TLA TLE Rare: 		/magic-rarity.mse-include/TLE_R.png
-	TLA TLE Uncommon: 	/magic-rarity.mse-include/TLE_U.png
-	TLA TLE Common: 	/magic-rarity.mse-include/TLE_C.png
-	TLA TLE Basic Land: /magic-rarity.mse-include/TLE_C.png
+	Standard TMT Mythic: 	/magic-rarity.mse-include/TMT_M.png
+	Standard TMT Rare: 		/magic-rarity.mse-include/TMT_R.png
+	Standard TMT Uncommon: 	/magic-rarity.mse-include/TMT_U.png
+	Standard TMT Common: 	/magic-rarity.mse-include/TMT_C.png
+	Standard TMT Basic Land: /magic-rarity.mse-include/TMT_C.png
+	Standard TMT PZA Mythic: 	/magic-rarity.mse-include/PZA_M.png
+	Standard TMT PZA Rare: 		/magic-rarity.mse-include/PZA_R.png
+	Standard TMT PZA Uncommon: 	/magic-rarity.mse-include/PZA_U.png
+	Standard TMT PZA Common: 	/magic-rarity.mse-include/PZA_C.png
+	Standard TMT PZA Basic Land: /magic-rarity.mse-include/PZA_C.png
 
+	Standard ECL Mythic: 	/magic-rarity.mse-include/ECL_M.png
+	Standard ECL Rare: 		/magic-rarity.mse-include/ECL_R.png
+	Standard ECL Uncommon: 	/magic-rarity.mse-include/ECL_U.png
+	Standard ECL Common: 	/magic-rarity.mse-include/ECL_C.png
+	Standard ECL Basic Land: /magic-rarity.mse-include/ECL_C.png
 
-	SPM Mythic: 	/magic-rarity.mse-include/SPM_M.png
-	SPM Rare: 		/magic-rarity.mse-include/SPM_R.png
-	SPM Uncommon: 	/magic-rarity.mse-include/SPM_U.png
-	SPM Common: 	/magic-rarity.mse-include/SPM_C.png
-	SPM Basic Land: /magic-rarity.mse-include/SPM_C.png
-	SPM SPE Mythic: 	/magic-rarity.mse-include/SPE_M.png
-	SPM SPE Rare: 		/magic-rarity.mse-include/SPE_R.png
-	SPM SPE Uncommon: 	/magic-rarity.mse-include/SPE_U.png
-	SPM SPE Common: 	/magic-rarity.mse-include/SPE_C.png
-	SPM SPE Basic Land: /magic-rarity.mse-include/SPE_C.png
-	SPM MAR Mythic: 	/magic-rarity.mse-include/MAR.png
+	Standard TLA Mythic: 	/magic-rarity.mse-include/TLA_M.png
+	Standard TLA Rare: 		/magic-rarity.mse-include/TLA_R.png
+	Standard TLA Uncommon: 	/magic-rarity.mse-include/TLA_U.png
+	Standard TLA Common: 	/magic-rarity.mse-include/TLA_C.png
+	Standard TLA Basic Land: /magic-rarity.mse-include/TLA_C.png
+	Standard TLA TLE Mythic: 	/magic-rarity.mse-include/TLE_M.png
+	Standard TLA TLE Rare: 		/magic-rarity.mse-include/TLE_R.png
+	Standard TLA TLE Uncommon: 	/magic-rarity.mse-include/TLE_U.png
+	Standard TLA TLE Common: 	/magic-rarity.mse-include/TLE_C.png
+	Standard TLA TLE Basic Land: /magic-rarity.mse-include/TLE_C.png
 
-	EOE Mythic: 	/magic-rarity.mse-include/EOE_M.png
-	EOE Rare: 		/magic-rarity.mse-include/EOE_R.png
-	EOE Uncommon: 	/magic-rarity.mse-include/EOE_U.png
-	EOE Common: 	/magic-rarity.mse-include/EOE_C.png
-	EOE Basic Land: /magic-rarity.mse-include/EOE_C.png
-	EOE EOS Mythic: 	/magic-rarity.mse-include/EOS_M.png
-	EOE EOS Rare: 		/magic-rarity.mse-include/EOS_R.png
-	EOE EOS Uncommon: 	/magic-rarity.mse-include/EOS_U.png
-	EOE EOS Common: 	/magic-rarity.mse-include/EOS_C.png
-	EOE EOS Basic Land: /magic-rarity.mse-include/EOS_C.png
+	Standard SPM Mythic: 	/magic-rarity.mse-include/SPM_M.png
+	Standard SPM Rare: 		/magic-rarity.mse-include/SPM_R.png
+	Standard SPM Uncommon: 	/magic-rarity.mse-include/SPM_U.png
+	Standard SPM Common: 	/magic-rarity.mse-include/SPM_C.png
+	Standard SPM Basic Land: /magic-rarity.mse-include/SPM_C.png
+	Standard SPM SPE Mythic: 	/magic-rarity.mse-include/SPE_M.png
+	Standard SPM SPE Rare: 		/magic-rarity.mse-include/SPE_R.png
+	Standard SPM SPE Uncommon: 	/magic-rarity.mse-include/SPE_U.png
+	Standard SPM SPE Common: 	/magic-rarity.mse-include/SPE_C.png
+	Standard SPM SPE Basic Land: /magic-rarity.mse-include/SPE_C.png
+	Standard SPM MAR Mythic: 	/magic-rarity.mse-include/MAR.png
 
-	FIN Mythic: 	/magic-rarity.mse-include/FIN_M.png
-	FIN Rare: 		/magic-rarity.mse-include/FIN_R.png
-	FIN Uncommon: 	/magic-rarity.mse-include/FIN_U.png
-	FIN Common: 	/magic-rarity.mse-include/FIN_C.png
-	FIN Basic Land: /magic-rarity.mse-include/FIN_C.png
-	FIN FCA Mythic: 	/magic-rarity.mse-include/FCA_M.png
-	FIN FCA Rare: 		/magic-rarity.mse-include/FCA_R.png
-	FIN FCA Uncommon: 	/magic-rarity.mse-include/FCA_U.png
-	FIN FCA Common: 	/magic-rarity.mse-include/FCA_C.png
-	FIN FCA Basic Land: /magic-rarity.mse-include/FCA_C.png
+	Standard EOE Mythic: 	/magic-rarity.mse-include/EOE_M.png
+	Standard EOE Rare: 		/magic-rarity.mse-include/EOE_R.png
+	Standard EOE Uncommon: 	/magic-rarity.mse-include/EOE_U.png
+	Standard EOE Common: 	/magic-rarity.mse-include/EOE_C.png
+	Standard EOE Basic Land: /magic-rarity.mse-include/EOE_C.png
+	Standard EOE EOS Mythic: 	/magic-rarity.mse-include/EOS_M.png
+	Standard EOE EOS Rare: 		/magic-rarity.mse-include/EOS_R.png
+	Standard EOE EOS Uncommon: 	/magic-rarity.mse-include/EOS_U.png
+	Standard EOE EOS Common: 	/magic-rarity.mse-include/EOS_C.png
+	Standard EOE EOS Basic Land: /magic-rarity.mse-include/EOS_C.png
 
-	TDM Mythic: 	/magic-rarity.mse-include/TDM_M.png
-	TDM Rare: 		/magic-rarity.mse-include/TDM_R.png
-	TDM Uncommon: 	/magic-rarity.mse-include/TDM_U.png
-	TDM Common: 	/magic-rarity.mse-include/TDM_C.png
-	TDM Basic Land: /magic-rarity.mse-include/TDM_C.png
+	Standard FIN Mythic: 	/magic-rarity.mse-include/FIN_M.png
+	Standard FIN Rare: 		/magic-rarity.mse-include/FIN_R.png
+	Standard FIN Uncommon: 	/magic-rarity.mse-include/FIN_U.png
+	Standard FIN Common: 	/magic-rarity.mse-include/FIN_C.png
+	Standard FIN Basic Land: /magic-rarity.mse-include/FIN_C.png
+	Standard FIN FCA Mythic: 	/magic-rarity.mse-include/FCA_M.png
+	Standard FIN FCA Rare: 		/magic-rarity.mse-include/FCA_R.png
+	Standard FIN FCA Uncommon: 	/magic-rarity.mse-include/FCA_U.png
+	Standard FIN FCA Common: 	/magic-rarity.mse-include/FCA_C.png
+	Standard FIN FCA Basic Land: /magic-rarity.mse-include/FCA_C.png
 
-	DFT Mythic: 	/magic-rarity.mse-include/DFT_M.png
-	DFT Rare: 		/magic-rarity.mse-include/DFT_R.png
-	DFT Uncommon: 	/magic-rarity.mse-include/DFT_U.png
-	DFT Common: 	/magic-rarity.mse-include/DFT_C.png
-	DFT Basic Land: /magic-rarity.mse-include/DFT_C.png
+	Standard TDM Mythic: 	/magic-rarity.mse-include/TDM_M.png
+	Standard TDM Rare: 		/magic-rarity.mse-include/TDM_R.png
+	Standard TDM Uncommon: 	/magic-rarity.mse-include/TDM_U.png
+	Standard TDM Common: 	/magic-rarity.mse-include/TDM_C.png
+	Standard TDM Basic Land: /magic-rarity.mse-include/TDM_C.png
 
-	FDN Mythic: 	/magic-rarity.mse-include/FDN_M.png
-	FDN Rare: 		/magic-rarity.mse-include/FDN_R.png
-	FDN Uncommon: 	/magic-rarity.mse-include/FDN_U.png
-	FDN Common: 	/magic-rarity.mse-include/FDN_C.png
+	Standard DFT Mythic: 	/magic-rarity.mse-include/DFT_M.png
+	Standard DFT Rare: 		/magic-rarity.mse-include/DFT_R.png
+	Standard DFT Uncommon: 	/magic-rarity.mse-include/DFT_U.png
+	Standard DFT Common: 	/magic-rarity.mse-include/DFT_C.png
+	Standard DFT Basic Land: /magic-rarity.mse-include/DFT_C.png
 
-	DSK Mythic: 	/magic-rarity.mse-include/DSK_M.png
-	DSK Rare: 		/magic-rarity.mse-include/DSK_R.png
-	DSK Uncommon: 	/magic-rarity.mse-include/DSK_U.png
-	DSK Common: 	/magic-rarity.mse-include/DSK_C.png
+	Standard FDN Mythic: 	/magic-rarity.mse-include/FDN_M.png
+	Standard FDN Rare: 		/magic-rarity.mse-include/FDN_R.png
+	Standard FDN Uncommon: 	/magic-rarity.mse-include/FDN_U.png
+	Standard FDN Common: 	/magic-rarity.mse-include/FDN_C.png
 
-	BLB Mythic: 	/magic-rarity.mse-include/BLB_M.png
-	BLB Rare: 		/magic-rarity.mse-include/BLB_R.png
-	BLB Uncommon: 	/magic-rarity.mse-include/BLB_U.png
-	BLB Common: 	/magic-rarity.mse-include/BLB_C.png
+	Standard DSK Mythic: 	/magic-rarity.mse-include/DSK_M.png
+	Standard DSK Rare: 		/magic-rarity.mse-include/DSK_R.png
+	Standard DSK Uncommon: 	/magic-rarity.mse-include/DSK_U.png
+	Standard DSK Common: 	/magic-rarity.mse-include/DSK_C.png
 
-	OTJ Mythic: 	/magic-rarity.mse-include/OTJ_M.png
-	OTJ Rare: 		/magic-rarity.mse-include/OTJ_R.png
-	OTJ Uncommon: 	/magic-rarity.mse-include/OTJ_U.png
-	OTJ Common: 	/magic-rarity.mse-include/OTJ_C.png
-	OTJ OTP Mythic: 	/magic-rarity.mse-include/OTP_M.png
-	OTJ OTP Rare: 		/magic-rarity.mse-include/OTP_R.png
-	OTJ OTP Uncommon: 	/magic-rarity.mse-include/OTP_U.png
-	OTJ OTP Common: 	/magic-rarity.mse-include/OTP_C.png
-	OTJ BIG Mythic: 	/magic-rarity.mse-include/BIG_M.png
-	OTJ BIG Rare: 		/magic-rarity.mse-include/BIG_R.png
-	OTJ BIG Uncommon: 	/magic-rarity.mse-include/BIG_U.png
-	OTJ BIG Common: 	/magic-rarity.mse-include/BIG_C.png
+	Standard BLB Mythic: 	/magic-rarity.mse-include/BLB_M.png
+	Standard BLB Rare: 		/magic-rarity.mse-include/BLB_R.png
+	Standard BLB Uncommon: 	/magic-rarity.mse-include/BLB_U.png
+	Standard BLB Common: 	/magic-rarity.mse-include/BLB_C.png
 
-	MKM Mythic: 	/magic-rarity.mse-include/MKM_M.png
-	MKM Rare: 		/magic-rarity.mse-include/MKM_R.png
-	MKM Uncommon: 	/magic-rarity.mse-include/MKM_U.png
-	MKM Common: 	/magic-rarity.mse-include/MKM_C.png
-	MKM CLU Mythic: 	/magic-rarity.mse-include/CLU_M.png
-	MKM CLU Rare: 		/magic-rarity.mse-include/CLU_R.png
-	MKM CLU Uncommon: 	/magic-rarity.mse-include/CLU_U.png
-	MKM CLU Common: 	/magic-rarity.mse-include/CLU_C.png
+	Standard OTJ Mythic: 	/magic-rarity.mse-include/OTJ_M.png
+	Standard OTJ Rare: 		/magic-rarity.mse-include/OTJ_R.png
+	Standard OTJ Uncommon: 	/magic-rarity.mse-include/OTJ_U.png
+	Standard OTJ Common: 	/magic-rarity.mse-include/OTJ_C.png
+	Standard OTJ OTP Mythic: 	/magic-rarity.mse-include/OTP_M.png
+	Standard OTJ OTP Rare: 		/magic-rarity.mse-include/OTP_R.png
+	Standard OTJ OTP Uncommon: 	/magic-rarity.mse-include/OTP_U.png
+	Standard OTJ OTP Common: 	/magic-rarity.mse-include/OTP_C.png
+	Standard OTJ BIG Mythic: 	/magic-rarity.mse-include/BIG_M.png
+	Standard OTJ BIG Rare: 		/magic-rarity.mse-include/BIG_R.png
+	Standard OTJ BIG Uncommon: 	/magic-rarity.mse-include/BIG_U.png
+	Standard OTJ BIG Common: 	/magic-rarity.mse-include/BIG_C.png
 
-	LCI Mythic: 	/magic-rarity.mse-include/LCI_M.png
-	LCI Rare: 		/magic-rarity.mse-include/LCI_R.png
-	LCI Uncommon: 	/magic-rarity.mse-include/LCI_U.png
-	LCI Common: 	/magic-rarity.mse-include/LCI_C.png
-	LCI REX Mythic: 	/magic-rarity.mse-include/REX_M.png
-	LCI REX Rare: 		/magic-rarity.mse-include/REX_R.png
-	LCI REX Uncommon: 	/magic-rarity.mse-include/REX_U.png
-	LCI REX Common: 	/magic-rarity.mse-include/REX_C.png
+	Standard MKM Mythic: 	/magic-rarity.mse-include/MKM_M.png
+	Standard MKM Rare: 		/magic-rarity.mse-include/MKM_R.png
+	Standard MKM Uncommon: 	/magic-rarity.mse-include/MKM_U.png
+	Standard MKM Common: 	/magic-rarity.mse-include/MKM_C.png
+	Standard MKM CLU Mythic: 	/magic-rarity.mse-include/CLU_M.png
+	Standard MKM CLU Rare: 		/magic-rarity.mse-include/CLU_R.png
+	Standard MKM CLU Uncommon: 	/magic-rarity.mse-include/CLU_U.png
+	Standard MKM CLU Common: 	/magic-rarity.mse-include/CLU_C.png
 
-	WOE Mythic: 	/magic-rarity.mse-include/WOE_M.png
-	WOE Rare: 		/magic-rarity.mse-include/WOE_R.png
-	WOE Uncommon: 	/magic-rarity.mse-include/WOE_U.png
-	WOE Common: 	/magic-rarity.mse-include/WOE_C.png
-	WOE WOT Mythic: 	/magic-rarity.mse-include/WOT_M.png
-	WOE WOT Rare: 		/magic-rarity.mse-include/WOT_R.png
-	WOE WOT Uncommon: 	/magic-rarity.mse-include/WOT_U.png
-	WOE WOT Common: 	/magic-rarity.mse-include/WOT_C.png
+	Standard LCI Mythic: 	/magic-rarity.mse-include/LCI_M.png
+	Standard LCI Rare: 		/magic-rarity.mse-include/LCI_R.png
+	Standard LCI Uncommon: 	/magic-rarity.mse-include/LCI_U.png
+	Standard LCI Common: 	/magic-rarity.mse-include/LCI_C.png
+	Standard LCI REX Mythic: 	/magic-rarity.mse-include/REX_M.png
+	Standard LCI REX Rare: 		/magic-rarity.mse-include/REX_R.png
+	Standard LCI REX Uncommon: 	/magic-rarity.mse-include/REX_U.png
+	Standard LCI REX Common: 	/magic-rarity.mse-include/REX_C.png
+
+	Standard WOE Mythic: 	/magic-rarity.mse-include/WOE_M.png
+	Standard WOE Rare: 		/magic-rarity.mse-include/WOE_R.png
+	Standard WOE Uncommon: 	/magic-rarity.mse-include/WOE_U.png
+	Standard WOE Common: 	/magic-rarity.mse-include/WOE_C.png
+	Standard WOE WOT Mythic: 	/magic-rarity.mse-include/WOT_M.png
+	Standard WOE WOT Rare: 		/magic-rarity.mse-include/WOT_R.png
+	Standard WOE WOT Uncommon: 	/magic-rarity.mse-include/WOT_U.png
+	Standard WOE WOT Common: 	/magic-rarity.mse-include/WOT_C.png
 
 	Modern MOM Mythic: 	/magic-rarity.mse-include/MOM_M.png
 	Modern MOM Rare: 		/magic-rarity.mse-include/MOM_R.png
@@ -836,6 +847,24 @@ choice images:
 	Duel EVG Rare: /magic-rarity.mse-include/EVG_R.png
 	Duel EVG Uncommon: /magic-rarity.mse-include/EVG_U.png
 	Duel EVG Common: /magic-rarity.mse-include/EVG_C.png
+
+	Command TRC Mythic: 	/magic-rarity.mse-include/TRC_M.png
+	Command TRC Rare: 		/magic-rarity.mse-include/TRC_R.png
+	Command TRC Uncommon: 	/magic-rarity.mse-include/TRC_U.png
+	Command TRC Common: 	/magic-rarity.mse-include/TRC_C.png
+	Command TRC Basic Land: /magic-rarity.mse-include/TRC_C.png
+
+	Command FRC Mythic: 	/magic-rarity.mse-include/FRC_M.png
+	Command FRC Rare: 		/magic-rarity.mse-include/FRC_R.png
+	Command FRC Uncommon: 	/magic-rarity.mse-include/FRC_U.png
+	Command FRC Common: 	/magic-rarity.mse-include/FRC_C.png
+	Command FRC Basic Land: /magic-rarity.mse-include/FRC_C.png
+
+	Command MBC Mythic: 	/magic-rarity.mse-include/MBC_M.png
+	Command MBC Rare: 		/magic-rarity.mse-include/MBC_R.png
+	Command MBC Uncommon: 	/magic-rarity.mse-include/MBC_U.png
+	Command MBC Common: 	/magic-rarity.mse-include/MBC_C.png
+	Command MBC Basic Land: /magic-rarity.mse-include/MBC_C.png
 
 	Command HOC Mythic: 	/magic-rarity.mse-include/HOC_M.png
 	Command HOC Rare: 		/magic-rarity.mse-include/HOC_R.png

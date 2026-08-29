@@ -644,7 +644,7 @@ card style:
 		height:	56
 		alignment: center middle shrink-overflow
 		font:
-			name: {"Helvetica Now Text" }
+			name: HelveticaNowText Black
 			size: 27
 
 			color: rgb(82, 60, 41) 

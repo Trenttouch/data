@@ -17,7 +17,7 @@ depends on:
 #	mana_t := {"new"}
 
 image font size: 135
-horizontal space: 2
+horizontal space: 4
 
 #######Custom Mana Symbols
 ### Colored

@@ -149,8 +149,8 @@ init script:
 	is_fullart := { chosen(styling.frames, choice:"full art frame") }
 	is_ub := { chosen(styling.frames, choice:"universe beyond") }
 	is_newpt := { chosen(styling.frames, choice:"new pt style") }
-	is_nickname := { chosen(styling.frames, choice:"godzilla nickname") }
 	is_adventure := { chosen(styling.frames, choice:"adventure") and not ( chosen(styling.frames, choice:"tall art") or chosen(styling.frames, choice:"short textbox") ) }
+	is_new_fullart_adventure :={ is_adventure() and chosen(styling.frames, choice:"↑ new fullart adventure") }
 	is_tallart := { chosen(styling.frames, choice:"tall art") and not chosen(styling.frames, choice:"short textbox") }
 	is_short := { chosen(styling.frames, choice:"short textbox") and not chosen(styling.frames, choice:"tall art") }
 	is_serialized := { chosen(styling.frames, choice:"serialized") }
@@ -158,7 +158,7 @@ init script:
 
 	blackframe := { chosen(styling.frames, choice:"use black twins") }
 	colored_crown := { chosen(styling.frames, choice:"↑ only type and oracle black") }
-	has_alias := { chosen(styling.frames, choice:"use alias") or is_nickname() }
+	has_alias := { chosen(styling.frames, choice:"use alias") }
 	use_acorn_stamp := { chosen(styling.frames, choice:"use acorn stamp") }
 	use_phyrexian_font := { chosen(styling.frames, choice:"use phyrexian font") }
 	
@@ -184,7 +184,7 @@ init script:
 		else
 		(if is_short() then "short/" else if is_tallart() then "tallart/" else "normal/")
 		+"mask/"
-		+ (if is_nickname() or blackframe() then (if is_land(card.type) then "nickname_l_" else "nickname_") else "")
+		+ (if has_alias() or blackframe() then (if is_land(card.type) then "nickname_l_" else "nickname_") else "")
 		+ (if is_fullart() then
 			(
 				if ( is_ub() and styling.use_holofoil_stamps ) then "ubfa_"
@@ -198,6 +198,8 @@ init script:
 	extra_chop_top := {to_number(pull_comma_array(styling.extra_text_chops, cell:0, end:false))}
 	extra_chop_bot := {to_number(pull_comma_array(styling.extra_text_chops, cell:1, end:false))}
 	extra_chop_right := {to_number(pull_comma_array(styling.extra_text_chops, cell:2, end:false))}
+
+	has_stroke := { chosen(styling.frames, choice:"hide name frame and apply name stroke") }
 
 
 	# d20
@@ -284,12 +286,13 @@ styling field:
 	choice: ↑ new full art fading
 	choice: universe beyond
 	choice: adventure
+	choice: ↑ new fullart adventure
 	choice: omen
 	choice: new pt style
 	choice: tall art
 	choice: short textbox
-	choice: godzilla nickname
 	choice: use alias
+	choice: hide name frame and apply name stroke
 	choice: use black twins
 	choice: ↑ only type and oracle black
 	choice: ↑ land innerglowing
@@ -373,7 +376,17 @@ card style:
 		z index: 0
 		render style: image
 		popup style: in place
-		image: {if no_frames() then "" else if is_short() then short_background() else if is_tallart() then tallart_background() else card_background() }
+		image: 
+			script:
+				if no_frames() then ""
+				else if (card.card_color == "colorless" and not is_land(card.type)) then
+				(
+					(if is_short() then "short/" else if is_tallart() then "tallart/" else "normal/")
+					+"clcard.png"
+				)
+				else if is_short() then short_background()
+				else if is_tallart() then tallart_background()
+				else card_background()
 		
 		mask: { card_mask() }
 	card color 2:
@@ -385,7 +398,7 @@ card style:
 		popup style: in place
 		image: {if no_frames() then "" else if is_omen() then omen_leftpage_background() else leftpage_background()}
 		z index: 3
-		visible: {is_adventure() or is_omen()}
+		visible: {(is_adventure() and not is_new_fullart_adventure()) or is_omen()}
 	############################# Name line
 	name:
 		left: 64
@@ -404,6 +417,11 @@ card style:
 			shadow displacement x: 1.25
 			shadow displacement y: 1.25
 			shadow blur: 0.5
+
+			stroke color: script: if (has_stroke()) then rgba(0,0,0,255) else rgba(0,0,0,0)
+			stroke radius: {if (has_stroke()) then 2 else 0}
+			stroke blur: {if (has_stroke()) then 0.5 else 0}
+
 	casting cost:
 		right: 692
 		top: 57
@@ -414,14 +432,21 @@ card style:
 			name: MPlantin
 			size: 30
 		symbol font:
-			name: magic-mana-large
+			name: 
+				script:
+					if has_stroke() then "magic-mana-small"
+					else "magic-mana-large"
 			size: 30
 			alignment: middle right
+
+			stroke color: script: if (has_stroke()) then rgba(0,0,0,255) else rgba(0,0,0,0)
+			stroke radius: {if (has_stroke()) then 2 else 0}
+			stroke blur: {if (has_stroke()) then 0.5 else 0}
 		always symbol: true
 		z index: 5
 		padding top: 0
 	alias:
-		left: 108
+		left: {if has_stroke() then 64 else 108}
 		top: {116 + (if styling.name_top_shift != "" then to_number(styling.name_top_shift) else 0)}
 		width: 536
 		height: 30
@@ -432,7 +457,12 @@ card style:
 			size: 20
 			scale down to: 6
 			color: white
-		alignment: middle center
+
+			stroke color: script: if (has_stroke()) then rgba(0,0,0,255) else rgba(0,0,0,0)
+			stroke radius: {if (has_stroke()) then 2 else 0}
+			stroke blur: {if (has_stroke()) then 0.5 else 0}
+
+		alignment: {if has_stroke() then "middle left" else "middle center"}
 
 	name 2:
 		left: {if is_adventure() or is_omen() then 64 else 0 }
@@ -460,8 +490,8 @@ card style:
 		height: 50
 		alignment: middle right
 		symbol font:
-			name: magic-mana-large
-			size: {if is_adventure() then 25 else if is_omen() then 26 else 0 }
+			name: { if is_new_fullart_adventure() then "magic-mana-small" else "magic-mana-large" }
+			size: {if is_adventure() then (if is_new_fullart_adventure() then 24 else 25) else if is_omen() then 26 else 0 }
 			alignment: middle right
 		always symbol: true
 		z index: 5
@@ -570,7 +600,7 @@ card style:
 					else symbol_variation(symbol: set.masterpiece_symbol, variation: "mythic rare")
 	############################# Text box
 	text:
-		left: {if is_omen() then 378 else if is_adventure() then 390 else 58}
+		left: {if is_omen() then 378 else if is_adventure() then (if is_new_fullart_adventure() then 377 else 390) else 58}
 		top: { 654-(-chop_top()) + (if is_tallart() then 50 else 0 ) + (if is_short() then 145 else 0 ) }
 		width: {if is_adventure() or is_omen() then 636/2 else 636}
 		bottom: {960-chop_bot()}
@@ -579,7 +609,7 @@ card style:
 			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font() }
 			size: {if styling.font_cap != "" then to_number(styling.font_cap) else 28 }
 			scale down to: 6
-			color: {if is_adventure() or is_omen() or black_text() then "black" else "white"}
+			color: {if (is_adventure() and not is_new_fullart_adventure()) or is_omen() or black_text() then "black" else "white"}
 			#影子实现
 			shadow color: script: if (has_shadow()) then rgba(0,0,0,255) else rgba(0,0,0,0)
 			shadow displacement x: 1.25
@@ -621,7 +651,7 @@ card style:
 			italic name: { if use_phyrexian_font() then "Phi_horizontal_gbrsh_3.0" else if set.card_language != "简体中文" then "MPlantin-Italic" else ch_flavor_font()  }
 			size: {if styling.font_cap_extra != "" then to_number(styling.font_cap_extra) else 26 }
 			scale down to: 6
-			color: black
+			color: {if is_new_fullart_adventure() then "white" else "black"}
 		symbol font:
 			name: { styling.text_box_mana_symbols }
 			size: {if styling.font_cap_extra != "" then to_number(styling.font_cap_extra)-2 else 26 }
@@ -869,6 +899,11 @@ extra card field:
 	save value: false
 	editable: false
 	script: card.card_color
+extra card field:
+	type: choice
+	name: newadventurepage
+	save value: false
+	editable: false
 
 extra card field:
 	type: multiple choice
@@ -1062,7 +1097,7 @@ extra card style:
 		z index: 5
 		visible: {if no_frames() then "" else (not is_omen() and (is_rare() and styling.use_holofoil_stamps and not is_ub()) or use_acorn_stamp())}
 		render style: image
-		image: { card_stamp() }
+		image: { if (card.card_color == "colorless" and not is_land(card.type)) then "stamp/clstamp.png" else card_stamp() }
 		mask: {if is_fullart() then "stamp/stamp_fa_frame_mask.png" else ""}
 
 	omenstamp:
@@ -1073,7 +1108,7 @@ extra card style:
 		z index: 2
 		visible: {if no_frames() then "" else (is_omen() and (is_rare() and styling.use_holofoil_stamps and not is_ub()) or use_acorn_stamp())}
 		render style: image
-		image: { card_stamp() }
+		image: { if (card.card_color == "colorless" and not is_land(card.type)) then "stamp/clstamp.png" else card_stamp() }
 		mask: {if is_fullart() then "stamp/stamp_fa_frame_mask.png" else ""}
 
 	ubstamp:
@@ -1084,7 +1119,14 @@ extra card style:
 		z index: 5
 		visible: { is_ub() and styling.use_holofoil_stamps }
 		render style: image
-		image: { if no_frames() then "" else ubstamp_background() }
+		image:
+			script:
+				if no_frames() then ""
+				else if (card.card_color == "colorless" and not is_land(card.type)) then
+				(
+					if is_rare() then "stamp/ub/clstamp.png" else "stamp/ub/clubstamp.png"
+				)
+				else ubstamp_background()
 		mask: {if is_fullart() then "stamp/ub/stamp_fa_frame_mask.png" else ""}
 		
 	auto copyright:
@@ -1142,8 +1184,19 @@ extra card style:
 		width:	750
 		height:	1050
 		render style: image
-		image: {if no_frames() then "" else if has_alias() then aliascrown_background() else crown_background()}
-		mask: { if is_nickname() or (blackframe() and not colored_crown()) then "nn_crown_mask.png" else "" }
+		image:
+			script:
+				if no_frames() then ""
+				else if (card.card_color == "colorless" and not is_land(card.type)) then
+				(
+					if has_alias() then
+						"crown/alias/cll" + (if is_legend() then "l") + "aliascrown.png"
+					else 
+						"crown/cll" + (if is_legend() then "l") + "crown.png"
+				)
+				else if has_alias() then aliascrown_background() else crown_background()
+		visible: { not has_stroke() }
+		mask: { if (has_alias() or blackframe()) and not colored_crown() then "crown/crown_mask.png" else "" }
 		z index: 0
 	innercrown:
 		left: 0
@@ -1162,13 +1215,14 @@ extra card style:
 		render style: image
 		image: {if no_frames() then "" else ((if is_short() then "short/" else if is_tallart() then "tallart/" else "normal/")+ (if is_land(card.type) then "l_" else "") + "nickname.png")}
 		z index: 0
-		visible: { is_nickname() or blackframe() }
+		visible: { has_alias() or blackframe() }
 		mask:
 			script:
-				if colored_crown() then (if (is_ub() and styling.use_holofoil_stamps) then "ubr_"
-										else if ((is_rare() and styling.use_holofoil_stamps) or use_acorn_stamp()) then "r_"
-										else "")
-				+ "nn_crown_mask.png"
+				if colored_crown() or chosen(styling.frames, choice:"hide name frame and apply name stroke") then 
+				(	(if (is_ub() and styling.use_holofoil_stamps) then "ubr_"
+						else if ((is_rare() and styling.use_holofoil_stamps) or use_acorn_stamp()) then "r_"
+						else "")
+				+ "nn_crown_mask.png")
 
 				else (if (is_ub() and styling.use_holofoil_stamps) then "ubr_nn_mask.png"
 					else if ((is_rare() and styling.use_holofoil_stamps) or use_acorn_stamp()) then "r_nn_mask.png"
@@ -1220,7 +1274,7 @@ extra card style:
 		render style: image
 		image: { if no_frames() then "" else if is_omen() then omen_rightpage_background() else rightpage_background() }
 		z index: 1
-		visible: {is_adventure() or is_omen()}
+		visible: {(is_adventure() and not is_new_fullart_adventure()) or is_omen()}
 		mask: { if is_omen() and is_fullart() and ((is_rare() and styling.use_holofoil_stamps) or use_acorn_stamp()) then "omen/rightpage/fullart_mask.png" else "" }
 	advmix:
 		left: 0
@@ -1230,7 +1284,17 @@ extra card style:
 		render style: image
 		image: { if no_frames() then "" else mix_background() }
 		z index: 0
-		visible: {is_adventure()}
+		visible: {is_adventure() and not is_new_fullart_adventure() }
+
+	newadventurepage:
+		left: 0
+		top: 0
+		width: 750
+		height: 1050
+		z index: 0
+		render style: image
+		visible: { is_new_fullart_adventure() }
+		image: { if is_rare() then "adventure/showcase_r.png" else "adventure/showcase.png" }
 
 	serialized:
 		left:	47
