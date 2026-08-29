@@ -429,7 +429,8 @@ init script:
 	ancestral_mana := { styling.ancestral_mana_symbols }
 	has_identity := { styling.color_indicator_dot }
 	is_unsorted := {styling.remove_from_autocount}
-	has_shadow := { chosen(styling.others, choice:"use shadow") }
+	has_shadow := { chosen(styling.others, choice:"use shadow") and not (styling.frames=="jpshowcase") }
+	has_stroke := { (styling.frames=="jpshowcase") or (styling.frames=="borderless source material")}
 
 	shrink_adventure_name := {if styling.shrink_adventure_name_text != "" then to_number(styling.shrink_adventure_name_text) else 0}
 
@@ -648,6 +649,7 @@ init script:
 		else if styling.frames=="imaginecritters" then if card.pt != "" then "imaginecritters/card1.png" else "imaginecritters/card.png"
 		else if styling.frames=="paranormal" then paranormal_background()
 		else if styling.frames=="jpshowcase" then jpshowcase_background()
+		else if styling.frames=="borderless source material" then "source-material/card.png"
 		else if styling.frames=="ghostfire" then if card.pt != "" then "ghostfire/cardpt.png" else "ghostfire/card.png"
 		else if styling.frames=="draconic" then draconic_background()
 		else if styling.frames=="stellarsights" then stellar_background()
@@ -714,6 +716,7 @@ init script:
 		else if styling.frames=="imaginecritters" then "imaginecritters/frame_mask.png"
 		else if styling.frames=="paranormal" then "paranormal/frame_mask.png"
 		else if styling.frames=="jpshowcase" then "jpshowcase/frame_mask.png"
+		else if styling.frames=="borderless source material" then "source-material/frame_mask.png"
 		else if styling.frames=="ghostfire" then "ghostfire/frame_mask.png"
 		else if styling.frames=="draconic" then "draconic/frame_mask.png"
 		else if styling.frames=="stellarsights" then "stellarsights/frame_mask.png"
@@ -760,6 +763,7 @@ init script:
 		else if styling.frames=="memory corridor" then memory_pt_background()
 		else if styling.frames=="paranormal" then paranormal_pt_background()
 		else if styling.frames=="jpshowcase" then jpshowcase_pt_background()
+		else if styling.frames=="borderless source material" then ""
 		else if styling.frames=="imaginecritters" then ""
 		else if styling.frames=="ghostfire" then ""
 		else if styling.frames=="draconic" then draconic_pt_background()
@@ -818,6 +822,7 @@ init script:
 		else if styling.frames=="imaginecritters" then if card.pt != "" then "0,0,750,990" else "0,0,750,965"
 		else if styling.frames=="paranormal" then "59,122,589,449"
 		else if styling.frames=="jpshowcase" then "0,0,750,969"
+		else if styling.frames=="borderless source material" then "0,0,750,975"
 		else if styling.frames=="ghostfire" then "36,42.5,678,897.5"
 		else if styling.frames=="draconic" then "25,120,698,469"
 		else if styling.frames=="stellarsights" then "0,0,750,969"
@@ -862,6 +867,7 @@ init script:
 		else if styling.frames=="imaginecritters" then ""
 		else if styling.frames=="paranormal" then paranormal_stamp_background()
 		else if styling.frames=="jpshowcase" then jpshowcase_stamp_background()
+		else if styling.frames=="borderless source material" then (if is_ub() then "source-material/ubstamp.png" else "better_stamp.png" )
 		else if styling.frames=="draconic" then draconic_stamp_background()
 		else if styling.frames=="stellarsights" or styling.frames=="stellarsightsposter" then "stellarsights/stamp.png"
 		else if styling.frames=="diyscroll" then ""
@@ -893,6 +899,7 @@ init script:
 		else if styling.frames=="memory corridor" then "340.6716,955.597,68.6567,38.4328"
 		else if styling.frames=="paranormal" then "320.5224,944.97,108.955224,48.880597"
 		else if styling.frames=="jpshowcase" then "327.5,948,95,47.5"
+		else if styling.frames=="borderless source material" then (if is_ub() then "332.4656,950,86.1940,54.8507" else "335.8209,951.4925,79.1045,41.4179" )
 		else if styling.frames=="ghostfire" then "327,942,96,49"
 		else if styling.frames=="draconic" then "295.5223,939.1791,158.9552,68.6567"
 		else if styling.frames=="stellarsights" or styling.frames=="stellarsightsposter" then "339.5, 958.5, 74, 40.5"
@@ -1087,6 +1094,8 @@ styling field:
 	choice: ghostfire
 	choice: draconic
 
+	choice: borderless source material
+
 	choice: stellarsights
 	choice: stellarsightsposter
 
@@ -1207,7 +1216,7 @@ styling style:
 			zendikar expeditions : 			expedition/exp/ucard.png
 			phyrexian : 					phyrexian/ucard.png
 			mystical archive : 				archive/ucard.png
-			fullart mystical archive : 				archive/ucard.png
+			fullart mystical archive : 		archive/ucard.png
 			dnd sourcebook : 				sourcebook/frame.png
 			equinox : 						equinox/ucard.png
 			fang : 							fang/ucard.png
@@ -1248,6 +1257,7 @@ styling style:
 			imaginecritters: 				imaginecritters/card.png
 			paranormal:						paranormal/u.png
 			jpshowcase:						jpshowcase/u.png
+			borderless source material:		source-material/card.png
 			ghostfire:						ghostfire/card.png
 			draconic:						draconic/u.png
 			sketch:							sketch/ucard.png
@@ -1373,13 +1383,17 @@ card style:
 					styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or 
 					styling.frames=="skyscraper" or styling.frames=="artdeco" or styling.frames=="magicfest" or styling.frames=="goldenage" or 
 					styling.frames=="neon" or styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="textless land(innistrad)" or 
-					styling.frames=="textless land(unstable)" or styling.frames=="etched" or styling.frames=="panel" then "white"
+					styling.frames=="textless land(unstable)" or styling.frames=="etched" or styling.frames=="panel" or styling.frames=="borderless source material" then "white"
 					else "black"
 			#影子实现
 			shadow color: script: if (has_shadow()) then rgba(0,0,0,255) else rgba(0,0,0,0)
 			shadow displacement x: 1.25
 			shadow displacement y: 1.25
 			shadow blur: 0.5
+
+			stroke color: script: if (has_stroke()) then rgba(0,0,0,255) else rgba(0,0,0,0)
+			stroke radius: {if (has_stroke()) then 2 else 0}
+			stroke blur: {if (has_stroke()) then 0.5 else 0}
 
 	casting cost:
 		right:
@@ -1434,6 +1448,7 @@ card style:
 					else if styling.frames=="fullart mystical archive" then "magic-mana-large"
 					else if styling.frames=="diyscroll" then "magic-mana-small-strixhaven-jp"
 					else if styling.frames=="pixel" then "magic-mana-pixel"
+					else if styling.frames=="jpshowcase" or styling.frames=="borderless source material" then "magic-mana-small"
 					else "magic-mana-large"
 			size: 
 				script:
@@ -1441,12 +1456,17 @@ card style:
 					else if styling.frames=="pixel" then 37
 					else 30
 			alignment: middle right
+
+			stroke color: script: if (has_stroke()) then rgba(0,0,0,255) else rgba(0,0,0,0)
+			stroke radius: {if (has_stroke()) then 2 else 0}
+			stroke blur: {if (has_stroke()) then 0.5 else 0}
+
 		always symbol: true
 		z index: 9
 		padding top: 0
 
 	alias:
-		left: {108 + (if chosen(styling.others, choice:"use alias") then 0 else 1000)}
+		left: {(if has_stroke() then 64 else 108) + (if chosen(styling.others, choice:"use alias") then 0 else 1000)}
 		top: {if styling.frames=="pipboy" then 118 else 116}
 		width: 536
 		height: 30
@@ -1462,7 +1482,12 @@ card style:
 			size: {if styling.frames=="pipboy" then 17 else 20}
 			scale down to: 6
 			color: white
-		alignment: middle center
+
+			stroke color: script: if (has_stroke()) then rgba(0,0,0,255) else rgba(0,0,0,0)
+			stroke radius: {if (has_stroke()) then 2 else 0}
+			stroke blur: {if (has_stroke()) then 0.5 else 0}
+
+		alignment: {if has_stroke() then "middle left" else "middle center"}
 
 	name 2:
 		left: {if styling.frames=="storybook adventure" then 64 else 0 }
@@ -1535,6 +1560,7 @@ card style:
 				else if styling.frames=="pixel" then -3
 				else if is_tll() and styling.frames!="textless land(theros)" then 1000
 				else if styling.frames=="panel" then -17
+				else if styling.frames=="borderless source material" then -6 
 				else 0)
 
 				+ (if styling.frames=="textless land(All will be one)" then 74 else 0)
@@ -1567,9 +1593,12 @@ card style:
 		width:
 			script:
 				if styling.frames=="breakingnews" then (max(20,card_style.type.content_width)*0.892)
-				else ((if has_identity() then "580" else "610")
+				else if styling.frames=="borderless source material" then 636 
+				else (
+				(if has_identity() then "580" else "610")
 				- max(44,card_style.rarity.content_width)
-				- (if styling.frames=="textless land(All will be one)" then 74 else 0))
+				- (if styling.frames=="textless land(All will be one)" then 74 else 0)
+				)
 		height: { 40 - shrink_type() }
 		alignment: 
 			script:
@@ -1612,7 +1641,7 @@ card style:
 					styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or 
 					styling.frames=="samurai" or styling.frames=="textless land(innistrad)" or 
 					styling.frames=="textless land(unstable)"  or styling.frames=="etched" or 
-					styling.frames=="memory corridor" or styling.frames=="pixel" or styling.frames=="panel" then "white"
+					styling.frames=="memory corridor" or styling.frames=="pixel" or styling.frames=="panel" or styling.frames=="borderless source material" then "white"
 					else "black"
 			separator color: red
 			#影子实现
@@ -1620,6 +1649,10 @@ card style:
 			shadow displacement x: 1.25
 			shadow displacement y: 1.25
 			shadow blur: 0.5
+
+			stroke color: script: if (has_stroke()) then rgba(0,0,0,255) else rgba(0,0,0,0)
+			stroke radius: {if (has_stroke()) then 2 else 0}
+			stroke blur: {if (has_stroke()) then 0.5 else 0}
 
 
 	super type:
@@ -1673,6 +1706,7 @@ card style:
 			 else if styling.frames=="equinox" then 680
 			 else if styling.frames=="breakingnews" then 690
 			 else if styling.frames=="memory corridor" then 685
+			 else if styling.frames=="borderless source material" then 788
 			 else 688)
 			 + rarity_shift()
 			 + if styling.frames=="textless land(unstable)" or styling.frames=="textless land(unfinity)" then 1000 else 0
@@ -1815,13 +1849,17 @@ card style:
 					styling.frames=="pipboy" or styling.frames=="glass" or styling.frames=="tardis" or styling.frames=="tarkir" or 
 					styling.frames=="ixalan" or styling.frames=="goldenage" or styling.frames=="neon" or styling.frames=="ninja" or 
 					styling.frames=="samurai" or styling.frames=="etched" or styling.frames=="textless land(unstable)"
-					then "white"
+					or styling.frames=="borderless source material" then "white"
 					else "black"
 			#影子实现
 			shadow color: script: if (has_shadow()) then rgba(0,0,0,255) else rgba(0,0,0,0)
 			shadow displacement x: 1.25
 			shadow displacement y: 1.25
 			shadow blur: 0.5
+			#描边实现
+			stroke color: script: if (has_stroke()) then rgba(0,0,0,255) else rgba(0,0,0,0)
+			stroke radius: {if (has_stroke()) then 2.5 else 0}
+			stroke blur: {if (has_stroke()) then 0.5 else 0}
 
 		symbol font:
 			name: { styling.text_box_mana_symbols }
@@ -1831,15 +1869,20 @@ card style:
 					else if styling.frames=="pixel" then if set.card_language != "简体中文" then 21.5 else 24
 					else 27 
 			scale down to: 6
+			#描边实现
+			stroke color: script: if (has_stroke()) then rgba(0,0,0,255) else rgba(0,0,0,0)
+			stroke radius: {if (has_stroke()) then 2.5 else 0}
+			stroke blur: {if (has_stroke()) then 0.5 else 0}
 		alignment:
 			script:
-				if (styling.center_text == "short text only" and
+				(if (styling.center_text == "short text only" and
 				   not contains(match:"\n", card.rule_text) and
 				   card.flavor_text == "<i-flavor></i-flavor>" and
 				   card_style.text.content_lines <= 2) or
 				   styling.center_text == "always"
 				then "middle center"
-				else "middle left"
+				else if styling.frames=="borderless source material" then "top left"
+				else "middle left")
 				+ if styling.justify_text == "yes" then " justify-all" else if styling.justify_text == "force justify" then " force justify-all" else ""
 		z index: 8
 		padding left: {if (styling.frames=="dossier" and set.card_language == "简体中文") then 10 else if styling.frames=="phyrexian" then 14 else 6}
@@ -2003,6 +2046,7 @@ card style:
 				else if styling.frames=="diyscroll" then 917
 				else if styling.frames=="pixel" then 904
 				else if styling.frames=="panel" then 928
+				else if styling.frames=="borderless source material" then 914
 				else 936
 		width: 120
 		height:	56
@@ -2035,8 +2079,13 @@ card style:
 					styling.frames=="tardis" or styling.frames=="ring" or styling.frames=="ixalan" or 
 					styling.frames=="artdeco" or styling.frames=="goldenage" or styling.frames=="neon" or 
 					styling.frames=="ninja" or styling.frames=="samurai" or styling.frames=="etched" or 
-					styling.frames=="memory corridor" or styling.frames=="pixel" or styling.frames=="panel" then "white" 
+					styling.frames=="memory corridor" or styling.frames=="pixel" or styling.frames=="panel" or styling.frames=="borderless source material" then "white" 
 					else "black"
+
+			#描边实现
+			stroke color: script: if (styling.frames=="borderless source material") then rgba(0,0,0,255) else rgba(0,0,0,0)
+			stroke radius: {if (styling.frames=="borderless source material") then 2 else 0}
+			stroke blur: {if (styling.frames=="borderless source material") then 0.5 else 0}
 			separator color: red
 	############################# Card sorting / numbering
 	set code:
@@ -2494,7 +2543,7 @@ extra card style:
 		z index: 5
 		alignment: 
 			script:
-				if card.pt != "" then "middle left shrink-overflow"
+				if card.pt != "" and not (styling.frames=="borderless source material") then "middle left shrink-overflow"
 				else "middle right shrink-overflow"
 		visible: {is_ub() or chosen(styling.others, choice:"second copyright")}
 		font:
